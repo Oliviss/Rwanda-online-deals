@@ -296,11 +296,11 @@ footer p{
 
   try {
     await createUserWithEmailAndPassword(auth, email, password);
-    message.textContent = "Registration successful!";
+    message.textContent = "✅ Account created successfully!";
     message.style.color = "green";
     document.getElementById("registerForm").reset();
   } catch (error) {
-    message.textContent = error.message;
+    message.textContent = "❌ Registration failed: " + error.message;
     message.style.color = "red";
   }
 });
@@ -314,11 +314,11 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    message.textContent = "Login successful!";
+    message.textContent = "✅ Login successful!";
     message.style.color = "green";
     document.getElementById("loginForm").reset();
   } catch (error) {
-    message.textContent = error.message;
+    message.textContent = "❌ Login failed: " + error.message;
     message.style.color = "red";
   }
 });

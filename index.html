@@ -1,157 +1,204 @@
 <!DOCTYPE html>
 <html lang="rw">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Rwanda Online Deals</title>
+<title>Rwanda Online Deals</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
 
-    body {
-      background: #f5f7fa;
-      color: #222;
-    }
+body{
+    background:#f5f7fa;
+    color:#222;
+}
 
-    header {
-      background: #0b63ce;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
+header{
+    background:#0b6b3a;
+    color:white;
+    padding:18px 15px;
+    text-align:center;
+}
 
-    header h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
+header h1{
+    font-size:26px;
+    margin-bottom:6px;
+}
 
-    header p {
-      font-size: 15px;
-    }
+header p{
+    font-size:14px;
+}
 
-    .hero {
-      padding: 50px 20px;
-      text-align: center;
-      background: white;
-    }
+nav{
+    background:white;
+    padding:12px;
+    text-align:center;
+    box-shadow:0 2px 8px #ddd;
+}
 
-    .hero h2 {
-      font-size: 30px;
-      margin-bottom: 15px;
-      color: #0b63ce;
-    }
+nav a{
+    color:#0b6b3a;
+    text-decoration:none;
+    margin:0 8px;
+    font-weight:bold;
+}
 
-    .hero p {
-      font-size: 17px;
-      margin-bottom: 25px;
-    }
+.hero{
+    background:white;
+    text-align:center;
+    padding:45px 20px;
+}
 
-    .button {
-      display: inline-block;
-      background: #0b63ce;
-      color: white;
-      padding: 13px 25px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.hero h2{
+    color:#0b6b3a;
+    font-size:30px;
+    margin-bottom:12px;
+}
 
-    .deals {
-      padding: 35px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
+.hero p{
+    font-size:16px;
+    margin-bottom:20px;
+}
 
-    .deals h2 {
-      text-align: center;
-      margin-bottom: 25px;
-    }
+.button{
+    display:inline-block;
+    background:#0b6b3a;
+    color:white;
+    padding:13px 22px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
+.deals{
+    padding:30px 15px;
+    max-width:1100px;
+    margin:auto;
+}
 
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-      text-align: center;
-    }
+.deals h2{
+    text-align:center;
+    color:#0b6b3a;
+    margin-bottom:25px;
+}
 
-    .card h3 {
-      margin-bottom: 10px;
-      color: #0b63ce;
-    }
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
 
-    .card p {
-      margin-bottom: 15px;
-      color: #555;
-    }
+.card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 3px 12px #ddd;
+}
 
-    footer {
-      margin-top: 30px;
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-  </style>
+.card h3{
+    color:#0b6b3a;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#555;
+    margin-bottom:15px;
+    line-height:1.5;
+}
+
+.price{
+    font-size:20px;
+    font-weight:bold;
+    color:#111;
+    margin-bottom:15px;
+}
+
+footer{
+    background:#0b6b3a;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+    margin-top:30px;
+}
+
+footer p{
+    margin:6px;
+}
+</style>
 </head>
 
 <body>
 
-  <header>
+<header>
     <h1>Rwanda Online Deals</h1>
-    <p>Shaka deals n'amahirwe kuri Internet</p>
-  </header>
+    <p>Deals nziza kandi zorohereza Abanyarwanda</p>
+</header>
 
-  <section class="hero">
-    <h2>Murakaza neza kuri Rwanda Online Deals</h2>
+<nav>
+    <a href="#home">Ahabanza</a>
+    <a href="#deals">Deals</a>
+    <a href="#contact">Twandikire</a>
+</nav>
+
+<section class="hero" id="home">
+    <h2>Murakaza neza!</h2>
     <p>
-      Ahantu hamwe ho kubona deals, offers n'amahirwe yo kuri Internet.
+        Shakisha deals n'ibicuruzwa bitandukanye
+        biboneka online mu Rwanda.
     </p>
-
     <a href="#deals" class="button">Reba Deals</a>
-  </section>
+</section>
 
-  <section class="deals" id="deals">
-    <h2>Deals Zigezweho</h2>
+<section class="deals" id="deals">
+
+    <h2>🔥 Deals Zacu</h2>
 
     <div class="cards">
 
-      <div class="card">
-        <h3>Online Tasks</h3>
-        <p>Shaka imirimo ushobora gukora online.</p>
-        <a href="#" class="button">Reba</a>
-      </div>
+        <div class="card">
+            <h3>Deal 1</h3>
+            <p>
+                Igicuruzwa cya mbere. 
+                Andika ibisobanuro byacyo hano.
+            </p>
+            <div class="price">5,000 RWF</div>
+            <a href="#" class="button">Reba byinshi</a>
+        </div>
 
-      <div class="card">
-        <h3>Deals</h3>
-        <p>Menya offers n'amahirwe ari kuri Internet.</p>
-        <a href="#" class="button">Reba</a>
-      </div>
+        <div class="card">
+            <h3>Deal 2</h3>
+            <p>
+                Igicuruzwa cya kabiri.
+                Andika ibisobanuro byacyo hano.
+            </p>
+            <div class="price">10,000 RWF</div>
+            <a href="#" class="button">Reba byinshi</a>
+        </div>
 
-      <div class="card">
-        <h3>Business</h3>
-        <p>Shaka amahirwe yo guteza imbere business yawe.</p>
-        <a href="#" class="button">Reba</a>
-      </div>
+        <div class="card">
+            <h3>Deal 3</h3>
+            <p>
+                Igicuruzwa cya gatatu.
+                Andika ibisobanuro byacyo hano.
+            </p>
+            <div class="price">15,000 RWF</div>
+            <a href="#" class="button">Reba byinshi</a>
+        </div>
 
     </div>
-  </section>
+</section>
 
-  <footer>
+<footer id="contact">
+    <p><strong>Rwanda Online Deals</strong></p>
+    <p>Deals • Ibicuruzwa • Amahirwe yo kugura online</p>
     <p>© 2026 Rwanda Online Deals</p>
-  </footer>
+</footer>
 
 </body>
 </html>

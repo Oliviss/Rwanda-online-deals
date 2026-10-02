@@ -264,64 +264,147 @@ footer p{
   </div>
 </section>
     <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/7.20.0/firebase-auth.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyCOOEbhkKrv0ysHarRZvjw2DlgsRlcN180",
-    authDomain: "rwanda-online-deals.firebaseapp.com",
-    projectId: "rwanda-online-deals",
-    storageBucket: "rwanda-online-deals.firebasestorage.app",
-    messagingSenderId: "74305121142",
-    appId: "1:74305121142:web:c3c0a305a82fa78f03e857",
-    measurementId: "G-FG5JEHSD00"
-  };
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const analytics = getAnalytics(app);
-        document.getElementById("registerForm").addEventListener("submit", async (e) => {
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCOOEbhkKrv0ysHarRZvjw2DlgsRlcN180",
+  authDomain: "rwanda-online-deals.firebaseapp.com",
+  projectId: "rwanda-online-deals",
+  storageBucket: "rwanda-online-deals.firebasestorage.app",
+  messagingSenderId: "74305121142",
+  appId: "1:74305121142:web:c3c0a305a82fa78f03e857",
+  measurementId: "G-FG5JEHSD00"
+};
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const analytics = getAnalytics(app);
+
+
+const message = document.getElementById("authMessage");
+const dealsSection = document.getElementById("deals");
+
+
+/* Hide Deals until user logs in */
+dealsSection.style.display = "none";
+
+
+/* Check login status */
+onAuthStateChanged(auth, (user) => {
+
+  if (user) {
+
+    dealsSection.style.display = "block";
+
+    message.textContent =
+      "✅ Winjiye neza! Welcome to Rwanda Online Deals.";
+
+    message.style.color = "green";
+
+  } else {
+
+    dealsSection.style.display = "none";
+
+  }
+
+});
+
+
+/* REGISTRATION */
+
+document.getElementById("registerForm").addEventListener("submit", async (e) => {
+
   e.preventDefault();
 
-  const email = document.getElementById("registerEmail").value;
-  const password = document.getElementById("registerPassword").value;
-  const message = document.getElementById("authMessage");
+  const email =
+    document.getElementById("registerEmail").value.trim();
+
+  const password =
+    document.getElementById("registerPassword").value;
+
+  message.textContent = "⏳ Creating your account...";
+  message.style.color = "blue";
 
   try {
-    await createUserWithEmailAndPassword(auth, email, password);
-    message.textContent = "✅ Account created successfully!";
+
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    message.textContent =
+      "✅ Account created successfully!";
+
     message.style.color = "green";
+
     document.getElementById("registerForm").reset();
+
   } catch (error) {
-    message.textContent = "❌ Registration failed: " + error.message;
+
+    message.textContent =
+      "❌ Registration failed: " + error.message;
+
     message.style.color = "red";
+
   }
+
 });
+
+
+/* LOGIN */
 
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
+
   e.preventDefault();
 
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
-  const message = document.getElementById("authMessage");
+  const email =
+    document.getElementById("loginEmail").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  message.textContent = "⏳ Logging in...";
+  message.style.color = "blue";
 
   try {
-    await signInWithEmailAndPassword(auth, email, password);
-    message.textContent = "✅ Login successful!";
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    message.textContent =
+      "✅ Login successful!";
+
     message.style.color = "green";
+
     document.getElementById("loginForm").reset();
+
   } catch (error) {
-    message.textContent = "❌ Login failed: " + error.message;
+
+    message.textContent =
+      "❌ Login failed: " + error.message;
+
     message.style.color = "red";
+
   }
+
 });
+
 </script>
 </body>
 </html>

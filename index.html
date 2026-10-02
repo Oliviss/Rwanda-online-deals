@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Rwanda Online Deals</title>
 
 <style>
@@ -14,452 +13,765 @@
     font-family:Arial,sans-serif;
 }
 
+html{scroll-behavior:smooth}
+
 body{
-    background:#f5f7fa;
-    color:#222;
+    background:#f4f8f6;
+    color:#17231d;
 }
 
+button,a{font-family:inherit}
+
 header{
-    background:#0b6b3a;
+    background:linear-gradient(135deg,#075b32,#0b7a45);
     color:white;
-    padding:18px 15px;
+    padding:18px 18px 26px;
     text-align:center;
 }
 
-header h1{
-    font-size:26px;
-    margin-bottom:6px;
+.brand{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
 }
 
-header p{
-    font-size:14px;
+.brand-text{text-align:left}
+.brand h1{font-size:25px;margin-bottom:5px}
+.brand p{font-size:13px;opacity:.9}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.login-top{
+    background:white;
+    color:#08703d;
+    border:0;
+    border-radius:25px;
+    padding:11px 15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.menu-btn{
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.16);
+    color:white;
+    font-size:25px;
+    cursor:pointer;
 }
 
 nav{
     background:white;
-    padding:12px;
+    padding:13px 10px;
     text-align:center;
-    box-shadow:0 2px 8px #ddd;
+    box-shadow:0 2px 10px rgba(0,0,0,.07);
+    position:sticky;
+    top:0;
+    z-index:20;
 }
 
 nav a{
-    color:#0b6b3a;
+    color:#086d3b;
     text-decoration:none;
     margin:0 8px;
     font-weight:bold;
+    font-size:14px;
 }
 
 .hero{
-    background:white;
-    text-align:center;
-    padding:45px 20px;
+    max-width:1100px;
+    margin:18px auto 0;
+    padding:24px 16px 15px;
+}
+
+.hero-box{
+    position:relative;
+    overflow:hidden;
+    border-radius:25px;
+    min-height:300px;
+    padding:34px 24px;
+    display:flex;
+    align-items:center;
+    background:
+      radial-gradient(circle at 88% 18%,rgba(255,255,255,.22),transparent 28%),
+      linear-gradient(135deg,#073f27,#0b7541 58%,#16a05b);
+    color:white;
+    box-shadow:0 12px 35px rgba(4,89,48,.22);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:610px;
+}
+
+.badge{
+    display:inline-block;
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.25);
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:13px;
 }
 
 .hero h2{
-    color:#0b6b3a;
-    font-size:30px;
+    font-size:34px;
+    line-height:1.08;
     margin-bottom:12px;
 }
 
 .hero p{
     font-size:16px;
+    line-height:1.6;
+    opacity:.94;
     margin-bottom:20px;
 }
 
-.button{
+.primary-btn{
     display:inline-block;
-    background:#0b6b3a;
-    color:white;
-    padding:13px 22px;
-    border-radius:8px;
+    background:white;
+    color:#086d3b;
+    padding:13px 20px;
+    border-radius:10px;
     text-decoration:none;
     font-weight:bold;
     border:none;
     cursor:pointer;
 }
 
-.deals{
-    padding:30px 15px;
+.hero-art{
+    position:absolute;
+    right:30px;
+    bottom:15px;
+    width:300px;
+    height:240px;
+}
+
+.art-circle{
+    position:absolute;
+    width:210px;
+    height:210px;
+    border-radius:50%;
+    background:rgba(255,255,255,.11);
+    right:20px;
+    top:15px;
+}
+
+.art-card{
+    position:absolute;
+    background:white;
+    color:#075d34;
+    border-radius:16px;
+    padding:17px;
+    width:170px;
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
+    transform:rotate(-5deg);
+    right:85px;
+    top:45px;
+}
+
+.art-card strong{font-size:24px;display:block;margin:8px 0}
+.art-card small{color:#64746b}
+
+.art-tag{
+    position:absolute;
+    background:#ffcf3f;
+    color:#553f00;
+    border-radius:12px;
+    padding:9px 12px;
+    font-weight:bold;
+    right:0;
+    bottom:25px;
+    transform:rotate(5deg);
+}
+
+.quick{
     max-width:1100px;
-    margin:auto;
+    margin:18px auto 0;
+    padding:0 16px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
 }
 
-.deals h2{
-    text-align:center;
-    color:#0b6b3a;
-    margin-bottom:25px;
+.quick-card{
+    background:white;
+    padding:17px;
+    border-radius:15px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+.quick-card b{color:#08703d}
+.quick-card p{font-size:12px;color:#66736c;margin-top:5px;line-height:1.4}
+
+.section{
+    max-width:1100px;
+    margin:25px auto;
+    padding:0 16px;
 }
 
-.cards{
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+.section-title h2{color:#086d3b;font-size:23px}
+.section-title span{font-size:12px;color:#69756f}
+
+.deals{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:18px;
+    gap:16px;
 }
 
 .card{
     background:white;
-    border-radius:12px;
-    padding:20px;
-    box-shadow:0 3px 12px #ddd;
+    border-radius:17px;
+    padding:18px;
+    box-shadow:0 5px 18px rgba(0,0,0,.07);
+    border:1px solid #edf1ee;
 }
 
-.card h3{
-    color:#0b6b3a;
-    margin-bottom:10px;
+.deal-image{
+    height:115px;
+    border-radius:13px;
+    background:linear-gradient(135deg,#dff5e8,#f7fbf8);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+    margin-bottom:14px;
 }
 
-.card p{
-    color:#555;
-    margin-bottom:15px;
-    line-height:1.5;
-}
+.card h3{color:#086d3b;margin-bottom:8px}
+.card p{color:#5d6862;margin-bottom:13px;line-height:1.5;font-size:14px}
+.price{font-size:19px;font-weight:bold;color:#111;margin-bottom:14px}
 
-.price{
-    font-size:20px;
-    font-weight:bold;
-    color:#111;
-    margin-bottom:15px;
-}
-
-footer{
+.button{
+    display:inline-block;
     background:#0b6b3a;
     color:white;
-    text-align:center;
-    padding:25px 15px;
-    margin-top:30px;
-}
-
-footer p{
-    margin:6px;
+    padding:11px 16px;
+    border-radius:9px;
+    text-decoration:none;
+    font-weight:bold;
+    border:none;
+    cursor:pointer;
 }
 
 #auth-section{
-    background:#f5f7fa;
-    padding:30px 15px;
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:rgba(9,30,20,.65);
+    padding:20px;
+    overflow:auto;
 }
 
 .auth-box{
     background:white;
-    max-width:500px;
-    margin:auto;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 3px 12px #ddd;
+    max-width:520px;
+    margin:35px auto;
+    padding:24px;
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
 }
 
-.auth-box h2{
-    text-align:center;
-    color:#0b6b3a;
+.auth-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     margin-bottom:15px;
 }
 
-.auth-box form{
-    display:flex;
+.auth-head h2{color:#086d3b}
+.close-auth{
+    border:0;
+    background:#eef5f1;
+    color:#075d34;
+    width:36px;height:36px;border-radius:50%;
+    font-size:20px;cursor:pointer;
+}
+
+.auth-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:17px;
+}
+
+.auth-tab{
+    padding:11px;
+    border:1px solid #d9e5de;
+    border-radius:9px;
+    background:#f7faf8;
+    color:#086d3b;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.auth-tab.active{
+    background:#0b6b3a;
+    color:white;
+}
+
+.auth-form{display:none}
+.auth-form.active{display:flex}
+.auth-form{
     flex-direction:column;
     gap:10px;
 }
-
-.auth-box input{
+.auth-form input{
     padding:12px;
-    border:1px solid #ccc;
-    border-radius:7px;
+    border:1px solid #ccd8d1;
+    border-radius:9px;
     font-size:15px;
 }
-
-.auth-box button{
+.auth-form button{
     padding:12px;
     border:none;
-    border-radius:7px;
+    border-radius:9px;
     background:#0b6b3a;
     color:white;
     font-weight:bold;
     cursor:pointer;
 }
+.auth-message{
+    margin-top:12px;
+    font-weight:bold;
+    text-align:center;
+    line-height:1.4;
+}
 
-.auth-box hr{
-    margin:25px 0;
-    border:none;
-    border-top:1px solid #ddd;
+#dashboard{
+    display:none;
+    background:#eef7f1;
+    min-height:100vh;
+    padding:24px 16px 40px;
+}
+
+.dashboard-wrap{max-width:1100px;margin:auto}
+
+.dashboard-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.dashboard-top h2{color:#075d34}
+.dashboard-top p{font-size:13px;color:#68756e;margin-top:4px}
+
+.logout-btn{
+    background:#fff;
+    color:#b42318;
+    border:1px solid #f0c6c1;
+    padding:10px 14px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.balance-box{
+    background:linear-gradient(135deg,#075d34,#0d8950);
+    color:white;
+    border-radius:20px;
+    padding:22px;
+    box-shadow:0 10px 30px rgba(7,93,52,.2);
+    margin-bottom:16px;
+}
+
+.balance-box small{opacity:.85}
+.balance-box h3{font-size:30px;margin:8px 0 16px}
+
+.action-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+.action{
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.22);
+    color:white;
+    border-radius:12px;
+    padding:11px;
+    text-align:center;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.account-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin:16px 0 25px;
+}
+
+.account-card{
+    background:white;
+    border-radius:16px;
+    padding:18px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+.account-card .icon{font-size:25px}
+.account-card h4{margin:9px 0 5px;color:#075d34}
+.account-card p{font-size:12px;color:#68756e;line-height:1.5}
+
+.dashboard-deals{
+    margin-top:8px;
+}
+
+.info-note{
+    background:#fff9e7;
+    border:1px solid #f0dda4;
+    color:#6d570d;
+    padding:12px;
+    border-radius:11px;
+    font-size:12px;
+    line-height:1.5;
+    margin-bottom:15px;
+}
+
+.menu-panel{
+    display:none;
+    position:absolute;
+    right:15px;
+    top:72px;
+    background:white;
+    border-radius:13px;
+    box-shadow:0 10px 30px rgba(0,0,0,.16);
+    padding:8px;
+    z-index:50;
+    min-width:150px;
+}
+.menu-panel a{
+    display:block;
+    padding:10px 12px;
+    color:#075d34;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+    font-size:13px;
+}
+.menu-panel a:hover{background:#eef7f1}
+
+footer{
+    background:#075d34;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+    margin-top:35px;
+}
+footer p{margin:6px;font-size:13px}
+
+.hidden{display:none!important}
+
+@media(max-width:760px){
+    .brand h1{font-size:21px}
+    .brand p{font-size:11px}
+    .login-top{padding:9px 11px;font-size:12px}
+    .hero-box{min-height:390px}
+    .hero h2{font-size:29px}
+    .hero-art{right:0;bottom:0;opacity:.55}
+    .quick{grid-template-columns:1fr}
+    .account-grid{grid-template-columns:1fr 1fr}
+    .action-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:480px){
+    nav a{margin:0 5px;font-size:12px}
+    .hero-box{padding:28px 19px}
+    .account-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Rwanda Online Deals</h1>
-    <p>Deals nziza kandi zorohereza Abanyarwanda</p>
+<header id="siteHeader">
+    <div class="brand">
+        <div class="brand-text">
+            <h1>Rwanda Online Deals</h1>
+            <p>Deals nziza kandi zorohereza Abanyarwanda</p>
+        </div>
+
+        <div class="header-actions">
+            <button class="login-top" id="openAuthTop">
+                Injira / Kora Account
+            </button>
+
+            <button class="menu-btn" id="menuBtn" aria-label="Menu">⋮</button>
+        </div>
+    </div>
+
+    <div class="menu-panel" id="menuPanel">
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#more">More</a>
+    </div>
 </header>
 
-<nav>
+<nav id="homeNav">
     <a href="#home">Ahabanza</a>
-    <a href="#deals">Deals</a>
+    <a href="#homeDeals">Deals</a>
     <a href="#contact">Twandikire</a>
 </nav>
 
+<main id="homePage">
+
 <section class="hero" id="home">
-    <h2>Murakaza neza!</h2>
-
-    <p>
-        Shakisha deals n'ibicuruzwa bitandukanye
-        biboneka online mu Rwanda.
-    </p>
-
-    <a href="#auth-section" class="button">
-        Injira / Kora Account
-    </a>
-</section>
-
-
-<!-- =========================
-     DEALS
-========================= -->
-
-<section class="deals" id="deals">
-
-    <h2>🔥 Deals Zacu</h2>
-
-    <div class="cards">
-
-        <div class="card">
-            <h3>Deal 1</h3>
-
+    <div class="hero-box">
+        <div class="hero-content">
+            <span class="badge">🇷🇼 ONLINE SHOPPING • RWANDA</span>
+            <h2>Shaka deals. Hitamo neza. Korera online.</h2>
             <p>
-                Igicuruzwa cya mbere.
-                Andika ibisobanuro byacyo hano.
+                Murakaza neza kuri Rwanda Online Deals — ahantu hamwe
+                ho kubona offers n'ibicuruzwa bitandukanye mu buryo bworoshye.
             </p>
-
-            <div class="price">
-                5,000 RWF
-            </div>
-
-            <a href="deal1.html" class="button">
-                Reba byinshi
-            </a>
+            <button class="primary-btn" id="openAuthHero">
+                Tangira nonaha →
+            </button>
         </div>
 
-
-        <div class="card">
-            <h3>Deal 2</h3>
-
-            <p>
-                Igicuruzwa cya kabiri.
-                Andika ibisobanuro byacyo hano.
-            </p>
-
-            <div class="price">
-                10,000 RWF
+        <div class="hero-art" aria-hidden="true">
+            <div class="art-circle"></div>
+            <div class="art-card">
+                🛍️
+                <strong>DEAL</strong>
+                <small>Offers zigezweho</small>
             </div>
-
-            <a href="deal2.html" class="button">
-                Reba byinshi
-            </a>
+            <div class="art-tag">🔥 New</div>
         </div>
-
-
-        <div class="card">
-            <h3>Deal 3</h3>
-
-            <p>
-                Igicuruzwa cya gatatu.
-                Andika ibisobanuro byacyo hano.
-            </p>
-
-            <div class="price">
-                15,000 RWF
-            </div>
-
-            <a href="deal3.html" class="button">
-                Reba byinshi
-            </a>
-        </div>
-
-
-        <div class="card">
-            <h3>Deal 4</h3>
-
-            <p>
-                Igicuruzwa cya kane.
-                Andika ibisobanuro byacyo hano.
-            </p>
-
-            <div class="price">
-                20,000 RWF
-            </div>
-
-            <a href="deal4.html" class="button">
-                Reba byinshi
-            </a>
-        </div>
-
-
-        <div class="card">
-            <h3>Deal 5</h3>
-
-            <p>
-                Igicuruzwa cya gatanu.
-                Andika ibisobanuro byacyo hano.
-            </p>
-
-            <div class="price">
-                25,000 RWF
-            </div>
-
-            <a href="deal5.html" class="button">
-                Reba byinshi
-            </a>
-        </div>
-
-
-        <div class="card">
-            <h3>Deal 6</h3>
-
-            <p>
-                Igicuruzwa cya gatandatu.
-                Andika ibisobanuro byacyo hano.
-            </p>
-
-            <div class="price">
-                30,000 RWF
-            </div>
-
-            <a href="Deal6.html" class="button">
-                Reba byinshi
-            </a>
-        </div>
-
-
-        <div class="card">
-            <h3>Deal 7</h3>
-
-            <p>
-                Igicuruzwa cya karindwi.
-                Andika ibisobanuro byacyo hano.
-            </p>
-
-            <div class="price">
-                35,000 RWF
-            </div>
-
-            <a href="Deal7.html" class="button">
-                Reba byinshi
-            </a>
-        </div>
-
     </div>
 </section>
 
+<section class="quick">
+    <div class="quick-card">
+        <b>🔥 Deals zatoranyijwe</b>
+        <p>Shakisha offers zitandukanye ahantu hamwe.</p>
+    </div>
+    <div class="quick-card">
+        <b>🔐 Account yawe</b>
+        <p>Login maze winjire mu gice cyihariye cy'abakoresha.</p>
+    </div>
+    <div class="quick-card">
+        <b>🤝 Affiliate</b>
+        <p>Gira uburyo bwo gukurikirana amahirwe ya affiliate.</p>
+    </div>
+</section>
+
+<section class="section" id="homeDeals">
+    <div class="section-title">
+        <h2>🔥 Iby'ingenzi kuri site</h2>
+        <span>Preview</span>
+    </div>
+
+    <div class="deals">
+        <div class="card">
+            <div class="deal-image">🛒</div>
+            <h3>Deals 1–7</h3>
+            <p>Deals zose ziboneka imbere nyuma yo gukora account no kwinjira.</p>
+        </div>
+
+        <div class="card">
+            <div class="deal-image">💰</div>
+            <h3>Wallet</h3>
+            <p>Dashboard izaba ifite balance, deposit na cash out interface.</p>
+        </div>
+
+        <div class="card">
+            <div class="deal-image">🤝</div>
+            <h3>Affiliate Program</h3>
+            <p>Igice cyo gukurikirana affiliate kizaba kiri muri account yawe.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="about">
+    <div class="section-title"><h2>About</h2></div>
+    <div class="card">
+        <p>
+            Rwanda Online Deals ni urubuga rugamije gutuma kubona deals
+            n'ibicuruzwa online mu Rwanda birushaho kuba byoroshye.
+        </p>
+    </div>
+</section>
+
+</main>
 
 <!-- =========================
-     FOOTER
+     PRIVATE DASHBOARD
 ========================= -->
+<section id="dashboard">
+    <div class="dashboard-wrap">
 
-<footer id="contact">
+        <div class="dashboard-top">
+            <div>
+                <h2>Murakaza neza, <span id="userName">User</span> 👋</h2>
+                <p id="userEmail"></p>
+            </div>
+            <button class="logout-btn" id="logoutButton">Logout</button>
+        </div>
 
-    <p>
-        <strong>Rwanda Online Deals</strong>
-    </p>
+        <div class="balance-box">
+            <small>💰 Balance yawe</small>
+            <h3>0 RWF</h3>
 
-    <p>
-        Deals • Ibicuruzwa • Amahirwe yo kugura online
-    </p>
+            <div class="action-grid">
+                <button class="action" id="depositBtn">➕ Deposit</button>
+                <button class="action" id="cashoutBtn">💸 Cash Out</button>
+                <button class="action" id="affiliateBtn">🤝 Affiliate</button>
+                <button class="action" id="accountBtn">👤 Account</button>
+            </div>
+        </div>
 
-    <p>
-        © 2026 Rwanda Online Deals
-    </p>
+        <div class="account-grid">
+            <div class="account-card">
+                <div class="icon">💳</div>
+                <h4>Deposit</h4>
+                <p>Igice cyo guteguriramo uburyo bwo kongera amafaranga kuri wallet.</p>
+            </div>
 
-</footer>
+            <div class="account-card">
+                <div class="icon">💸</div>
+                <h4>Cash Out</h4>
+                <p>Igice cyo guteguriramo withdrawal nyuma yo gushyiramo payment system.</p>
+            </div>
 
+            <div class="account-card">
+                <div class="icon">🤝</div>
+                <h4>Affiliate Program</h4>
+                <p>Gukurikirana referral na commission bizongerwa muri iyi dashboard.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-deals">
+            <div class="section-title">
+                <h2>🔥 Deals Zose</h2>
+                <span>Deal 1–7</span>
+            </div>
+
+            <div class="info-note">
+                ℹ️ Izi ni Deals z'imbere. Ubu ziboneka gusa ku muntu winjiye muri account.
+                Deposit na Cash Out bizakenera payment/backend system nyayo mbere yo kwakira amafaranga.
+            </div>
+
+            <div class="deals">
+
+                <div class="card">
+                    <div class="deal-image">🛍️</div>
+                    <h3>Deal 1</h3>
+                    <p>Igicuruzwa cya mbere. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">5,000 RWF</div>
+                    <a href="deal1.html" class="button">Reba byinshi</a>
+                </div>
+
+                <div class="card">
+                    <div class="deal-image">🎁</div>
+                    <h3>Deal 2</h3>
+                    <p>Igicuruzwa cya kabiri. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">10,000 RWF</div>
+                    <a href="deal2.html" class="button">Reba byinshi</a>
+                </div>
+
+                <div class="card">
+                    <div class="deal-image">📦</div>
+                    <h3>Deal 3</h3>
+                    <p>Igicuruzwa cya gatatu. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">15,000 RWF</div>
+                    <a href="deal3.html" class="button">Reba byinshi</a>
+                </div>
+
+                <div class="card">
+                    <div class="deal-image">🔥</div>
+                    <h3>Deal 4</h3>
+                    <p>Igicuruzwa cya kane. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">20,000 RWF</div>
+                    <a href="deal4.html" class="button">Reba byinshi</a>
+                </div>
+
+                <div class="card">
+                    <div class="deal-image">⭐</div>
+                    <h3>Deal 5</h3>
+                    <p>Igicuruzwa cya gatanu. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">25,000 RWF</div>
+                    <a href="deal5.html" class="button">Reba byinshi</a>
+                </div>
+
+                <div class="card">
+                    <div class="deal-image">🚀</div>
+                    <h3>Deal 6</h3>
+                    <p>Igicuruzwa cya gatandatu. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">30,000 RWF</div>
+                    <a href="Deal6.html" class="button">Reba byinshi</a>
+                </div>
+
+                <div class="card">
+                    <div class="deal-image">👑</div>
+                    <h3>Deal 7</h3>
+                    <p>Igicuruzwa cya karindwi. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">35,000 RWF</div>
+                    <a href="Deal7.html" class="button">Reba byinshi</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- =========================
-     AUTH SECTION
+     AUTH MODAL
 ========================= -->
-
 <section id="auth-section">
 
     <div class="auth-box">
 
-        <h2>Register</h2>
+        <div class="auth-head">
+            <h2>Rwanda Online Deals</h2>
+            <button class="close-auth" id="closeAuth">×</button>
+        </div>
 
-        <form id="registerForm">
+        <div class="auth-tabs">
+            <button class="auth-tab active" id="registerTab">Kora Account</button>
+            <button class="auth-tab" id="loginTab">Injira</button>
+        </div>
 
-            <input
-                type="text"
-                id="registerName"
-                placeholder="Full Name"
-                required
-            >
-
-            <input
-                type="email"
-                id="registerEmail"
-                placeholder="Email Address"
-                required
-            >
-
-            <input
-                type="password"
-                id="registerPassword"
-                placeholder="Password"
-                required
-            >
-
-            <button type="submit">
-                Create Account
-            </button>
-
+        <form id="registerForm" class="auth-form active">
+            <input type="text" id="registerName" placeholder="Amazina yawe" required>
+            <input type="email" id="registerEmail" placeholder="Email Address" required>
+            <input type="password" id="registerPassword" placeholder="Password (minimum 6)" minlength="6" required>
+            <button type="submit">Create Account</button>
         </form>
 
-
-        <hr>
-
-
-        <h2>Login</h2>
-
-        <form id="loginForm">
-
-            <input
-                type="email"
-                id="loginEmail"
-                placeholder="Email Address"
-                required
-            >
-
-            <input
-                type="password"
-                id="loginPassword"
-                placeholder="Password"
-                required
-            >
-
-            <button type="submit">
-                Login
-            </button>
-
+        <form id="loginForm" class="auth-form">
+            <input type="email" id="loginEmail" placeholder="Email Address" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button type="submit">Login</button>
         </form>
 
-
-        <button
-            id="logoutButton"
-            style="display:none; margin-top:15px;"
-        >
-            Logout
-        </button>
-
-
-        <p
-            id="authMessage"
-            style="
-                margin-top:15px;
-                font-weight:bold;
-                text-align:center;
-            "
-        ></p>
-
+        <p id="authMessage" class="auth-message"></p>
     </div>
-
 </section>
 
+<footer id="contact">
+    <p><strong>Rwanda Online Deals</strong></p>
+    <p>Deals • Ibicuruzwa • Amahirwe yo kugura online</p>
+    <p>© 2026 Rwanda Online Deals</p>
+</footer>
 
 <script type="module">
 
@@ -471,7 +783,6 @@ import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -479,7 +790,6 @@ import {
     signOut,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
 
 import {
     getAnalytics
@@ -491,26 +801,13 @@ import {
 ========================= */
 
 const firebaseConfig = {
-
     apiKey: "AIzaSyCOOEbhkKrv0ysHarRZvjw2DlgsRlcN180",
-
-    authDomain:
-        "rwanda-online-deals.firebaseapp.com",
-
-    projectId:
-        "rwanda-online-deals",
-
-    storageBucket:
-        "rwanda-online-deals.firebasestorage.app",
-
-    messagingSenderId:
-        "74305121142",
-
-    appId:
-        "1:74305121142:web:c3c0a305a82fa78f03e857",
-
-    measurementId:
-        "G-FG5JEHSD00"
+    authDomain: "rwanda-online-deals.firebaseapp.com",
+    projectId: "rwanda-online-deals",
+    storageBucket: "rwanda-online-deals.firebasestorage.app",
+    messagingSenderId: "74305121142",
+    appId: "1:74305121142:web:c3c0a305a82fa78f03e857",
+    measurementId: "G-FG5JEHSD00"
 };
 
 
@@ -518,41 +815,139 @@ const firebaseConfig = {
    INITIALIZE FIREBASE
 ========================= */
 
-const app =
-    initializeApp(firebaseConfig);
-
-const auth =
-    getAuth(app);
-
-const analytics =
-    getAnalytics(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const analytics = getAnalytics(app);
 
 
 /* =========================
    ELEMENTS
 ========================= */
 
-const message =
-    document.getElementById("authMessage");
+const authSection = document.getElementById("auth-section");
+const authMessage = document.getElementById("authMessage");
+const registerForm = document.getElementById("registerForm");
+const loginForm = document.getElementById("loginForm");
+const registerTab = document.getElementById("registerTab");
+const loginTab = document.getElementById("loginTab");
+const closeAuth = document.getElementById("closeAuth");
 
-const dealsSection =
-    document.getElementById("deals");
+const homePage = document.getElementById("homePage");
+const homeNav = document.getElementById("homeNav");
+const dashboard = document.getElementById("dashboard");
+const logoutButton = document.getElementById("logoutButton");
 
-const logoutButton =
-    document.getElementById("logoutButton");
-
-const registerForm =
-    document.getElementById("registerForm");
-
-const loginForm =
-    document.getElementById("loginForm");
+const userName = document.getElementById("userName");
+const userEmail = document.getElementById("userEmail");
 
 
 /* =========================
-   HIDE DEALS BY DEFAULT
+   AUTH MODAL
 ========================= */
 
-dealsSection.style.display = "none";
+function openAuth(tab = "register"){
+    authSection.style.display = "block";
+    document.body.style.overflow = "hidden";
+    showTab(tab);
+}
+
+function closeAuthBox(){
+    authSection.style.display = "none";
+    document.body.style.overflow = "";
+    authMessage.textContent = "";
+}
+
+function showTab(tab){
+    const isRegister = tab === "register";
+
+    registerTab.classList.toggle("active", isRegister);
+    loginTab.classList.toggle("active", !isRegister);
+
+    registerForm.classList.toggle("active", isRegister);
+    loginForm.classList.toggle("active", !isRegister);
+
+    authMessage.textContent = "";
+}
+
+document.getElementById("openAuthTop")
+    .addEventListener("click", () => openAuth("register"));
+
+document.getElementById("openAuthHero")
+    .addEventListener("click", () => openAuth("register"));
+
+registerTab.addEventListener("click", () => showTab("register"));
+loginTab.addEventListener("click", () => showTab("login"));
+closeAuth.addEventListener("click", closeAuthBox);
+
+authSection.addEventListener("click", (e) => {
+    if(e.target === authSection) closeAuthBox();
+});
+
+
+/* =========================
+   THREE DOT MENU
+========================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const menuPanel = document.getElementById("menuPanel");
+
+menuBtn.addEventListener("click", () => {
+    menuPanel.style.display =
+        menuPanel.style.display === "block" ? "none" : "block";
+});
+
+document.addEventListener("click", (e) => {
+    if(!menuBtn.contains(e.target) && !menuPanel.contains(e.target)){
+        menuPanel.style.display = "none";
+    }
+});
+
+
+/* =========================
+   SHOW PRIVATE DASHBOARD
+========================= */
+
+function showDashboard(user){
+
+    homePage.style.display = "none";
+    homeNav.style.display = "none";
+    dashboard.style.display = "block";
+
+    userEmail.textContent =
+        user.email || "";
+
+    const savedName =
+        localStorage.getItem("rwandaOnlineDealsName");
+
+    userName.textContent =
+        savedName || "User";
+
+    window.location.hash = "dashboard";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* =========================
+   SHOW HOME
+========================= */
+
+function showHome(){
+
+    dashboard.style.display = "none";
+    homePage.style.display = "block";
+    homeNav.style.display = "block";
+
+    window.location.hash = "home";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
 
 
 /* =========================
@@ -561,30 +956,16 @@ dealsSection.style.display = "none";
 
 onAuthStateChanged(auth, (user) => {
 
-    if (user) {
+    if(user){
 
-        /* User is logged in */
+        showDashboard(user);
 
-        dealsSection.style.display = "block";
+        closeAuthBox();
 
-        logoutButton.style.display =
-            "block";
+    }else{
 
-        message.textContent =
-            "✅ Winjiye neza! Welcome to Rwanda Online Deals.";
+        showHome();
 
-        message.style.color =
-            "green";
-
-    } else {
-
-        /* User is logged out */
-
-        dealsSection.style.display =
-            "none";
-
-        logoutButton.style.display =
-            "none";
     }
 
 });
@@ -594,193 +975,185 @@ onAuthStateChanged(auth, (user) => {
    REGISTRATION
 ========================= */
 
-registerForm.addEventListener(
-    "submit",
-    async (e) => {
+registerForm.addEventListener("submit", async (e) => {
 
-        e.preventDefault();
+    e.preventDefault();
 
+    const name =
+        document.getElementById("registerName").value.trim();
 
-        const name =
-            document
-            .getElementById("registerName")
-            .value
-            .trim();
+    const email =
+        document.getElementById("registerEmail").value.trim();
 
+    const password =
+        document.getElementById("registerPassword").value;
 
-        const email =
-            document
-            .getElementById("registerEmail")
-            .value
-            .trim();
+    authMessage.textContent =
+        "⏳ Creating your account...";
 
+    authMessage.style.color = "#086d3b";
 
-        const password =
-            document
-            .getElementById("registerPassword")
-            .value;
+    try{
 
+        await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
 
-        message.textContent =
-            "⏳ Creating your account...";
+        localStorage.setItem(
+            "rwandaOnlineDealsName",
+            name
+        );
 
-        message.style.color =
-            "blue";
+        authMessage.textContent =
+            "✅ Account yakozwe neza! Turakwinjiza...";
 
+        authMessage.style.color = "green";
 
-        try {
+        registerForm.reset();
 
-            const userCredential =
-                await createUserWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
+        /*
+          Firebase ihita itanga login state nyuma ya
+          createUserWithEmailAndPassword.
+          onAuthStateChanged niyo ihita itujyana kuri dashboard.
+        */
 
+    }catch(error){
 
-            const user =
-                userCredential.user;
+        console.error(error);
 
+        let msg = error.message;
 
-            console.log(
-                "Registered user:",
-                name,
-                user.email
-            );
-
-
-            message.textContent =
-                "✅ Account created successfully!";
-
-            message.style.color =
-                "green";
-
-
-            registerForm.reset();
-
-
-        } catch (error) {
-
-            console.error(error);
-
-
-            message.textContent =
-                "❌ Registration failed: " +
-                error.message;
-
-            message.style.color =
-                "red";
-
+        if(error.code === "auth/email-already-in-use"){
+            msg = "Iyi email isanzwe ifite account. Koresha Login.";
         }
 
+        if(error.code === "auth/weak-password"){
+            msg = "Password igomba kuba nibura characters 6.";
+        }
+
+        if(error.code === "auth/invalid-email"){
+            msg = "Email ntabwo ari yo.";
+        }
+
+        authMessage.textContent =
+            "❌ " + msg;
+
+        authMessage.style.color = "red";
+
     }
-);
+
+});
 
 
 /* =========================
    LOGIN
 ========================= */
 
-loginForm.addEventListener(
-    "submit",
-    async (e) => {
+loginForm.addEventListener("submit", async (e) => {
 
-        e.preventDefault();
+    e.preventDefault();
 
+    const email =
+        document.getElementById("loginEmail").value.trim();
 
-        const email =
-            document
-            .getElementById("loginEmail")
-            .value
-            .trim();
+    const password =
+        document.getElementById("loginPassword").value;
 
+    authMessage.textContent =
+        "⏳ Turimo kukwinjiza...";
 
-        const password =
-            document
-            .getElementById("loginPassword")
-            .value;
+    authMessage.style.color = "#086d3b";
 
+    try{
 
-        message.textContent =
-            "⏳ Logging in...";
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
 
-        message.style.color =
-            "blue";
+        authMessage.textContent =
+            "✅ Login yakozwe neza! Turakwinjiza...";
 
+        authMessage.style.color = "green";
 
-        try {
+        loginForm.reset();
 
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
+        /*
+          onAuthStateChanged ihita ibona user
+          ikerekana dashboard.
+        */
 
+    }catch(error){
 
-            message.textContent =
-                "✅ Login successful!";
+        console.error(error);
 
-            message.style.color =
-                "green";
+        let msg = "Login yanze. Reba email na password.";
 
-
-            loginForm.reset();
-
-
-        } catch (error) {
-
-            console.error(error);
-
-
-            message.textContent =
-                "❌ Login failed: " +
-                error.message;
-
-            message.style.color =
-                "red";
-
+        if(
+            error.code === "auth/invalid-credential" ||
+            error.code === "auth/wrong-password" ||
+            error.code === "auth/user-not-found"
+        ){
+            msg = "Email cyangwa password ntabwo ari byo.";
         }
 
+        if(error.code === "auth/too-many-requests"){
+            msg = "Gerageza nyuma gato. Attempts zabaye nyinshi.";
+        }
+
+        authMessage.textContent =
+            "❌ " + msg;
+
+        authMessage.style.color = "red";
+
     }
-);
+
+});
 
 
 /* =========================
    LOGOUT
 ========================= */
 
-logoutButton.addEventListener(
-    "click",
-    async () => {
+logoutButton.addEventListener("click", async () => {
 
-        try {
+    try{
 
-            await signOut(auth);
+        await signOut(auth);
 
+        localStorage.removeItem("rwandaOnlineDealsName");
 
-            message.textContent =
-                "✅ Wasohotse neza.";
+    }catch(error){
 
-            message.style.color =
-                "green";
-
-
-        } catch (error) {
-
-            console.error(error);
-
-
-            message.textContent =
-                "❌ Logout failed: " +
-                error.message;
-
-            message.style.color =
-                "red";
-
-        }
+        console.error(error);
 
     }
-);
+
+});
+
+
+/* =========================
+   DASHBOARD ACTIONS
+========================= */
+
+document.getElementById("depositBtn").addEventListener("click", () => {
+    alert("Deposit module irategurwa. Tuzayihuza na payment system nyayo.");
+});
+
+document.getElementById("cashoutBtn").addEventListener("click", () => {
+    alert("Cash Out module irategurwa. Tuzayihuza na payment system nyayo.");
+});
+
+document.getElementById("affiliateBtn").addEventListener("click", () => {
+    alert("Affiliate Program module irategurwa.");
+});
+
+document.getElementById("accountBtn").addEventListener("click", () => {
+    alert("Account yawe iri gukora neza. Email: " + (auth.currentUser?.email || ""));
+});
 
 </script>
 

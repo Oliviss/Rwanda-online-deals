@@ -150,52 +150,6 @@ nav a{
     cursor:pointer;
 }
 
-.hero-art{
-    position:absolute;
-    right:30px;
-    bottom:15px;
-    width:300px;
-    height:240px;
-}
-
-.art-circle{
-    position:absolute;
-    width:210px;
-    height:210px;
-    border-radius:50%;
-    background:rgba(255,255,255,.11);
-    right:20px;
-    top:15px;
-}
-
-.art-card{
-    position:absolute;
-    background:white;
-    color:#075d34;
-    border-radius:16px;
-    padding:17px;
-    width:170px;
-    box-shadow:0 15px 35px rgba(0,0,0,.18);
-    transform:rotate(-5deg);
-    right:85px;
-    top:45px;
-}
-
-.art-card strong{font-size:24px;display:block;margin:8px 0}
-.art-card small{color:#64746b}
-
-.art-tag{
-    position:absolute;
-    background:#ffcf3f;
-    color:#553f00;
-    border-radius:12px;
-    padding:9px 12px;
-    font-weight:bold;
-    right:0;
-    bottom:25px;
-    transform:rotate(5deg);
-}
-
 .quick{
     max-width:1100px;
     margin:18px auto 0;
@@ -241,10 +195,13 @@ nav a{
     padding:18px;
     box-shadow:0 5px 18px rgba(0,0,0,.07);
     border:1px solid #edf1ee;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .deal-image{
-    height:115px;
+    height:130px;
     border-radius:13px;
     background:linear-gradient(135deg,#dff5e8,#f7fbf8);
     display:flex;
@@ -275,6 +232,13 @@ nav a{
     font-weight:bold;
     border:none;
     cursor:pointer;
+    text-align:center;
+    width: 100%;
+}
+
+.button-delete {
+    background: #d9534f;
+    margin-top: 6px;
 }
 
 #auth-section, .modal-popup{
@@ -334,12 +298,9 @@ nav a{
     color:white;
 }
 
-.auth-form{display:none}
+.auth-form{display:none; flex-direction:column; gap:10px;}
 .auth-form.active{display:flex}
-.auth-form{
-    flex-direction:column;
-    gap:10px;
-}
+
 .auth-form input, .custom-form input, .custom-form textarea, .custom-form select{
     padding:12px;
     border:1px solid #ccd8d1;
@@ -348,6 +309,7 @@ nav a{
     width:100%;
     margin-bottom:10px;
 }
+
 .auth-form button, .custom-btn{
     padding:12px;
     border:none;
@@ -358,6 +320,7 @@ nav a{
     cursor:pointer;
     width:100%;
 }
+
 .auth-message{
     margin-top:12px;
     font-weight:bold;
@@ -424,39 +387,6 @@ nav a{
     font-weight:bold;
 }
 
-.account-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
-    margin:16px 0 25px;
-}
-
-.account-card{
-    background:white;
-    border-radius:16px;
-    padding:18px;
-    box-shadow:0 5px 18px rgba(0,0,0,.06);
-}
-.account-card .icon{font-size:25px}
-.account-card h4{margin:9px 0 5px;color:#075d34}
-.account-card p{font-size:12px;color:#68756e;line-height:1.5}
-
-.dashboard-deals{
-    margin-top:8px;
-}
-
-.info-note{
-    background:#fff9e7;
-    border:1px solid #f0dda4;
-    color:#6d570d;
-    padding:12px;
-    border-radius:11px;
-    font-size:12px;
-    line-height:1.5;
-    margin-bottom:15px;
-}
-
-/* ADMIN STYLES */
 .admin-section {
     background: #ffffff;
     border: 2px solid #08703d;
@@ -492,7 +422,6 @@ nav a{
     font-weight:bold;
     font-size:13px;
 }
-.menu-panel a:hover{background:#eef7f1}
 
 footer{
     background:#075d34;
@@ -507,21 +436,8 @@ footer p{margin:6px;font-size:13px}
 
 @media(max-width:760px){
     .brand h1{font-size:21px}
-    .brand p{font-size:11px}
-    .login-top{padding:9px 11px;font-size:12px}
-    .hero-box{min-height:390px}
-    .hero h2{font-size:29px}
-    .hero-art{right:0;bottom:0;opacity:.55}
-    .quick{grid-template-columns:1fr}
-    .account-grid{grid-template-columns:1fr 1fr}
     .action-grid{grid-template-columns:repeat(2,1fr)}
     .admin-grid{grid-template-columns:1fr;}
-}
-
-@media(max-width:480px){
-    nav a{margin:0 5px;font-size:12px}
-    .hero-box{padding:28px 19px}
-    .account-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -536,18 +452,14 @@ footer p{margin:6px;font-size:13px}
         </div>
 
         <div class="header-actions">
-            <button class="login-top" id="openAuthTop">
-                Injira / Kora Account
-            </button>
-
-            <button class="menu-btn" id="menuBtn" aria-label="Menu">⋮</button>
+            <button class="login-top" id="openAuthTop">Injira / Kora Account</button>
+            <button class="menu-btn" id="menuBtn">⋮</button>
         </div>
     </div>
 
     <div class="menu-panel" id="menuPanel">
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
-        <a href="#more">More</a>
     </div>
 </header>
 
@@ -558,85 +470,29 @@ footer p{margin:6px;font-size:13px}
 </nav>
 
 <main id="homePage">
-
 <section class="hero" id="home">
     <div class="hero-box">
         <div class="hero-content">
             <span class="badge">🇷🇼 ONLINE SHOPPING • RWANDA</span>
             <h2>Shaka deals. Hitamo neza. Korera online.</h2>
-            <p>
-                Murakaza neza kuri Rwanda Online Deals — ahantu hamwe
-                ho kubona offers n'ibicuruzwa bitandukanye mu buryo bworoshye.
-            </p>
-            <button class="primary-btn" id="openAuthHero">
-                Tangira nonaha →
-            </button>
+            <p>Murakaza neza kuri Rwanda Online Deals — offers n'ibicuruzwa mu buryo bworoshye.</p>
+            <button class="primary-btn" id="openAuthHero">Tangira nonaha →</button>
         </div>
-
-        <div class="hero-art" aria-hidden="true">
-            <div class="art-circle"></div>
-            <div class="art-card">
-                🛍️
-                <strong>DEAL</strong>
-                <small>Offers zigezweho</small>
-            </div>
-            <div class="art-tag">🔥 New</div>
-        </div>
-    </div>
-</section>
-
-<section class="quick">
-    <div class="quick-card">
-        <b>🔥 Deals zatoranyijwe</b>
-        <p>Shakisha offers zitandukanye ahantu hamwe.</p>
-    </div>
-    <div class="quick-card">
-        <b>🔐 Account yawe</b>
-        <p>Login maze winjire mu gice cyihariye cy'abakoresha.</p>
-    </div>
-    <div class="quick-card">
-        <b>🤝 Affiliate</b>
-        <p>Gira uburyo bwo gukurikirana amahirwe ya affiliate.</p>
     </div>
 </section>
 
 <section class="section" id="homeDeals">
     <div class="section-title">
-        <h2>🔥 Iby'ingenzi kuri site</h2>
-        <span>Preview</span>
+        <h2>🔥 Preview Deals</h2>
     </div>
-
     <div class="deals">
         <div class="card">
             <div class="deal-image">🛒</div>
-            <h3>Deals 1–7</h3>
-            <p>Deals zose ziboneka imbere nyuma yo gukora account no kwinjira.</p>
-        </div>
-
-        <div class="card">
-            <div class="deal-image">💰</div>
-            <h3>Wallet</h3>
-            <p>Dashboard izaba ifite balance, deposit na cash out interface.</p>
-        </div>
-
-        <div class="card">
-            <div class="deal-image">🤝</div>
-            <h3>Affiliate Program</h3>
-            <p>Igice cyo gukurikirana affiliate kizaba kiri muri account yawe.</p>
+            <h3>Ibicuruzwa neza</h3>
+            <p>Ibicuruzwa byose biba biri imbere nyuma yo kwinjira.</p>
         </div>
     </div>
 </section>
-
-<section class="section" id="about">
-    <div class="section-title"><h2>About</h2></div>
-    <div class="card">
-        <p>
-            Rwanda Online Deals ni urubuga rugamije gutuma kubona deals
-            n'ibicuruzwa online mu Rwanda birushaho kuba byoroshye.
-        </p>
-    </div>
-</section>
-
 </main>
 
 <!-- =========================
@@ -660,88 +516,66 @@ footer p{margin:6px;font-size:13px}
             <div class="action-grid">
                 <button class="action" id="depositBtn">➕ Deposit</button>
                 <button class="action" id="cashoutBtn">💸 Cash Out</button>
+                <button class="action" id="ordersBtn">📦 My Orders</button>
                 <button class="action" id="affiliateBtn">🤝 Support</button>
-                <button class="action" id="accountBtn">👤 Account</button>
-            </div>
-        </div>
-
-        <div class="account-grid">
-            <div class="account-card">
-                <div class="icon">💳</div>
-                <h4>Deposit</h4>
-                <p>Saba gushyira amafaranga kuri wallet yawe hano.</p>
-            </div>
-
-            <div class="account-card">
-                <div class="icon">💸</div>
-                <h4>Cash Out</h4>
-                <p>Saba kubikuza amafaranga kuri Momo/Airtel Money.</p>
-            </div>
-
-            <div class="account-card">
-                <div class="icon">🤝</div>
-                <h4>Support System</h4>
-                <p>Andikira admin ibyo ukeneye ubufasha cyangwa ubibaze.</p>
             </div>
         </div>
 
         <div class="dashboard-deals">
             <div class="section-title">
-                <h2>🔥 Deals Zose</h2>
-                <span>Aha ni naho nshya ziza</span>
+                <h2>🔥 Deals & Products Zose</h2>
             </div>
 
             <div class="deals" id="dealsContainer">
-               <!-- Dynamic Loading -->
+                <p>⏳ Load-inga ibicuruzwa...</p>
             </div>
         </div>
 
         <!-- =========================
-             ADMIN PANEL (FOR ADMIN USERS)
+             ADMIN PANEL
         ========================= -->
         <div id="adminPanel" class="admin-section hidden">
             <h2>👑 Admin Control Dashboard</h2>
-            <div class="admin-grid">
+            
+            <!-- ADD OR EDIT PRODUCT -->
+            <h3>🛒 Ongeza cyangwa Uhingure Igicuruzwa (Product / Deal)</h3>
+            <form id="addProductForm" class="custom-form" style="margin-top: 10px;">
+                <input type="hidden" id="prodEditId">
+                <input type="text" id="prodName" placeholder="Izina ry'Igicuruzwa (Urugero: Deal 1)" required>
+                <input type="number" id="prodPrice" placeholder="Igiciro (RWF)" required>
+                <textarea id="prodDesc" rows="2" placeholder="Ibisobanuro by'igicuruzwa" required></textarea>
+                <input type="text" id="prodImg" placeholder="Image Link (Unayisibe niba ntayo)">
+                <button type="submit" class="custom-btn" id="saveProdBtn">➕ Save Product</button>
+            </form>
 
+            <hr style="margin: 20px 0;">
+
+            <div class="admin-grid">
                 <!-- Deposit Requests -->
                 <div>
                     <h3>💳 Pending Deposits</h3>
-                    <div id="pendingDepositsList"><p style="font-size: 13px;">Nta deposits nshya ziri kugaragara...</p></div>
+                    <div id="pendingDepositsList"></div>
                 </div>
 
                 <!-- Withdrawal Requests -->
                 <div>
                     <h3>💸 Pending Withdrawals</h3>
-                    <div id="pendingWithdrawalsList"><p style="font-size: 13px;">Nta cash outs nshya ziri kugaragara...</p></div>
+                    <div id="pendingWithdrawalsList"></div>
                 </div>
-
             </div>
-
-            <hr style="margin: 20px 0; border: 0; border-top: 1fr solid #ddd;">
-
-            <!-- Product Price & Creation Management -->
-            <h3>🛍️ Manage Products & Change Prices</h3>
-            <form id="addProductForm" class="custom-form" style="margin-top: 10px;">
-                <input type="text" id="prodName" placeholder="Izina ry'Igicuruzwa" required>
-                <input type="number" id="prodPrice" placeholder="Igiciro (RWF)" required>
-                <input type="text" id="prodDesc" placeholder="Ibisobanuro magufi" required>
-                <input type="text" id="prodImg" placeholder="Image URL (Optionally paste link)">
-                <button type="submit" class="custom-btn">Kongeramo / Update Product</button>
-            </form>
 
             <hr style="margin: 20px 0;">
 
-            <!-- Messages/Support -->
-            <h3>✉️ Support Tickets / Messages</h3>
-            <div id="supportMessagesList" style="margin-top: 10px;"></div>
+            <!-- ORDERS MANAGEMENT -->
+            <h3>📦 Customer Orders (Ibyaguzwe)</h3>
+            <div id="adminOrdersList" style="margin-top:10px;"></div>
+
         </div>
 
     </div>
 </section>
 
-<!-- =========================
-     AUTH MODAL
-========================= -->
+<!-- AUTH MODAL -->
 <section id="auth-section">
     <div class="auth-box">
         <div class="auth-head">
@@ -757,7 +591,7 @@ footer p{margin:6px;font-size:13px}
         <form id="registerForm" class="auth-form active">
             <input type="text" id="registerName" placeholder="Amazina yawe" required>
             <input type="email" id="registerEmail" placeholder="Email Address" required>
-            <input type="password" id="registerPassword" placeholder="Password (minimum 6)" minlength="6" required>
+            <input type="password" id="registerPassword" placeholder="Password (min 6)" minlength="6" required>
             <button type="submit">Create Account</button>
         </form>
 
@@ -771,7 +605,7 @@ footer p{margin:6px;font-size:13px}
     </div>
 </section>
 
-<!-- TRANSACTION MODAL (DEPOSIT / CASH OUT) -->
+<!-- TRANSACTION MODAL -->
 <div id="transactionModal" class="modal-popup">
     <div class="modal-content">
         <div class="auth-head">
@@ -779,527 +613,409 @@ footer p{margin:6px;font-size:13px}
             <button class="close-modal" id="closeTransModal">×</button>
         </div>
         <form id="transactionForm" class="custom-form">
-            <input type="number" id="transAmount" placeholder="Injiza Umubare w'amafaranga (RWF)" required min="100">
+            <input type="number" id="transAmount" placeholder="Umubare w'amafaranga (RWF)" required min="100">
             <input type="text" id="transPhone" placeholder="Nimero ya Phone (MTN/Airtel)" required>
-            <button type="submit" class="custom-btn" id="transSubmitBtn">Ohereza Request</button>
+            <button type="submit" class="custom-btn">Ohereza Request</button>
         </form>
     </div>
 </div>
 
-<!-- SUPPORT MODAL -->
-<div id="supportModal" class="modal-popup">
+<!-- MY ORDERS MODAL (USER) -->
+<div id="myOrdersModal" class="modal-popup">
     <div class="modal-content">
         <div class="auth-head">
-            <h2>Tangira Support Ticket</h2>
-            <button class="close-modal" id="closeSupportModal">×</button>
+            <h2>📦 Orders Zanjye</h2>
+            <button class="close-modal" id="closeOrdersModal">×</button>
         </div>
-        <form id="supportForm" class="custom-form">
-            <textarea id="supportMsgText" rows="4" placeholder="Andika hano icyo ukeneye ubufasha..." required></textarea>
-            <button type="submit" class="custom-btn">Ohereza Ubutumwa</button>
-        </form>
+        <div id="myOrdersList"></div>
     </div>
 </div>
 
 <footer id="contact">
-    <p><strong>Rwanda Online Deals</strong></p>
-    <p>Deals • Ibicuruzwa • Amahirwe yo kugura online</p>
-    <p>© 2026 Rwanda Online Deals</p>
+    <p><strong>Rwanda Online Deals</strong> © 2026</p>
 </footer>
 
 <script type="module">
-
-/* =========================
-   FIREBASE IMPORTS
-========================= */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged
+    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
-    getFirestore,
-    collection,
-    doc,
-    setDoc,
-    getDoc,
-    getDocs,
-    addDoc,
-    updateDoc,
-    onSnapshot,
-    query,
-    where,
-    serverTimestamp
+    getFirestore, collection, doc, setDoc, getDoc, addDoc, updateDoc, deleteDoc, onSnapshot, query, where, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
 const firebaseConfig = {
     apiKey: "AIzaSyCOOEbhkKrv0ysHarRZvjw2DlgsRlcN180",
     authDomain: "rwanda-online-deals.firebaseapp.com",
     projectId: "rwanda-online-deals",
     storageBucket: "rwanda-online-deals.firebasestorage.app",
     messagingSenderId: "74305121142",
-    appId: "1:74305121142:web:c3c0a305a82fa78f03e857",
-    measurementId: "G-FG5JEHSD00"
+    appId: "1:74305121142:web:c3c0a305a82fa78f03e857"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-let currentTransType = "deposit"; 
+let currentTransType = "deposit";
+let isAdminUser = false;
 
-/* =========================
-   ELEMENTS
-========================= */
+/* AUTH & MODALS UI HANDLERS */
 const authSection = document.getElementById("auth-section");
-const authMessage = document.getElementById("authMessage");
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
-const registerTab = document.getElementById("registerTab");
-const loginTab = document.getElementById("loginTab");
-const closeAuth = document.getElementById("closeAuth");
+const authMessage = document.getElementById("authMessage");
 
-const homePage = document.getElementById("homePage");
-const homeNav = document.getElementById("homeNav");
-const dashboard = document.getElementById("dashboard");
-const logoutButton = document.getElementById("logoutButton");
+document.getElementById("openAuthTop").onclick = () => authSection.style.display = "block";
+document.getElementById("openAuthHero").onclick = () => authSection.style.display = "block";
+document.getElementById("closeAuth").onclick = () => authSection.style.display = "none";
 
-const userName = document.getElementById("userName");
-const userEmail = document.getElementById("userEmail");
-const userBalanceDisplay = document.getElementById("userBalanceDisplay");
-const adminPanel = document.getElementById("adminPanel");
+document.getElementById("registerTab").onclick = () => {
+    document.getElementById("registerTab").classList.add("active");
+    document.getElementById("loginTab").classList.remove("active");
+    registerForm.classList.add("active");
+    loginForm.classList.remove("active");
+};
 
-/* =========================
-   AUTH MODAL FUNCTIONS
-========================= */
-function openAuth(tab = "register"){
-    authSection.style.display = "block";
-    document.body.style.overflow = "hidden";
-    showTab(tab);
-}
+document.getElementById("loginTab").onclick = () => {
+    document.getElementById("loginTab").classList.add("active");
+    document.getElementById("registerTab").classList.remove("active");
+    loginForm.classList.add("active");
+    registerForm.classList.remove("active");
+};
 
-function closeAuthBox(){
-    authSection.style.display = "none";
-    document.body.style.overflow = "";
-    authMessage.textContent = "";
-}
+/* AUTH STATE LISTENERS */
+onAuthStateChanged(auth, async (user) => {
+    if(user){
+        document.getElementById("homePage").style.display = "none";
+        document.getElementById("homeNav").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+        document.getElementById("userEmail").textContent = user.email;
+        authSection.style.display = "none";
 
-function showTab(tab){
-    const isRegister = tab === "register";
-    registerTab.classList.toggle("active", isRegister);
-    loginTab.classList.toggle("active", !isRegister);
-    registerForm.classList.toggle("active", isRegister);
-    loginForm.classList.toggle("active", !isRegister);
-    authMessage.textContent = "";
-}
-
-document.getElementById("openAuthTop").addEventListener("click", () => openAuth("register"));
-document.getElementById("openAuthHero").addEventListener("click", () => openAuth("register"));
-registerTab.addEventListener("click", () => showTab("register"));
-loginTab.addEventListener("click", () => showTab("login"));
-closeAuth.addEventListener("click", closeAuthBox);
-
-authSection.addEventListener("click", (e) => {
-    if(e.target === authSection) closeAuthBox();
-});
-
-/* =========================
-   THREE DOT MENU
-========================= */
-const menuBtn = document.getElementById("menuBtn");
-const menuPanel = document.getElementById("menuPanel");
-
-menuBtn.addEventListener("click", () => {
-    menuPanel.style.display = menuPanel.style.display === "block" ? "none" : "block";
-});
-
-document.addEventListener("click", (e) => {
-    if(!menuBtn.contains(e.target) && !menuPanel.contains(e.target)){
-        menuPanel.style.display = "none";
+        listenUserData(user);
+        checkAdmin(user);
+        loadProducts();
+    } else {
+        document.getElementById("dashboard").style.display = "none";
+        document.getElementById("homePage").style.display = "block";
+        document.getElementById("homeNav").style.display = "block";
     }
 });
 
-/* =========================
-   LOAD PRODUCTS
-========================= */
-async function loadProducts() {
+function listenUserData(user) {
+    onSnapshot(doc(db, "users", user.uid), (snap) => {
+        if(snap.exists()) {
+            document.getElementById("userName").textContent = snap.data().name || "User";
+            document.getElementById("userBalanceDisplay").textContent = (snap.data().balance || 0).toLocaleString() + " RWF";
+        }
+    });
+}
+
+async function checkAdmin(user) {
+    const snap = await getDoc(doc(db, "users", user.uid));
+    if(snap.exists() && snap.data().role === "admin") {
+        isAdminUser = true;
+        document.getElementById("adminPanel").classList.remove("hidden");
+        listenAdminTxs();
+        listenAdminOrders();
+    } else {
+        isAdminUser = false;
+        document.getElementById("adminPanel").classList.add("hidden");
+    }
+}
+
+/* REGISTRATION & LOGIN */
+registerForm.onsubmit = async (e) => {
+    e.preventDefault();
+    const name = document.getElementById("registerName").value;
+    const email = document.getElementById("registerEmail").value;
+    const pwd = document.getElementById("registerPassword").value;
+    try {
+        const cred = await createUserWithEmailAndPassword(auth, email, pwd);
+        await setDoc(doc(db, "users", cred.user.uid), {
+            name, email, balance: 0, role: "user", createdAt: serverTimestamp()
+        });
+    } catch(err) { authMessage.textContent = "❌ " + err.message; }
+};
+
+loginForm.onsubmit = async (e) => {
+    e.preventDefault();
+    try {
+        await signInWithEmailAndPassword(auth, document.getElementById("loginEmail").value, document.getElementById("loginPassword").value);
+    } catch(err) { authMessage.textContent = "❌ Email/Password si yo."; }
+};
+
+document.getElementById("logoutButton").onclick = () => signOut(auth);
+
+/* ===================================================
+   DYNAMIC PRODUCTS / TEMPLATES MANAGEMENT
+=================================================== */
+
+// Populate initial default 7 deals into Firestore if empty!
+async function seedDefaultDealsIfEmpty() {
+    const qSnap = await getDoc(doc(db, "settings", "seeded"));
+    if(!qSnap.exists()) {
+        const defaultDeals = [
+            { name: "Deal 1", price: 5000, description: "Igicuruzwa cya mbere. Reba ibikubiyemo." },
+            { name: "Deal 2", price: 10000, description: "Igicuruzwa cya kabiri. Reba ibikubiyemo." },
+            { name: "Deal 3", price: 15000, description: "Igicuruzwa cya gatatu. Reba ibikubiyemo." },
+            { name: "Deal 4", price: 20000, description: "Igicuruzwa cya kane. Reba ibikubiyemo." },
+            { name: "Deal 5", price: 25000, description: "Igicuruzwa cya gatanu. Reba ibikubiyemo." },
+            { name: "Deal 6", price: 30000, description: "Igicuruzwa cya gatandatu. Reba ibikubiyemo." },
+            { name: "Deal 7", price: 35000, description: "Igicuruzwa cya karindwi. Reba ibikubiyemo." }
+        ];
+        for(let p of defaultDeals) {
+            await addDoc(collection(db, "products"), { ...p, imageUrl: "", createdAt: serverTimestamp() });
+        }
+        await setDoc(doc(db, "settings", "seeded"), { done: true });
+    }
+}
+
+function loadProducts() {
+    seedDefaultDealsIfEmpty();
     const dealsContainer = document.getElementById("dealsContainer");
+
     onSnapshot(collection(db, "products"), (snapshot) => {
         dealsContainer.innerHTML = "";
-        if (snapshot.empty) {
-            dealsContainer.innerHTML = "<p>Nta deal iraboneka.</p>";
+        if(snapshot.empty) {
+            dealsContainer.innerHTML = "<p>Nta bicuruzwa biragera mu bubiko.</p>";
             return;
         }
-        snapshot.forEach((doc) => {
-            const product = doc.data();
+
+        snapshot.forEach((docSnap) => {
+            const p = docSnap.data();
+            const pId = docSnap.id;
+
             const card = document.createElement("div");
             card.className = "card";
             card.innerHTML = `
-                <div class="deal-image">
-                    ${product.imageUrl ? `<img src="${product.imageUrl}" alt="${product.name}">` : "🛍️"}
+                <div>
+                    <div class="deal-image">
+                        ${p.imageUrl ? `<img src="${p.imageUrl}">` : '🛍️'}
+                    </div>
+                    <h3>${p.name}</h3>
+                    <p>${p.description}</p>
+                    <div class="price">${Number(p.price).toLocaleString()} RWF</div>
                 </div>
-                <h3>${product.name || "Product"}</h3>
-                <p>${product.description || "Nta bisobanuro birahari."}</p>
-                <div class="price">${(product.price || 0).toLocaleString()} RWF</div>
-                <button class="button">Gura Sasa</button>
+                <div>
+                    <button class="button" onclick="buyProduct('${pId}', '${p.name}', ${p.price})">🛒 Gura Nonaha</button>
+                    ${isAdminUser ? `
+                        <button class="button" style="background:#f0a732; margin-top:5px;" onclick="editProduct('${pId}', '${p.name}',${p.price}, '${p.description}', '${p.imageUrl || ''}')">✏️ Edit</button>
+                        <button class="button button-delete" onclick="deleteProduct('${pId}')">🗑️ Delete</button>
+                    ` : ''}
+                </div>
             `;
             dealsContainer.appendChild(card);
         });
     });
 }
 
-/* =========================
-   AUTH STATE LISTENERS & SYNC
-========================= */
-onAuthStateChanged(auth, async (user) => {
-    if(user){
-        showDashboard(user);
-        closeAuthBox();
-        listenToUserData(user);
-        checkAdminRole(user);
-    }else{
-        showHome();
-    }
-});
-
-function showDashboard(user){
-    homePage.style.display = "none";
-    homeNav.style.display = "none";
-    dashboard.style.display = "block";
-    userEmail.textContent = user.email || "";
-
-    window.location.hash = "dashboard";
-    window.scrollTo({ top:0, behavior:"smooth" });
-    loadProducts();
-}
-
-function showHome(){
-    dashboard.style.display = "none";
-    homePage.style.display = "block";
-    homeNav.style.display = "block";
-    window.location.hash = "home";
-    window.scrollTo({ top:0, behavior:"smooth" });
-}
-
-/* Realtime Sync user document */
-function listenToUserData(user) {
-    const userRef = doc(db, "users", user.uid);
-    onSnapshot(userRef, (docSnap) => {
-        if (docSnap.exists()) {
-            const data = docSnap.data();
-            userName.textContent = data.name || "User";
-            userBalanceDisplay.textContent = (data.balance || 0).toLocaleString() + " RWF";
-        } else {
-            // User entry initialization if missing
-            setDoc(userRef, {
-                name: localStorage.getItem("rwandaOnlineDealsName") || "User",
-                email: user.email,
-                balance: 0,
-                role: "user"
-            });
-        }
-    });
-}
-
-/* =========================
-   REGISTRATION
-========================= */
-registerForm.addEventListener("submit", async (e) => {
+/* ADMIN SAVE / EDIT / DELETE PRODUCT */
+document.getElementById("addProductForm").onsubmit = async (e) => {
     e.preventDefault();
-    const name = document.getElementById("registerName").value.trim();
-    const email = document.getElementById("registerEmail").value.trim();
-    const password = document.getElementById("registerPassword").value;
-
-    authMessage.textContent = "⏳ Creating your account...";
-    authMessage.style.color = "#086d3b";
-
-    try{
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-
-        // Save initial record in Firestore securely
-        await setDoc(doc(db, "users", user.uid), {
-            name: name,
-            email: email,
-            balance: 0,
-            role: "user",
-            createdAt: serverTimestamp()
-        });
-
-        localStorage.setItem("rwandaOnlineDealsName", name);
-        authMessage.textContent = "✅ Account yakozwe neza! Turakwinjiza...";
-        authMessage.style.color = "green";
-        registerForm.reset();
-
-    }catch(error){
-        console.error(error);
-        let msg = error.message;
-        if(error.code === "auth/email-already-in-use") msg = "Iyi email isanzwe ifite account.";
-        if(error.code === "auth/weak-password") msg = "Password igomba kuba nibura characters 6.";
-        authMessage.textContent = "❌ " + msg;
-        authMessage.style.color = "red";
-    }
-});
-
-/* =========================
-   LOGIN
-========================= */
-loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = document.getElementById("loginEmail").value.trim();
-    const password = document.getElementById("loginPassword").value;
-
-    authMessage.textContent = "⏳ Turimo kukwinjiza...";
-    authMessage.style.color = "#086d3b";
-
-    try{
-        await signInWithEmailAndPassword(auth, email, password);
-        authMessage.textContent = "✅ Login yakozwe neza!";
-        authMessage.style.color = "green";
-        loginForm.reset();
-    }catch(error){
-        console.error(error);
-        authMessage.textContent = "❌ Email cyangwa password ntabwo ari byo.";
-        authMessage.style.color = "red";
-    }
-});
-
-/* =========================
-   LOGOUT
-========================= */
-logoutButton.addEventListener("click", async () => {
-    try{
-        await signOut(auth);
-        localStorage.removeItem("rwandaOnlineDealsName");
-    }catch(error){
-        console.error(error);
-    }
-});
-
-/* =========================
-   DEPOSIT & CASHOUT HANDLING
-========================= */
-const transModal = document.getElementById("transactionModal");
-const transModalTitle = document.getElementById("transModalTitle");
-const closeTransModal = document.getElementById("closeTransModal");
-const transactionForm = document.getElementById("transactionForm");
-
-document.getElementById("depositBtn").addEventListener("click", () => {
-    currentTransType = "deposit";
-    transModalTitle.textContent = "➕ Deposit Cash";
-    transModal.style.display = "block";
-});
-
-document.getElementById("cashoutBtn").addEventListener("click", () => {
-    currentTransType = "withdraw";
-    transModalTitle.textContent = "💸 Cash Out (Withdraw)";
-    transModal.style.display = "block";
-});
-
-closeTransModal.addEventListener("click", () => transModal.style.display = "none");
-
-transactionForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const amount = Number(document.getElementById("transAmount").value);
-    const phone = document.getElementById("transPhone").value.trim();
-    const user = auth.currentUser;
-
-    if (!user) return;
-
-    try {
-        if (currentTransType === "withdraw") {
-            const userSnap = await getDoc(doc(db, "users", user.uid));
-            const currentBalance = userSnap.data()?.balance || 0;
-            if (amount > currentBalance) {
-                alert("❌ Balance yawe ntiyaguhagije gukora uwo mushinga!");
-                return;
-            }
-        }
-
-        await addDoc(collection(db, "transactions"), {
-            userId: user.uid,
-            userEmail: user.email,
-            userName: userName.textContent,
-            amount: amount,
-            phone: phone,
-            type: currentTransType,
-            status: "PENDING",
-            createdAt: serverTimestamp()
-        });
-
-        alert("✅ Request ya " + currentTransType + " yoherejwe neza! Tegereza admin ayemeze.");
-        transModal.style.display = "none";
-        transactionForm.reset();
-
-    } catch (err) {
-        console.error(err);
-        alert("An error occurred: " + err.message);
-    }
-});
-
-/* =========================
-   SUPPORT SYSTEM
-========================= */
-const supportModal = document.getElementById("supportModal");
-const closeSupportModal = document.getElementById("closeSupportModal");
-const supportForm = document.getElementById("supportForm");
-
-document.getElementById("affiliateBtn").addEventListener("click", () => {
-    supportModal.style.display = "block";
-});
-
-closeSupportModal.addEventListener("click", () => supportModal.style.display = "none");
-
-supportForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const text = document.getElementById("supportMsgText").value.trim();
-    const user = auth.currentUser;
-
-    try {
-        await addDoc(collection(db, "support_tickets"), {
-            userId: user.uid,
-            userEmail: user.email,
-            message: text,
-            createdAt: serverTimestamp()
-        });
-
-        alert("✅ Support ticket yoherejwe neza!");
-        supportModal.style.display = "none";
-        supportForm.reset();
-    } catch(err) {
-        alert("Error sending support ticket: " + err.message);
-    }
-});
-
-document.getElementById("accountBtn").addEventListener("click", () => {
-    alert("Account status: Active\nEmail: " + (auth.currentUser?.email || ""));
-});
-
-/* =========================
-   ADMIN PANEL ACTIONS & WORKFLOW
-========================= */
-async function checkAdminRole(user) {
-    const userSnap = await getDoc(doc(db, "users", user.uid));
-    const userData = userSnap.data();
-
-    if (userData && userData.role === "admin") {
-        adminPanel.classList.remove("hidden");
-        listenToPendingTransactions();
-        listenToSupportTickets();
-    } else {
-        adminPanel.classList.add("hidden");
-    }
-}
-
-function listenToPendingTransactions() {
-    const q = query(collection(db, "transactions"), where("status", "==", "PENDING"));
-    onSnapshot(q, (snapshot) => {
-        const depList = document.getElementById("pendingDepositsList");
-        const withList = document.getElementById("pendingWithdrawalsList");
-
-        depList.innerHTML = "";
-        withList.innerHTML = "";
-
-        if (snapshot.empty) {
-            depList.innerHTML = "<p style='font-size:12px;'>Nta deposits nshya ziri kugaragara.</p>";
-            withList.innerHTML = "<p style='font-size:12px;'>Nta cash outs nshya ziri kugaragara.</p>";
-            return;
-        }
-
-        snapshot.forEach((docSnap) => {
-            const tx = docSnap.data();
-            const txId = docSnap.id;
-
-            const div = document.createElement("div");
-            div.className = "tx-card";
-            div.innerHTML = `
-                <p><b>${tx.userName}</b> (${tx.phone})</p>
-                <p>Amount: <b>${tx.amount.toLocaleString()} RWF</b></p>
-                <div class="tx-actions">
-                    <button class="btn-approve" onclick="processTx('${txId}', '${tx.userId}', ${tx.amount}, '${tx.type}', true)">Approve</button>
-                    <button class="btn-reject" onclick="processTx('${txId}', '${tx.userId}', ${tx.amount}, '${tx.type}', false)">Reject</button>
-                </div>
-            `;
-
-            if (tx.type === "deposit") depList.appendChild(div);
-            else withList.appendChild(div);
-        });
-    });
-}
-
-window.processTx = async function(txId, userId, amount, type, isApproved) {
-    try {
-        const userRef = doc(db, "users", userId);
-        const userSnap = await getDoc(userRef);
-        const currentBal = userSnap.data()?.balance || 0;
-
-        if (isApproved) {
-            let newBalance = currentBal;
-            if (type === "deposit") newBalance += amount;
-            else if (type === "withdraw") newBalance -= amount;
-
-            if (newBalance < 0) {
-                alert("❌ User balance space is insufficient for withdrawal!");
-                return;
-            }
-
-            await updateDoc(userRef, { balance: newBalance });
-            await updateDoc(doc(db, "transactions", txId), { status: "APPROVED" });
-            alert("✅ Action approved successfully!");
-        } else {
-            await updateDoc(doc(db, "transactions", txId), { status: "REJECTED" });
-            alert("❌ Transaction rejected.");
-        }
-    } catch (err) {
-        console.error(err);
-        alert("Action failed: " + err.message);
-    }
-};
-
-/* Product creation / editing for Admin */
-document.getElementById("addProductForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+    const editId = document.getElementById("prodEditId").value;
     const name = document.getElementById("prodName").value.trim();
     const price = Number(document.getElementById("prodPrice").value);
     const desc = document.getElementById("prodDesc").value.trim();
     const img = document.getElementById("prodImg").value.trim();
 
     try {
-        await addDoc(collection(db, "products"), {
-            name: name,
-            price: price,
-            description: desc,
-            imageUrl: img || "",
-            updatedAt: serverTimestamp()
-        });
-        alert("✅ Product process completed successfully!");
+        if(editId) {
+            await updateDoc(doc(db, "products", editId), { name, price, description: desc, imageUrl: img });
+            alert("✅ Product updated!");
+        } else {
+            await addDoc(collection(db, "products"), { name, price, description: desc, imageUrl: img, createdAt: serverTimestamp() });
+            alert("✅ Product nshya yongewe!");
+        }
         document.getElementById("addProductForm").reset();
-    } catch (err) {
-        alert("Error saving product: " + err.message);
-    }
-});
+        document.getElementById("prodEditId").value = "";
+        document.getElementById("saveProdBtn").textContent = "➕ Save Product";
+    } catch(err) { alert(err.message); }
+};
 
-function listenToSupportTickets() {
-    onSnapshot(collection(db, "support_tickets"), (snapshot) => {
-        const list = document.getElementById("supportMessagesList");
-        list.innerHTML = "";
-        snapshot.forEach((docSnap) => {
-            const ticket = docSnap.data();
-            const card = document.createElement("div");
-            card.className = "tx-card";
-            card.innerHTML = `<p><b>From:</b> ${ticket.userEmail}</p><p>${ticket.message}</p>`;
-            list.appendChild(card);
+window.editProduct = (id, name, price, desc, img) => {
+    document.getElementById("prodEditId").value = id;
+    document.getElementById("prodName").value = name;
+    document.getElementById("prodPrice").value = price;
+    document.getElementById("prodDesc").value = desc;
+    document.getElementById("prodImg").value = img;
+    document.getElementById("saveProdBtn").textContent = "💾 Update Product";
+    window.scrollTo({ top: document.getElementById("adminPanel").offsetTop, behavior: 'smooth' });
+};
+
+window.deleteProduct = async (id) => {
+    if(confirm("Wimfuje gusiba iki gicuruzwa?")) {
+        await deleteDoc(doc(db, "products", id));
+    }
+};
+
+/* ===================================================
+   BUY / ORDERS SYSTEM
+=================================================== */
+window.buyProduct = async (prodId, prodName, price) => {
+    const user = auth.currentUser;
+    if(!user) return;
+
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+    const bal = userSnap.data()?.balance || 0;
+
+    if(bal < price) {
+        alert("❌ Balance yawe (" + bal.toLocaleString() + " RWF) ntiyaguhagije kugura " + prodName + " (" + price.toLocaleString() + " RWF).\n\nKora Deposit ubanze!");
+        return;
+    }
+
+    if(confirm(`Wimfuje kugura ${prodName} kuri ${price.toLocaleString()} RWF?`)) {
+        try {
+            // Deduct money immediately
+            await updateDoc(userRef, { balance: bal - price });
+
+            // Create Order record
+            await addDoc(collection(db, "orders"), {
+                userId: user.uid,
+                userName: userSnap.data().name || "User",
+                userEmail: user.email,
+                productName: prodName,
+                price: price,
+                status: "PENDING",
+                createdAt: serverTimestamp()
+            });
+
+            alert("🎉 Mwaremewe Order neza! Amafaranga yaguzwe yakuwe kuri Wallet. Admin azaguhaza igicuruzwa vuba!");
+        } catch(err) { alert("Error: " + err.message); }
+    }
+};
+
+/* USER MY ORDERS */
+const myOrdersModal = document.getElementById("myOrdersModal");
+document.getElementById("ordersBtn").onclick = () => {
+    myOrdersModal.style.display = "block";
+    loadMyOrders();
+};
+document.getElementById("closeOrdersModal").onclick = () => myOrdersModal.style.display = "none";
+
+function loadMyOrders() {
+    const user = auth.currentUser;
+    const q = query(collection(db, "orders"), where("userId", "==", user.uid));
+    onSnapshot(q, (snap) => {
+        const div = document.getElementById("myOrdersList");
+        div.innerHTML = "";
+        if(snap.empty) { div.innerHTML = "<p>Nta order n'imwe urakora.</p>"; return; }
+
+        snap.forEach(d => {
+            const o = d.data();
+            div.innerHTML += `
+                <div class="tx-card">
+                    <p><b>${o.productName}</b> - ${o.price.toLocaleString()} RWF</p>
+                    <p>Status: <b style="color:${o.status==='COMPLETED'?'green':'orange'}">${o.status}</b></p>
+                </div>
+            `;
         });
     });
 }
 
-</script>
+/* ADMIN ORDERS MANAGEMENT */
+function listenAdminOrders() {
+    onSnapshot(collection(db, "orders"), (snap) => {
+        const div = document.getElementById("adminOrdersList");
+        div.innerHTML = "";
+        if(snap.empty) { div.innerHTML = "<p>Nta orders zirabyara.</p>"; return; }
 
+        snap.forEach(d => {
+            const o = d.data();
+            const oId = d.id;
+            div.innerHTML += `
+                <div class="tx-card">
+                    <p><b>Client:</b> ${o.userName} (${o.userEmail})</p>
+                    <p><b>Product:</b> ${o.productName} (${o.price.toLocaleString()} RWF)</p>
+                    <p><b>Status:</b> ${o.status}</p>
+                    ${o.status === 'PENDING' ? `
+                        <button class="btn-approve" onclick="completeOrder('${oId}')">Mark Delivered/Completed</button>
+                    ` : ''}
+                </div>
+            `;
+        });
+    });
+}
+
+window.completeOrder = async (orderId) => {
+    await updateDoc(doc(db, "orders", orderId), { status: "COMPLETED" });
+    alert("✅ Order completed!");
+};
+
+/* ===================================================
+   DEPOSIT / CASHOUT SYSTEM
+=================================================== */
+const transModal = document.getElementById("transactionModal");
+document.getElementById("depositBtn").onclick = () => {
+    currentTransType = "deposit";
+    document.getElementById("transModalTitle").textContent = "➕ Deposit Cash";
+    transModal.style.display = "block";
+};
+document.getElementById("cashoutBtn").onclick = () => {
+    currentTransType = "withdraw";
+    document.getElementById("transModalTitle").textContent = "💸 Cash Out (Withdraw)";
+    transModal.style.display = "block";
+};
+document.getElementById("closeTransModal").onclick = () => transModal.style.display = "none";
+
+document.getElementById("transactionForm").onsubmit = async (e) => {
+    e.preventDefault();
+    const amount = Number(document.getElementById("transAmount").value);
+    const phone = document.getElementById("transPhone").value.trim();
+    const user = auth.currentUser;
+
+    await addDoc(collection(db, "transactions"), {
+        userId: user.uid, userEmail: user.email, userName: document.getElementById("userName").textContent,
+        amount, phone, type: currentTransType, status: "PENDING", createdAt: serverTimestamp()
+    });
+
+    alert("✅ Transaction request sent!");
+    transModal.style.display = "none";
+};
+
+function listenAdminTxs() {
+    const q = query(collection(db, "transactions"), where("status", "==", "PENDING"));
+    onSnapshot(q, (snapshot) => {
+        const depList = document.getElementById("pendingDepositsList");
+        const withList = document.getElementById("pendingWithdrawalsList");
+        depList.innerHTML = ""; withList.innerHTML = "";
+
+        snapshot.forEach((docSnap) => {
+            const tx = docSnap.data();
+            const txId = docSnap.id;
+            const card = `
+                <div class="tx-card">
+                    <p><b>${tx.userName}</b> (${tx.phone})</p>
+                    <p>Amount: <b>${tx.amount.toLocaleString()} RWF</b></p>
+                    <div class="tx-actions">
+                        <button class="btn-approve" onclick="processTx('${txId}', '${tx.userId}', ${tx.amount}, '${tx.type}', true)">Approve</button>
+                        <button class="btn-reject" onclick="processTx('${txId}', '${tx.userId}', ${tx.amount}, '${tx.type}', false)">Reject</button>
+                    </div>
+                </div>
+            `;
+            if (tx.type === "deposit") depList.innerHTML += card;
+            else withList.innerHTML += card;
+        });
+    });
+}
+
+window.processTx = async (txId, userId, amount, type, isApproved) => {
+    const userRef = doc(db, "users", userId);
+    const userSnap = await getDoc(userRef);
+    let bal = userSnap.data()?.balance || 0;
+
+    if (isApproved) {
+        bal = (type === "deposit") ? bal + amount : bal - amount;
+        await updateDoc(userRef, { balance: bal });
+        await updateDoc(doc(db, "transactions", txId), { status: "APPROVED" });
+    } else {
+        await updateDoc(doc(db, "transactions", txId), { status: "REJECTED" });
+    }
+};
+
+</script>
 </body>
 </html>

@@ -10,23 +10,53 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 html{scroll-behavior:smooth}
 
 body{
-    background:#f4f8f6;
+    background:#f0f4f2;
     color:#17231d;
+    overflow-x: hidden;
 }
 
 button,a{font-family:inherit}
 
+/* ==========================================
+   MOVING GRAPHICS & ANIMATIONS
+========================================== */
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 15px rgba(22, 160, 91, 0.4); }
+    50% { box-shadow: 0 0 30px rgba(22, 160, 91, 0.8); }
+    100% { box-shadow: 0 0 15px rgba(22, 160, 91, 0.4); }
+}
+
+@keyframes floatBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes floatElement {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
 header{
-    background:linear-gradient(135deg,#075b32,#0b7a45);
+    background: linear-gradient(-45deg, #054023, #075b32, #0b7a45, #16a05b);
+    background-size: 400% 400%;
+    animation: floatBackground 12s ease infinite;
     color:white;
     padding:18px 18px 26px;
     text-align:center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
 .brand{
@@ -39,7 +69,7 @@ header{
 }
 
 .brand-text{text-align:left}
-.brand h1{font-size:25px;margin-bottom:5px}
+.brand h1{font-size:26px;margin-bottom:5px;letter-spacing: 0.5px;}
 .brand p{font-size:13px;opacity:.9}
 
 .header-actions{
@@ -53,27 +83,24 @@ header{
     color:#08703d;
     border:0;
     border-radius:25px;
-    padding:11px 15px;
+    padding:11px 20px;
     font-weight:bold;
     cursor:pointer;
+    transition: all 0.3s ease;
+    animation: pulseGlow 3s infinite;
 }
 
-.menu-btn{
-    width:42px;
-    height:42px;
-    border:0;
-    border-radius:50%;
-    background:rgba(255,255,255,.16);
-    color:white;
-    font-size:25px;
-    cursor:pointer;
+.login-top:hover{
+    transform: scale(1.05);
+    background: #eef8f2;
 }
 
 nav{
-    background:white;
-    padding:13px 10px;
+    background:rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    padding:14px 10px;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,.07);
+    box-shadow:0 4px 20px rgba(0,0,0,.06);
     position:sticky;
     top:0;
     z-index:20;
@@ -82,9 +109,14 @@ nav{
 nav a{
     color:#086d3b;
     text-decoration:none;
-    margin:0 8px;
+    margin:0 12px;
     font-weight:bold;
-    font-size:14px;
+    font-size:15px;
+    transition: color 0.2s ease;
+}
+
+nav a:hover{
+    color: #16a05b;
 }
 
 .hero{
@@ -97,80 +129,70 @@ nav a{
     position:relative;
     overflow:hidden;
     border-radius:25px;
-    min-height:300px;
-    padding:34px 24px;
+    min-height:320px;
+    padding:38px 28px;
     display:flex;
     align-items:center;
-    background:
-      radial-gradient(circle at 88% 18%,rgba(255,255,255,.22),transparent 28%),
-      linear-gradient(135deg,#073f27,#0b7541 58%,#16a05b);
+    background: linear-gradient(-45deg, #05331c, #07522d, #0e834a, #15aa61);
+    background-size: 300% 300%;
+    animation: floatBackground 8s ease infinite;
     color:white;
-    box-shadow:0 12px 35px rgba(4,89,48,.22);
+    box-shadow:0 15px 40px rgba(4,89,48,.25);
 }
 
 .hero-content{
     position:relative;
     z-index:2;
-    max-width:610px;
+    max-width:620px;
 }
 
 .badge{
     display:inline-block;
-    background:rgba(255,255,255,.15);
-    border:1px solid rgba(255,255,255,.25);
-    padding:7px 12px;
+    background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.3);
+    padding:7px 14px;
     border-radius:20px;
     font-size:12px;
     font-weight:bold;
-    margin-bottom:13px;
+    margin-bottom:15px;
+    animation: floatElement 4s ease-in-out infinite;
 }
 
 .hero h2{
-    font-size:34px;
-    line-height:1.08;
-    margin-bottom:12px;
+    font-size:36px;
+    line-height:1.1;
+    margin-bottom:14px;
 }
 
 .hero p{
     font-size:16px;
     line-height:1.6;
-    opacity:.94;
-    margin-bottom:20px;
+    opacity:.95;
+    margin-bottom:22px;
 }
 
 .primary-btn{
     display:inline-block;
     background:white;
     color:#086d3b;
-    padding:13px 20px;
-    border-radius:10px;
+    padding:14px 24px;
+    border-radius:12px;
     text-decoration:none;
     font-weight:bold;
     border:none;
     cursor:pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
 
-.quick{
-    max-width:1100px;
-    margin:18px auto 0;
-    padding:0 16px;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
+.primary-btn:hover{
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
-
-.quick-card{
-    background:white;
-    padding:17px;
-    border-radius:15px;
-    box-shadow:0 5px 18px rgba(0,0,0,.06);
-}
-.quick-card b{color:#08703d}
-.quick-card p{font-size:12px;color:#66736c;margin-top:5px;line-height:1.4}
 
 .section{
     max-width:1100px;
-    margin:25px auto;
+    margin:28px auto;
     padding:0 16px;
 }
 
@@ -178,37 +200,43 @@ nav a{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:15px;
+    margin-bottom:18px;
 }
-.section-title h2{color:#086d3b;font-size:23px}
-.section-title span{font-size:12px;color:#69756f}
+.section-title h2{color:#086d3b;font-size:24px}
 
 .deals{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:16px;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:18px;
 }
 
 .card{
     background:white;
-    border-radius:17px;
-    padding:18px;
-    box-shadow:0 5px 18px rgba(0,0,0,.07);
-    border:1px solid #edf1ee;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 8px 22px rgba(0,0,0,.06);
+    border:1px solid #e5ece8;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: all 0.3s ease;
+    animation: floatElement 6s ease-in-out infinite;
+}
+
+.card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.12);
 }
 
 .deal-image{
-    height:130px;
-    border-radius:13px;
+    height:140px;
+    border-radius:14px;
     background:linear-gradient(135deg,#dff5e8,#f7fbf8);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:42px;
-    margin-bottom:14px;
+    font-size:45px;
+    margin-bottom:15px;
     overflow:hidden;
 }
 
@@ -218,53 +246,56 @@ nav a{
     object-fit:cover;
 }
 
-.card h3{color:#086d3b;margin-bottom:8px}
-.card p{color:#5d6862;margin-bottom:13px;line-height:1.5;font-size:14px}
-.price{font-size:19px;font-weight:bold;color:#111;margin-bottom:14px}
+.card h3{color:#086d3b;margin-bottom:8px;font-size: 18px;}
+.card p{color:#5d6862;margin-bottom:14px;line-height:1.5;font-size:14px}
+.price{font-size:20px;font-weight:bold;color:#111;margin-bottom:15px}
 
 .button{
     display:inline-block;
     background:#0b6b3a;
     color:white;
-    padding:11px 16px;
-    border-radius:9px;
+    padding:12px 16px;
+    border-radius:10px;
     text-decoration:none;
     font-weight:bold;
     border:none;
     cursor:pointer;
     text-align:center;
     width: 100%;
+    transition: background 0.2s ease;
 }
 
-.button-delete {
-    background: #d9534f;
-    margin-top: 6px;
-}
+.button:hover{ background: #08572f; }
+.button-delete { background: #d9534f; margin-top: 6px; }
+.button-delete:hover { background: #b52b27; }
 
+/* MODALS & AUTH */
 #auth-section, .modal-popup{
     display:none;
     position:fixed;
     inset:0;
     z-index:100;
-    background:rgba(9,30,20,.65);
+    background:rgba(9,30,20,.7);
+    backdrop-filter: blur(5px);
     padding:20px;
     overflow:auto;
 }
 
 .auth-box, .modal-content{
     background:white;
-    max-width:520px;
+    max-width:500px;
     margin:35px auto;
-    padding:24px;
-    border-radius:20px;
-    box-shadow:0 20px 60px rgba(0,0,0,.25);
+    padding:28px;
+    border-radius:22px;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+    animation: floatElement 0.4s ease-out;
 }
 
 .auth-head{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:15px;
+    margin-bottom:18px;
 }
 
 .auth-head h2{color:#086d3b}
@@ -272,21 +303,22 @@ nav a{
     border:0;
     background:#eef5f1;
     color:#075d34;
-    width:36px;height:36px;border-radius:50%;
+    width:38px;height:38px;border-radius:50%;
     font-size:20px;cursor:pointer;
+    font-weight: bold;
 }
 
 .auth-tabs{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:8px;
-    margin-bottom:17px;
+    margin-bottom:18px;
 }
 
 .auth-tab{
-    padding:11px;
+    padding:12px;
     border:1px solid #d9e5de;
-    border-radius:9px;
+    border-radius:10px;
     background:#f7faf8;
     color:#086d3b;
     font-weight:bold;
@@ -301,33 +333,56 @@ nav a{
 .auth-form{display:none; flex-direction:column; gap:10px;}
 .auth-form.active{display:flex}
 
-.auth-form input, .custom-form input, .custom-form textarea, .custom-form select{
-    padding:12px;
+.auth-form input, .custom-form input, .custom-form textarea{
+    padding:13px;
     border:1px solid #ccd8d1;
-    border-radius:9px;
+    border-radius:10px;
     font-size:15px;
     width:100%;
     margin-bottom:10px;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.auth-form input:focus, .custom-form input:focus{
+    border-color: #0b6b3a;
 }
 
 .auth-form button, .custom-btn{
-    padding:12px;
+    padding:13px;
     border:none;
-    border-radius:9px;
+    border-radius:10px;
     background:#0b6b3a;
     color:white;
     font-weight:bold;
     cursor:pointer;
     width:100%;
+    font-size:15px;
 }
 
 .auth-message{
-    margin-top:12px;
+    margin-top:14px;
+    padding:10px;
+    border-radius:8px;
     font-weight:bold;
     text-align:center;
     line-height:1.4;
+    font-size:14px;
+    display:none;
+}
+.auth-message.error { background: #fde8e8; color: #9b1c1c; display: block; }
+.auth-message.success { background: #e1f5fe; color: #0277bd; display: block; }
+
+.forgot-link{
+    color: #086d3b;
+    text-align: right;
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-decoration: underline;
 }
 
+/* DASHBOARD */
 #dashboard{
     display:none;
     background:#eef7f1;
@@ -342,7 +397,7 @@ nav a{
     justify-content:space-between;
     align-items:center;
     gap:15px;
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
 
 .dashboard-top h2{color:#075d34}
@@ -352,8 +407,8 @@ nav a{
     background:#fff;
     color:#b42318;
     border:1px solid #f0c6c1;
-    padding:10px 14px;
-    border-radius:9px;
+    padding:10px 16px;
+    border-radius:10px;
     font-weight:bold;
     cursor:pointer;
 }
@@ -362,13 +417,13 @@ nav a{
     background:linear-gradient(135deg,#075d34,#0d8950);
     color:white;
     border-radius:20px;
-    padding:22px;
+    padding:24px;
     box-shadow:0 10px 30px rgba(7,93,52,.2);
-    margin-bottom:16px;
+    margin-bottom:20px;
 }
 
 .balance-box small{opacity:.85}
-.balance-box h3{font-size:30px;margin:8px 0 16px}
+.balance-box h3{font-size:32px;margin:8px 0 18px}
 
 .action-grid{
     display:grid;
@@ -377,67 +432,60 @@ nav a{
 }
 
 .action{
-    background:rgba(255,255,255,.14);
-    border:1px solid rgba(255,255,255,.22);
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.25);
     color:white;
     border-radius:12px;
-    padding:11px;
+    padding:12px 6px;
     text-align:center;
     cursor:pointer;
     font-weight:bold;
+    font-size:13px;
+    transition: background 0.2s ease;
 }
+
+.action:hover{ background: rgba(255,255,255,0.25); }
 
 .admin-section {
     background: #ffffff;
     border: 2px solid #08703d;
-    border-radius: 16px;
-    padding: 20px;
+    border-radius: 18px;
+    padding: 22px;
     margin-top: 30px;
 }
-.admin-section h2 { color: #075d34; margin-bottom: 15px; }
-.admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-.tx-card { background: #f8faf9; border: 1px solid #dce8e1; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
-.tx-actions { display: flex; gap: 10px; margin-top: 8px; }
-.btn-approve { background: #16a05b; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
-.btn-reject { background: #d9534f; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.admin-section h2 { color: #075d34; margin-bottom: 16px; }
+.admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.tx-card { background: #f8faf9; border: 1px solid #dce8e1; border-radius: 12px; padding: 14px; margin-bottom: 10px; }
+.tx-actions { display: flex; gap: 10px; margin-top: 10px; }
+.btn-approve { background: #16a05b; color: white; border: none; padding: 7px 14px; border-radius: 7px; cursor: pointer; font-weight: bold; }
+.btn-reject { background: #d9534f; color: white; border: none; padding: 7px 14px; border-radius: 7px; cursor: pointer; font-weight: bold; }
 
-.menu-panel{
-    display:none;
-    position:absolute;
-    right:15px;
-    top:72px;
-    background:white;
-    border-radius:13px;
-    box-shadow:0 10px 30px rgba(0,0,0,.16);
-    padding:8px;
-    z-index:50;
-    min-width:150px;
-}
-.menu-panel a{
-    display:block;
-    padding:10px 12px;
-    color:#075d34;
-    text-decoration:none;
-    border-radius:8px;
-    font-weight:bold;
-    font-size:13px;
+.badge-role {
+    background: #075d34;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    margin-left: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 footer{
     background:#075d34;
     color:white;
     text-align:center;
-    padding:25px 15px;
-    margin-top:35px;
+    padding:28px 15px;
+    margin-top:40px;
 }
-footer p{margin:6px;font-size:13px}
 
 .hidden{display:none!important}
 
 @media(max-width:760px){
-    .brand h1{font-size:21px}
+    .brand h1{font-size:20px}
     .action-grid{grid-template-columns:repeat(2,1fr)}
     .admin-grid{grid-template-columns:1fr;}
+    .hero h2{font-size: 28px;}
 }
 </style>
 </head>
@@ -453,13 +501,7 @@ footer p{margin:6px;font-size:13px}
 
         <div class="header-actions">
             <button class="login-top" id="openAuthTop">Injira / Kora Account</button>
-            <button class="menu-btn" id="menuBtn">⋮</button>
         </div>
-    </div>
-
-    <div class="menu-panel" id="menuPanel">
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
     </div>
 </header>
 
@@ -503,7 +545,7 @@ footer p{margin:6px;font-size:13px}
 
         <div class="dashboard-top">
             <div>
-                <h2>Murakaza neza, <span id="userName">User</span> 👋</h2>
+                <h2>Murakaza neza, <span id="userName">User</span> <span id="userRoleBadge" class="badge-role">USER</span> 👋</h2>
                 <p id="userEmail"></p>
             </div>
             <button class="logout-btn" id="logoutButton">Logout</button>
@@ -517,8 +559,21 @@ footer p{margin:6px;font-size:13px}
                 <button class="action" id="depositBtn">➕ Deposit</button>
                 <button class="action" id="cashoutBtn">💸 Cash Out</button>
                 <button class="action" id="ordersBtn">📦 My Orders</button>
-                <button class="action" id="affiliateBtn">🤝 Support</button>
+                <button class="action" id="supportBtn">🤝 Support</button>
             </div>
+        </div>
+
+        <!-- SELLER / ADMIN PRODUCT FORM -->
+        <div id="productManageSection" class="admin-section hidden" style="margin-bottom: 25px;">
+            <h3>🛒 Ongeza cyangwa Uhingure Igicuruzwa (Product / Deal)</h3>
+            <form id="addProductForm" class="custom-form" style="margin-top: 12px;">
+                <input type="hidden" id="prodEditId">
+                <input type="text" id="prodName" placeholder="Izina ry'Igicuruzwa (Urugero: Deal 1)" required>
+                <input type="number" id="prodPrice" placeholder="Igiciro (RWF)" required>
+                <textarea id="prodDesc" rows="2" placeholder="Ibisobanuro by'igicuruzwa" required></textarea>
+                <input type="text" id="prodImg" placeholder="Image Link (Unayisibe niba ntayo)">
+                <button type="submit" class="custom-btn" id="saveProdBtn">➕ Save Product</button>
+            </form>
         </div>
 
         <div class="dashboard-deals">
@@ -531,33 +586,16 @@ footer p{margin:6px;font-size:13px}
             </div>
         </div>
 
-        <!-- =========================
-             ADMIN PANEL
-        ========================= -->
+        <!-- ADMIN PANEL -->
         <div id="adminPanel" class="admin-section hidden">
             <h2>👑 Admin Control Dashboard</h2>
-            
-            <!-- ADD OR EDIT PRODUCT -->
-            <h3>🛒 Ongeza cyangwa Uhingure Igicuruzwa (Product / Deal)</h3>
-            <form id="addProductForm" class="custom-form" style="margin-top: 10px;">
-                <input type="hidden" id="prodEditId">
-                <input type="text" id="prodName" placeholder="Izina ry'Igicuruzwa (Urugero: Deal 1)" required>
-                <input type="number" id="prodPrice" placeholder="Igiciro (RWF)" required>
-                <textarea id="prodDesc" rows="2" placeholder="Ibisobanuro by'igicuruzwa" required></textarea>
-                <input type="text" id="prodImg" placeholder="Image Link (Unayisibe niba ntayo)">
-                <button type="submit" class="custom-btn" id="saveProdBtn">➕ Save Product</button>
-            </form>
-
-            <hr style="margin: 20px 0;">
 
             <div class="admin-grid">
-                <!-- Deposit Requests -->
                 <div>
                     <h3>💳 Pending Deposits</h3>
                     <div id="pendingDepositsList"></div>
                 </div>
 
-                <!-- Withdrawal Requests -->
                 <div>
                     <h3>💸 Pending Withdrawals</h3>
                     <div id="pendingWithdrawalsList"></div>
@@ -566,10 +604,8 @@ footer p{margin:6px;font-size:13px}
 
             <hr style="margin: 20px 0;">
 
-            <!-- ORDERS MANAGEMENT -->
             <h3>📦 Customer Orders (Ibyaguzwe)</h3>
             <div id="adminOrdersList" style="margin-top:10px;"></div>
-
         </div>
 
     </div>
@@ -588,6 +624,7 @@ footer p{margin:6px;font-size:13px}
             <button class="auth-tab" id="loginTab">Injira</button>
         </div>
 
+        <!-- REGISTER FORM -->
         <form id="registerForm" class="auth-form active">
             <input type="text" id="registerName" placeholder="Amazina yawe" required>
             <input type="email" id="registerEmail" placeholder="Email Address" required>
@@ -595,13 +632,23 @@ footer p{margin:6px;font-size:13px}
             <button type="submit">Create Account</button>
         </form>
 
+        <!-- LOGIN FORM -->
         <form id="loginForm" class="auth-form">
             <input type="email" id="loginEmail" placeholder="Email Address" required>
             <input type="password" id="loginPassword" placeholder="Password" required>
+            <div class="forgot-link" id="forgotPwdBtn">Wibagiwe password?</div>
             <button type="submit">Login</button>
         </form>
 
-        <p id="authMessage" class="auth-message"></p>
+        <!-- FORGOT PASSWORD FORM -->
+        <form id="forgotForm" class="auth-form">
+            <p style="font-size:13px; color:#5d6862; margin-bottom:8px;">Andika email yawe tugusohoreze link yo gusettinga password nshya.</p>
+            <input type="email" id="forgotEmail" placeholder="Email Address" required>
+            <button type="submit">Send Reset Email</button>
+            <div class="forgot-link" id="backToLoginBtn" style="text-align:center; margin-top:10px;">← Subira kuri Login</div>
+        </form>
+
+        <div id="authMessage" class="auth-message"></div>
     </div>
 </section>
 
@@ -620,7 +667,7 @@ footer p{margin:6px;font-size:13px}
     </div>
 </div>
 
-<!-- MY ORDERS MODAL (USER) -->
+<!-- MY ORDERS MODAL -->
 <div id="myOrdersModal" class="modal-popup">
     <div class="modal-content">
         <div class="auth-head">
@@ -638,11 +685,11 @@ footer p{margin:6px;font-size:13px}
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import {
-    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged
+    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
-    getFirestore, collection, doc, setDoc, getDoc, addDoc, updateDoc, deleteDoc, onSnapshot, query, where, serverTimestamp
+    getFirestore, collection, doc, setDoc, getDoc, addDoc, updateDoc, deleteDoc, onSnapshot, query, where, getDocs, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -659,33 +706,60 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 let currentTransType = "deposit";
-let isAdminUser = false;
+let currentUserRole = "user";
 
-/* AUTH & MODALS UI HANDLERS */
+/* UI CONTROLS & FEEDBACK NOTIFICATIONS */
 const authSection = document.getElementById("auth-section");
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
+const forgotForm = document.getElementById("forgotForm");
 const authMessage = document.getElementById("authMessage");
 
-document.getElementById("openAuthTop").onclick = () => authSection.style.display = "block";
-document.getElementById("openAuthHero").onclick = () => authSection.style.display = "block";
+function showFeedback(msg, isSuccess = false) {
+    authMessage.textContent = msg;
+    authMessage.className = "auth-message " + (isSuccess ? "success" : "error");
+}
+
+function clearFeedback() {
+    authMessage.textContent = "";
+    authMessage.className = "auth-message";
+}
+
+document.getElementById("openAuthTop").onclick = () => { clearFeedback(); authSection.style.display = "block"; };
+document.getElementById("openAuthHero").onclick = () => { clearFeedback(); authSection.style.display = "block"; };
 document.getElementById("closeAuth").onclick = () => authSection.style.display = "none";
 
 document.getElementById("registerTab").onclick = () => {
+    clearFeedback();
     document.getElementById("registerTab").classList.add("active");
     document.getElementById("loginTab").classList.remove("active");
     registerForm.classList.add("active");
     loginForm.classList.remove("active");
+    forgotForm.classList.remove("active");
 };
 
 document.getElementById("loginTab").onclick = () => {
+    clearFeedback();
     document.getElementById("loginTab").classList.add("active");
     document.getElementById("registerTab").classList.remove("active");
     loginForm.classList.add("active");
     registerForm.classList.remove("active");
+    forgotForm.classList.remove("active");
 };
 
-/* AUTH STATE LISTENERS */
+document.getElementById("forgotPwdBtn").onclick = () => {
+    clearFeedback();
+    loginForm.classList.remove("active");
+    forgotForm.classList.add("active");
+};
+
+document.getElementById("backToLoginBtn").onclick = () => {
+    clearFeedback();
+    forgotForm.classList.remove("active");
+    loginForm.classList.add("active");
+};
+
+/* AUTH STATE LISTENERS WITH FIRESTORE PROFILE */
 onAuthStateChanged(auth, async (user) => {
     if(user){
         document.getElementById("homePage").style.display = "none";
@@ -694,8 +768,21 @@ onAuthStateChanged(auth, async (user) => {
         document.getElementById("userEmail").textContent = user.email;
         authSection.style.display = "none";
 
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+
+        if(!userSnap.exists()) {
+            await setDoc(userRef, {
+                name: user.displayName || user.email.split('@')[0],
+                email: user.email,
+                balance: 0,
+                role: "user",
+                createdAt: serverTimestamp()
+            });
+        }
+
         listenUserData(user);
-        checkAdmin(user);
+        await seedDefaultDealsIfEmpty();
         loadProducts();
     } else {
         document.getElementById("dashboard").style.display = "none";
@@ -707,28 +794,33 @@ onAuthStateChanged(auth, async (user) => {
 function listenUserData(user) {
     onSnapshot(doc(db, "users", user.uid), (snap) => {
         if(snap.exists()) {
-            document.getElementById("userName").textContent = snap.data().name || "User";
-            document.getElementById("userBalanceDisplay").textContent = (snap.data().balance || 0).toLocaleString() + " RWF";
+            const data = snap.data();
+            currentUserRole = data.role || "user";
+            document.getElementById("userName").textContent = data.name || "User";
+            document.getElementById("userRoleBadge").textContent = currentUserRole;
+            document.getElementById("userBalanceDisplay").textContent = (data.balance || 0).toLocaleString() + " RWF";
+
+            if(currentUserRole === "admin" || currentUserRole === "seller") {
+                document.getElementById("productManageSection").classList.remove("hidden");
+            } else {
+                document.getElementById("productManageSection").classList.add("hidden");
+            }
+
+            if(currentUserRole === "admin") {
+                document.getElementById("adminPanel").classList.remove("hidden");
+                listenAdminTxs();
+                listenAdminOrders();
+            } else {
+                document.getElementById("adminPanel").classList.add("hidden");
+            }
         }
     });
 }
 
-async function checkAdmin(user) {
-    const snap = await getDoc(doc(db, "users", user.uid));
-    if(snap.exists() && snap.data().role === "admin") {
-        isAdminUser = true;
-        document.getElementById("adminPanel").classList.remove("hidden");
-        listenAdminTxs();
-        listenAdminOrders();
-    } else {
-        isAdminUser = false;
-        document.getElementById("adminPanel").classList.add("hidden");
-    }
-}
-
-/* REGISTRATION & LOGIN */
+/* REGISTRATION, LOGIN & FORGOT PASSWORD */
 registerForm.onsubmit = async (e) => {
     e.preventDefault();
+    clearFeedback();
     const name = document.getElementById("registerName").value;
     const email = document.getElementById("registerEmail").value;
     const pwd = document.getElementById("registerPassword").value;
@@ -737,44 +829,53 @@ registerForm.onsubmit = async (e) => {
         await setDoc(doc(db, "users", cred.user.uid), {
             name, email, balance: 0, role: "user", createdAt: serverTimestamp()
         });
-    } catch(err) { authMessage.textContent = "❌ " + err.message; }
+        showFeedback("✅ Account yaremwe neza! Murakaza neza.", true);
+    } catch(err) { showFeedback("❌ " + err.message); }
 };
 
 loginForm.onsubmit = async (e) => {
     e.preventDefault();
+    clearFeedback();
     try {
         await signInWithEmailAndPassword(auth, document.getElementById("loginEmail").value, document.getElementById("loginPassword").value);
-    } catch(err) { authMessage.textContent = "❌ Email/Password si yo."; }
+    } catch(err) { showFeedback("❌ Email cyangwa Password si yo. Ongera ugerageze."); }
+};
+
+forgotForm.onsubmit = async (e) => {
+    e.preventDefault();
+    clearFeedback();
+    const email = document.getElementById("forgotEmail").value;
+    try {
+        await sendPasswordResetEmail(auth, email);
+        showFeedback("✉️ Boherereje email yo gusettinga password nshya! Reba muri Inbox/Spam.", true);
+    } catch(err) { showFeedback("❌ " + err.message); }
 };
 
 document.getElementById("logoutButton").onclick = () => signOut(auth);
 
 /* ===================================================
-   DYNAMIC PRODUCTS / TEMPLATES MANAGEMENT
+   DEALS 1 TO 7 SEEDING & PRODUCTS MANAGEMENT
 =================================================== */
 
-// Populate initial default 7 deals into Firestore if empty!
 async function seedDefaultDealsIfEmpty() {
-    const qSnap = await getDoc(doc(db, "settings", "seeded"));
-    if(!qSnap.exists()) {
+    const pSnap = await getDocs(collection(db, "products"));
+    if(pSnap.empty) {
         const defaultDeals = [
-            { name: "Deal 1", price: 5000, description: "Igicuruzwa cya mbere. Reba ibikubiyemo." },
-            { name: "Deal 2", price: 10000, description: "Igicuruzwa cya kabiri. Reba ibikubiyemo." },
-            { name: "Deal 3", price: 15000, description: "Igicuruzwa cya gatatu. Reba ibikubiyemo." },
-            { name: "Deal 4", price: 20000, description: "Igicuruzwa cya kane. Reba ibikubiyemo." },
-            { name: "Deal 5", price: 25000, description: "Igicuruzwa cya gatanu. Reba ibikubiyemo." },
-            { name: "Deal 6", price: 30000, description: "Igicuruzwa cya gatandatu. Reba ibikubiyemo." },
-            { name: "Deal 7", price: 35000, description: "Igicuruzwa cya karindwi. Reba ibikubiyemo." }
+            { name: "Deal 1", price: 5000, description: "Igicuruzwa cya 1. Kanda ugure cyangwa uguhindure." },
+            { name: "Deal 2", price: 10000, description: "Igicuruzwa cya 2. Kanda ugure cyangwa uguhindure." },
+            { name: "Deal 3", price: 15000, description: "Igicuruzwa cya 3. Kanda ugure cyangwa uguhindure." },
+            { name: "Deal 4", price: 20000, description: "Igicuruzwa cya 4. Kanda ugure cyangwa uguhindure." },
+            { name: "Deal 5", price: 25000, description: "Igicuruzwa cya 5. Kanda ugure cyangwa uguhindure." },
+            { name: "Deal 6", price: 30000, description: "Igicuruzwa cya 6. Kanda ugure cyangwa uguhindure." },
+            { name: "Deal 7", price: 35000, description: "Igicuruzwa cya 7. Kanda ugure cyangwa uguhindure." }
         ];
         for(let p of defaultDeals) {
-            await addDoc(collection(db, "products"), { ...p, imageUrl: "", createdAt: serverTimestamp() });
+            await addDoc(collection(db, "products"), { ...p, imageUrl: "", sellerId: "system", createdAt: serverTimestamp() });
         }
-        await setDoc(doc(db, "settings", "seeded"), { done: true });
     }
 }
 
 function loadProducts() {
-    seedDefaultDealsIfEmpty();
     const dealsContainer = document.getElementById("dealsContainer");
 
     onSnapshot(collection(db, "products"), (snapshot) => {
@@ -784,9 +885,15 @@ function loadProducts() {
             return;
         }
 
+        const user = auth.currentUser;
+
         snapshot.forEach((docSnap) => {
             const p = docSnap.data();
             const pId = docSnap.id;
+
+            // UBURINDIRO BWA SELLER (OWNERSHIP): Seller ahindura/asiba ibye gusa. Admin ahindura vyose.
+            const isOwner = (p.sellerId === user?.uid);
+            const canEdit = (currentUserRole === "admin") || (currentUserRole === "seller" && isOwner);
 
             const card = document.createElement("div");
             card.className = "card";
@@ -801,8 +908,8 @@ function loadProducts() {
                 </div>
                 <div>
                     <button class="button" onclick="buyProduct('${pId}', '${p.name}', ${p.price})">🛒 Gura Nonaha</button>
-                    ${isAdminUser ? `
-                        <button class="button" style="background:#f0a732; margin-top:5px;" onclick="editProduct('${pId}', '${p.name}',${p.price}, '${p.description}', '${p.imageUrl || ''}')">✏️ Edit</button>
+                    ${canEdit ? `
+                        <button class="button" style="background:#f0a732; margin-top:6px;" onclick="editProduct('${pId}', '${p.name}',${p.price}, '${p.description}', '${p.imageUrl || ''}')">✏ Edit</button>
                         <button class="button button-delete" onclick="deleteProduct('${pId}')">🗑️ Delete</button>
                     ` : ''}
                 </div>
@@ -812,9 +919,10 @@ function loadProducts() {
     });
 }
 
-/* ADMIN SAVE / EDIT / DELETE PRODUCT */
+/* SAVE / EDIT / DELETE PRODUCT (ADMIN & SELLER OWNERSHIP) */
 document.getElementById("addProductForm").onsubmit = async (e) => {
     e.preventDefault();
+    const user = auth.currentUser;
     const editId = document.getElementById("prodEditId").value;
     const name = document.getElementById("prodName").value.trim();
     const price = Number(document.getElementById("prodPrice").value);
@@ -826,13 +934,13 @@ document.getElementById("addProductForm").onsubmit = async (e) => {
             await updateDoc(doc(db, "products", editId), { name, price, description: desc, imageUrl: img });
             alert("✅ Product updated!");
         } else {
-            await addDoc(collection(db, "products"), { name, price, description: desc, imageUrl: img, createdAt: serverTimestamp() });
+            await addDoc(collection(db, "products"), { name, price, description: desc, imageUrl: img, sellerId: user.uid, createdAt: serverTimestamp() });
             alert("✅ Product nshya yongewe!");
         }
         document.getElementById("addProductForm").reset();
         document.getElementById("prodEditId").value = "";
         document.getElementById("saveProdBtn").textContent = "➕ Save Product";
-    } catch(err) { alert(err.message); }
+    } catch(err) { alert("Ikosa: " + err.message); }
 };
 
 window.editProduct = (id, name, price, desc, img) => {
@@ -842,7 +950,7 @@ window.editProduct = (id, name, price, desc, img) => {
     document.getElementById("prodDesc").value = desc;
     document.getElementById("prodImg").value = img;
     document.getElementById("saveProdBtn").textContent = "💾 Update Product";
-    window.scrollTo({ top: document.getElementById("adminPanel").offsetTop, behavior: 'smooth' });
+    window.scrollTo({ top: document.getElementById("productManageSection").offsetTop, behavior: 'smooth' });
 };
 
 window.deleteProduct = async (id) => {
@@ -869,10 +977,8 @@ window.buyProduct = async (prodId, prodName, price) => {
 
     if(confirm(`Wimfuje kugura ${prodName} kuri ${price.toLocaleString()} RWF?`)) {
         try {
-            // Deduct money immediately
             await updateDoc(userRef, { balance: bal - price });
 
-            // Create Order record
             await addDoc(collection(db, "orders"), {
                 userId: user.uid,
                 userName: userSnap.data().name || "User",
@@ -883,12 +989,12 @@ window.buyProduct = async (prodId, prodName, price) => {
                 createdAt: serverTimestamp()
             });
 
-            alert("🎉 Mwaremewe Order neza! Amafaranga yaguzwe yakuwe kuri Wallet. Admin azaguhaza igicuruzwa vuba!");
+            alert("🎉 Mwaremewe Order neza! Amafaranga yaguzwe yakuwe kuri Wallet.");
         } catch(err) { alert("Error: " + err.message); }
     }
 };
 
-/* USER MY ORDERS */
+/* USER ORDERS */
 const myOrdersModal = document.getElementById("myOrdersModal");
 document.getElementById("ordersBtn").onclick = () => {
     myOrdersModal.style.display = "block";

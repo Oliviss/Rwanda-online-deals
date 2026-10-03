@@ -6,261 +6,496 @@
 <title>Rwanda Online Deals</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
 html{scroll-behavior:smooth}
-body{background:#f4f8f6;color:#17231d}
-button,input,textarea,select{font-family:inherit}
-button{cursor:pointer}
+
+body{
+    background:#f4f8f6;
+    color:#17231d;
+}
+
+button,a{font-family:inherit}
 
 header{
- background:linear-gradient(135deg,#075b32,#0b7a45);
- color:white;padding:18px;
+    background:linear-gradient(135deg,#075b32,#0b7a45);
+    color:white;
+    padding:18px 18px 26px;
+    text-align:center;
 }
+
 .brand{
- max-width:1100px;margin:auto;display:flex;justify-content:space-between;
- align-items:center;gap:15px
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
 }
+
 .brand-text{text-align:left}
 .brand h1{font-size:25px;margin-bottom:5px}
 .brand p{font-size:13px;opacity:.9}
-.header-actions{display:flex;gap:8px;align-items:center}
-.login-top,.menu-btn{
- border:0;border-radius:25px;padding:11px 15px;font-weight:bold
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
-.login-top{background:white;color:#08703d}
+
+.login-top{
+    background:white;
+    color:#08703d;
+    border:0;
+    border-radius:25px;
+    padding:11px 15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
 .menu-btn{
- width:42px;height:42px;border-radius:50%;
- background:rgba(255,255,255,.16);color:white;font-size:25px
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.16);
+    color:white;
+    font-size:25px;
+    cursor:pointer;
 }
 
 nav{
- background:white;padding:13px 10px;text-align:center;
- box-shadow:0 2px 10px rgba(0,0,0,.07);position:sticky;top:0;z-index:20
-}
-nav a{color:#086d3b;text-decoration:none;margin:0 8px;font-weight:bold;font-size:14px}
-
-.menu-panel{
- display:none;position:absolute;right:15px;top:72px;background:white;
- border-radius:13px;box-shadow:0 10px 30px rgba(0,0,0,.16);
- padding:8px;z-index:50;min-width:170px
-}
-.menu-panel a{
- display:block;padding:10px 12px;color:#075d34;text-decoration:none;
- border-radius:8px;font-weight:bold;font-size:13px
+    background:white;
+    padding:13px 10px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.07);
+    position:sticky;
+    top:0;
+    z-index:20;
 }
 
-.hero{max-width:1100px;margin:18px auto 0;padding:24px 16px 15px}
+nav a{
+    color:#086d3b;
+    text-decoration:none;
+    margin:0 8px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.hero{
+    max-width:1100px;
+    margin:18px auto 0;
+    padding:24px 16px 15px;
+}
+
 .hero-box{
- position:relative;overflow:hidden;border-radius:25px;min-height:300px;
- padding:34px 24px;display:flex;align-items:center;
- background:radial-gradient(circle at 88% 18%,rgba(255,255,255,.22),transparent 28%),
- linear-gradient(135deg,#073f27,#0b7541 58%,#16a05b);
- color:white;box-shadow:0 12px 35px rgba(4,89,48,.22)
+    position:relative;
+    overflow:hidden;
+    border-radius:25px;
+    min-height:300px;
+    padding:34px 24px;
+    display:flex;
+    align-items:center;
+    background:
+      radial-gradient(circle at 88% 18%,rgba(255,255,255,.22),transparent 28%),
+      linear-gradient(135deg,#073f27,#0b7541 58%,#16a05b);
+    color:white;
+    box-shadow:0 12px 35px rgba(4,89,48,.22);
 }
-.hero-content{position:relative;z-index:2;max-width:610px}
-.badge{
- display:inline-block;background:rgba(255,255,255,.15);
- border:1px solid rgba(255,255,255,.25);padding:7px 12px;
- border-radius:20px;font-size:12px;font-weight:bold;margin-bottom:13px
-}
-.hero h2{font-size:34px;line-height:1.08;margin-bottom:12px}
-.hero p{font-size:16px;line-height:1.6;opacity:.94;margin-bottom:20px}
-.primary-btn,.button{
- background:#0b6b3a;color:white;padding:12px 17px;border-radius:9px;
- border:0;text-decoration:none;font-weight:bold;display:inline-block
-}
-.primary-btn{background:white;color:#086d3b}
 
-.hero-art{position:absolute;right:30px;bottom:15px;width:300px;height:240px}
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:610px;
+}
+
+.badge{
+    display:inline-block;
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.25);
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:13px;
+}
+
+.hero h2{
+    font-size:34px;
+    line-height:1.08;
+    margin-bottom:12px;
+}
+
+.hero p{
+    font-size:16px;
+    line-height:1.6;
+    opacity:.94;
+    margin-bottom:20px;
+}
+
+.primary-btn{
+    display:inline-block;
+    background:white;
+    color:#086d3b;
+    padding:13px 20px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+    border:none;
+    cursor:pointer;
+}
+
+.hero-art{
+    position:absolute;
+    right:30px;
+    bottom:15px;
+    width:300px;
+    height:240px;
+}
+
 .art-circle{
- position:absolute;width:210px;height:210px;border-radius:50%;
- background:rgba(255,255,255,.11);right:20px;top:15px
+    position:absolute;
+    width:210px;
+    height:210px;
+    border-radius:50%;
+    background:rgba(255,255,255,.11);
+    right:20px;
+    top:15px;
 }
+
 .art-card{
- position:absolute;background:white;color:#075d34;border-radius:16px;padding:17px;
- width:170px;box-shadow:0 15px 35px rgba(0,0,0,.18);
- transform:rotate(-5deg);right:85px;top:45px
+    position:absolute;
+    background:white;
+    color:#075d34;
+    border-radius:16px;
+    padding:17px;
+    width:170px;
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
+    transform:rotate(-5deg);
+    right:85px;
+    top:45px;
 }
+
 .art-card strong{font-size:24px;display:block;margin:8px 0}
 .art-card small{color:#64746b}
+
 .art-tag{
- position:absolute;background:#ffcf3f;color:#553f00;border-radius:12px;
- padding:9px 12px;font-weight:bold;right:0;bottom:25px;transform:rotate(5deg)
+    position:absolute;
+    background:#ffcf3f;
+    color:#553f00;
+    border-radius:12px;
+    padding:9px 12px;
+    font-weight:bold;
+    right:0;
+    bottom:25px;
+    transform:rotate(5deg);
 }
 
 .quick{
- max-width:1100px;margin:18px auto 0;padding:0 16px;
- display:grid;grid-template-columns:repeat(3,1fr);gap:12px
+    max-width:1100px;
+    margin:18px auto 0;
+    padding:0 16px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
 }
-.quick-card,.card,.account-card{
- background:white;border-radius:15px;padding:17px;
- box-shadow:0 5px 18px rgba(0,0,0,.06)
+
+.quick-card{
+    background:white;
+    padding:17px;
+    border-radius:15px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
 }
 .quick-card b{color:#08703d}
 .quick-card p{font-size:12px;color:#66736c;margin-top:5px;line-height:1.4}
 
-.section{max-width:1100px;margin:25px auto;padding:0 16px}
+.section{
+    max-width:1100px;
+    margin:25px auto;
+    padding:0 16px;
+}
+
 .section-title{
- display:flex;justify-content:space-between;align-items:center;margin-bottom:15px
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
 }
 .section-title h2{color:#086d3b;font-size:23px}
 .section-title span{font-size:12px;color:#69756f}
 
-.deals,.grid{
- display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px
+.deals{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px;
 }
-.card{border:1px solid #edf1ee}
+
+.card{
+    background:white;
+    border-radius:17px;
+    padding:18px;
+    box-shadow:0 5px 18px rgba(0,0,0,.07);
+    border:1px solid #edf1ee;
+}
+
 .deal-image{
- height:150px;border-radius:13px;background:#e5f5eb;
- display:flex;align-items:center;justify-content:center;
- overflow:hidden;font-size:42px;margin-bottom:14px
+    height:115px;
+    border-radius:13px;
+    background:linear-gradient(135deg,#dff5e8,#f7fbf8);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+    margin-bottom:14px;
 }
-.deal-image img{width:100%;height:100%;object-fit:cover}
+
 .card h3{color:#086d3b;margin-bottom:8px}
 .card p{color:#5d6862;margin-bottom:13px;line-height:1.5;font-size:14px}
 .price{font-size:19px;font-weight:bold;color:#111;margin-bottom:14px}
 
+.button{
+    display:inline-block;
+    background:#0b6b3a;
+    color:white;
+    padding:11px 16px;
+    border-radius:9px;
+    text-decoration:none;
+    font-weight:bold;
+    border:none;
+    cursor:pointer;
+}
+
 #auth-section{
- display:none;position:fixed;inset:0;z-index:100;
- background:rgba(9,30,20,.65);padding:20px;overflow:auto
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:rgba(9,30,20,.65);
+    padding:20px;
+    overflow:auto;
 }
+
 .auth-box{
- background:white;max-width:520px;margin:35px auto;padding:24px;
- border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.25)
+    background:white;
+    max-width:520px;
+    margin:35px auto;
+    padding:24px;
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
 }
-.auth-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+
+.auth-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
 .auth-head h2{color:#086d3b}
 .close-auth{
- border:0;background:#eef5f1;color:#075d34;width:36px;height:36px;
- border-radius:50%;font-size:20px
+    border:0;
+    background:#eef5f1;
+    color:#075d34;
+    width:36px;height:36px;border-radius:50%;
+    font-size:20px;cursor:pointer;
 }
-.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:17px}
+
+.auth-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:17px;
+}
+
 .auth-tab{
- padding:11px;border:1px solid #d9e5de;border-radius:9px;
- background:#f7faf8;color:#086d3b;font-weight:bold
+    padding:11px;
+    border:1px solid #d9e5de;
+    border-radius:9px;
+    background:#f7faf8;
+    color:#086d3b;
+    font-weight:bold;
+    cursor:pointer;
 }
-.auth-tab.active{background:#0b6b3a;color:white}
-.auth-form{display:none;flex-direction:column;gap:10px}
+
+.auth-tab.active{
+    background:#0b6b3a;
+    color:white;
+}
+
+.auth-form{display:none}
 .auth-form.active{display:flex}
-.auth-form input,.form input,.form textarea,.form select{
- padding:12px;border:1px solid #ccd8d1;border-radius:9px;font-size:15px;width:100%
+.auth-form{
+    flex-direction:column;
+    gap:10px;
 }
-.auth-form button,.form button{
- padding:12px;border:0;border-radius:9px;background:#0b6b3a;
- color:white;font-weight:bold
+.auth-form input{
+    padding:12px;
+    border:1px solid #ccd8d1;
+    border-radius:9px;
+    font-size:15px;
 }
-.auth-message{margin-top:12px;font-weight:bold;text-align:center;line-height:1.4}
+.auth-form button{
+    padding:12px;
+    border:none;
+    border-radius:9px;
+    background:#0b6b3a;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+.auth-message{
+    margin-top:12px;
+    font-weight:bold;
+    text-align:center;
+    line-height:1.4;
+}
 
 #dashboard{
- display:none;background:#eef7f1;min-height:100vh;padding:24px 16px 40px
+    display:none;
+    background:#eef7f1;
+    min-height:100vh;
+    padding:24px 16px 40px;
 }
+
 .dashboard-wrap{max-width:1100px;margin:auto}
+
 .dashboard-top{
- display:flex;justify-content:space-between;align-items:center;
- gap:15px;margin-bottom:18px
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:18px;
 }
+
 .dashboard-top h2{color:#075d34}
 .dashboard-top p{font-size:13px;color:#68756e;margin-top:4px}
+
 .logout-btn{
- background:#fff;color:#b42318;border:1px solid #f0c6c1;
- padding:10px 14px;border-radius:9px;font-weight:bold
+    background:#fff;
+    color:#b42318;
+    border:1px solid #f0c6c1;
+    padding:10px 14px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
 }
+
 .balance-box{
- background:linear-gradient(135deg,#075d34,#0d8950);color:white;
- border-radius:20px;padding:22px;box-shadow:0 10px 30px rgba(7,93,52,.2);
- margin-bottom:16px
+    background:linear-gradient(135deg,#075d34,#0d8950);
+    color:white;
+    border-radius:20px;
+    padding:22px;
+    box-shadow:0 10px 30px rgba(7,93,52,.2);
+    margin-bottom:16px;
 }
+
 .balance-box small{opacity:.85}
 .balance-box h3{font-size:30px;margin:8px 0 16px}
-.action-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.action{
- background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);
- color:white;border-radius:12px;padding:11px;text-align:center;font-weight:bold
+
+.action-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
 }
-.account-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0 25px}
+
+.action{
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.22);
+    color:white;
+    border-radius:12px;
+    padding:11px;
+    text-align:center;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.account-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin:16px 0 25px;
+}
+
+.account-card{
+    background:white;
+    border-radius:16px;
+    padding:18px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+.account-card .icon{font-size:25px}
 .account-card h4{margin:9px 0 5px;color:#075d34}
 .account-card p{font-size:12px;color:#68756e;line-height:1.5}
 
-.panel{
- background:white;border-radius:16px;padding:18px;margin:16px 0;
- box-shadow:0 5px 18px rgba(0,0,0,.06)
-}
-.panel h3{color:#075d34;margin-bottom:14px}
-
-.admin-tabs,.seller-tabs{
- display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px
-}
-.tab-btn{
- border:1px solid #d7e4dc;background:#f7faf8;color:#075d34;
- padding:10px 13px;border-radius:8px;font-weight:bold
-}
-.tab-btn.active{background:#0b6b3a;color:white}
-
-.admin-section,.seller-section{display:none}
-.admin-section.active,.seller-section.active{display:block}
-
-.row{
- display:flex;justify-content:space-between;align-items:center;
- gap:12px;padding:13px 0;border-bottom:1px solid #edf1ee
-}
-.row:last-child{border-bottom:0}
-.row-info{flex:1}
-.row-info strong{color:#173a29}
-.row-info small{display:block;color:#68756e;margin-top:4px;line-height:1.4}
-.row-actions{display:flex;gap:6px;flex-wrap:wrap}
-.approve{background:#087443;color:white}
-.reject{background:#b42318;color:white}
-.edit{background:#1769aa;color:white}
-.delete{background:#7b1fa2;color:white}
-.gray{background:#e9efeb;color:#315044}
-.small-btn{padding:8px 10px;border:0;border-radius:7px;font-weight:bold}
-
-.form{
- display:grid;grid-template-columns:1fr 1fr;gap:10px
-}
-.form .full{grid-column:1/-1}
-.form label{font-size:12px;color:#52625a;font-weight:bold}
-.form-group{display:flex;flex-direction:column;gap:5px}
-
-.status{
- display:inline-block;padding:5px 8px;border-radius:6px;
- background:#edf1ee;font-size:11px;font-weight:bold
-}
-.status.pending{background:#fff3cd;color:#795600}
-.status.approved{background:#dff5e8;color:#086d3b}
-.status.rejected{background:#fde3e1;color:#a51d14}
-
-.notice{
- background:#fff9e7;border:1px solid #f0dda4;color:#6d570d;
- padding:12px;border-radius:10px;font-size:12px;line-height:1.5;margin-bottom:12px
-}
-.empty{
- padding:25px;text-align:center;color:#68756e;background:#f7faf8;border-radius:10px
+.dashboard-deals{
+    margin-top:8px;
 }
 
-#toast{
- position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
- background:#12382a;color:white;padding:13px 18px;border-radius:9px;
- display:none;z-index:300;box-shadow:0 5px 20px #0004
+.info-note{
+    background:#fff9e7;
+    border:1px solid #f0dda4;
+    color:#6d570d;
+    padding:12px;
+    border-radius:11px;
+    font-size:12px;
+    line-height:1.5;
+    margin-bottom:15px;
 }
+
+.menu-panel{
+    display:none;
+    position:absolute;
+    right:15px;
+    top:72px;
+    background:white;
+    border-radius:13px;
+    box-shadow:0 10px 30px rgba(0,0,0,.16);
+    padding:8px;
+    z-index:50;
+    min-width:150px;
+}
+.menu-panel a{
+    display:block;
+    padding:10px 12px;
+    color:#075d34;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+    font-size:13px;
+}
+.menu-panel a:hover{background:#eef7f1}
 
 footer{
- background:#075d34;color:white;text-align:center;padding:25px 15px;margin-top:35px
+    background:#075d34;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+    margin-top:35px;
 }
 footer p{margin:6px;font-size:13px}
+
 .hidden{display:none!important}
 
 @media(max-width:760px){
- .brand h1{font-size:21px}.brand p{font-size:11px}
- .login-top{padding:9px 11px;font-size:12px}
- .hero-box{min-height:390px}.hero h2{font-size:29px}
- .hero-art{right:0;bottom:0;opacity:.55}
- .quick,.account-grid{grid-template-columns:1fr}
- .action-grid{grid-template-columns:repeat(2,1fr)}
- .form{grid-template-columns:1fr}
- .form .full{grid-column:auto}
- .row{align-items:flex-start;flex-direction:column}
- .row-actions{width:100%}
+    .brand h1{font-size:21px}
+    .brand p{font-size:11px}
+    .login-top{padding:9px 11px;font-size:12px}
+    .hero-box{min-height:390px}
+    .hero h2{font-size:29px}
+    .hero-art{right:0;bottom:0;opacity:.55}
+    .quick{grid-template-columns:1fr}
+    .account-grid{grid-template-columns:1fr 1fr}
+    .action-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:480px){
+    nav a{margin:0 5px;font-size:12px}
+    .hero-box{padding:28px 19px}
+    .account-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -278,14 +513,15 @@ footer p{margin:6px;font-size:13px}
             <button class="login-top" id="openAuthTop">
                 Injira / Kora Account
             </button>
-            <button class="menu-btn" id="menuBtn">⋮</button>
+
+            <button class="menu-btn" id="menuBtn" aria-label="Menu">⋮</button>
         </div>
     </div>
 
     <div class="menu-panel" id="menuPanel">
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
-        <a href="#homeDeals">Deals</a>
+        <a href="#more">More</a>
     </div>
 </header>
 
@@ -311,7 +547,7 @@ footer p{margin:6px;font-size:13px}
             </button>
         </div>
 
-        <div class="hero-art">
+        <div class="hero-art" aria-hidden="true">
             <div class="art-circle"></div>
             <div class="art-card">
                 🛍️
@@ -330,37 +566,37 @@ footer p{margin:6px;font-size:13px}
     </div>
     <div class="quick-card">
         <b>🔐 Account yawe</b>
-        <p>Login maze ubone dashboard yawe.</p>
+        <p>Login maze winjire mu gice cyihariye cy'abakoresha.</p>
     </div>
     <div class="quick-card">
         <b>🤝 Affiliate</b>
-        <p>Gukurikirana referrals na commission.</p>
+        <p>Gira uburyo bwo gukurikirana amahirwe ya affiliate.</p>
     </div>
 </section>
 
 <section class="section" id="homeDeals">
     <div class="section-title">
         <h2>🔥 Iby'ingenzi kuri site</h2>
-        <span>Rwanda Online Deals</span>
+        <span>Preview</span>
     </div>
 
     <div class="deals">
         <div class="card">
             <div class="deal-image">🛒</div>
-            <h3>Deals</h3>
-            <p>Products zemejwe na Admin zigaragara kuri platform.</p>
+            <h3>Deals 1–7</h3>
+            <p>Deals zose ziboneka imbere nyuma yo gukora account no kwinjira.</p>
         </div>
 
         <div class="card">
             <div class="deal-image">💰</div>
             <h3>Wallet</h3>
-            <p>Deposit na withdrawal bigenzurwa na Admin.</p>
+            <p>Dashboard izaba ifite balance, deposit na cash out interface.</p>
         </div>
 
         <div class="card">
             <div class="deal-image">🤝</div>
             <h3>Affiliate Program</h3>
-            <p>Abakoresha bashobora gukurikirana referrals zabo.</p>
+            <p>Igice cyo gukurikirana affiliate kizaba kiri muri account yawe.</p>
         </div>
     </div>
 </section>
@@ -377,501 +613,165 @@ footer p{margin:6px;font-size:13px}
 
 </main>
 
-
-<!-- =========================
-     DASHBOARD
-========================= -->
-
 <section id="dashboard">
+    <div class="dashboard-wrap">
 
-<div class="dashboard-wrap">
-
-    <div class="dashboard-top">
-        <div>
-            <h2>Murakaza neza, <span id="userName">User</span> 👋</h2>
-            <p id="userEmail"></p>
-            <p><strong>Role:</strong> <span id="userRole">customer</span></p>
+        <div class="dashboard-top">
+            <div>
+                <h2>Murakaza neza, <span id="userName">User</span> 👋</h2>
+                <p id="userEmail"></p>
+            </div>
+            <button class="logout-btn" id="logoutButton">Logout</button>
         </div>
 
-        <button class="logout-btn" id="logoutButton">
-            Logout
-        </button>
-    </div>
+        <div class="balance-box">
+            <small>💰 Balance yawe</small>
+            <h3>0 RWF</h3>
 
-
-    <!-- CUSTOMER / USER WALLET -->
-
-    <div class="balance-box">
-        <small>💰 Balance yawe</small>
-        <h3 id="balanceDisplay">0 RWF</h3>
-
-        <div class="action-grid">
-            <button class="action" onclick="openTransactionForm('deposit')">
-                ➕ Deposit
-            </button>
-
-            <button class="action" onclick="openTransactionForm('withdrawal')">
-                💸 Withdrawal
-            </button>
-
-            <button class="action" onclick="openSupportForm()">
-                🎧 Support
-            </button>
-
-            <button class="action" onclick="openAccountPanel()">
-                👤 Account
-            </button>
-        </div>
-    </div>
-
-
-    <!-- CUSTOMER PRODUCTS -->
-
-    <div id="customerArea">
-
-        <div class="section-title">
-            <h2>🔥 Products</h2>
-            <span>Products zemejwe</span>
+            <div class="action-grid">
+                <button class="action" id="depositBtn">➕ Deposit</button>
+                <button class="action" id="cashoutBtn">💸 Cash Out</button>
+                <button class="action" id="affiliateBtn">🤝 Affiliate</button>
+                <button class="action" id="accountBtn">👤 Account</button>
+            </div>
         </div>
 
-        <div class="deals" id="dealsContainer"></div>
-
-    </div>
-
-
-    <!-- SELLER -->
-
-    <div id="sellerArea" class="hidden">
-
-        <div class="panel">
-            <h3>🏪 Seller Dashboard</h3>
-
-            <div class="seller-tabs">
-                <button class="tab-btn active"
-                        onclick="sellerTab('sellerProducts',this)">
-                    Products
-                </button>
-
-                <button class="tab-btn"
-                        onclick="sellerTab('sellerAdd',this)">
-                    Add Product
-                </button>
-
-                <button class="tab-btn"
-                        onclick="sellerTab('sellerOrders',this)">
-                    Orders
-                </button>
-
-                <button class="tab-btn"
-                        onclick="sellerTab('sellerSupport',this)">
-                    Support
-                </button>
+        <div class="account-grid">
+            <div class="account-card">
+                <div class="icon">💳</div>
+                <h4>Deposit</h4>
+                <p>Igice cyo guteguriramo uburyo bwo kongera amafaranga kuri wallet.</p>
             </div>
 
-
-            <div id="sellerProducts" class="seller-section active">
-                <div id="sellerProductList"></div>
+            <div class="account-card">
+                <div class="icon">💸</div>
+                <h4>Cash Out</h4>
+                <p>Igice cyo guteguriramo withdrawal nyuma yo gushyiramo payment system.</p>
             </div>
 
-
-            <div id="sellerAdd" class="seller-section">
-
-                <form class="form" id="sellerProductForm">
-
-                    <div class="form-group">
-                        <label>Product name</label>
-                        <input id="sellerProductName" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Price (RWF)</label>
-                        <input id="sellerProductPrice"
-                               type="number"
-                               min="1"
-                               required>
-                    </div>
-
-                    <div class="form-group full">
-                        <label>Description</label>
-                        <textarea id="sellerProductDescription"
-                                  rows="4"
-                                  required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Image URL</label>
-                        <input id="sellerProductImage">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Template</label>
-                        <select id="sellerTemplateSelect"></select>
-                    </div>
-
-                    <button class="full" type="submit">
-                        Save Product
-                    </button>
-
-                </form>
-
+            <div class="account-card">
+                <div class="icon">🤝</div>
+                <h4>Affiliate Program</h4>
+                <p>Gukurikirana referral na commission bizongerwa muri iyi dashboard.</p>
             </div>
-
-
-            <div id="sellerOrders" class="seller-section">
-                <div id="sellerOrderList"></div>
-            </div>
-
-
-            <div id="sellerSupport" class="seller-section">
-                <div id="sellerSupportList"></div>
-            </div>
-
         </div>
 
-    </div>
-
-
-    <!-- ADMIN -->
-
-    <div id="adminArea" class="hidden">
-
-        <div class="panel">
-
-            <h3>👑 Admin Control Center</h3>
-
-            <div class="admin-tabs">
-
-                <button class="tab-btn active"
-                        onclick="adminTab('adminTransactions',this)">
-                    Transactions
-                </button>
-
-                <button class="tab-btn"
-                        onclick="adminTab('adminOrders',this)">
-                    Orders
-                </button>
-
-                <button class="tab-btn"
-                        onclick="adminTab('adminProducts',this)">
-                    Products
-                </button>
-
-                <button class="tab-btn"
-                        onclick="adminTab('adminTemplates',this)">
-                    Templates
-                </button>
-
-                <button class="tab-btn"
-                        onclick="adminTab('adminSellers',this)">
-                    Sellers
-                </button>
-
-                <button class="tab-btn"
-                        onclick="adminTab('adminSupport',this)">
-                    Support
-                </button>
-
+        <div class="dashboard-deals">
+            <div class="section-title">
+                <h2>🔥 Deals Zose</h2>
+                <span>Deal 1–7</span>
             </div>
 
+            <div class="info-note">
+                ℹ️ Izi ni Deals z'imbere. Ubu ziboneka gusa ku muntu winjiye muri account.
+                Deposit na Cash Out bizakenera payment/backend system nyayo mbere yo kwakira amafaranga.
+            </div>
 
-            <!-- TRANSACTIONS -->
+            <div class="deals" id="dealsContainer">
 
-            <div id="adminTransactions"
-                 class="admin-section active">
-
-                <div class="notice">
-                    Admin agomba kubanza kugenzura proof/reference y'umukoresha
-                    mbere yo kwemeza Deposit cyangwa Withdrawal.
+                <div class="card">
+                    <div class="deal-image">🛍️</div>
+                    <h3>Deal 1</h3>
+                    <p>Igicuruzwa cya mbere. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">5,000 RWF</div>
+                    <a href="deal1.html" class="button">Reba byinshi</a>
                 </div>
 
-                <div id="adminTransactionList"></div>
-
-            </div>
-
-
-            <!-- ORDERS -->
-
-            <div id="adminOrders"
-                 class="admin-section">
-
-                <div id="adminOrderList"></div>
-
-            </div>
-
-
-            <!-- PRODUCTS -->
-
-            <div id="adminProducts"
-                 class="admin-section">
-
-                <div id="adminProductList"></div>
-
-            </div>
-
-
-            <!-- TEMPLATES -->
-
-            <div id="adminTemplates"
-                 class="admin-section">
-
-                <form class="form" id="templateForm">
-
-                    <div class="form-group">
-                        <label>Template name</label>
-                        <input id="templateName" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Template icon</label>
-                        <input id="templateIcon" value="🛍️">
-                    </div>
-
-                    <div class="form-group full">
-                        <label>Template description</label>
-                        <textarea id="templateDescription"
-                                  rows="3"
-                                  required></textarea>
-                    </div>
-
-                    <button class="full" type="submit">
-                        Create Template
-                    </button>
-
-                </form>
-
-                <br>
-
-                <div id="templateList"></div>
-
-            </div>
-
-
-            <!-- SELLERS -->
-
-            <div id="adminSellers"
-                 class="admin-section">
-
-                <div class="notice">
-                    Seller ahabwa permissions na Admin gusa.
-                    Permissions zigenzura icyo Seller yemerewe gukora.
+                <div class="card">
+                    <div class="deal-image">🎁</div>
+                    <h3>Deal 2</h3>
+                    <p>Igicuruzwa cya kabiri. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">10,000 RWF</div>
+                    <a href="deal2.html" class="button">Reba byinshi</a>
                 </div>
 
-                <div id="adminSellerList"></div>
+                <div class="card">
+                    <div class="deal-image">📦</div>
+                    <h3>Deal 3</h3>
+                    <p>Igicuruzwa cya gatatu. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">15,000 RWF</div>
+                    <a href="deal3.html" class="button">Reba byinshi</a>
+                </div>
+
+                <div class="card">
+                    <div class="deal-image">🔥</div>
+                    <h3>Deal 4</h3>
+                    <p>Igicuruzwa cya kane. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">20,000 RWF</div>
+                    <a href="deal4.html" class="button">Reba byinshi</a>
+                </div>
+
+                <div class="card">
+                    <div class="deal-image">⭐</div>
+                    <h3>Deal 5</h3>
+                    <p>Igicuruzwa cya gatanu. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">25,000 RWF</div>
+                    <a href="deal5.html" class="button">Reba byinshi</a>
+                </div>
+
+                <div class="card">
+                    <div class="deal-image">🚀</div>
+                    <h3>Deal 6</h3>
+                    <p>Igicuruzwa cya gatandatu. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">30,000 RWF</div>
+                    <a href="Deal6.html" class="button">Reba byinshi</a>
+                </div>
+
+                <div class="card">
+                    <div class="deal-image">👑</div>
+                    <h3>Deal 7</h3>
+                    <p>Igicuruzwa cya karindwi. Andika ibisobanuro byacyo hano.</p>
+                    <div class="price">35,000 RWF</div>
+                    <a href="Deal7.html" class="button">Reba byinshi</a>
+                </div>
 
             </div>
-
-
-            <!-- SUPPORT -->
-
-            <div id="adminSupport"
-                 class="admin-section">
-
-                <div id="adminSupportList"></div>
-
-            </div>
-
         </div>
-
     </div>
-
-
-    <!-- ACCOUNT -->
-
-    <div id="accountPanel"
-         class="panel hidden">
-
-        <h3>👤 Account yawe</h3>
-
-        <p><strong>Name:</strong> <span id="accountName"></span></p>
-        <p><strong>Email:</strong> <span id="accountEmail"></span></p>
-        <p><strong>Role:</strong> <span id="accountRole"></span></p>
-
-    </div>
-
-
-    <!-- TRANSACTION FORM -->
-
-    <div id="transactionPanel"
-         class="panel hidden">
-
-        <h3 id="transactionTitle">Transaction</h3>
-
-        <form class="form" id="transactionForm">
-
-            <div class="form-group">
-                <label>Amount (RWF)</label>
-                <input id="transactionAmount"
-                       type="number"
-                       min="1"
-                       required>
-            </div>
-
-            <div class="form-group">
-                <label>Payment method</label>
-
-                <select id="paymentMethod" required>
-                    <option value="">Hitamo</option>
-                    <option value="Mobile Money">Mobile Money</option>
-                    <option value="Bank">Bank</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-
-            <div class="form-group full">
-                <label>Payment reference / proof</label>
-                <input id="paymentReference"
-                       placeholder="Transaction ID cyangwa reference"
-                       required>
-            </div>
-
-            <button class="full" type="submit">
-                Submit Request
-            </button>
-
-        </form>
-
-    </div>
-
-
-    <!-- SUPPORT FORM -->
-
-    <div id="supportPanel"
-         class="panel hidden">
-
-        <h3>🎧 Contact Support</h3>
-
-        <form class="form" id="supportForm">
-
-            <div class="form-group full">
-                <label>Subject</label>
-                <input id="supportSubject" required>
-            </div>
-
-            <div class="form-group full">
-                <label>Message</label>
-                <textarea id="supportMessage"
-                          rows="5"
-                          required></textarea>
-            </div>
-
-            <button class="full">
-                Send Support Request
-            </button>
-
-        </form>
-
-    </div>
-
-
-    <!-- TRANSACTION HISTORY -->
-
-    <div class="panel">
-
-        <h3>📋 Transaction History</h3>
-
-        <div id="userTransactionList"></div>
-
-    </div>
-
-</div>
-
 </section>
-
-
-<!-- AUTH -->
 
 <section id="auth-section">
 
-<div class="auth-box">
+    <div class="auth-box">
 
-    <div class="auth-head">
-        <h2>Rwanda Online Deals</h2>
-        <button class="close-auth" id="closeAuth">×</button>
+        <div class="auth-head">
+            <h2>Rwanda Online Deals</h2>
+            <button class="close-auth" id="closeAuth">×</button>
+        </div>
+
+        <div class="auth-tabs">
+            <button class="auth-tab active" id="registerTab">Kora Account</button>
+            <button class="auth-tab" id="loginTab">Injira</button>
+        </div>
+
+        <form id="registerForm" class="auth-form active">
+            <input type="text" id="registerName" placeholder="Amazina yawe" required>
+            <input type="email" id="registerEmail" placeholder="Email Address" required>
+            <input type="password" id="registerPassword" placeholder="Password (minimum 6)" minlength="6" required>
+            <button type="submit">Create Account</button>
+        </form>
+
+        <form id="loginForm" class="auth-form">
+            <input type="email" id="loginEmail" placeholder="Email Address" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <p id="authMessage" class="auth-message"></p>
     </div>
-
-    <div class="auth-tabs">
-
-        <button class="auth-tab active"
-                id="registerTab">
-            Kora Account
-        </button>
-
-        <button class="auth-tab"
-                id="loginTab">
-            Injira
-        </button>
-
-    </div>
-
-
-    <form id="registerForm"
-          class="auth-form active">
-
-        <input type="text"
-               id="registerName"
-               placeholder="Amazina yawe"
-               required>
-
-        <input type="email"
-               id="registerEmail"
-               placeholder="Email Address"
-               required>
-
-        <input type="password"
-               id="registerPassword"
-               placeholder="Password (minimum 6)"
-               minlength="6"
-               required>
-
-        <button type="submit">
-            Create Account
-        </button>
-
-    </form>
-
-
-    <form id="loginForm"
-          class="auth-form">
-
-        <input type="email"
-               id="loginEmail"
-               placeholder="Email Address"
-               required>
-
-        <input type="password"
-               id="loginPassword"
-               placeholder="Password"
-               required>
-
-        <button type="submit">
-            Login
-        </button>
-
-    </form>
-
-    <p id="authMessage"
-       class="auth-message"></p>
-
-</div>
-
 </section>
-
-
-<div id="toast"></div>
-
 
 <footer id="contact">
     <p><strong>Rwanda Online Deals</strong></p>
-    <p>Deals • Ibicuruzwa • Online Shopping</p>
+    <p>Deals • Ibicuruzwa • Amahirwe yo kugura online</p>
     <p>© 2026 Rwanda Online Deals</p>
 </footer>
 
-
 <script type="module">
 
-/* =========================================================
-   FIREBASE
-========================================================= */
+/* =========================
+   FIREBASE IMPORTS
+========================= */
 
 import {
     initializeApp
@@ -886,2222 +786,774 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
+    getAnalytics
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js";
+
+import {
     getFirestore,
     collection,
-    addDoc,
     getDocs,
-    getDoc,
     doc,
     setDoc,
-    updateDoc,
-    deleteDoc,
-    query,
-    where,
-    orderBy,
-    limit,
-    serverTimestamp,
-    writeBatch
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
 const firebaseConfig = {
-    apiKey:"AIzaSyCOOEbhkKrv0ysHarRZvjw2DlgsRlcN180",
-    authDomain:"rwanda-online-deals.firebaseapp.com",
-    projectId:"rwanda-online-deals",
-    storageBucket:"rwanda-online-deals.firebasestorage.app",
-    messagingSenderId:"74305121142",
-    appId:"1:74305121142:web:c3c0a305a82fa78f03e857",
-    measurementId:"G-FG5JEHSD00"
+    apiKey: "AIzaSyCOOEbhkKrv0ysHarRzvjw2DlgsRlcN180",
+    authDomain: "rwanda-online-deals.firebaseapp.com",
+    projectId: "rwanda-online-deals",
+    storageBucket: "rwanda-online-deals.firebasestorage.app",
+    messagingSenderId: "74305121142",
+    appId: "1:74305121142:web:c3c0a305a82fa78f03e857",
+    measurementId: "G-FG5JEHSD00"
 };
 
+
+/* =========================
+   INITIALIZE FIREBASE
+========================= */
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
 
-/* =========================================================
-   STATE
-========================================================= */
+/* =========================
+   LOAD PRODUCTS
+========================= */
 
-let currentUser = null;
-let currentUserData = null;
-let transactionType = null;
+async function loadProducts() {
 
+    const dealsContainer =
+        document.getElementById("dealsContainer");
 
-/* =========================================================
-   HELPERS
-========================================================= */
+    try {
 
-const $ = id => document.getElementById(id);
+        const productsRef =
+            collection(db, "products");
 
-function money(value){
-    return Number(value || 0).toLocaleString("en-US") + " RWF";
-}
+        const snapshot =
+            await getDocs(productsRef);
 
-function escapeHTML(value=""){
-    return String(value)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-}
+        dealsContainer.innerHTML = "";
 
-function showToast(message){
-    const t = $("toast");
-    t.textContent = message;
-    t.style.display = "block";
+        snapshot.forEach((productDoc) => {
 
-    setTimeout(()=>{
-        t.style.display = "none";
-    },3000);
-}
+            const product = productDoc.data();
 
-function statusHTML(status){
-    const s = status || "pending";
-    return `<span class="status ${escapeHTML(s)}">${escapeHTML(s)}</span>`;
-}
+            const card =
+                document.createElement("div");
 
+            card.className = "card";
 
-/* =========================================================
-   AUTH UI
-========================================================= */
-
-function openAuth(tab="register"){
-    $("auth-section").style.display="block";
-    document.body.style.overflow="hidden";
-    showTab(tab);
-}
-
-function closeAuthBox(){
-    $("auth-section").style.display="none";
-    document.body.style.overflow="";
-    $("authMessage").textContent="";
-}
-
-function showTab(tab){
-    const reg = tab === "register";
-
-    $("registerTab").classList.toggle("active",reg);
-    $("loginTab").classList.toggle("active",!reg);
-
-    $("registerForm").classList.toggle("active",reg);
-    $("loginForm").classList.toggle("active",!reg);
-
-    $("authMessage").textContent="";
-}
-
-$("openAuthTop").addEventListener("click",()=>openAuth("register"));
-$("openAuthHero").addEventListener("click",()=>openAuth("register"));
-$("registerTab").addEventListener("click",()=>showTab("register"));
-$("loginTab").addEventListener("click",()=>showTab("login"));
-$("closeAuth").addEventListener("click",closeAuthBox);
-
-$("auth-section").addEventListener("click",e=>{
-    if(e.target === $("auth-section")) closeAuthBox();
-});
-
-
-/* =========================================================
-   MENU
-========================================================= */
-
-$("menuBtn").addEventListener("click",()=>{
-    const p=$("menuPanel");
-    p.style.display=p.style.display==="block" ? "none" : "block";
-});
-
-document.addEventListener("click",e=>{
-    if(!$("menuBtn").contains(e.target) &&
-       !$("menuPanel").contains(e.target)){
-        $("menuPanel").style.display="none";
-    }
-});
-
-
-/* =========================================================
-   REGISTRATION
-========================================================= */
-
-$("registerForm").addEventListener("submit",async e=>{
-
-    e.preventDefault();
-
-    const name=$("registerName").value.trim();
-    const email=$("registerEmail").value.trim();
-    const password=$("registerPassword").value;
-
-    $("authMessage").textContent="⏳ Creating account...";
-
-    try{
-
-        const result=
-            await createUserWithEmailAndPassword(
-                auth,email,password
-            );
-
-        const uid=result.user.uid;
-
-        await setDoc(doc(db,"users",uid),{
-            name:name,
-            email:email,
-            role:"customer",
-            balance:0,
-            permissions:{
-                editProduct:false,
-                editPrice:false,
-                manageOrders:false,
-                support:false
-            },
-            createdAt:serverTimestamp()
-        });
-
-        $("registerForm").reset();
-
-        showToast("Account yakozwe neza.");
-
-    }catch(error){
-
-        console.error(error);
-
-        let msg="Account ntiyakozwe.";
-
-        if(error.code==="auth/email-already-in-use")
-            msg="Iyi email isanzwe ifite account.";
-
-        if(error.code==="auth/weak-password")
-            msg="Password igomba kuba nibura characters 6.";
-
-        if(error.code==="auth/invalid-email")
-            msg="Email ntabwo ari yo.";
-
-        $("authMessage").textContent="❌ "+msg;
-
-    }
-
-});
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-$("loginForm").addEventListener("submit",async e=>{
-
-    e.preventDefault();
-
-    const email=$("loginEmail").value.trim();
-    const password=$("loginPassword").value;
-
-    $("authMessage").textContent="⏳ Turimo kukwinjiza...";
-
-    try{
-
-        await signInWithEmailAndPassword(
-            auth,email,password
-        );
-
-        $("loginForm").reset();
-
-    }catch(error){
-
-        console.error(error);
-
-        $("authMessage").textContent=
-            "❌ Email cyangwa password ntabwo ari byo.";
-
-    }
-
-});
-
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
-
-onAuthStateChanged(auth,async user=>{
-
-    if(user){
-
-        currentUser=user;
-
-        await loadUserData();
-
-        showPrivateDashboard();
-
-        await loadProducts();
-        await loadUserTransactions();
-
-        if(currentUserData.role==="seller"){
-            await loadSellerArea();
-        }
-
-        if(currentUserData.role==="admin"){
-            await loadAdminArea();
-        }
-
-    }else{
-
-        currentUser=null;
-        currentUserData=null;
-
-        showPublicHome();
-
-    }
-
-});
-
-
-/* =========================================================
-   USER DATA
-========================================================= */
-
-async function loadUserData(){
-
-    const ref=doc(db,"users",currentUser.uid);
-    const snap=await getDoc(ref);
-
-    if(!snap.exists()){
-
-        await setDoc(ref,{
-            name:currentUser.email.split("@")[0],
-            email:currentUser.email,
-            role:"customer",
-            balance:0,
-            permissions:{
-                editProduct:false,
-                editPrice:false,
-                manageOrders:false,
-                support:false
-            },
-            createdAt:serverTimestamp()
-        });
-
-        const newSnap=await getDoc(ref);
-        currentUserData=newSnap.data();
-
-    }else{
-
-        currentUserData=snap.data();
-
-    }
-
-}
-
-
-/* =========================================================
-   HOME / DASHBOARD
-========================================================= */
-
-function showPrivateDashboard(){
-
-    $("homePage").style.display="none";
-    $("homeNav").style.display="none";
-    $("dashboard").style.display="block";
-
-    $("userName").textContent=
-        currentUserData.name || "User";
-
-    $("userEmail").textContent=
-        currentUser.email || "";
-
-    $("userRole").textContent=
-        currentUserData.role || "customer";
-
-    $("balanceDisplay").textContent=
-        money(currentUserData.balance);
-
-    $("accountName").textContent=
-        currentUserData.name || "";
-
-    $("accountEmail").textContent=
-        currentUser.email || "";
-
-    $("accountRole").textContent=
-        currentUserData.role || "customer";
-
-    $("customerArea").classList.remove("hidden");
-    $("sellerArea").classList.add("hidden");
-    $("adminArea").classList.add("hidden");
-
-    if(currentUserData.role==="seller")
-        $("sellerArea").classList.remove("hidden");
-
-    if(currentUserData.role==="admin")
-        $("adminArea").classList.remove("hidden");
-
-    closeAuthBox();
-
-    window.scrollTo({top:0,behavior:"smooth"});
-}
-
-
-function showPublicHome(){
-
-    $("dashboard").style.display="none";
-    $("homePage").style.display="block";
-    $("homeNav").style.display="block";
-
-    $("customerArea").classList.remove("hidden");
-    $("sellerArea").classList.add("hidden");
-    $("adminArea").classList.add("hidden");
-}
-
-
-/* =========================================================
-   PRODUCTS
-========================================================= */
-
-async function loadProducts(){
-
-    const box=$("dealsContainer");
-
-    box.innerHTML=
-        `<div class="empty">⏳ Turimo gushaka products...</div>`;
-
-    try{
-
-        const q=query(
-            collection(db,"products"),
-            where("status","==","approved")
-        );
-
-        const snap=await getDocs(q);
-
-        box.innerHTML="";
-
-        if(snap.empty){
-
-            box.innerHTML=
-                `<div class="empty">Nta products zemejwe ziraboneka.</div>`;
-
-            return;
-        }
-
-        snap.forEach(d=>{
-
-            const p=d.data();
-
-            const image=p.imageUrl || p.image || "";
-
-            box.innerHTML+=`
-
-            <div class="card">
-
+            card.innerHTML = `
                 <div class="deal-image">
-
                     ${
-                        image
-                        ? `<img src="${escapeHTML(image)}"
-                               alt="${escapeHTML(p.name)}">`
-                        : (p.icon || "🛍️")
+                        product.imageUrl
+                        ? `<img src="${product.imageUrl}" alt="${product.name || "Product"}" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;">`
+                        : "🛍️"
                     }
-
                 </div>
 
-                <h3>${escapeHTML(p.name || "Product")}</h3>
+                <h3>${product.name || "Product"}</h3>
 
-                <p>${escapeHTML(
-                    p.description || "Nta bisobanuro."
-                )}</p>
+                <p>
+                    ${product.description || "Nta bisobanuro bihari."}
+                </p>
 
                 <div class="price">
-                    ${money(p.price)}
+                    ${(Number(product.price) || 0).toLocaleString()} RWF
                 </div>
 
-                <button
-                    class="button"
-                    onclick="placeOrder('${d.id}')">
-                    Gura ubu
-                </button>
-
-            </div>
-
+                <a href="#" class="button">
+                    Reba byinshi
+                </a>
             `;
+
+            dealsContainer.appendChild(card);
 
         });
 
-    }catch(error){
+    } catch(error) {
 
-        console.error(error);
-
-        box.innerHTML=
-            `<div class="empty">
-                Ntibyashobotse kuzana products.
-             </div>`;
+        console.error(
+            "Error loading products:",
+            error
+        );
 
     }
 
 }
 
 
-/* =========================================================
-   ORDER
-========================================================= */
+/*
+   Iyi iguma uko yari iri.
+*/
+loadProducts();
 
-window.placeOrder=async function(productId){
 
-    if(!currentUser){
+/* =========================
+   ELEMENTS
+========================= */
 
-        openAuth("login");
-        return;
+const authSection =
+    document.getElementById("auth-section");
+
+const authMessage =
+    document.getElementById("authMessage");
+
+const registerForm =
+    document.getElementById("registerForm");
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const registerTab =
+    document.getElementById("registerTab");
+
+const loginTab =
+    document.getElementById("loginTab");
+
+const closeAuth =
+    document.getElementById("closeAuth");
+
+const homePage =
+    document.getElementById("homePage");
+
+const homeNav =
+    document.getElementById("homeNav");
+
+const dashboard =
+    document.getElementById("dashboard");
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+const userName =
+    document.getElementById("userName");
+
+const userEmail =
+    document.getElementById("userEmail");
+
+
+/* =========================
+   AUTH MODAL
+========================= */
+
+function openAuth(tab = "register") {
+
+    authSection.style.display = "block";
+
+    document.body.style.overflow = "hidden";
+
+    showTab(tab);
+
+}
+
+
+function closeAuthBox() {
+
+    authSection.style.display = "none";
+
+    document.body.style.overflow = "";
+
+    authMessage.textContent = "";
+
+}
+
+
+function showTab(tab) {
+
+    const isRegister =
+        tab === "register";
+
+    registerTab.classList.toggle(
+        "active",
+        isRegister
+    );
+
+    loginTab.classList.toggle(
+        "active",
+        !isRegister
+    );
+
+    registerForm.classList.toggle(
+        "active",
+        isRegister
+    );
+
+    loginForm.classList.toggle(
+        "active",
+        !isRegister
+    );
+
+    authMessage.textContent = "";
+
+}
+
+
+document.getElementById("openAuthTop")
+    .addEventListener(
+        "click",
+        () => openAuth("register")
+    );
+
+
+document.getElementById("openAuthHero")
+    .addEventListener(
+        "click",
+        () => openAuth("register")
+    );
+
+
+registerTab.addEventListener(
+    "click",
+    () => showTab("register")
+);
+
+
+loginTab.addEventListener(
+    "click",
+    () => showTab("login")
+);
+
+
+closeAuth.addEventListener(
+    "click",
+    closeAuthBox
+);
+
+
+authSection.addEventListener(
+    "click",
+    (e) => {
+
+        if(e.target === authSection){
+
+            closeAuthBox();
+
+        }
 
     }
+);
 
-    try{
 
-        const productSnap=
-            await getDoc(doc(db,"products",productId));
+/* =========================
+   THREE DOT MENU
+========================= */
 
-        if(!productSnap.exists()){
+const menuBtn =
+    document.getElementById("menuBtn");
 
-            showToast("Product ntikiboneka.");
-            return;
+const menuPanel =
+    document.getElementById("menuPanel");
+
+
+menuBtn.addEventListener(
+    "click",
+    () => {
+
+        menuPanel.style.display =
+            menuPanel.style.display === "block"
+            ? "none"
+            : "block";
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    (e) => {
+
+        if(
+            !menuBtn.contains(e.target) &&
+            !menuPanel.contains(e.target)
+        ){
+
+            menuPanel.style.display =
+                "none";
 
         }
 
-        const p=productSnap.data();
-
-        if(p.status!=="approved"){
-
-            showToast("Iyi product ntabwo yemejwe.");
-            return;
-
-        }
-
-        if(Number(currentUserData.balance || 0)
-           < Number(p.price || 0)){
-
-            showToast(
-                "Balance ntabwo ihagije. Kora Deposit."
-            );
-
-            openTransactionForm("deposit");
-            return;
-
-        }
+    }
+);
 
 
-        await addDoc(collection(db,"orders"),{
+/* =========================
+   SHOW PRIVATE DASHBOARD
+========================= */
 
-            buyerId:currentUser.uid,
+function showDashboard(user) {
 
-            sellerId:p.sellerId || "",
+    homePage.style.display = "none";
 
-            productId:productId,
+    homeNav.style.display = "none";
 
-            productName:p.name,
+    dashboard.style.display = "block";
 
-            amount:Number(p.price),
 
-            status:"pending",
+    userEmail.textContent =
+        user.email || "";
 
-            paymentStatus:"pending",
 
-            createdAt:serverTimestamp()
-
-        });
-
-        showToast(
-            "Order yashyizwe muri system. Admin azayigenzura."
+    const savedName =
+        localStorage.getItem(
+            "rwandaOnlineDealsName"
         );
 
-    }catch(error){
 
-        console.error(error);
-
-        showToast("Order yanze gukora.");
-
-    }
-
-};
+    userName.textContent =
+        savedName || "User";
 
 
-/* =========================================================
-   TRANSACTION FORM
-========================================================= */
+    window.location.hash =
+        "dashboard";
 
-window.openTransactionForm=function(type){
 
-    transactionType=type;
-
-    $("transactionPanel").classList.remove("hidden");
-
-    $("transactionTitle").textContent=
-        type==="deposit"
-        ? "➕ Saba Deposit"
-        : "💸 Saba Withdrawal";
-
-    $("transactionAmount").value="";
-    $("paymentReference").value="";
-    $("paymentMethod").value="";
-
-    $("transactionPanel").scrollIntoView({
+    window.scrollTo({
+        top:0,
         behavior:"smooth"
     });
 
-};
+}
 
 
-$("transactionForm").addEventListener("submit",async e=>{
+/* =========================
+   SHOW HOME
+========================= */
 
-    e.preventDefault();
+function showHome() {
 
-    if(!currentUser) return;
+    dashboard.style.display = "none";
 
-    const amount=
-        Number($("transactionAmount").value);
+    homePage.style.display = "block";
 
-    const method=
-        $("paymentMethod").value;
-
-    const reference=
-        $("paymentReference").value.trim();
-
-    if(amount<=0){
-
-        showToast("Amount ntabwo ari yo.");
-        return;
-
-    }
-
-    if(transactionType==="withdrawal" &&
-       amount>Number(currentUserData.balance || 0)){
-
-        showToast("Balance ntabwo ihagije.");
-        return;
-
-    }
+    homeNav.style.display = "block";
 
 
-    try{
-
-        await addDoc(
-            collection(db,"transactions"),
-            {
-
-                userId:currentUser.uid,
-
-                type:transactionType,
-
-                amount:amount,
-
-                paymentMethod:method,
-
-                paymentReference:reference,
-
-                status:"pending",
-
-                createdAt:serverTimestamp()
-
-            }
-        );
-
-        $("transactionForm").reset();
-        $("transactionPanel").classList.add("hidden");
-
-        showToast(
-            "Request yoherejwe. Tegereza igenzurwa na Admin."
-        );
-
-        await loadUserTransactions();
-
-    }catch(error){
-
-        console.error(error);
-        showToast("Transaction request yanze.");
-
-    }
-
-});
+    window.location.hash =
+        "home";
 
 
-/* =========================================================
-   USER TRANSACTION HISTORY
-========================================================= */
-
-async function loadUserTransactions(){
-
-    const box=$("userTransactionList");
-
-    box.innerHTML=
-        `<div class="empty">⏳ Loading...</div>`;
-
-    try{
-
-        const q=query(
-            collection(db,"transactions"),
-            where("userId","==",currentUser.uid)
-        );
-
-        const snap=await getDocs(q);
-
-        box.innerHTML="";
-
-        if(snap.empty){
-
-            box.innerHTML=
-                `<div class="empty">
-                    Nta transaction uragira.
-                 </div>`;
-
-            return;
-
-        }
-
-        snap.forEach(d=>{
-
-            const t=d.data();
-
-            box.innerHTML+=`
-
-            <div class="row">
-
-                <div class="row-info">
-
-                    <strong>
-                        ${escapeHTML(t.type)}
-                    </strong>
-
-                    <small>
-                        ${money(t.amount)}
-                        • ${escapeHTML(t.paymentMethod || "")}
-                    </small>
-
-                    <small>
-                        Ref:
-                        ${escapeHTML(
-                            t.paymentReference || "-"
-                        )}
-                    </small>
-
-                </div>
-
-                <div>
-                    ${statusHTML(t.status)}
-                </div>
-
-            </div>
-
-            `;
-
-        });
-
-    }catch(error){
-
-        console.error(error);
-
-        box.innerHTML=
-            `<div class="empty">
-                Ntibyashobotse kubona transactions.
-             </div>`;
-
-    }
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
 
 
-/* =========================================================
-   SELLER
-========================================================= */
+/* =========================
+   CHECK LOGIN STATUS
+========================= */
 
-async function loadSellerArea(){
+onAuthStateChanged(
+    auth,
+    (user) => {
 
-    await loadSellerProducts();
-    await loadSellerTemplates();
-    await loadSellerOrders();
-    await loadSellerSupport();
+        if(user){
 
-}
+            /*
+              NTIBYAHINDUTSE.
+              Login ikomeje gukoresha
+              uburyo bwawe bwa mbere.
+            */
 
+            showDashboard(user);
 
-async function loadSellerProducts(){
-
-    const box=$("sellerProductList");
-
-    box.innerHTML=
-        `<div class="empty">⏳ Loading...</div>`;
-
-    try{
-
-        const q=query(
-            collection(db,"products"),
-            where("sellerId","==",currentUser.uid)
-        );
-
-        const snap=await getDocs(q);
-
-        box.innerHTML="";
-
-        if(snap.empty){
-
-            box.innerHTML=
-                `<div class="empty">
-                    Nta product urashyiraho.
-                 </div>`;
-
-            return;
-
-        }
-
-        snap.forEach(d=>{
-
-            const p=d.data();
-
-            const canEdit=
-                currentUserData.permissions?.editProduct === true;
-
-            box.innerHTML+=`
-
-            <div class="row">
-
-                <div class="row-info">
-
-                    <strong>
-                        ${escapeHTML(p.name)}
-                    </strong>
-
-                    <small>
-                        ${money(p.price)}
-                    </small>
-
-                    ${statusHTML(p.status)}
-
-                </div>
-
-                <div class="row-actions">
-
-                    ${
-                        canEdit
-                        ? `
-                        <button class="small-btn edit"
-                          onclick="editSellerProduct('${d.id}')">
-                          Edit
-                        </button>
-                        `
-                        : `
-                        <span class="status">
-                          Edit permission ntabwo itangwa.
-                        </span>
-                        `
-                    }
-
-                </div>
-
-            </div>
-
-            `;
-
-        });
-
-    }catch(error){
-
-        console.error(error);
-
-        box.innerHTML=
-            `<div class="empty">
-                Ntibyashobotse.
-             </div>`;
-
-    }
-
-}
-
-
-async function loadSellerTemplates(){
-
-    const select=$("sellerTemplateSelect");
-
-    select.innerHTML=
-        `<option value="">Default Template</option>`;
-
-    try{
-
-        const snap=
-            await getDocs(collection(db,"templates"));
-
-        snap.forEach(d=>{
-
-            const t=d.data();
-
-            select.innerHTML+=`
-                <option value="${d.id}">
-                    ${escapeHTML(t.name)}
-                </option>
-            `;
-
-        });
-
-    }catch(error){
-
-        console.error(error);
-
-    }
-
-}
-
-
-$("sellerProductForm").addEventListener("submit",async e=>{
-
-    e.preventDefault();
-
-    if(
-        currentUserData.role!=="seller" &&
-        currentUserData.role!=="admin"
-    ){
-
-        showToast("Ntubyemerewe.");
-        return;
-
-    }
-
-    try{
-
-        await addDoc(collection(db,"products"),{
-
-            name:$("sellerProductName").value.trim(),
-
-            price:Number(
-                $("sellerProductPrice").value
-            ),
-
-            description:
-                $("sellerProductDescription").value.trim(),
-
-            imageUrl:
-                $("sellerProductImage").value.trim(),
-
-            templateId:
-                $("sellerTemplateSelect").value || "",
-
-            sellerId:
-                currentUser.uid,
-
-            status:
-                currentUserData.role==="admin"
-                ? "approved"
-                : "pending",
-
-            createdAt:
-                serverTimestamp()
-
-        });
-
-        $("sellerProductForm").reset();
-
-        showToast(
-            currentUserData.role==="admin"
-            ? "Product yashyizweho."
-            : "Product yoherejwe kuri Admin ngo ayemeze."
-        );
-
-        await loadSellerProducts();
-
-    }catch(error){
-
-        console.error(error);
-
-        showToast("Product ntiyashyizweho.");
-
-    }
-
-});
-
-
-/* =========================================================
-   SELLER EDIT
-========================================================= */
-
-window.editSellerProduct=async function(productId){
-
-    if(currentUserData.permissions?.editProduct!==true &&
-       currentUserData.role!=="admin"){
-
-        showToast("Admin ntabwo yaguhaye Edit permission.");
-        return;
-
-    }
-
-    const snap=
-        await getDoc(doc(db,"products",productId));
-
-    if(!snap.exists()){
-
-        showToast("Product ntiboneka.");
-        return;
-
-    }
-
-    const p=snap.data();
-
-    const name=prompt(
-        "Product name:",
-        p.name || ""
-    );
-
-    if(name===null) return;
-
-    const price=prompt(
-        "Price:",
-        p.price || ""
-    );
-
-    if(price===null) return;
-
-    const description=prompt(
-        "Description:",
-        p.description || ""
-    );
-
-    if(description===null) return;
-
-
-    const updateData={
-        name:name.trim(),
-        description:description.trim(),
-        updatedAt:serverTimestamp()
-    };
-
-    if(
-        currentUserData.permissions?.editPrice===true ||
-        currentUserData.role==="admin"
-    ){
-        updateData.price=Number(price);
-    }
-
-    await updateDoc(
-        doc(db,"products",productId),
-        updateData
-    );
-
-    showToast("Product yahinduwe neza.");
-
-    await loadSellerProducts();
-    await loadProducts();
-
-};
-
-
-/* =========================================================
-   SELLER ORDERS
-========================================================= */
-
-async function loadSellerOrders(){
-
-    const box=$("sellerOrderList");
-
-    try{
-
-        const q=query(
-            collection(db,"orders"),
-            where("sellerId","==",currentUser.uid)
-        );
-
-        const snap=await getDocs(q);
-
-        box.innerHTML="";
-
-        if(snap.empty){
-
-            box.innerHTML=
-                `<div class="empty">
-                    Nta orders ziraboneka.
-                 </div>`;
-
-            return;
-
-        }
-
-        snap.forEach(d=>{
-
-            const o=d.data();
-
-            box.innerHTML+=`
-
-            <div class="row">
-
-                <div class="row-info">
-
-                    <strong>
-                        ${escapeHTML(o.productName)}
-                    </strong>
-
-                    <small>
-                        ${money(o.amount)}
-                    </small>
-
-                </div>
-
-                <div>
-                    ${statusHTML(o.status)}
-                </div>
-
-            </div>
-
-            `;
-
-        });
-
-    }catch(error){
-
-        console.error(error);
-
-        box.innerHTML=
-            `<div class="empty">Ntibyashobotse.</div>`;
-
-    }
-
-}
-
-
-/* =========================================================
-   SELLER SUPPORT
-========================================================= */
-
-async function loadSellerSupport(){
-
-    const box=$("sellerSupportList");
-
-    try{
-
-        const q=query(
-            collection(db,"support"),
-            where("userId","==",currentUser.uid)
-        );
-
-        const snap=await getDocs(q);
-
-        box.innerHTML="";
-
-        if(snap.empty){
-
-            box.innerHTML=
-                `<div class="empty">
-                    Nta support request.
-                 </div>`;
-
-            return;
-
-        }
-
-        snap.forEach(d=>{
-
-            const s=d.data();
-
-            box.innerHTML+=`
-
-            <div class="row">
-
-                <div class="row-info">
-                    <strong>
-                        ${escapeHTML(s.subject)}
-                    </strong>
-
-                    <small>
-                        ${escapeHTML(s.message)}
-                    </small>
-                </div>
-
-                ${statusHTML(s.status)}
-
-            </div>
-
-            `;
-
-        });
-
-    }catch(error){
-
-        console.error(error);
-
-    }
-
-}
-
-
-/* =========================================================
-   ADMIN
-========================================================= */
-
-async function loadAdminArea(){
-
-    await loadAdminTransactions();
-    await loadAdminOrders();
-    await loadAdminProducts();
-    await loadTemplates();
-    await loadAdminSellers();
-    await loadAdminSupport();
-
-}
-
-
-/* =========================================================
-   ADMIN TRANSACTIONS
-========================================================= */
-
-async function loadAdminTransactions(){
-
-    const box=$("adminTransactionList");
-
-    box.innerHTML=
-        `<div class="empty">⏳ Loading...</div>`;
-
-    try{
-
-        const q=query(
-            collection(db,"transactions"),
-            where("status","==","pending")
-        );
-
-        const snap=await getDocs(q);
-
-        box.innerHTML="";
-
-        if(snap.empty){
-
-            box.innerHTML=
-                `<div class="empty">
-                    Nta transaction zitegereje approval.
-                 </div>`;
-
-            return;
-
-        }
-
-        snap.forEach(d=>{
-
-            const t=d.data();
-
-            box.innerHTML+=`
-
-            <div class="row">
-
-                <div class="row-info">
-
-                    <strong>
-                        ${escapeHTML(t.type)}
-                        • ${money(t.amount)}
-                    </strong>
-
-                    <small>
-                        User:
-                        ${escapeHTML(t.userId)}
-                    </small>
-
-                    <small>
-                        Method:
-                        ${escapeHTML(t.paymentMethod || "-")}
-                    </small>
-
-                    <small>
-                        Reference:
-                        ${escapeHTML(t.paymentReference || "-")}
-                    </small>
-
-                </div>
-
-                <div class="row-actions">
-
-                    <button
-                        class="small-btn approve"
-                        onclick="approveTransaction('${d.id}')">
-                        Approve
-                    </button>
-
-                    <button
-                        class="small-btn reject"
-                        onclick="rejectTransaction('${d.id}')">
-                        Reject
-                    </button>
-
-                </div>
-
-            </div>
-
-            `;
-
-        });
-
-    }catch(error){
-
-        console.error(error);
-
-        box.innerHTML=
-            `<div class="empty">
-                Error loading transactions.
-             </div>`;
-
-    }
-
-}
-
-
-/* =========================================================
-   ADMIN APPROVE TRANSACTION
-========================================================= */
-
-window.approveTransaction=async function(transactionId){
-
-    if(currentUserData.role!=="admin"){
-
-        showToast("Admin gusa niwe wemerewe.");
-        return;
-
-    }
-
-    try{
-
-        const transactionRef=
-            doc(db,"transactions",transactionId);
-
-        const transactionSnap=
-            await getDoc(transactionRef);
-
-        if(!transactionSnap.exists()){
-
-            showToast("Transaction ntiboneka.");
-            return;
-
-        }
-
-        const t=transactionSnap.data();
-
-        if(t.status!=="pending"){
-
-            showToast("Iyi transaction yamaze gukorerwa.");
-            return;
-
-        }
-
-        const userRef=
-            doc(db,"users",t.userId);
-
-        const userSnap=
-            await getDoc(userRef);
-
-        if(!userSnap.exists()){
-
-            showToast("User ntabonetse.");
-            return;
-
-        }
-
-        const u=userSnap.data();
-
-        const oldBalance=
-            Number(u.balance || 0);
-
-        const amount=
-            Number(t.amount || 0);
-
-        let newBalance=oldBalance;
-
-        if(t.type==="deposit"){
-
-            newBalance=oldBalance+amount;
-
-        }else if(t.type==="withdrawal"){
-
-            if(oldBalance<amount){
-
-                showToast(
-                    "Balance y'uyu user ntabwo ihagije."
-                );
-
-                return;
-
-            }
-
-            newBalance=oldBalance-amount;
+            closeAuthBox();
 
         }else{
 
-            showToast("Transaction type ntabwo izwi.");
-            return;
+            showHome();
 
         }
 
-
-        const batch=writeBatch(db);
-
-        batch.update(
-            transactionRef,
-            {
-                status:"approved",
-                reviewedBy:currentUser.uid,
-                reviewedAt:serverTimestamp()
-            }
-        );
-
-        batch.update(
-            userRef,
-            {
-                balance:newBalance
-            }
-        );
-
-        await batch.commit();
-
-        showToast(
-            "Transaction yemejwe kandi balance yahinduwe."
-        );
-
-        await loadAdminTransactions();
-
-    }catch(error){
-
-        console.error(error);
-
-        showToast(
-            "Approval yanze. Reba Firebase Rules."
-        );
-
     }
+);
 
-};
 
+/* =========================
+   REGISTRATION
+========================= */
 
-/* =========================================================
-   ADMIN REJECT
-========================================================= */
+registerForm.addEventListener(
+    "submit",
+    async (e) => {
 
-window.rejectTransaction=async function(transactionId){
+        e.preventDefault();
 
-    if(currentUserData.role!=="admin"){
 
-        showToast("Admin gusa.");
-        return;
+        const name =
+            document.getElementById(
+                "registerName"
+            ).value.trim();
 
-    }
 
-    try{
+        const email =
+            document.getElementById(
+                "registerEmail"
+            ).value.trim();
 
-        await updateDoc(
-            doc(db,"transactions",transactionId),
-            {
-                status:"rejected",
-                reviewedBy:currentUser.uid,
-                reviewedAt:serverTimestamp()
-            }
-        );
 
-        showToast("Transaction yangiwe.");
+        const password =
+            document.getElementById(
+                "registerPassword"
+            ).value;
 
-        await loadAdminTransactions();
 
-    }catch(error){
+        authMessage.textContent =
+            "⏳ Creating your account...";
 
-        console.error(error);
+        authMessage.style.color =
+            "#086d3b";
 
-        showToast("Reject yanze.");
 
-    }
+        try {
 
-};
+            /*
+              STEP 1:
+              Firebase Authentication
+            */
 
+            const result =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
 
-/* =========================================================
-   ADMIN ORDERS
-========================================================= */
 
-async function loadAdminOrders(){
+            /*
+              STEP 2:
+              Bika profile y'umukoresha
+              muri Firestore.
 
-    const box=$("adminOrderList");
+              Document:
+              users/{uid}
+            */
 
-    try{
+            await setDoc(
+                doc(
+                    db,
+                    "users",
+                    result.user.uid
+                ),
+                {
+                    name: name,
+                    email: email,
+                    role: "customer",
+                    balance: 0,
 
-        const q=query(
-            collection(db,"orders"),
-            where("status","==","pending")
-        );
+                    permissions: {
+                        editProduct: false,
+                        editPrice: false,
+                        manageOrders: false,
+                        support: false
+                    },
 
-        const snap=await getDocs(q);
-
-        box.innerHTML="";
-
-        if(snap.empty){
-
-            box.innerHTML=
-                `<div class="empty">
-                    Nta orders zitegereje approval.
-                 </div>`;
-
-            return;
-
-        }
-
-        snap.forEach(d=>{
-
-            const o=d.data();
-
-            box.innerHTML+=`
-
-            <div class="row">
-
-                <div class="row-info">
-
-                    <strong>
-                        ${escapeHTML(o.productName)}
-                    </strong>
-
-                    <small>
-                        Buyer: ${escapeHTML(o.buyerId)}
-                    </small>
-
-                    <small>
-                        Seller: ${escapeHTML(o.sellerId || "-")}
-                    </small>
-
-                    <small>
-                        ${money(o.amount)}
-                    </small>
-
-                </div>
-
-                <div class="row-actions">
-
-                    <button
-                        class="small-btn approve"
-                        onclick="approveOrder('${d.id}')">
-                        Approve
-                    </button>
-
-                    <button
-                        class="small-btn reject"
-                        onclick="rejectOrder('${d.id}')">
-                        Reject
-                    </button>
-
-                </div>
-
-            </div>
-
-            `;
-
-        });
-
-    }catch(error){
-
-        console.error(error);
-
-    }
-
-}
-
-
-/* =========================================================
-   ORDER APPROVAL
-========================================================= */
-
-window.approveOrder=async function(orderId){
-
-    if(currentUserData.role!=="admin"){
-
-        showToast("Admin gusa.");
-        return;
-
-    }
-
-    try{
-
-        const orderRef=
-            doc(db,"orders",orderId);
-
-        const orderSnap=
-            await getDoc(orderRef);
-
-        if(!orderSnap.exists()) return;
-
-        const o=orderSnap.data();
-
-        if(o.status!=="pending"){
-
-            showToast("Order yamaze gukorerwa.");
-            return;
-
-        }
-
-        const buyerRef=
-            doc(db,"users",o.buyerId);
-
-        const buyerSnap=
-            await getDoc(buyerRef);
-
-        if(!buyerSnap.exists()){
-
-            showToast("Buyer ntabonetse.");
-            return;
-
-        }
-
-        const buyer=buyerSnap.data();
-
-        const balance=
-            Number(buyer.balance || 0);
-
-        const amount=
-            Number(o.amount || 0);
-
-        if(balance<amount){
-
-            showToast(
-                "Buyer nta balance ihagije afite."
+                    createdAt:
+                        serverTimestamp()
+                }
             );
 
-            return;
 
-        }
+            /*
+              STEP 3:
+              Bika name kuri phone
+              kugirango dashboard
+              ikomeze kuyerekana.
+            */
+
+            localStorage.setItem(
+                "rwandaOnlineDealsName",
+                name
+            );
 
 
-        const batch=writeBatch(db);
+            authMessage.textContent =
+                "✅ Account yakozwe neza! Turakwinjiza...";
 
-        batch.update(
-            buyerRef,
-            {
-                balance:balance-amount
+            authMessage.style.color =
+                "green";
+
+
+            registerForm.reset();
+
+
+            /*
+              Firebase ihita itanga login state.
+              onAuthStateChanged ihita ifungura
+              dashboard.
+            */
+
+        } catch(error) {
+
+            console.error(
+                "REGISTER ERROR:",
+                error
+            );
+
+
+            let msg =
+                "Account ntiyakozwe.";
+
+
+            if(
+                error.code ===
+                "auth/email-already-in-use"
+            ){
+
+                msg =
+                    "Iyi email isanzwe ifite account. Koresha Login.";
+
             }
-        );
 
-        batch.update(
-            orderRef,
-            {
-                status:"approved",
-                paymentStatus:"approved",
-                approvedBy:currentUser.uid,
-                approvedAt:serverTimestamp()
+
+            if(
+                error.code ===
+                "auth/weak-password"
+            ){
+
+                msg =
+                    "Password igomba kuba nibura characters 6.";
+
             }
-        );
 
-        await batch.commit();
 
-        showToast("Order yemejwe.");
+            if(
+                error.code ===
+                "auth/invalid-email"
+            ){
 
-        await loadAdminOrders();
+                msg =
+                    "Email ntabwo ari yo.";
 
-    }catch(error){
+            }
 
-        console.error(error);
 
-        showToast("Order approval yanze.");
+            if(
+                error.code ===
+                "permission-denied"
+            ){
+
+                msg =
+                    "Account yakozwe ariko Firestore Rules ntizemeye kubika profile.";
+
+            }
+
+
+            authMessage.textContent =
+                "❌ " + msg;
+
+
+            authMessage.style.color =
+                "red";
+
+        }
 
     }
+);
 
-};
+
+/* =========================
+   LOGIN
+========================= */
+
+loginForm.addEventListener(
+    "submit",
+    async (e) => {
+
+        e.preventDefault();
 
 
-window.rejectOrder=async function(orderId){
+        const email =
+            document.getElementById(
+                "loginEmail"
+            ).value.trim();
 
-    if(currentUserData.role!=="admin") return;
 
-    await updateDoc(
-        doc(db,"orders",orderId),
-        {
-            status:"rejected",
-            rejectedBy:currentUser.uid,
-            rejectedAt:serverTimestamp()
+        const password =
+            document.getElementById(
+                "loginPassword"
+            ).value;
+
+
+        authMessage.textContent =
+            "⏳ Turimo kukwinjiza...";
+
+
+        authMessage.style.color =
+            "#086d3b";
+
+
+        try {
+
+            /*
+              LOGIN YAWE YAGUMYE UKO YARI.
+            */
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+            authMessage.textContent =
+                "✅ Login yakozwe neza! Turakwinjiza...";
+
+
+            authMessage.style.color =
+                "green";
+
+
+            loginForm.reset();
+
+
+        } catch(error) {
+
+            console.error(
+                "LOGIN ERROR:",
+                error
+            );
+
+
+            let msg =
+                "Login yanze. Reba email na password.";
+
+
+            if(
+                error.code ===
+                    "auth/invalid-credential" ||
+                error.code ===
+                    "auth/wrong-password" ||
+                error.code ===
+                    "auth/user-not-found"
+            ){
+
+                msg =
+                    "Email cyangwa password ntabwo ari byo.";
+
+            }
+
+
+            if(
+                error.code ===
+                "auth/too-many-requests"
+            ){
+
+                msg =
+                    "Gerageza nyuma gato. Attempts zabaye nyinshi.";
+
+            }
+
+
+            authMessage.textContent =
+                "❌ " + msg;
+
+
+            authMessage.style.color =
+                "red";
+
         }
-    );
-
-    showToast("Order yangiwe.");
-
-    await loadAdminOrders();
-
-};
-
-
-/* =========================================================
-   ADMIN PRODUCTS
-========================================================= */
-
-async function loadAdminProducts(){
-
-    const box=$("adminProductList");
-
-    try{
-
-        const snap=
-            await getDocs(collection(db,"products"));
-
-        box.innerHTML="";
-
-        if(snap.empty){
-
-            box.innerHTML=
-                `<div class="empty">Nta products.</div>`;
-
-            return;
-
-        }
-
-        snap.forEach(d=>{
-
-            const p=d.data();
-
-            box.innerHTML+=`
-
-            <div class="row">
-
-                <div class="row-info">
-
-                    <strong>
-                        ${escapeHTML(p.name)}
-                    </strong>
-
-                    <small>
-                        ${money(p.price)}
-                    </small>
-
-                    <small>
-                        Seller:
-                        ${escapeHTML(p.sellerId || "Admin")}
-                    </small>
-
-                    ${statusHTML(p.status)}
-
-                </div>
-
-                <div class="row-actions">
-
-                    ${
-                        p.status==="pending"
-                        ? `
-                        <button class="small-btn approve"
-                          onclick="approveProduct('${d.id}')">
-                          Approve
-                        </button>
-                        `
-                        : ""
-                    }
-
-                    <button class="small-btn edit"
-                        onclick="adminEditProduct('${d.id}')">
-                        Edit
-                    </button>
-
-                    <button class="small-btn delete"
-                        onclick="deleteProduct('${d.id}')">
-                        Delete
-                    </button>
-
-                </div>
-
-            </div>
-
-            `;
-
-        });
-
-    }catch(error){
-
-        console.error(error);
 
     }
+);
 
-}
 
-
-window.approveProduct=async function(productId){
-
-    if(currentUserData.role!=="admin") return;
-
-    await updateDoc(
-        doc(db,"products",productId),
-        {
-            status:"approved",
-            approvedBy:currentUser.uid,
-            approvedAt:serverTimestamp()
-        }
-    );
-
-    showToast("Product yemejwe.");
-
-    await loadAdminProducts();
-    await loadProducts();
-
-};
-
-
-window.adminEditProduct=async function(productId){
-
-    if(currentUserData.role!=="admin") return;
-
-    const ref=doc(db,"products",productId);
-    const snap=await getDoc(ref);
-
-    if(!snap.exists()) return;
-
-    const p=snap.data();
-
-    const name=prompt("Product name:",p.name || "");
-    if(name===null) return;
-
-    const price=prompt("Price:",p.price || "");
-    if(price===null) return;
-
-    const description=prompt(
-        "Description:",
-        p.description || ""
-    );
-
-    if(description===null) return;
-
-    await updateDoc(ref,{
-        name:name.trim(),
-        price:Number(price),
-        description:description.trim(),
-        updatedAt:serverTimestamp()
-    });
-
-    showToast("Product yahinduwe.");
-
-    await loadAdminProducts();
-    await loadProducts();
-
-};
-
-
-window.deleteProduct=async function(productId){
-
-    if(currentUserData.role!=="admin") return;
-
-    if(!confirm("Urashaka koko gusiba iyi product?"))
-        return;
-
-    await deleteDoc(
-        doc(db,"products",productId)
-    );
-
-    showToast("Product yasibwe.");
-
-    await loadAdminProducts();
-    await loadProducts();
-
-};
-
-
-/* =========================================================
-   TEMPLATES
-========================================================= */
-
-$("templateForm").addEventListener("submit",async e=>{
-
-    e.preventDefault();
-
-    if(currentUserData.role!=="admin") return;
-
-    await addDoc(collection(db,"templates"),{
-
-        name:$("templateName").value.trim(),
-
-        icon:$("templateIcon").value.trim() || "🛍️",
-
-        description:
-            $("templateDescription").value.trim(),
-
-        createdBy:currentUser.uid,
-
-        createdAt:serverTimestamp()
-
-    });
-
-    $("templateForm").reset();
-
-    showToast("Template yakozwe.");
-
-    await loadTemplates();
-    await loadSellerTemplates();
-
-});
-
-
-async function loadTemplates(){
-
-    const box=$("templateList");
-
-    const snap=
-        await getDocs(collection(db,"templates"));
-
-    box.innerHTML="";
-
-    if(snap.empty){
-
-        box.innerHTML=
-            `<div class="empty">
-                Nta templates zirakorwa.
-             </div>`;
-
-        return;
-
-    }
-
-    snap.forEach(d=>{
-
-        const t=d.data();
-
-        box.innerHTML+=`
-
-        <div class="row">
-
-            <div class="row-info">
-
-                <strong>
-                    ${escapeHTML(t.icon || "🛍️")}
-                    ${escapeHTML(t.name)}
-                </strong>
-
-                <small>
-                    ${escapeHTML(t.description)}
-                </small>
-
-            </div>
-
-            <button
-                class="small-btn delete"
-                onclick="deleteTemplate('${d.id}')">
-                Delete
-            </button>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-
-window.deleteTemplate=async function(id){
-
-    if(currentUserData.role!=="admin") return;
-
-    if(!confirm("Delete template?")) return;
-
-    await deleteDoc(
-        doc(db,"templates",id)
-    );
-
-    showToast("Template yasibwe.");
-
-    await loadTemplates();
-    await loadSellerTemplates();
-
-};
-
-
-/* =========================================================
-   SELLERS
-========================================================= */
-
-async function loadAdminSellers(){
-
-    const box=$("adminSellerList");
-
-    const q=query(
-        collection(db,"users"),
-        where("role","==","seller")
-    );
-
-    const snap=await getDocs(q);
-
-    box.innerHTML="";
-
-    if(snap.empty){
-
-        box.innerHTML=
-            `<div class="empty">
-                Nta seller account iraboneka.
-             </div>`;
-
-        return;
-
-    }
-
-    snap.forEach(d=>{
-
-        const s=d.data();
-
-        const permissions=s.permissions || {};
-
-        box.innerHTML+=`
-
-        <div class="row">
-
-            <div class="row-info">
-
-                <strong>
-                    ${escapeHTML(s.name || "Seller")}
-                </strong>
-
-                <small>
-                    ${escapeHTML(s.email || "")}
-                </small>
-
-                <small>
-                    Product Edit:
-                    ${permissions.editProduct ? "YES" : "NO"}
-                    • Price:
-                    ${permissions.editPrice ? "YES" : "NO"}
-                </small>
-
-            </div>
-
-            <div class="row-actions">
-
-                <button class="small-btn approve"
-                  onclick="setSellerPermission(
-                    '${d.id}','editProduct'
-                  )">
-                    Product Edit
-                </button>
-
-                <button class="small-btn approve"
-                  onclick="setSellerPermission(
-                    '${d.id}','editPrice'
-                  )">
-                    Price Edit
-                </button>
-
-                <button class="small-btn gray"
-                  onclick="removeSellerPermissions(
-                    '${d.id}'
-                  )">
-                    Remove
-                </button>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-
-window.setSellerPermission=async function(
-    sellerId,
-    permission
-){
-
-    if(currentUserData.role!=="admin") return;
-
-    await updateDoc(
-        doc(db,"users",sellerId),
-        {
-            [`permissions.${permission}`]:true
-        }
-    );
-
-    showToast("Permission yahawe Seller.");
-
-    await loadAdminSellers();
-
-};
-
-
-window.removeSellerPermissions=async function(sellerId){
-
-    if(currentUserData.role!=="admin") return;
-
-    await updateDoc(
-        doc(db,"users",sellerId),
-        {
-            "permissions.editProduct":false,
-            "permissions.editPrice":false,
-            "permissions.manageOrders":false,
-            "permissions.support":false
-        }
-    );
-
-    showToast("Permissions zavanywe.");
-
-    await loadAdminSellers();
-
-};
-
-
-/* =========================================================
-   SUPPORT
-========================================================= */
-
-window.openSupportForm=function(){
-
-    $("supportPanel").classList.remove("hidden");
-
-    $("supportPanel").scrollIntoView({
-        behavior:"smooth"
-    });
-
-};
-
-
-$("supportForm").addEventListener("submit",async e=>{
-
-    e.preventDefault();
-
-    await addDoc(collection(db,"support"),{
-
-        userId:currentUser.uid,
-
-        subject:
-            $("supportSubject").value.trim(),
-
-        message:
-            $("supportMessage").value.trim(),
-
-        status:"pending",
-
-        createdAt:serverTimestamp()
-
-    });
-
-    $("supportForm").reset();
-    $("supportPanel").classList.add("hidden");
-
-    showToast("Support request yoherejwe.");
-
-});
-
-
-async function loadAdminSupport(){
-
-    const box=$("adminSupportList");
-
-    const q=query(
-        collection(db,"support"),
-        where("status","==","pending")
-    );
-
-    const snap=await getDocs(q);
-
-    box.innerHTML="";
-
-    if(snap.empty){
-
-        box.innerHTML=
-            `<div class="empty">
-                Nta support request itegereje.
-             </div>`;
-
-        return;
-
-    }
-
-    snap.forEach(d=>{
-
-        const s=d.data();
-
-        box.innerHTML+=`
-
-        <div class="row">
-
-            <div class="row-info">
-
-                <strong>
-                    ${escapeHTML(s.subject)}
-                </strong>
-
-                <small>
-                    User: ${escapeHTML(s.userId)}
-                </small>
-
-                <small>
-                    ${escapeHTML(s.message)}
-                </small>
-
-            </div>
-
-            <button
-                class="small-btn approve"
-                onclick="resolveSupport('${d.id}')">
-                Resolve
-            </button>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-
-window.resolveSupport=async function(id){
-
-    if(currentUserData.role!=="admin") return;
-
-    await updateDoc(
-        doc(db,"support",id),
-        {
-            status:"resolved",
-            resolvedBy:currentUser.uid,
-            resolvedAt:serverTimestamp()
-        }
-    );
-
-    showToast("Support request yafunzwe.");
-
-    await loadAdminSupport();
-
-};
-
-
-/* =========================================================
-   ACCOUNT
-========================================================= */
-
-window.openAccountPanel=function(){
-
-    $("accountPanel").classList.toggle("hidden");
-
-};
-
-
-/* =========================================================
-   TABS
-========================================================= */
-
-window.adminTab=function(id,button){
-
-    document.querySelectorAll(".admin-section")
-        .forEach(x=>x.classList.remove("active"));
-
-    document.querySelectorAll(
-        "#adminArea .tab-btn"
-    ).forEach(x=>x.classList.remove("active"));
-
-    $(id).classList.add("active");
-    button.classList.add("active");
-
-};
-
-
-window.sellerTab=function(id,button){
-
-    document.querySelectorAll(".seller-section")
-        .forEach(x=>x.classList.remove("active"));
-
-    document.querySelectorAll(
-        "#sellerArea .tab-btn"
-    ).forEach(x=>x.classList.remove("active"));
-
-    $(id).classList.add("active");
-    button.classList.add("active");
-
-};
-
-
-/* =========================================================
+/* =========================
    LOGOUT
-========================================================= */
+========================= */
 
-$("logoutButton").addEventListener("click",async()=>{
+logoutButton.addEventListener(
+    "click",
+    async () => {
 
-    await signOut(auth);
+        try {
 
-});
+            await signOut(auth);
+
+            localStorage.removeItem(
+                "rwandaOnlineDealsName"
+            );
+
+        } catch(error) {
+
+            console.error(error);
+
+        }
+
+    }
+);
+
+
+/* =========================
+   DASHBOARD ACTIONS
+========================= */
+
+document.getElementById(
+    "depositBtn"
+).addEventListener(
+    "click",
+    () => {
+
+        alert(
+            "Deposit module irategurwa. Tuzayihuza na payment system nyayo."
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "cashoutBtn"
+).addEventListener(
+    "click",
+    () => {
+
+        alert(
+            "Cash Out module irategurwa. Tuzayihuza na payment system nyayo."
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "affiliateBtn"
+).addEventListener(
+    "click",
+    () => {
+
+        alert(
+            "Affiliate Program module irategurwa."
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "accountBtn"
+).addEventListener(
+    "click",
+    () => {
+
+        alert(
+            "Account yawe iri gukora neza. Email: " +
+            (auth.currentUser?.email || "")
+        );
+
+    }
+);
 
 </script>
 

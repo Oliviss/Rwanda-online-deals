@@ -10,53 +10,23 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 html{scroll-behavior:smooth}
 
 body{
-    background:#f0f4f2;
+    background:#f4f8f6;
     color:#17231d;
-    overflow-x: hidden;
 }
 
 button,a{font-family:inherit}
 
-/* ==========================================
-   MOVING GRAPHICS & ANIMATIONS
-========================================== */
-@keyframes pulseGlow {
-    0% { box-shadow: 0 0 15px rgba(22, 160, 91, 0.4); }
-    50% { box-shadow: 0 0 30px rgba(22, 160, 91, 0.8); }
-    100% { box-shadow: 0 0 15px rgba(22, 160, 91, 0.4); }
-}
-
-@keyframes floatBackground {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes floatElement {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
-    100% { transform: translateY(0px); }
-}
-
-@keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-}
-
 header{
-    background: linear-gradient(-45deg, #054023, #075b32, #0b7a45, #16a05b);
-    background-size: 400% 400%;
-    animation: floatBackground 12s ease infinite;
+    background:linear-gradient(135deg,#075b32,#0b7a45);
     color:white;
     padding:18px 18px 26px;
     text-align:center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
 .brand{
@@ -69,7 +39,7 @@ header{
 }
 
 .brand-text{text-align:left}
-.brand h1{font-size:26px;margin-bottom:5px;letter-spacing: 0.5px;}
+.brand h1{font-size:25px;margin-bottom:5px}
 .brand p{font-size:13px;opacity:.9}
 
 .header-actions{
@@ -83,24 +53,27 @@ header{
     color:#08703d;
     border:0;
     border-radius:25px;
-    padding:11px 20px;
+    padding:11px 15px;
     font-weight:bold;
     cursor:pointer;
-    transition: all 0.3s ease;
-    animation: pulseGlow 3s infinite;
 }
 
-.login-top:hover{
-    transform: scale(1.05);
-    background: #eef8f2;
+.menu-btn{
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.16);
+    color:white;
+    font-size:25px;
+    cursor:pointer;
 }
 
 nav{
-    background:rgba(255,255,255,0.95);
-    backdrop-filter: blur(10px);
-    padding:14px 10px;
+    background:white;
+    padding:13px 10px;
     text-align:center;
-    box-shadow:0 4px 20px rgba(0,0,0,.06);
+    box-shadow:0 2px 10px rgba(0,0,0,.07);
     position:sticky;
     top:0;
     z-index:20;
@@ -109,14 +82,9 @@ nav{
 nav a{
     color:#086d3b;
     text-decoration:none;
-    margin:0 12px;
+    margin:0 8px;
     font-weight:bold;
-    font-size:15px;
-    transition: color 0.2s ease;
-}
-
-nav a:hover{
-    color: #16a05b;
+    font-size:14px;
 }
 
 .hero{
@@ -129,70 +97,126 @@ nav a:hover{
     position:relative;
     overflow:hidden;
     border-radius:25px;
-    min-height:320px;
-    padding:38px 28px;
+    min-height:300px;
+    padding:34px 24px;
     display:flex;
     align-items:center;
-    background: linear-gradient(-45deg, #05331c, #07522d, #0e834a, #15aa61);
-    background-size: 300% 300%;
-    animation: floatBackground 8s ease infinite;
+    background:
+      radial-gradient(circle at 88% 18%,rgba(255,255,255,.22),transparent 28%),
+      linear-gradient(135deg,#073f27,#0b7541 58%,#16a05b);
     color:white;
-    box-shadow:0 15px 40px rgba(4,89,48,.25);
+    box-shadow:0 12px 35px rgba(4,89,48,.22);
 }
 
 .hero-content{
     position:relative;
     z-index:2;
-    max-width:620px;
+    max-width:610px;
 }
 
 .badge{
     display:inline-block;
-    background:rgba(255,255,255,.18);
-    border:1px solid rgba(255,255,255,.3);
-    padding:7px 14px;
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.25);
+    padding:7px 12px;
     border-radius:20px;
     font-size:12px;
     font-weight:bold;
-    margin-bottom:15px;
-    animation: floatElement 4s ease-in-out infinite;
+    margin-bottom:13px;
 }
 
 .hero h2{
-    font-size:36px;
-    line-height:1.1;
-    margin-bottom:14px;
+    font-size:34px;
+    line-height:1.08;
+    margin-bottom:12px;
 }
 
 .hero p{
     font-size:16px;
     line-height:1.6;
-    opacity:.95;
-    margin-bottom:22px;
+    opacity:.94;
+    margin-bottom:20px;
 }
 
 .primary-btn{
     display:inline-block;
     background:white;
     color:#086d3b;
-    padding:14px 24px;
-    border-radius:12px;
+    padding:13px 20px;
+    border-radius:10px;
     text-decoration:none;
     font-weight:bold;
     border:none;
     cursor:pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
 }
 
-.primary-btn:hover{
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+.hero-art{
+    position:absolute;
+    right:30px;
+    bottom:15px;
+    width:300px;
+    height:240px;
 }
+
+.art-circle{
+    position:absolute;
+    width:210px;
+    height:210px;
+    border-radius:50%;
+    background:rgba(255,255,255,.11);
+    right:20px;
+    top:15px;
+}
+
+.art-card{
+    position:absolute;
+    background:white;
+    color:#075d34;
+    border-radius:16px;
+    padding:17px;
+    width:170px;
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
+    transform:rotate(-5deg);
+    right:85px;
+    top:45px;
+}
+
+.art-card strong{font-size:24px;display:block;margin:8px 0}
+.art-card small{color:#64746b}
+
+.art-tag{
+    position:absolute;
+    background:#ffcf3f;
+    color:#553f00;
+    border-radius:12px;
+    padding:9px 12px;
+    font-weight:bold;
+    right:0;
+    bottom:25px;
+    transform:rotate(5deg);
+}
+
+.quick{
+    max-width:1100px;
+    margin:18px auto 0;
+    padding:0 16px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.quick-card{
+    background:white;
+    padding:17px;
+    border-radius:15px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+.quick-card b{color:#08703d}
+.quick-card p{font-size:12px;color:#66736c;margin-top:5px;line-height:1.4}
 
 .section{
     max-width:1100px;
-    margin:28px auto;
+    margin:25px auto;
     padding:0 16px;
 }
 
@@ -200,43 +224,34 @@ nav a:hover{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:18px;
+    margin-bottom:15px;
 }
-.section-title h2{color:#086d3b;font-size:24px}
+.section-title h2{color:#086d3b;font-size:23px}
+.section-title span{font-size:12px;color:#69756f}
 
 .deals{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-    gap:18px;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px;
 }
 
 .card{
     background:white;
-    border-radius:18px;
-    padding:20px;
-    box-shadow:0 8px 22px rgba(0,0,0,.06);
-    border:1px solid #e5ece8;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.3s ease;
-    animation: floatElement 6s ease-in-out infinite;
-}
-
-.card:hover{
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    border-radius:17px;
+    padding:18px;
+    box-shadow:0 5px 18px rgba(0,0,0,.07);
+    border:1px solid #edf1ee;
 }
 
 .deal-image{
-    height:140px;
-    border-radius:14px;
+    height:115px;
+    border-radius:13px;
     background:linear-gradient(135deg,#dff5e8,#f7fbf8);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:45px;
-    margin-bottom:15px;
+    font-size:42px;
+    margin-bottom:14px;
     overflow:hidden;
 }
 
@@ -246,79 +261,70 @@ nav a:hover{
     object-fit:cover;
 }
 
-.card h3{color:#086d3b;margin-bottom:8px;font-size: 18px;}
-.card p{color:#5d6862;margin-bottom:14px;line-height:1.5;font-size:14px}
-.price{font-size:20px;font-weight:bold;color:#111;margin-bottom:15px}
+.card h3{color:#086d3b;margin-bottom:8px}
+.card p{color:#5d6862;margin-bottom:13px;line-height:1.5;font-size:14px}
+.price{font-size:19px;font-weight:bold;color:#111;margin-bottom:14px}
 
 .button{
     display:inline-block;
     background:#0b6b3a;
     color:white;
-    padding:12px 16px;
-    border-radius:10px;
+    padding:11px 16px;
+    border-radius:9px;
     text-decoration:none;
     font-weight:bold;
     border:none;
     cursor:pointer;
     text-align:center;
-    width: 100%;
-    transition: background 0.2s ease;
+    width:100%;
 }
 
-.button:hover{ background: #08572f; }
-.button-delete { background: #d9534f; margin-top: 6px; }
-.button-delete:hover { background: #b52b27; }
-
-/* MODALS & AUTH */
-#auth-section, .modal-popup{
+#auth-section{
     display:none;
     position:fixed;
     inset:0;
     z-index:100;
-    background:rgba(9,30,20,.7);
-    backdrop-filter: blur(5px);
+    background:rgba(9,30,20,.65);
     padding:20px;
     overflow:auto;
 }
 
-.auth-box, .modal-content{
+.auth-box{
     background:white;
-    max-width:500px;
+    max-width:520px;
     margin:35px auto;
-    padding:28px;
-    border-radius:22px;
-    box-shadow:0 20px 60px rgba(0,0,0,.3);
-    animation: floatElement 0.4s ease-out;
+    padding:24px;
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
 }
 
 .auth-head{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:18px;
+    margin-bottom:15px;
 }
 
 .auth-head h2{color:#086d3b}
-.close-auth, .close-modal{
+.close-auth{
     border:0;
     background:#eef5f1;
     color:#075d34;
-    width:38px;height:38px;border-radius:50%;
+    width:36px;height:36px;border-radius:50%;
     font-size:20px;cursor:pointer;
-    font-weight: bold;
 }
 
 .auth-tabs{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:8px;
-    margin-bottom:18px;
+    margin-bottom:17px;
 }
 
 .auth-tab{
-    padding:12px;
+    padding:11px;
     border:1px solid #d9e5de;
-    border-radius:10px;
+    border-radius:9px;
     background:#f7faf8;
     color:#086d3b;
     font-weight:bold;
@@ -330,59 +336,34 @@ nav a:hover{
     color:white;
 }
 
-.auth-form{display:none; flex-direction:column; gap:10px;}
+.auth-form{display:none}
 .auth-form.active{display:flex}
-
-.auth-form input, .custom-form input, .custom-form textarea{
-    padding:13px;
+.auth-form{
+    flex-direction:column;
+    gap:10px;
+}
+.auth-form input{
+    padding:12px;
     border:1px solid #ccd8d1;
-    border-radius:10px;
+    border-radius:9px;
     font-size:15px;
-    width:100%;
-    margin-bottom:10px;
-    outline: none;
-    transition: border 0.2s ease;
 }
-
-.auth-form input:focus, .custom-form input:focus{
-    border-color: #0b6b3a;
-}
-
-.auth-form button, .custom-btn{
-    padding:13px;
+.auth-form button{
+    padding:12px;
     border:none;
-    border-radius:10px;
+    border-radius:9px;
     background:#0b6b3a;
     color:white;
     font-weight:bold;
     cursor:pointer;
-    width:100%;
-    font-size:15px;
 }
-
 .auth-message{
-    margin-top:14px;
-    padding:10px;
-    border-radius:8px;
+    margin-top:12px;
     font-weight:bold;
     text-align:center;
     line-height:1.4;
-    font-size:14px;
-    display:none;
-}
-.auth-message.error { background: #fde8e8; color: #9b1c1c; display: block; }
-.auth-message.success { background: #e1f5fe; color: #0277bd; display: block; }
-
-.forgot-link{
-    color: #086d3b;
-    text-align: right;
-    font-size: 13px;
-    cursor: pointer;
-    margin-bottom: 10px;
-    text-decoration: underline;
 }
 
-/* DASHBOARD */
 #dashboard{
     display:none;
     background:#eef7f1;
@@ -397,7 +378,7 @@ nav a:hover{
     justify-content:space-between;
     align-items:center;
     gap:15px;
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
 
 .dashboard-top h2{color:#075d34}
@@ -407,8 +388,8 @@ nav a:hover{
     background:#fff;
     color:#b42318;
     border:1px solid #f0c6c1;
-    padding:10px 16px;
-    border-radius:10px;
+    padding:10px 14px;
+    border-radius:9px;
     font-weight:bold;
     cursor:pointer;
 }
@@ -417,13 +398,13 @@ nav a:hover{
     background:linear-gradient(135deg,#075d34,#0d8950);
     color:white;
     border-radius:20px;
-    padding:24px;
+    padding:22px;
     box-shadow:0 10px 30px rgba(7,93,52,.2);
-    margin-bottom:20px;
+    margin-bottom:16px;
 }
 
 .balance-box small{opacity:.85}
-.balance-box h3{font-size:32px;margin:8px 0 18px}
+.balance-box h3{font-size:30px;margin:8px 0 16px}
 
 .action-grid{
     display:grid;
@@ -432,60 +413,113 @@ nav a:hover{
 }
 
 .action{
-    background:rgba(255,255,255,.15);
-    border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.22);
     color:white;
     border-radius:12px;
-    padding:12px 6px;
+    padding:11px;
     text-align:center;
     cursor:pointer;
     font-weight:bold;
-    font-size:13px;
-    transition: background 0.2s ease;
 }
 
-.action:hover{ background: rgba(255,255,255,0.25); }
-
-.admin-section {
-    background: #ffffff;
-    border: 2px solid #08703d;
-    border-radius: 18px;
-    padding: 22px;
-    margin-top: 30px;
+.account-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin:16px 0 25px;
 }
-.admin-section h2 { color: #075d34; margin-bottom: 16px; }
-.admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.tx-card { background: #f8faf9; border: 1px solid #dce8e1; border-radius: 12px; padding: 14px; margin-bottom: 10px; }
-.tx-actions { display: flex; gap: 10px; margin-top: 10px; }
-.btn-approve { background: #16a05b; color: white; border: none; padding: 7px 14px; border-radius: 7px; cursor: pointer; font-weight: bold; }
-.btn-reject { background: #d9534f; color: white; border: none; padding: 7px 14px; border-radius: 7px; cursor: pointer; font-weight: bold; }
 
-.badge-role {
-    background: #075d34;
-    color: white;
-    padding: 4px 10px;
+.account-card{
+    background:white;
+    border-radius:16px;
+    padding:18px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+.account-card .icon{font-size:25px}
+.account-card h4{margin:9px 0 5px;color:#075d34}
+.account-card p{font-size:12px;color:#68756e;line-height:1.5}
+
+.dashboard-deals{
+    margin-top:8px;
+}
+
+.info-note{
+    background:#fff9e7;
+    border:1px solid #f0dda4;
+    color:#6d570d;
+    padding:12px;
+    border-radius:11px;
+    font-size:12px;
+    line-height:1.5;
+    margin-bottom:15px;
+}
+
+.admin-box {
+    background: white;
+    border: 2px dashed #075d34;
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 20px;
+}
+.admin-box input, .admin-box select {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 11px;
-    margin-left: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
+
+.menu-panel{
+    display:none;
+    position:absolute;
+    right:15px;
+    top:72px;
+    background:white;
+    border-radius:13px;
+    box-shadow:0 10px 30px rgba(0,0,0,.16);
+    padding:8px;
+    z-index:50;
+    min-width:150px;
+}
+.menu-panel a{
+    display:block;
+    padding:10px 12px;
+    color:#075d34;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+    font-size:13px;
+}
+.menu-panel a:hover{background:#eef7f1}
 
 footer{
     background:#075d34;
     color:white;
     text-align:center;
-    padding:28px 15px;
-    margin-top:40px;
+    padding:25px 15px;
+    margin-top:35px;
 }
+footer p{margin:6px;font-size:13px}
 
 .hidden{display:none!important}
 
 @media(max-width:760px){
-    .brand h1{font-size:20px}
+    .brand h1{font-size:21px}
+    .brand p{font-size:11px}
+    .login-top{padding:9px 11px;font-size:12px}
+    .hero-box{min-height:390px}
+    .hero h2{font-size:29px}
+    .hero-art{right:0;bottom:0;opacity:.55}
+    .quick{grid-template-columns:1fr}
+    .account-grid{grid-template-columns:1fr 1fr}
     .action-grid{grid-template-columns:repeat(2,1fr)}
-    .admin-grid{grid-template-columns:1fr;}
-    .hero h2{font-size: 28px;}
+}
+
+@media(max-width:480px){
+    nav a{margin:0 5px;font-size:12px}
+    .hero-box{padding:28px 19px}
+    .account-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -500,8 +534,18 @@ footer{
         </div>
 
         <div class="header-actions">
-            <button class="login-top" id="openAuthTop">Injira / Kora Account</button>
+            <button class="login-top" id="openAuthTop">
+                Injira / Kora Account
+            </button>
+
+            <button class="menu-btn" id="menuBtn" aria-label="Menu">⋮</button>
         </div>
+    </div>
+
+    <div class="menu-panel" id="menuPanel">
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#more">More</a>
     </div>
 </header>
 
@@ -512,29 +556,85 @@ footer{
 </nav>
 
 <main id="homePage">
+
 <section class="hero" id="home">
     <div class="hero-box">
         <div class="hero-content">
             <span class="badge">🇷🇼 ONLINE SHOPPING • RWANDA</span>
             <h2>Shaka deals. Hitamo neza. Korera online.</h2>
-            <p>Murakaza neza kuri Rwanda Online Deals — offers n'ibicuruzwa mu buryo bworoshye.</p>
-            <button class="primary-btn" id="openAuthHero">Tangira nonaha →</button>
+            <p>
+                Murakaza neza kuri Rwanda Online Deals — ahantu hamwe
+                ho kubona offers n'ibicuruzwa bitandukanye mu buryo bworoshye.
+            </p>
+            <button class="primary-btn" id="openAuthHero">
+                Tangira nonaha →
+            </button>
         </div>
+
+        <div class="hero-art" aria-hidden="true">
+            <div class="art-circle"></div>
+            <div class="art-card">
+                🛍️
+                <strong>DEAL</strong>
+                <small>Offers zigezweho</small>
+            </div>
+            <div class="art-tag">🔥 New</div>
+        </div>
+    </div>
+</section>
+
+<section class="quick">
+    <div class="quick-card">
+        <b>🔥 Deals zatoranyijwe</b>
+        <p>Shakisha offers zitandukanye ahantu hamwe.</p>
+    </div>
+    <div class="quick-card">
+        <b>🔐 Account yawe</b>
+        <p>Login maze winjire mu gice cyihariye cy'abakoresha.</p>
+    </div>
+    <div class="quick-card">
+        <b>🤝 Affiliate</b>
+        <p>Gira uburyo bwo gukurikirana amahirwe ya affiliate.</p>
     </div>
 </section>
 
 <section class="section" id="homeDeals">
     <div class="section-title">
-        <h2>🔥 Preview Deals</h2>
+        <h2>🔥 Iby'ingenzi kuri site</h2>
+        <span>Preview</span>
     </div>
+
     <div class="deals">
         <div class="card">
             <div class="deal-image">🛒</div>
-            <h3>Ibicuruzwa neza</h3>
-            <p>Ibicuruzwa byose biba biri imbere nyuma yo kwinjira.</p>
+            <h3>Deals 1–7</h3>
+            <p>Deals zose ziboneka imbere nyuma yo gukora account no kwinjira.</p>
+        </div>
+
+        <div class="card">
+            <div class="deal-image">💰</div>
+            <h3>Wallet</h3>
+            <p>Dashboard izaba ifite balance, deposit na cash out interface.</p>
+        </div>
+
+        <div class="card">
+            <div class="deal-image">🤝</div>
+            <h3>Affiliate Program</h3>
+            <p>Igice cyo gukurikirana affiliate kizaba kiri muri account yawe.</p>
         </div>
     </div>
 </section>
+
+<section class="section" id="about">
+    <div class="section-title"><h2>About</h2></div>
+    <div class="card">
+        <p>
+            Rwanda Online Deals ni urubuga rugamije gutuma kubona deals
+            n'ibicuruzwa online mu Rwanda birushaho kuba byoroshye.
+        </p>
+    </div>
+</section>
+
 </main>
 
 <!-- =========================
@@ -545,7 +645,7 @@ footer{
 
         <div class="dashboard-top">
             <div>
-                <h2>Murakaza neza, <span id="userName">User</span> <span id="userRoleBadge" class="badge-role">USER</span> 👋</h2>
+                <h2>Murakaza neza, <span id="userName">User</span> 👋</h2>
                 <p id="userEmail"></p>
             </div>
             <button class="logout-btn" id="logoutButton">Logout</button>
@@ -553,67 +653,73 @@ footer{
 
         <div class="balance-box">
             <small>💰 Balance yawe</small>
-            <h3 id="userBalanceDisplay">0 RWF</h3>
+            <h3 id="userBalanceText">0 RWF</h3>
 
             <div class="action-grid">
                 <button class="action" id="depositBtn">➕ Deposit</button>
                 <button class="action" id="cashoutBtn">💸 Cash Out</button>
-                <button class="action" id="ordersBtn">📦 My Orders</button>
-                <button class="action" id="supportBtn">🤝 Support</button>
+                <button class="action" id="affiliateBtn">🤝 Affiliate</button>
+                <button class="action" id="accountBtn">👤 Account</button>
             </div>
         </div>
 
-        <!-- SELLER / ADMIN PRODUCT FORM -->
-        <div id="productManageSection" class="admin-section hidden" style="margin-bottom: 25px;">
-            <h3>🛒 Ongeza cyangwa Uhingure Igicuruzwa (Product / Deal)</h3>
-            <form id="addProductForm" class="custom-form" style="margin-top: 12px;">
-                <input type="hidden" id="prodEditId">
-                <input type="text" id="prodName" placeholder="Izina ry'Igicuruzwa (Urugero: Deal 1)" required>
-                <input type="number" id="prodPrice" placeholder="Igiciro (RWF)" required>
-                <textarea id="prodDesc" rows="2" placeholder="Ibisobanuro by'igicuruzwa" required></textarea>
-                <input type="text" id="prodImg" placeholder="Image Link (Unayisibe niba ntayo)">
-                <button type="submit" class="custom-btn" id="saveProdBtn">➕ Save Product</button>
-            </form>
+        <div class="account-grid">
+            <div class="account-card">
+                <div class="icon">💳</div>
+                <h4>Deposit</h4>
+                <p>Igice cyo guteguriramo uburyo bwo kongera amafaranga kuri wallet.</p>
+            </div>
+
+            <div class="account-card">
+                <div class="icon">💸</div>
+                <h4>Cash Out</h4>
+                <p>Igice cyo guteguriramo withdrawal nyuma yo gushyiramo payment system.</p>
+            </div>
+
+            <div class="account-card">
+                <div class="icon">🤝</div>
+                <h4>Affiliate Program</h4>
+                <p>Gukurikirana referral na commission bizongerwa muri iyi dashboard.</p>
+            </div>
         </div>
 
         <div class="dashboard-deals">
             <div class="section-title">
-                <h2>🔥 Deals & Products Zose</h2>
+                <h2>🔥 Deals Zose</h2>
+                <div>
+                    <button id="toggleAdminBtn" style="padding: 5px 10px; background: #075d34; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">⚙️ Admin Mode</button>
+                </div>
+            </div>
+
+            <div class="info-note">
+                ℹ️ Izi ni Deals z'imbere. Ubu ziboneka gusa ku muntu winjiye muri account.
+            </div>
+
+            <!-- ADMIN TEMPLATE MANAGER -->
+            <div id="adminPanelBox" class="admin-box" style="display: none;">
+                <h3 style="color: #075d34; margin-bottom: 8px;">⚙️ Dynamic Template / Product Editor</h3>
+                <p style="font-size: 12px; margin-bottom: 10px; color: #555;">Ongeramo nshya cyangwa ungere n'ama-deals ataguhaye gukoresha Firebase Console:</p>
+                <input type="text" id="adminProdName" placeholder="Izina rya Product / Deal (ex: Deal 8)">
+                <input type="number" id="adminProdPrice" placeholder="Igiciro (RWF)">
+                <input type="text" id="adminProdDesc" placeholder="Ibisobanuro migufi">
+                <input type="text" id="adminProdImg" placeholder="Link y'ishusho (Image URL)">
+                <button id="adminSaveProdBtn" class="button" style="margin-top: 8px;">+ Save / Ongeramo</button>
             </div>
 
             <div class="deals" id="dealsContainer">
-                <p>⏳ Load-inga ibicuruzwa...</p>
+                <!-- Dynamic or Fallback Deals 1 to 7 will render here -->
             </div>
         </div>
-
-        <!-- ADMIN PANEL -->
-        <div id="adminPanel" class="admin-section hidden">
-            <h2>👑 Admin Control Dashboard</h2>
-
-            <div class="admin-grid">
-                <div>
-                    <h3>💳 Pending Deposits</h3>
-                    <div id="pendingDepositsList"></div>
-                </div>
-
-                <div>
-                    <h3>💸 Pending Withdrawals</h3>
-                    <div id="pendingWithdrawalsList"></div>
-                </div>
-            </div>
-
-            <hr style="margin: 20px 0;">
-
-            <h3>📦 Customer Orders (Ibyaguzwe)</h3>
-            <div id="adminOrdersList" style="margin-top:10px;"></div>
-        </div>
-
     </div>
 </section>
 
-<!-- AUTH MODAL -->
+<!-- =========================
+     AUTH MODAL
+========================= -->
 <section id="auth-section">
+
     <div class="auth-box">
+
         <div class="auth-head">
             <h2>Rwanda Online Deals</h2>
             <button class="close-auth" id="closeAuth">×</button>
@@ -624,73 +730,60 @@ footer{
             <button class="auth-tab" id="loginTab">Injira</button>
         </div>
 
-        <!-- REGISTER FORM -->
         <form id="registerForm" class="auth-form active">
             <input type="text" id="registerName" placeholder="Amazina yawe" required>
             <input type="email" id="registerEmail" placeholder="Email Address" required>
-            <input type="password" id="registerPassword" placeholder="Password (min 6)" minlength="6" required>
+            <input type="password" id="registerPassword" placeholder="Password (minimum 6)" minlength="6" required>
             <button type="submit">Create Account</button>
         </form>
 
-        <!-- LOGIN FORM -->
         <form id="loginForm" class="auth-form">
             <input type="email" id="loginEmail" placeholder="Email Address" required>
             <input type="password" id="loginPassword" placeholder="Password" required>
-            <div class="forgot-link" id="forgotPwdBtn">Wibagiwe password?</div>
             <button type="submit">Login</button>
         </form>
 
-        <!-- FORGOT PASSWORD FORM -->
-        <form id="forgotForm" class="auth-form">
-            <p style="font-size:13px; color:#5d6862; margin-bottom:8px;">Andika email yawe tugusohoreze link yo gusettinga password nshya.</p>
-            <input type="email" id="forgotEmail" placeholder="Email Address" required>
-            <button type="submit">Send Reset Email</button>
-            <div class="forgot-link" id="backToLoginBtn" style="text-align:center; margin-top:10px;">← Subira kuri Login</div>
-        </form>
-
-        <div id="authMessage" class="auth-message"></div>
+        <p id="authMessage" class="auth-message"></p>
     </div>
 </section>
 
-<!-- TRANSACTION MODAL -->
-<div id="transactionModal" class="modal-popup">
-    <div class="modal-content">
-        <div class="auth-head">
-            <h2 id="transModalTitle">Deposit Cash</h2>
-            <button class="close-modal" id="closeTransModal">×</button>
-        </div>
-        <form id="transactionForm" class="custom-form">
-            <input type="number" id="transAmount" placeholder="Umubare w'amafaranga (RWF)" required min="100">
-            <input type="text" id="transPhone" placeholder="Nimero ya Phone (MTN/Airtel)" required>
-            <button type="submit" class="custom-btn">Ohereza Request</button>
-        </form>
-    </div>
-</div>
-
-<!-- MY ORDERS MODAL -->
-<div id="myOrdersModal" class="modal-popup">
-    <div class="modal-content">
-        <div class="auth-head">
-            <h2>📦 Orders Zanjye</h2>
-            <button class="close-modal" id="closeOrdersModal">×</button>
-        </div>
-        <div id="myOrdersList"></div>
-    </div>
-</div>
-
 <footer id="contact">
-    <p><strong>Rwanda Online Deals</strong> © 2026</p>
+    <p><strong>Rwanda Online Deals</strong></p>
+    <p>Deals • Ibicuruzwa • Amahirwe yo kugura online</p>
+    <p>© 2026 Rwanda Online Deals</p>
 </footer>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+/* =========================
+   FIREBASE IMPORTS
+========================= */
+
 import {
-    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
-    getFirestore, collection, doc, setDoc, getDoc, addDoc, updateDoc, deleteDoc, onSnapshot, query, where, getDocs, serverTimestamp
+    getAnalytics
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
 
 const firebaseConfig = {
     apiKey: "AIzaSyCOOEbhkKrv0ysHarRZvjw2DlgsRlcN180",
@@ -698,430 +791,464 @@ const firebaseConfig = {
     projectId: "rwanda-online-deals",
     storageBucket: "rwanda-online-deals.firebasestorage.app",
     messagingSenderId: "74305121142",
-    appId: "1:74305121142:web:c3c0a305a82fa78f03e857"
+    appId: "1:74305121142:web:c3c0a305a82fa78f03e857",
+    measurementId: "G-FG5JEHSD00"
 };
+
+const WHATSAPP_NUM = "250780175746";
+
+/* =========================
+   INITIALIZE FIREBASE
+========================= */
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-let currentTransType = "deposit";
-let currentUserRole = "user";
+// Default Deals 1 to 7 Templates
+const defaultDeals = [
+    { name: "Deal 1", price: 5000, description: "Igicuruzwa cya mbere. Package ya Simple Product.", icon: "🛍️" },
+    { name: "Deal 2", price: 10000, description: "Igicuruzwa cya kabiri. Package ya Simple Product.", icon: "🎁" },
+    { name: "Deal 3", price: 15000, description: "Igicuruzwa cya gatatu. Package ya Simple Product.", icon: "📦" },
+    { name: "Deal 4", price: 20000, description: "Igicuruzwa cya kane. Package ya Simple Product.", icon: "🔥" },
+    { name: "Deal 5", price: 25000, description: "Igicuruzwa cya gatanu. Package ya Simple Product.", icon: "⭐" },
+    { name: "Deal 6", price: 30000, description: "Igicuruzwa cya gatandatu. Package ya Simple Product.", icon: "🚀" },
+    { name: "Deal 7", price: 35000, description: "Igicuruzwa cya karindwi. Package ya Simple Product.", icon: "👑" }
+];
 
-/* UI CONTROLS & FEEDBACK NOTIFICATIONS */
+let localCustomProducts = JSON.parse(localStorage.getItem("app_custom_deals")) || [];
+
+async function loadProducts() {
+    const dealsContainer = document.getElementById("dealsContainer");
+    let loadedProducts = [];
+
+    try {
+        const productsRef = collection(db, "products");
+        const snapshot = await getDocs(productsRef);
+
+        snapshot.forEach((doc) => {
+            loadedProducts.push(doc.data());
+        });
+    } catch (error) {
+        console.warn("Could not load Firestore items, fallback to template deals.", error);
+    }
+
+    // Combine Firebase, Custom added products, or Fallback Deal 1-7
+    let finalProductsToDisplay = [];
+
+    if (loadedProducts.length > 0) {
+        finalProductsToDisplay = loadedProducts;
+    } else {
+        finalProductsToDisplay = [...defaultDeals, ...localCustomProducts];
+    }
+
+    dealsContainer.innerHTML = "";
+
+    finalProductsToDisplay.forEach((product) => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const imageHTML = product.imageUrl 
+            ? `<img src="${product.imageUrl}" alt="${product.name}">` 
+            : (product.icon || "🛍️");
+
+        card.innerHTML = `
+            <div class="deal-image">
+                ${imageHTML}
+            </div>
+            <h3>${product.name || "Deal"}</h3>
+            <p>${product.description || "Nta bisobanuro birahari."}</p>
+            <div class="price">
+                ${(product.price || 0).toLocaleString()} RWF
+            </div>
+            <button class="button buy-action-btn">Reba byinshi / Gura</button>
+        `;
+
+        card.querySelector(".buy-action-btn").addEventListener("click", () => {
+            const msg = encodeURIComponent(`Mwaramutse/Mwiriwe! Nshaka kugura: ${product.name} ku giciro cy'amafaranga ${product.price} RWF.`);
+            window.open(`https://wa.me/${WHATSAPP_NUM}?text=${msg}`, '_blank');
+        });
+
+        dealsContainer.appendChild(card);
+    });
+}
+
+loadProducts();
+
+/* =========================
+   ELEMENTS
+========================= */
+
 const authSection = document.getElementById("auth-section");
+const authMessage = document.getElementById("authMessage");
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
-const forgotForm = document.getElementById("forgotForm");
-const authMessage = document.getElementById("authMessage");
+const registerTab = document.getElementById("registerTab");
+const loginTab = document.getElementById("loginTab");
+const closeAuth = document.getElementById("closeAuth");
 
-function showFeedback(msg, isSuccess = false) {
-    authMessage.textContent = msg;
-    authMessage.className = "auth-message " + (isSuccess ? "success" : "error");
-}
+const homePage = document.getElementById("homePage");
+const homeNav = document.getElementById("homeNav");
+const dashboard = document.getElementById("dashboard");
+const logoutButton = document.getElementById("logoutButton");
 
-function clearFeedback() {
-    authMessage.textContent = "";
-    authMessage.className = "auth-message";
-}
+const userName = document.getElementById("userName");
+const userEmail = document.getElementById("userEmail");
 
-document.getElementById("openAuthTop").onclick = () => { clearFeedback(); authSection.style.display = "block"; };
-document.getElementById("openAuthHero").onclick = () => { clearFeedback(); authSection.style.display = "block"; };
-document.getElementById("closeAuth").onclick = () => authSection.style.display = "none";
 
-document.getElementById("registerTab").onclick = () => {
-    clearFeedback();
-    document.getElementById("registerTab").classList.add("active");
-    document.getElementById("loginTab").classList.remove("active");
-    registerForm.classList.add("active");
-    loginForm.classList.remove("active");
-    forgotForm.classList.remove("active");
-};
+/* =========================
+   ADMIN PANEL ACTIONS
+========================= */
+const toggleAdminBtn = document.getElementById("toggleAdminBtn");
+const adminPanelBox = document.getElementById("adminPanelBox");
+const adminSaveProdBtn = document.getElementById("adminSaveProdBtn");
 
-document.getElementById("loginTab").onclick = () => {
-    clearFeedback();
-    document.getElementById("loginTab").classList.add("active");
-    document.getElementById("registerTab").classList.remove("active");
-    loginForm.classList.add("active");
-    registerForm.classList.remove("active");
-    forgotForm.classList.remove("active");
-};
-
-document.getElementById("forgotPwdBtn").onclick = () => {
-    clearFeedback();
-    loginForm.classList.remove("active");
-    forgotForm.classList.add("active");
-};
-
-document.getElementById("backToLoginBtn").onclick = () => {
-    clearFeedback();
-    forgotForm.classList.remove("active");
-    loginForm.classList.add("active");
-};
-
-/* AUTH STATE LISTENERS WITH FIRESTORE PROFILE */
-onAuthStateChanged(auth, async (user) => {
-    if(user){
-        document.getElementById("homePage").style.display = "none";
-        document.getElementById("homeNav").style.display = "none";
-        document.getElementById("dashboard").style.display = "block";
-        document.getElementById("userEmail").textContent = user.email;
-        authSection.style.display = "none";
-
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
-
-        if(!userSnap.exists()) {
-            await setDoc(userRef, {
-                name: user.displayName || user.email.split('@')[0],
-                email: user.email,
-                balance: 0,
-                role: "user",
-                createdAt: serverTimestamp()
-            });
-        }
-
-        listenUserData(user);
-        await seedDefaultDealsIfEmpty();
-        loadProducts();
-    } else {
-        document.getElementById("dashboard").style.display = "none";
-        document.getElementById("homePage").style.display = "block";
-        document.getElementById("homeNav").style.display = "block";
-    }
+toggleAdminBtn.addEventListener("click", () => {
+    adminPanelBox.style.display = adminPanelBox.style.display === "none" ? "block" : "none";
 });
 
-function listenUserData(user) {
-    onSnapshot(doc(db, "users", user.uid), (snap) => {
-        if(snap.exists()) {
-            const data = snap.data();
-            currentUserRole = data.role || "user";
-            document.getElementById("userName").textContent = data.name || "User";
-            document.getElementById("userRoleBadge").textContent = currentUserRole;
-            document.getElementById("userBalanceDisplay").textContent = (data.balance || 0).toLocaleString() + " RWF";
+adminSaveProdBtn.addEventListener("click", () => {
+    const name = document.getElementById("adminProdName").value.trim();
+    const price = parseInt(document.getElementById("adminProdPrice").value);
+    const desc = document.getElementById("adminProdDesc").value.trim();
+    const img = document.getElementById("adminProdImg").value.trim();
 
-            if(currentUserRole === "admin" || currentUserRole === "seller") {
-                document.getElementById("productManageSection").classList.remove("hidden");
-            } else {
-                document.getElementById("productManageSection").classList.add("hidden");
-            }
-
-            if(currentUserRole === "admin") {
-                document.getElementById("adminPanel").classList.remove("hidden");
-                listenAdminTxs();
-                listenAdminOrders();
-            } else {
-                document.getElementById("adminPanel").classList.add("hidden");
-            }
-        }
-    });
-}
-
-/* REGISTRATION, LOGIN & FORGOT PASSWORD */
-registerForm.onsubmit = async (e) => {
-    e.preventDefault();
-    clearFeedback();
-    const name = document.getElementById("registerName").value;
-    const email = document.getElementById("registerEmail").value;
-    const pwd = document.getElementById("registerPassword").value;
-    try {
-        const cred = await createUserWithEmailAndPassword(auth, email, pwd);
-        await setDoc(doc(db, "users", cred.user.uid), {
-            name, email, balance: 0, role: "user", createdAt: serverTimestamp()
-        });
-        showFeedback("✅ Account yaremwe neza! Murakaza neza.", true);
-    } catch(err) { showFeedback("❌ " + err.message); }
-};
-
-loginForm.onsubmit = async (e) => {
-    e.preventDefault();
-    clearFeedback();
-    try {
-        await signInWithEmailAndPassword(auth, document.getElementById("loginEmail").value, document.getElementById("loginPassword").value);
-    } catch(err) { showFeedback("❌ Email cyangwa Password si yo. Ongera ugerageze."); }
-};
-
-forgotForm.onsubmit = async (e) => {
-    e.preventDefault();
-    clearFeedback();
-    const email = document.getElementById("forgotEmail").value;
-    try {
-        await sendPasswordResetEmail(auth, email);
-        showFeedback("✉️ Boherereje email yo gusettinga password nshya! Reba muri Inbox/Spam.", true);
-    } catch(err) { showFeedback("❌ " + err.message); }
-};
-
-document.getElementById("logoutButton").onclick = () => signOut(auth);
-
-/* ===================================================
-   DEALS 1 TO 7 SEEDING & PRODUCTS MANAGEMENT
-=================================================== */
-
-async function seedDefaultDealsIfEmpty() {
-    const pSnap = await getDocs(collection(db, "products"));
-    if(pSnap.empty) {
-        const defaultDeals = [
-            { name: "Deal 1", price: 5000, description: "Igicuruzwa cya 1. Kanda ugure cyangwa uguhindure." },
-            { name: "Deal 2", price: 10000, description: "Igicuruzwa cya 2. Kanda ugure cyangwa uguhindure." },
-            { name: "Deal 3", price: 15000, description: "Igicuruzwa cya 3. Kanda ugure cyangwa uguhindure." },
-            { name: "Deal 4", price: 20000, description: "Igicuruzwa cya 4. Kanda ugure cyangwa uguhindure." },
-            { name: "Deal 5", price: 25000, description: "Igicuruzwa cya 5. Kanda ugure cyangwa uguhindure." },
-            { name: "Deal 6", price: 30000, description: "Igicuruzwa cya 6. Kanda ugure cyangwa uguhindure." },
-            { name: "Deal 7", price: 35000, description: "Igicuruzwa cya 7. Kanda ugure cyangwa uguhindure." }
-        ];
-        for(let p of defaultDeals) {
-            await addDoc(collection(db, "products"), { ...p, imageUrl: "", sellerId: "system", createdAt: serverTimestamp() });
-        }
-    }
-}
-
-function loadProducts() {
-    const dealsContainer = document.getElementById("dealsContainer");
-
-    onSnapshot(collection(db, "products"), (snapshot) => {
-        dealsContainer.innerHTML = "";
-        if(snapshot.empty) {
-            dealsContainer.innerHTML = "<p>Nta bicuruzwa biragera mu bubiko.</p>";
-            return;
-        }
-
-        const user = auth.currentUser;
-
-        snapshot.forEach((docSnap) => {
-            const p = docSnap.data();
-            const pId = docSnap.id;
-
-            // UBURINDIRO BWA SELLER (OWNERSHIP): Seller ahindura/asiba ibye gusa. Admin ahindura vyose.
-            const isOwner = (p.sellerId === user?.uid);
-            const canEdit = (currentUserRole === "admin") || (currentUserRole === "seller" && isOwner);
-
-            const card = document.createElement("div");
-            card.className = "card";
-            card.innerHTML = `
-                <div>
-                    <div class="deal-image">
-                        ${p.imageUrl ? `<img src="${p.imageUrl}">` : '🛍️'}
-                    </div>
-                    <h3>${p.name}</h3>
-                    <p>${p.description}</p>
-                    <div class="price">${Number(p.price).toLocaleString()} RWF</div>
-                </div>
-                <div>
-                    <button class="button" onclick="buyProduct('${pId}', '${p.name}', ${p.price})">🛒 Gura Nonaha</button>
-                    ${canEdit ? `
-                        <button class="button" style="background:#f0a732; margin-top:6px;" onclick="editProduct('${pId}', '${p.name}',${p.price}, '${p.description}', '${p.imageUrl || ''}')">✏ Edit</button>
-                        <button class="button button-delete" onclick="deleteProduct('${pId}')">🗑️ Delete</button>
-                    ` : ''}
-                </div>
-            `;
-            dealsContainer.appendChild(card);
-        });
-    });
-}
-
-/* SAVE / EDIT / DELETE PRODUCT (ADMIN & SELLER OWNERSHIP) */
-document.getElementById("addProductForm").onsubmit = async (e) => {
-    e.preventDefault();
-    const user = auth.currentUser;
-    const editId = document.getElementById("prodEditId").value;
-    const name = document.getElementById("prodName").value.trim();
-    const price = Number(document.getElementById("prodPrice").value);
-    const desc = document.getElementById("prodDesc").value.trim();
-    const img = document.getElementById("prodImg").value.trim();
-
-    try {
-        if(editId) {
-            await updateDoc(doc(db, "products", editId), { name, price, description: desc, imageUrl: img });
-            alert("✅ Product updated!");
-        } else {
-            await addDoc(collection(db, "products"), { name, price, description: desc, imageUrl: img, sellerId: user.uid, createdAt: serverTimestamp() });
-            alert("✅ Product nshya yongewe!");
-        }
-        document.getElementById("addProductForm").reset();
-        document.getElementById("prodEditId").value = "";
-        document.getElementById("saveProdBtn").textContent = "➕ Save Product";
-    } catch(err) { alert("Ikosa: " + err.message); }
-};
-
-window.editProduct = (id, name, price, desc, img) => {
-    document.getElementById("prodEditId").value = id;
-    document.getElementById("prodName").value = name;
-    document.getElementById("prodPrice").value = price;
-    document.getElementById("prodDesc").value = desc;
-    document.getElementById("prodImg").value = img;
-    document.getElementById("saveProdBtn").textContent = "💾 Update Product";
-    window.scrollTo({ top: document.getElementById("productManageSection").offsetTop, behavior: 'smooth' });
-};
-
-window.deleteProduct = async (id) => {
-    if(confirm("Wimfuje gusiba iki gicuruzwa?")) {
-        await deleteDoc(doc(db, "products", id));
-    }
-};
-
-/* ===================================================
-   BUY / ORDERS SYSTEM
-=================================================== */
-window.buyProduct = async (prodId, prodName, price) => {
-    const user = auth.currentUser;
-    if(!user) return;
-
-    const userRef = doc(db, "users", user.uid);
-    const userSnap = await getDoc(userRef);
-    const bal = userSnap.data()?.balance || 0;
-
-    if(bal < price) {
-        alert("❌ Balance yawe (" + bal.toLocaleString() + " RWF) ntiyaguhagije kugura " + prodName + " (" + price.toLocaleString() + " RWF).\n\nKora Deposit ubanze!");
+    if (!name || isNaN(price)) {
+        alert("Uzuzamo izina n'igiciro cy'igicuruzwa.");
         return;
     }
 
-    if(confirm(`Wimfuje kugura ${prodName} kuri ${price.toLocaleString()} RWF?`)) {
-        try {
-            await updateDoc(userRef, { balance: bal - price });
+    const newDealObj = {
+        name: name,
+        price: price,
+        description: desc || "Simple product package.",
+        imageUrl: img || ""
+    };
 
-            await addDoc(collection(db, "orders"), {
-                userId: user.uid,
-                userName: userSnap.data().name || "User",
-                userEmail: user.email,
-                productName: prodName,
-                price: price,
-                status: "PENDING",
-                createdAt: serverTimestamp()
-            });
+    localCustomProducts.push(newDealObj);
+    localStorage.setItem("app_custom_deals", JSON.stringify(localCustomProducts));
+    
+    alert("Deal/Product nshya yongeweho neza!");
+    document.getElementById("adminProdName").value = "";
+    document.getElementById("adminProdPrice").value = "";
+    document.getElementById("adminProdDesc").value = "";
+    document.getElementById("adminProdImg").value = "";
+    
+    loadProducts();
+});
 
-            alert("🎉 Mwaremewe Order neza! Amafaranga yaguzwe yakuwe kuri Wallet.");
-        } catch(err) { alert("Error: " + err.message); }
+
+/* =========================
+   AUTH MODAL
+========================= */
+
+function openAuth(tab = "register"){
+    authSection.style.display = "block";
+    document.body.style.overflow = "hidden";
+    showTab(tab);
+}
+
+function closeAuthBox(){
+    authSection.style.display = "none";
+    document.body.style.overflow = "";
+    authMessage.textContent = "";
+}
+
+function showTab(tab){
+    const isRegister = tab === "register";
+
+    registerTab.classList.toggle("active", isRegister);
+    loginTab.classList.toggle("active", !isRegister);
+
+    registerForm.classList.toggle("active", isRegister);
+    loginForm.classList.toggle("active", !isRegister);
+
+    authMessage.textContent = "";
+}
+
+document.getElementById("openAuthTop")
+    .addEventListener("click", () => openAuth("register"));
+
+document.getElementById("openAuthHero")
+    .addEventListener("click", () => openAuth("register"));
+
+registerTab.addEventListener("click", () => showTab("register"));
+loginTab.addEventListener("click", () => showTab("login"));
+closeAuth.addEventListener("click", closeAuthBox);
+
+authSection.addEventListener("click", (e) => {
+    if(e.target === authSection) closeAuthBox();
+});
+
+
+/* =========================
+   THREE DOT MENU
+========================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const menuPanel = document.getElementById("menuPanel");
+
+menuBtn.addEventListener("click", () => {
+    menuPanel.style.display =
+        menuPanel.style.display === "block" ? "none" : "block";
+});
+
+document.addEventListener("click", (e) => {
+    if(!menuBtn.contains(e.target) && !menuPanel.contains(e.target)){
+        menuPanel.style.display = "none";
     }
-};
+});
 
-/* USER ORDERS */
-const myOrdersModal = document.getElementById("myOrdersModal");
-document.getElementById("ordersBtn").onclick = () => {
-    myOrdersModal.style.display = "block";
-    loadMyOrders();
-};
-document.getElementById("closeOrdersModal").onclick = () => myOrdersModal.style.display = "none";
 
-function loadMyOrders() {
-    const user = auth.currentUser;
-    const q = query(collection(db, "orders"), where("userId", "==", user.uid));
-    onSnapshot(q, (snap) => {
-        const div = document.getElementById("myOrdersList");
-        div.innerHTML = "";
-        if(snap.empty) { div.innerHTML = "<p>Nta order n'imwe urakora.</p>"; return; }
+/* =========================
+   SHOW PRIVATE DASHBOARD
+========================= */
 
-        snap.forEach(d => {
-            const o = d.data();
-            div.innerHTML += `
-                <div class="tx-card">
-                    <p><b>${o.productName}</b> - ${o.price.toLocaleString()} RWF</p>
-                    <p>Status: <b style="color:${o.status==='COMPLETED'?'green':'orange'}">${o.status}</b></p>
-                </div>
-            `;
-        });
+function showDashboard(user){
+
+    homePage.style.display = "none";
+    homeNav.style.display = "none";
+    dashboard.style.display = "block";
+
+    userEmail.textContent =
+        user.email || "";
+
+    const savedName =
+        localStorage.getItem("rwandaOnlineDealsName");
+
+    userName.textContent =
+        savedName || "User";
+
+    window.location.hash = "dashboard";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
     });
 }
 
-/* ADMIN ORDERS MANAGEMENT */
-function listenAdminOrders() {
-    onSnapshot(collection(db, "orders"), (snap) => {
-        const div = document.getElementById("adminOrdersList");
-        div.innerHTML = "";
-        if(snap.empty) { div.innerHTML = "<p>Nta orders zirabyara.</p>"; return; }
 
-        snap.forEach(d => {
-            const o = d.data();
-            const oId = d.id;
-            div.innerHTML += `
-                <div class="tx-card">
-                    <p><b>Client:</b> ${o.userName} (${o.userEmail})</p>
-                    <p><b>Product:</b> ${o.productName} (${o.price.toLocaleString()} RWF)</p>
-                    <p><b>Status:</b> ${o.status}</p>
-                    ${o.status === 'PENDING' ? `
-                        <button class="btn-approve" onclick="completeOrder('${oId}')">Mark Delivered/Completed</button>
-                    ` : ''}
-                </div>
-            `;
-        });
+/* =========================
+   SHOW HOME
+========================= */
+
+function showHome(){
+
+    dashboard.style.display = "none";
+    homePage.style.display = "block";
+    homeNav.style.display = "block";
+
+    window.location.hash = "home";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
     });
 }
 
-window.completeOrder = async (orderId) => {
-    await updateDoc(doc(db, "orders", orderId), { status: "COMPLETED" });
-    alert("✅ Order completed!");
-};
 
-/* ===================================================
-   DEPOSIT / CASHOUT SYSTEM
-=================================================== */
-const transModal = document.getElementById("transactionModal");
-document.getElementById("depositBtn").onclick = () => {
-    currentTransType = "deposit";
-    document.getElementById("transModalTitle").textContent = "➕ Deposit Cash";
-    transModal.style.display = "block";
-};
-document.getElementById("cashoutBtn").onclick = () => {
-    currentTransType = "withdraw";
-    document.getElementById("transModalTitle").textContent = "💸 Cash Out (Withdraw)";
-    transModal.style.display = "block";
-};
-document.getElementById("closeTransModal").onclick = () => transModal.style.display = "none";
+/* =========================
+   CHECK LOGIN STATUS
+========================= */
 
-document.getElementById("transactionForm").onsubmit = async (e) => {
+onAuthStateChanged(auth, (user) => {
+
+    if(user){
+
+        showDashboard(user);
+
+        closeAuthBox();
+
+    }else{
+
+        showHome();
+
+    }
+
+});
+
+
+/* =========================
+   REGISTRATION
+========================= */
+
+registerForm.addEventListener("submit", async (e) => {
+
     e.preventDefault();
-    const amount = Number(document.getElementById("transAmount").value);
-    const phone = document.getElementById("transPhone").value.trim();
-    const user = auth.currentUser;
 
-    await addDoc(collection(db, "transactions"), {
-        userId: user.uid, userEmail: user.email, userName: document.getElementById("userName").textContent,
-        amount, phone, type: currentTransType, status: "PENDING", createdAt: serverTimestamp()
-    });
+    const name =
+        document.getElementById("registerName").value.trim();
 
-    alert("✅ Transaction request sent!");
-    transModal.style.display = "none";
-};
+    const email =
+        document.getElementById("registerEmail").value.trim();
 
-function listenAdminTxs() {
-    const q = query(collection(db, "transactions"), where("status", "==", "PENDING"));
-    onSnapshot(q, (snapshot) => {
-        const depList = document.getElementById("pendingDepositsList");
-        const withList = document.getElementById("pendingWithdrawalsList");
-        depList.innerHTML = ""; withList.innerHTML = "";
+    const password =
+        document.getElementById("registerPassword").value;
 
-        snapshot.forEach((docSnap) => {
-            const tx = docSnap.data();
-            const txId = docSnap.id;
-            const card = `
-                <div class="tx-card">
-                    <p><b>${tx.userName}</b> (${tx.phone})</p>
-                    <p>Amount: <b>${tx.amount.toLocaleString()} RWF</b></p>
-                    <div class="tx-actions">
-                        <button class="btn-approve" onclick="processTx('${txId}', '${tx.userId}', ${tx.amount}, '${tx.type}', true)">Approve</button>
-                        <button class="btn-reject" onclick="processTx('${txId}', '${tx.userId}', ${tx.amount}, '${tx.type}', false)">Reject</button>
-                    </div>
-                </div>
-            `;
-            if (tx.type === "deposit") depList.innerHTML += card;
-            else withList.innerHTML += card;
-        });
-    });
-}
+    authMessage.textContent =
+        "⏳ Creating your account...";
 
-window.processTx = async (txId, userId, amount, type, isApproved) => {
-    const userRef = doc(db, "users", userId);
-    const userSnap = await getDoc(userRef);
-    let bal = userSnap.data()?.balance || 0;
+    authMessage.style.color = "#086d3b";
 
-    if (isApproved) {
-        bal = (type === "deposit") ? bal + amount : bal - amount;
-        await updateDoc(userRef, { balance: bal });
-        await updateDoc(doc(db, "transactions", txId), { status: "APPROVED" });
-    } else {
-        await updateDoc(doc(db, "transactions", txId), { status: "REJECTED" });
+    try{
+
+        await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        localStorage.setItem(
+            "rwandaOnlineDealsName",
+            name
+        );
+
+        authMessage.textContent =
+            "✅ Account yakozwe neza! Turakwinjiza...";
+
+        authMessage.style.color = "green";
+
+        registerForm.reset();
+
+    }catch(error){
+
+        console.error(error);
+
+        let msg = error.message;
+
+        if(error.code === "auth/email-already-in-use"){
+            msg = "Iyi email isanzwe ifite account. Koresha Login.";
+        }
+
+        if(error.code === "auth/weak-password"){
+            msg = "Password igomba kuba nibura characters 6.";
+        }
+
+        if(error.code === "auth/invalid-email"){
+            msg = "Email ntabwo ari yo.";
+        }
+
+        authMessage.textContent =
+            "❌ " + msg;
+
+        authMessage.style.color = "red";
+
     }
-};
+
+});
+
+
+/* =========================
+   LOGIN
+========================= */
+
+loginForm.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const email =
+        document.getElementById("loginEmail").value.trim();
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+    authMessage.textContent =
+        "⏳ Turimo kukwinjiza...";
+
+    authMessage.style.color = "#086d3b";
+
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        authMessage.textContent =
+            "✅ Login yakozwe neza! Turakwinjiza...";
+
+        authMessage.style.color = "green";
+
+        loginForm.reset();
+
+    }catch(error){
+
+        console.error(error);
+
+        let msg = "Login yanze. Reba email na password.";
+
+        if(
+            error.code === "auth/invalid-credential" ||
+            error.code === "auth/wrong-password" ||
+            error.code === "auth/user-not-found"
+        ){
+            msg = "Email cyangwa password ntabwo ari byo.";
+        }
+
+        if(error.code === "auth/too-many-requests"){
+            msg = "Gerageza nyuma gato. Attempts zabaye nyinshi.";
+        }
+
+        authMessage.textContent =
+            "❌ " + msg;
+
+        authMessage.style.color = "red";
+
+    }
+
+});
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutButton.addEventListener("click", async () => {
+
+    try{
+
+        await signOut(auth);
+
+        localStorage.removeItem("rwandaOnlineDealsName");
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+});
+
+
+/* =========================
+   DASHBOARD ACTIONS
+========================= */
+
+document.getElementById("depositBtn").addEventListener("click", () => {
+    const amt = prompt("Andika umubare w'amafaranga wifuza kwinjiza (Deposit):");
+    if(amt && !isNaN(amt)) {
+        alert("Ubusabe bwa deposit bw'amafaranga " + amt + " RWF bwamaze kwakirwa!");
+    }
+});
+
+document.getElementById("cashoutBtn").addEventListener("click", () => {
+    const amt = prompt("Andika umubare w'amafaranga wifuza kukuramo (Cash Out):");
+    if(amt && !isNaN(amt)) {
+        alert("Ubusabe bw'amafaranga " + amt + " RWF bwoherejwe kuri MTN/Airtel Money!");
+    }
+});
+
+document.getElementById("affiliateBtn").addEventListener("click", () => {
+    alert("Affiliate Program: Nimero yawe y'ubutumire (Referral Link) ni: https://rwandaonlinedeals.com?ref=" + (auth.currentUser?.uid || "user"));
+});
+
+document.getElementById("accountBtn").addEventListener("click", () => {
+    alert("Account details:\nEmail: " + (auth.currentUser?.email || "") + "\nStatus: Active");
+});
 
 </script>
+
 </body>
 </html>

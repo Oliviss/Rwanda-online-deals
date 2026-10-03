@@ -795,7 +795,11 @@ import {
     getAnalytics
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js";
 
-
+import {
+    getFirestore,
+    collection,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 /* =========================
    FIREBASE CONFIG
 ========================= */
@@ -818,7 +822,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const analytics = getAnalytics(app);
+const db = getFirestore(app);
+    async function loadProducts() {
+    const productsRef = collection(db, "products");
+    const snapshot = await getDocs(productsRef);
 
+    snapshot.forEach((doc) => {
+        console.log(doc.id, doc.data());
+    });
+}
+
+loadProducts();
 
 /* =========================
    ELEMENTS

@@ -613,6 +613,9 @@ footer p{margin:6px;font-size:13px}
 
 </main>
 
+<!-- =========================
+     PRIVATE DASHBOARD
+========================= -->
 <section id="dashboard">
     <div class="dashboard-wrap">
 
@@ -730,6 +733,9 @@ footer p{margin:6px;font-size:13px}
     </div>
 </section>
 
+<!-- =========================
+     AUTH MODAL
+========================= -->
 <section id="auth-section">
 
     <div class="auth-box">
@@ -792,19 +798,14 @@ import {
 import {
     getFirestore,
     collection,
-    getDocs,
-    doc,
-    setDoc,
-    serverTimestamp
+    getDocs
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-
-
 /* =========================
    FIREBASE CONFIG
 ========================= */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCOOEbhkKrv0ysHarRzvjw2DlgsRlcN180",
+    apiKey: "AIzaSyCOOEbhkKrv0ysHarRZvjw2DlgsRlcN180",
     authDomain: "rwanda-online-deals.firebaseapp.com",
     projectId: "rwanda-online-deals",
     storageBucket: "rwanda-online-deals.firebasestorage.app",
@@ -822,306 +823,156 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
-
-
-/* =========================
-   LOAD PRODUCTS
-========================= */
-
-async function loadProducts() {
-
-    const dealsContainer =
-        document.getElementById("dealsContainer");
+    async function loadProducts() {
+    const dealsContainer = document.getElementById("dealsContainer");
 
     try {
-
-        const productsRef =
-            collection(db, "products");
-
-        const snapshot =
-            await getDocs(productsRef);
+        const productsRef = collection(db, "products");
+        const snapshot = await getDocs(productsRef);
 
         dealsContainer.innerHTML = "";
 
-        snapshot.forEach((productDoc) => {
+        snapshot.forEach((doc) => {
+            const product = doc.data();
 
-            const product = productDoc.data();
-
-            const card =
-                document.createElement("div");
-
+            const card = document.createElement("div");
             card.className = "card";
 
             card.innerHTML = `
                 <div class="deal-image">
-                    ${
-                        product.imageUrl
-                        ? `<img src="${product.imageUrl}" alt="${product.name || "Product"}" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;">`
-                        : "🛍️"
-                    }
+                    ${product.imageUrl
+                        ? `<img src="${product.imageUrl}" alt="${product.name || "Product"}">`
+                        : "🛍️"}
                 </div>
 
                 <h3>${product.name || "Product"}</h3>
 
-                <p>
-                    ${product.description || "Nta bisobanuro bihari."}
-                </p>
+                <p>${product.description || "Nta bisobanuro birahari."}</p>
 
                 <div class="price">
-                    ${(Number(product.price) || 0).toLocaleString()} RWF
+                    ${(product.price || 0).toLocaleString()} RWF
                 </div>
 
-                <a href="#" class="button">
-                    Reba byinshi
-                </a>
+                <a href="#" class="button">Reba byinshi</a>
             `;
 
             dealsContainer.appendChild(card);
-
         });
 
-    } catch(error) {
-
-        console.error(
-            "Error loading products:",
-            error
-        );
-
+    } catch (error) {
+        console.error("Error loading products:", error);
     }
-
 }
 
-
-/*
-   Iyi iguma uko yari iri.
-*/
 loadProducts();
-
-
 /* =========================
    ELEMENTS
 ========================= */
 
-const authSection =
-    document.getElementById("auth-section");
+const authSection = document.getElementById("auth-section");
+const authMessage = document.getElementById("authMessage");
+const registerForm = document.getElementById("registerForm");
+const loginForm = document.getElementById("loginForm");
+const registerTab = document.getElementById("registerTab");
+const loginTab = document.getElementById("loginTab");
+const closeAuth = document.getElementById("closeAuth");
 
-const authMessage =
-    document.getElementById("authMessage");
+const homePage = document.getElementById("homePage");
+const homeNav = document.getElementById("homeNav");
+const dashboard = document.getElementById("dashboard");
+const logoutButton = document.getElementById("logoutButton");
 
-const registerForm =
-    document.getElementById("registerForm");
-
-const loginForm =
-    document.getElementById("loginForm");
-
-const registerTab =
-    document.getElementById("registerTab");
-
-const loginTab =
-    document.getElementById("loginTab");
-
-const closeAuth =
-    document.getElementById("closeAuth");
-
-const homePage =
-    document.getElementById("homePage");
-
-const homeNav =
-    document.getElementById("homeNav");
-
-const dashboard =
-    document.getElementById("dashboard");
-
-const logoutButton =
-    document.getElementById("logoutButton");
-
-const userName =
-    document.getElementById("userName");
-
-const userEmail =
-    document.getElementById("userEmail");
+const userName = document.getElementById("userName");
+const userEmail = document.getElementById("userEmail");
 
 
 /* =========================
    AUTH MODAL
 ========================= */
 
-function openAuth(tab = "register") {
-
+function openAuth(tab = "register"){
     authSection.style.display = "block";
-
     document.body.style.overflow = "hidden";
-
     showTab(tab);
-
 }
 
-
-function closeAuthBox() {
-
+function closeAuthBox(){
     authSection.style.display = "none";
-
     document.body.style.overflow = "";
-
     authMessage.textContent = "";
-
 }
 
+function showTab(tab){
+    const isRegister = tab === "register";
 
-function showTab(tab) {
+    registerTab.classList.toggle("active", isRegister);
+    loginTab.classList.toggle("active", !isRegister);
 
-    const isRegister =
-        tab === "register";
-
-    registerTab.classList.toggle(
-        "active",
-        isRegister
-    );
-
-    loginTab.classList.toggle(
-        "active",
-        !isRegister
-    );
-
-    registerForm.classList.toggle(
-        "active",
-        isRegister
-    );
-
-    loginForm.classList.toggle(
-        "active",
-        !isRegister
-    );
+    registerForm.classList.toggle("active", isRegister);
+    loginForm.classList.toggle("active", !isRegister);
 
     authMessage.textContent = "";
-
 }
-
 
 document.getElementById("openAuthTop")
-    .addEventListener(
-        "click",
-        () => openAuth("register")
-    );
-
+    .addEventListener("click", () => openAuth("register"));
 
 document.getElementById("openAuthHero")
-    .addEventListener(
-        "click",
-        () => openAuth("register")
-    );
+    .addEventListener("click", () => openAuth("register"));
 
+registerTab.addEventListener("click", () => showTab("register"));
+loginTab.addEventListener("click", () => showTab("login"));
+closeAuth.addEventListener("click", closeAuthBox);
 
-registerTab.addEventListener(
-    "click",
-    () => showTab("register")
-);
-
-
-loginTab.addEventListener(
-    "click",
-    () => showTab("login")
-);
-
-
-closeAuth.addEventListener(
-    "click",
-    closeAuthBox
-);
-
-
-authSection.addEventListener(
-    "click",
-    (e) => {
-
-        if(e.target === authSection){
-
-            closeAuthBox();
-
-        }
-
-    }
-);
+authSection.addEventListener("click", (e) => {
+    if(e.target === authSection) closeAuthBox();
+});
 
 
 /* =========================
    THREE DOT MENU
 ========================= */
 
-const menuBtn =
-    document.getElementById("menuBtn");
+const menuBtn = document.getElementById("menuBtn");
+const menuPanel = document.getElementById("menuPanel");
 
-const menuPanel =
-    document.getElementById("menuPanel");
+menuBtn.addEventListener("click", () => {
+    menuPanel.style.display =
+        menuPanel.style.display === "block" ? "none" : "block";
+});
 
-
-menuBtn.addEventListener(
-    "click",
-    () => {
-
-        menuPanel.style.display =
-            menuPanel.style.display === "block"
-            ? "none"
-            : "block";
-
+document.addEventListener("click", (e) => {
+    if(!menuBtn.contains(e.target) && !menuPanel.contains(e.target)){
+        menuPanel.style.display = "none";
     }
-);
-
-
-document.addEventListener(
-    "click",
-    (e) => {
-
-        if(
-            !menuBtn.contains(e.target) &&
-            !menuPanel.contains(e.target)
-        ){
-
-            menuPanel.style.display =
-                "none";
-
-        }
-
-    }
-);
+});
 
 
 /* =========================
    SHOW PRIVATE DASHBOARD
 ========================= */
 
-function showDashboard(user) {
+function showDashboard(user){
 
     homePage.style.display = "none";
-
     homeNav.style.display = "none";
-
     dashboard.style.display = "block";
-
 
     userEmail.textContent =
         user.email || "";
 
-
     const savedName =
-        localStorage.getItem(
-            "rwandaOnlineDealsName"
-        );
-
+        localStorage.getItem("rwandaOnlineDealsName");
 
     userName.textContent =
         savedName || "User";
 
-
-    window.location.hash =
-        "dashboard";
-
+    window.location.hash = "dashboard";
 
     window.scrollTo({
         top:0,
         behavior:"smooth"
     });
-
 }
 
 
@@ -1129,24 +980,18 @@ function showDashboard(user) {
    SHOW HOME
 ========================= */
 
-function showHome() {
+function showHome(){
 
     dashboard.style.display = "none";
-
     homePage.style.display = "block";
-
     homeNav.style.display = "block";
 
-
-    window.location.hash =
-        "home";
-
+    window.location.hash = "home";
 
     window.scrollTo({
         top:0,
         behavior:"smooth"
     });
-
 }
 
 
@@ -1154,406 +999,206 @@ function showHome() {
    CHECK LOGIN STATUS
 ========================= */
 
-onAuthStateChanged(
-    auth,
-    (user) => {
+onAuthStateChanged(auth, (user) => {
 
-        if(user){
+    if(user){
 
-            /*
-              NTIBYAHINDUTSE.
-              Login ikomeje gukoresha
-              uburyo bwawe bwa mbere.
-            */
+        showDashboard(user);
 
-            showDashboard(user);
+        closeAuthBox();
 
-            closeAuthBox();
+    }else{
 
-        }else{
-
-            showHome();
-
-        }
+        showHome();
 
     }
-);
+
+});
 
 
 /* =========================
    REGISTRATION
 ========================= */
 
-registerForm.addEventListener(
-    "submit",
-    async (e) => {
+registerForm.addEventListener("submit", async (e) => {
 
-        e.preventDefault();
+    e.preventDefault();
 
+    const name =
+        document.getElementById("registerName").value.trim();
 
-        const name =
-            document.getElementById(
-                "registerName"
-            ).value.trim();
+    const email =
+        document.getElementById("registerEmail").value.trim();
 
+    const password =
+        document.getElementById("registerPassword").value;
 
-        const email =
-            document.getElementById(
-                "registerEmail"
-            ).value.trim();
+    authMessage.textContent =
+        "⏳ Creating your account...";
 
+    authMessage.style.color = "#086d3b";
 
-        const password =
-            document.getElementById(
-                "registerPassword"
-            ).value;
+    try{
 
+        await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        localStorage.setItem(
+            "rwandaOnlineDealsName",
+            name
+        );
 
         authMessage.textContent =
-            "⏳ Creating your account...";
+            "✅ Account yakozwe neza! Turakwinjiza...";
 
-        authMessage.style.color =
-            "#086d3b";
+        authMessage.style.color = "green";
 
+        registerForm.reset();
 
-        try {
+        /*
+          Firebase ihita itanga login state nyuma ya
+          createUserWithEmailAndPassword.
+          onAuthStateChanged niyo ihita itujyana kuri dashboard.
+        */
 
-            /*
-              STEP 1:
-              Firebase Authentication
-            */
+    }catch(error){
 
-            const result =
-                await createUserWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
+        console.error(error);
 
+        let msg = error.message;
 
-            /*
-              STEP 2:
-              Bika profile y'umukoresha
-              muri Firestore.
-
-              Document:
-              users/{uid}
-            */
-
-            await setDoc(
-                doc(
-                    db,
-                    "users",
-                    result.user.uid
-                ),
-                {
-                    name: name,
-                    email: email,
-                    role: "customer",
-                    balance: 0,
-
-                    permissions: {
-                        editProduct: false,
-                        editPrice: false,
-                        manageOrders: false,
-                        support: false
-                    },
-
-                    createdAt:
-                        serverTimestamp()
-                }
-            );
-
-
-            /*
-              STEP 3:
-              Bika name kuri phone
-              kugirango dashboard
-              ikomeze kuyerekana.
-            */
-
-            localStorage.setItem(
-                "rwandaOnlineDealsName",
-                name
-            );
-
-
-            authMessage.textContent =
-                "✅ Account yakozwe neza! Turakwinjiza...";
-
-            authMessage.style.color =
-                "green";
-
-
-            registerForm.reset();
-
-
-            /*
-              Firebase ihita itanga login state.
-              onAuthStateChanged ihita ifungura
-              dashboard.
-            */
-
-        } catch(error) {
-
-            console.error(
-                "REGISTER ERROR:",
-                error
-            );
-
-
-            let msg =
-                "Account ntiyakozwe.";
-
-
-            if(
-                error.code ===
-                "auth/email-already-in-use"
-            ){
-
-                msg =
-                    "Iyi email isanzwe ifite account. Koresha Login.";
-
-            }
-
-
-            if(
-                error.code ===
-                "auth/weak-password"
-            ){
-
-                msg =
-                    "Password igomba kuba nibura characters 6.";
-
-            }
-
-
-            if(
-                error.code ===
-                "auth/invalid-email"
-            ){
-
-                msg =
-                    "Email ntabwo ari yo.";
-
-            }
-
-
-            if(
-                error.code ===
-                "permission-denied"
-            ){
-
-                msg =
-                    "Account yakozwe ariko Firestore Rules ntizemeye kubika profile.";
-
-            }
-
-
-            authMessage.textContent =
-                "❌ " + msg;
-
-
-            authMessage.style.color =
-                "red";
-
+        if(error.code === "auth/email-already-in-use"){
+            msg = "Iyi email isanzwe ifite account. Koresha Login.";
         }
 
+        if(error.code === "auth/weak-password"){
+            msg = "Password igomba kuba nibura characters 6.";
+        }
+
+        if(error.code === "auth/invalid-email"){
+            msg = "Email ntabwo ari yo.";
+        }
+
+        authMessage.textContent =
+            "❌ " + msg;
+
+        authMessage.style.color = "red";
+
     }
-);
+
+});
 
 
 /* =========================
    LOGIN
 ========================= */
 
-loginForm.addEventListener(
-    "submit",
-    async (e) => {
+loginForm.addEventListener("submit", async (e) => {
 
-        e.preventDefault();
+    e.preventDefault();
 
+    const email =
+        document.getElementById("loginEmail").value.trim();
 
-        const email =
-            document.getElementById(
-                "loginEmail"
-            ).value.trim();
+    const password =
+        document.getElementById("loginPassword").value;
 
+    authMessage.textContent =
+        "⏳ Turimo kukwinjiza...";
 
-        const password =
-            document.getElementById(
-                "loginPassword"
-            ).value;
+    authMessage.style.color = "#086d3b";
 
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
 
         authMessage.textContent =
-            "⏳ Turimo kukwinjiza...";
+            "✅ Login yakozwe neza! Turakwinjiza...";
 
+        authMessage.style.color = "green";
 
-        authMessage.style.color =
-            "#086d3b";
+        loginForm.reset();
 
+        /*
+          onAuthStateChanged ihita ibona user
+          ikerekana dashboard.
+        */
 
-        try {
+    }catch(error){
 
-            /*
-              LOGIN YAWE YAGUMYE UKO YARI.
-            */
+        console.error(error);
 
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
+        let msg = "Login yanze. Reba email na password.";
 
-
-            authMessage.textContent =
-                "✅ Login yakozwe neza! Turakwinjiza...";
-
-
-            authMessage.style.color =
-                "green";
-
-
-            loginForm.reset();
-
-
-        } catch(error) {
-
-            console.error(
-                "LOGIN ERROR:",
-                error
-            );
-
-
-            let msg =
-                "Login yanze. Reba email na password.";
-
-
-            if(
-                error.code ===
-                    "auth/invalid-credential" ||
-                error.code ===
-                    "auth/wrong-password" ||
-                error.code ===
-                    "auth/user-not-found"
-            ){
-
-                msg =
-                    "Email cyangwa password ntabwo ari byo.";
-
-            }
-
-
-            if(
-                error.code ===
-                "auth/too-many-requests"
-            ){
-
-                msg =
-                    "Gerageza nyuma gato. Attempts zabaye nyinshi.";
-
-            }
-
-
-            authMessage.textContent =
-                "❌ " + msg;
-
-
-            authMessage.style.color =
-                "red";
-
+        if(
+            error.code === "auth/invalid-credential" ||
+            error.code === "auth/wrong-password" ||
+            error.code === "auth/user-not-found"
+        ){
+            msg = "Email cyangwa password ntabwo ari byo.";
         }
 
+        if(error.code === "auth/too-many-requests"){
+            msg = "Gerageza nyuma gato. Attempts zabaye nyinshi.";
+        }
+
+        authMessage.textContent =
+            "❌ " + msg;
+
+        authMessage.style.color = "red";
+
     }
-);
+
+});
 
 
 /* =========================
    LOGOUT
 ========================= */
 
-logoutButton.addEventListener(
-    "click",
-    async () => {
+logoutButton.addEventListener("click", async () => {
 
-        try {
+    try{
 
-            await signOut(auth);
+        await signOut(auth);
 
-            localStorage.removeItem(
-                "rwandaOnlineDealsName"
-            );
+        localStorage.removeItem("rwandaOnlineDealsName");
 
-        } catch(error) {
+    }catch(error){
 
-            console.error(error);
-
-        }
+        console.error(error);
 
     }
-);
+
+});
 
 
 /* =========================
    DASHBOARD ACTIONS
 ========================= */
 
-document.getElementById(
-    "depositBtn"
-).addEventListener(
-    "click",
-    () => {
+document.getElementById("depositBtn").addEventListener("click", () => {
+    alert("Deposit module irategurwa. Tuzayihuza na payment system nyayo.");
+});
 
-        alert(
-            "Deposit module irategurwa. Tuzayihuza na payment system nyayo."
-        );
+document.getElementById("cashoutBtn").addEventListener("click", () => {
+    alert("Cash Out module irategurwa. Tuzayihuza na payment system nyayo.");
+});
 
-    }
-);
+document.getElementById("affiliateBtn").addEventListener("click", () => {
+    alert("Affiliate Program module irategurwa.");
+});
 
-
-document.getElementById(
-    "cashoutBtn"
-).addEventListener(
-    "click",
-    () => {
-
-        alert(
-            "Cash Out module irategurwa. Tuzayihuza na payment system nyayo."
-        );
-
-    }
-);
-
-
-document.getElementById(
-    "affiliateBtn"
-).addEventListener(
-    "click",
-    () => {
-
-        alert(
-            "Affiliate Program module irategurwa."
-        );
-
-    }
-);
-
-
-document.getElementById(
-    "accountBtn"
-).addEventListener(
-    "click",
-    () => {
-
-        alert(
-            "Account yawe iri gukora neza. Email: " +
-            (auth.currentUser?.email || "")
-        );
-
-    }
-);
+document.getElementById("accountBtn").addEventListener("click", () => {
+    alert("Account yawe iri gukora neza. Email: " + (auth.currentUser?.email || ""));
+});
 
 </script>
 

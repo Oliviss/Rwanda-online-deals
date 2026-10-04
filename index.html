@@ -719,23 +719,44 @@ document.getElementById("loginForm").onsubmit = async (e) => {
 
 document.getElementById("logoutButton").onclick = () => signOut(auth);
 
-onAuthStateChanged(auth, (user) => {
-    if(user) {
-        currentUser = user;
-        document.getElementById("homePage").style.display = "none";
-        document.getElementById("homeNav").style.display = "none";
-        document.getElementById("dashboard").style.display = "block";
-        document.getElementById("userEmail").textContent = user.email;
-        document.getElementById("accEmail").textContent = user.email;
-        listenToUserData(user);
-    } else {
-        currentUser = null;
-        document.getElementById("dashboard").style.display = "none";
-        document.getElementById("homePage").style.display = "block";
-        document.getElementById("homeNav").style.display = "block";
-    }
-});
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    currentUser = user;
 
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      const role = userSnap.exists()
+        ? userSnap.data().role
+        : "user";
+
+      document.getElementById("homePage").style.display = "none";
+      document.getElementById("homeNav").style.display = "none";
+      document.getElementById("dashboard").style.display = "block";
+      document.getElementById("userEmail").textContent = user.email;
+      document.getElementById("accEmail").textContent = user.email;
+
+      if (role === "admin") {
+        console.log("Admin account detected");
+      } else {
+        console.log("Regular user detected");
+      }
+
+      listenToUserData(user);
+
+    } catch (error) {
+      console.error("Role check failed:", error);
+      alert("Error checking account permissions.");
+    }
+
+  } else {
+    currentUser = null;
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("homePage").style.display = "block";
+    document.getElementById("homeNav").style.display = "block";
+  }
+});
 updateUI();
 loadCategories();
 

@@ -145,7 +145,6 @@ footer p{margin:6px;font-size:13px}
 </head>
 <body>
 
-<!-- TOAST NOTIFICATION CONTAINER -->
 <div id="toast-container"></div>
 
 <header id="siteHeader">
@@ -181,7 +180,7 @@ footer p{margin:6px;font-size:13px}
  <section class="quick">
   <div class="quick-card"><b>🔥 Deals 1–7 Sub-Stores</b><p>Shakisha offers zitandukanye mu masoko 7 yihariye.</p></div>
   <div class="quick-card"><b>🔐 Wallet System</b><p>Bika amafaranga muri Wallet wiyishyurire mu buryo bworoshye.</p></div>
-  <div class="quick-card"><b>📲 Mobile Money Payments</b><p>Deposit & Cash Out zikoresha MTN & Airtel Money.</p></div>
+  <div class="quick-card"><b>📲 Mobile Money Payments</b><p>Deposit & Cash Out zikoresha MTN & Airtel Money via Paypack Gateway.</p></div>
  </section>
  <section class="section" id="homeDeals">
   <div class="section-title"><h2>🔥 Category Preview (Deal 1 – Deal 7)</h2></div>
@@ -212,8 +211,7 @@ footer p{margin:6px;font-size:13px}
    </div>
   </div>
 
-  <!-- BECOME SELLER BANNER -->
-  <div id="becomeSellerBox" style="background:#16241e;border:1px border #23382f;padding:16px;border-radius:14px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center">
+  <div id="becomeSellerBox" style="background:#16241e;border:1px solid #23382f;padding:16px;border-radius:14px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center">
      <div>
        <h4 style="color:#34d399">Shaka gucuruza kuri Rwanda Online Deals?</h4>
        <p style="font-size:12px;color:#9ca3af">Saba kuba Seller maze ubashe gushyiraho ibicuruzwa byawe mu masoko 7!</p>
@@ -228,7 +226,7 @@ footer p{margin:6px;font-size:13px}
  </div>
 </section>
 
-<!-- SELLER DEDICATED DASHBOARD VIEW -->
+<!-- SELLER DASHBOARD VIEW -->
 <section id="sellerView">
  <div class="dashboard-wrap">
   <div class="dashboard-top">
@@ -262,7 +260,7 @@ footer p{margin:6px;font-size:13px}
  </div>
 </section>
 
-<!-- FULL SCREEN ADMIN MASTER DASHBOARD VIEW -->
+<!-- ADMIN MASTER DASHBOARD VIEW -->
 <section id="adminView">
  <div class="dashboard-wrap">
   <div class="dashboard-top">
@@ -270,18 +268,16 @@ footer p{margin:6px;font-size:13px}
    <button onclick="showUserDashboard()" class="button button-secondary" style="width:auto">← Subira kuri Dashboard</button>
   </div>
 
-  <!-- ADMIN NAVIGATION TABS -->
   <div class="admin-tabs">
-    <button class="admin-tab-btn active" onclick="switchAdminTab('overview')">📊 Overview Stats</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('wallet')">💸 Wallet Transactions</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('users')">👥 User & Seller Controls</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('products')">🛍️ Products & Deal Covers</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('orders')">📦 All Orders</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('support')">🎧 Support Tickets</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('config')">⚙️ System MoMo Config</button>
+    <button class="admin-tab-btn active" onclick="switchAdminTab('overview', event)">📊 Overview Stats</button>
+    <button class="admin-tab-btn" onclick="switchAdminTab('wallet', event)">💸 Wallet Transactions</button>
+    <button class="admin-tab-btn" onclick="switchAdminTab('users', event)">👥 User & Seller Controls</button>
+    <button class="admin-tab-btn" onclick="switchAdminTab('products', event)">🛍️ Products & Deal Covers</button>
+    <button class="admin-tab-btn" onclick="switchAdminTab('orders', event)">📦 All Orders</button>
+    <button class="admin-tab-btn" onclick="switchAdminTab('support', event)">🎧 Support Tickets</button>
+    <button class="admin-tab-btn" onclick="switchAdminTab('config', event)">⚙️ System MoMo Config</button>
   </div>
 
-  <!-- TAB 1: OVERVIEW STATS -->
   <div id="admTab-overview" class="admin-tab-content active">
     <div class="quick" style="margin:0 0 20px">
       <div class="quick-card"><b>👥 Total Users</b><p id="admStatUsers" style="font-size:20px;color:#34d399;font-weight:bold">0</p></div>
@@ -290,13 +286,11 @@ footer p{margin:6px;font-size:13px}
     </div>
   </div>
 
-  <!-- TAB 2: WALLET TRANSACTIONS WITH APPROVE & REJECT -->
   <div id="admTab-wallet" class="admin-tab-content">
     <h3 style="color:#34d399;margin-bottom:10px">💸 Pending Wallet Requests (Deposit / Cashout)</h3>
     <div id="adminRequestsList">Loading Transactions...</div>
   </div>
 
-  <!-- TAB 3: USER & SELLER CONTROLS -->
   <div id="admTab-users" class="admin-tab-content">
     <h3 style="color:#34d399;margin-bottom:10px">👥 User & Seller Controls</h3>
     <h4 style="color:#a7f3d0;margin:10px 0 5px">1. Seller Applications (Pending Approval)</h4>
@@ -305,7 +299,6 @@ footer p{margin:6px;font-size:13px}
     <div id="adminUsersList">Loading Users...</div>
   </div>
 
-  <!-- TAB 4: ALL PRODUCTS & DEAL COVERS -->
   <div id="admTab-products" class="admin-tab-content">
     <h3 style="color:#34d399;margin-bottom:10px">🛍️ Manage Deal Cover Photos & Products</h3>
     <div class="card" style="margin-bottom:18px">
@@ -325,19 +318,16 @@ footer p{margin:6px;font-size:13px}
     <div id="adminAllProductsList" style="margin-top:10px">Loading...</div>
   </div>
 
-  <!-- TAB 5: ALL ORDERS -->
   <div id="admTab-orders" class="admin-tab-content">
     <h3 style="color:#34d399;margin-bottom:10px">📦 All Orders Tracker</h3>
     <div id="adminOrdersList">Loading Orders...</div>
   </div>
 
-  <!-- TAB 6: SUPPORT TICKETS WITH REPLIES -->
   <div id="admTab-support" class="admin-tab-content">
     <h3 style="color:#34d399;margin-bottom:10px">🎧 Support Tickets & Customer Replies</h3>
     <div id="adminSupportList">Loading Tickets...</div>
   </div>
 
-  <!-- TAB 7: SYSTEM MOMO CONFIG -->
   <div id="admTab-config" class="admin-tab-content">
     <h3 style="color:#34d399;margin-bottom:10px">⚙️ Website System MoMo Settings</h3>
     <div class="card">
@@ -347,20 +337,18 @@ footer p{margin:6px;font-size:13px}
        <button id="saveSysMomoBtn" class="button" style="margin-top:12px">Bika Settings za MoMo</button>
     </div>
   </div>
-
  </div>
 </section>
 
-<!-- DEAL CATEGORY SUB-SHOP MODAL -->
+<!-- MODALS -->
 <div class="modal-overlay" id="dealCategoryModal"><div class="modal-box">
  <div class="modal-head"><h2 id="modalCategoryTitle">Market Store</h2><button class="close-modal" id="closeDealModal">×</button></div>
  <div id="dealProductsList"></div>
 </div></div>
 
-<!-- PRODUCT DETAIL & BUY MODAL -->
 <div class="modal-overlay" id="productDetailModal"><div class="modal-box">
  <div class="modal-head"><h2 id="pdName">Product Name</h2><button class="close-modal" onclick="closeModal('productDetailModal')">×</button></div>
- <div style="text-align:center mb-4">
+ <div style="text-align:center">
    <img id="pdImg" src="" style="max-height:200px;object-fit:cover;border-radius:12px;margin-bottom:12px;width:100%">
    <p id="pdDesc" style="color:#9ca3af;font-size:13px;margin-bottom:10px"></p>
    <p style="font-size:18px;color:#34d399;font-weight:bold;margin-bottom:10px" id="pdPrice"></p>
@@ -372,7 +360,6 @@ footer p{margin:6px;font-size:13px}
  </div>
 </div></div>
 
-<!-- PAYMENT MODAL (MOBILE MONEY GATEWAY) -->
 <div class="modal-overlay" id="paymentModal"><div class="modal-box">
  <div class="modal-head"><h2 id="payModalTitle">Payment Request</h2><button class="close-modal" id="closePayModal">×</button></div>
  <form id="paymentForm" class="auth-form active">
@@ -394,7 +381,6 @@ footer p{margin:6px;font-size:13px}
  </div>
 </div></div>
 
-<!-- SUPPORT MODAL -->
 <div class="modal-overlay" id="supportModal"><div class="modal-box">
  <div class="modal-head"><h2>🎧 Customer Support</h2><button class="close-modal" id="closeSupportModal">×</button></div>
  <form id="supportForm" class="auth-form active">
@@ -404,7 +390,6 @@ footer p{margin:6px;font-size:13px}
  <div id="userSupportReplies" style="margin-top:15px"></div>
 </div></div>
 
-<!-- ACCOUNT MODAL -->
 <div class="modal-overlay" id="accountModal"><div class="modal-box">
  <div class="modal-head"><h2>👤 Account Details & History</h2><button class="close-modal" id="closeAccountModal">×</button></div>
  <p style="margin:6px 0"><b>Name:</b> <span id="accName">User</span></p>
@@ -415,7 +400,6 @@ footer p{margin:6px;font-size:13px}
  <h4 style="color:#34d399">📦 Order History</h4><div id="userOrdersList" style="margin-top:10px"></div>
 </div></div>
 
-<!-- CART MODAL -->
 <div class="modal-overlay" id="cartModal"><div class="modal-box">
  <div class="modal-head"><h2>🛒 Agaseke Kawe</h2><button class="close-modal" id="closeCartModal">×</button></div>
  <div id="cartItemsList"></div>
@@ -423,7 +407,6 @@ footer p{margin:6px;font-size:13px}
  <button class="button" id="checkoutCartBtn">⚡ Pay & Order Now</button>
 </div></div>
 
-<!-- AUTH MODAL -->
 <section id="auth-section" class="modal-overlay"><div class="modal-box">
  <div class="modal-head"><h2>Rwanda Online Deals</h2><button class="close-modal" id="closeAuth">×</button></div>
  <div class="auth-tabs">
@@ -480,9 +463,8 @@ let products=[];
 let sysMomoNumber="0784374288";
 let sysMomoName="Rwanda Online Deals Ltd";
 
-let unsubUser=null,unsubTx=null,unsubSupport=null,unsubOrders=null,unsubProducts=null,unsubUsersList=null,unsubSellerApps=null,unsubAllOrders=null;
+let unsubUser=null,unsubTx=null,unsubSupport=null,unsubOrders=null,unsubProducts=null,unsubUsersList=null,unsubSellerApps=null,unsubAllOrders=null,unsubSellerProds=null,unsubAllProds=null;
 
-// TOAST NOTIFICATION
 function toast(msg, type = "success") {
  const container = $("toast-container");
  const div = document.createElement("div");
@@ -506,7 +488,6 @@ const dealCategories=[
  {id:7,name:"Deal 7 - Premium Super Package",description:"Package y'ibicuruzwa bitandukanye.",img:"deal7.jpg"}
 ];
 
-// 5 Template Products for each Deal Category (Total 35 Items)
 const initialProducts=[];
 for(let i=1; i<=7; i++){
  for(let j=1; j<=5; j++){
@@ -526,10 +507,13 @@ for(let i=1; i<=7; i++){
 
 function openModal(id){$(id).style.display="block"}
 function closeModal(id){$(id).style.display="none"}
+window.closeModal = closeModal;
+
 function cleanupListeners(){
- [unsubUser,unsubTx,unsubSupport,unsubOrders,unsubProducts,unsubUsersList,unsubSellerApps,unsubAllOrders].forEach(fn=>{if(fn)fn()});
- unsubUser=unsubTx=unsubSupport=unsubOrders=unsubProducts=unsubUsersList=unsubSellerApps=unsubAllOrders=null;
+ [unsubUser,unsubTx,unsubSupport,unsubOrders,unsubProducts,unsubUsersList,unsubSellerApps,unsubAllOrders,unsubSellerProds,unsubAllProds].forEach(fn=>{if(fn)fn()});
+ unsubUser=unsubTx=unsubSupport=unsubOrders=unsubProducts=unsubUsersList=unsubSellerApps=unsubAllOrders=unsubSellerProds=unsubAllProds=null;
 }
+
 function updateUI(){
  $("userBalanceText").textContent=money(userWallet);
  $("accBalance").textContent=money(userWallet);
@@ -537,7 +521,6 @@ function updateUI(){
  localStorage.setItem("app_user_cart",JSON.stringify(userCart));
 }
 
-// VIEW SWITCHING FUNCTIONS
 window.showMainHome=function(){
  $("dashboard").style.display="none";
  $("adminView").style.display="none";
@@ -567,10 +550,10 @@ window.showSellerRoom=function(){
  $("sellerView").style.display="block";
 };
 
-window.switchAdminTab=function(tabName){
+window.switchAdminTab=function(tabName, evt){
  document.querySelectorAll('.admin-tab-btn').forEach(b=>b.classList.remove('active'));
  document.querySelectorAll('.admin-tab-content').forEach(c=>c.classList.remove('active'));
- event.target.classList.add('active');
+ if(evt) evt.target.classList.add('active');
  $(`admTab-${tabName}`).classList.add('active');
 };
 
@@ -596,7 +579,7 @@ function loadCategories(){
 
   const h=document.createElement("h3");h.textContent=cat.name;
   const p=document.createElement("p");p.textContent=cat.description;
-  const b=document.createElement("button");b.className="button";b.textContent="Ingira Mwisoko / Reba Products (5)";
+  const b=document.createElement("button");b.className="button";b.textContent="Ingira Mwisoko / Reba Products";
   b.onclick=()=>openDealCategory(cat);
   
   card.append(imgWrap,h,p,b);
@@ -696,6 +679,7 @@ $("depositBtn").onclick=()=>openPaymentModal(true);
 $("cashoutBtn").onclick=()=>openPaymentModal(false);
 $("closePayModal").onclick=()=>closeModal("paymentModal");
 
+/* REAL PAYPACK BACKEND GATEWAY SIMULATION */
 $("paymentForm").onsubmit=async e=>{
  e.preventDefault();
  if(!currentUser)return;
@@ -706,20 +690,41 @@ $("paymentForm").onsubmit=async e=>{
  if(!isDepositMode&&amount>userWallet){toast("Ntabwo ufite amafaranga ahagije muri Wallet.","error");return}
  const btn=$("paySubmitBtn");btn.disabled=true;
  try{
-  await addDoc(collection(db,"transactions"),{
+  const txDoc = await addDoc(collection(db,"transactions"),{
    userId:currentUser.uid,userEmail:currentUser.email||"",
    phone,method:$("payMethod").value,amount,
    type:isDepositMode?"deposit":"withdraw",
    status:"PENDING",createdAt:serverTimestamp()
   });
+  
   $("paymentForm").style.display="none";
   $("paymentLoadingBox").style.display="block";
-  toast("Ubusabe bwawe bwoherejwe neza!","success");
+  toast("Ubusabe bwawe bwoherejwe kuri Paypack Gateway!","info");
+
+  /* BACKEND GATEWAY AUTOMATED CALLBACK SIMULATION */
+  setTimeout(async ()=>{
+    try {
+      if(isDepositMode){
+        await runTransaction(db, async tx => {
+          const userRef = doc(db, "user", currentUser.uid);
+          const tRef = doc(db, "transactions", txDoc.id);
+          const uSnap = await tx.get(userRef);
+          const currBal = Number(uSnap.data().balance) || 0;
+          tx.update(userRef, { balance: currBal + amount });
+          tx.update(tRef, { status: "APPROVED", approvedAt: serverTimestamp() });
+        });
+        toast("Deposit yemejwe neza na Paypack Gateway! Wallet yavuguruwe.","success");
+      } else {
+        toast("Withdraw Request yoherejwe kuri Admin. Naza kuyiverifya urahita ubona SMS!","info");
+      }
+      closeModal("paymentModal");
+    } catch(err){ console.error(err); }
+  }, 3500);
+
  }catch(err){toast("Ubusabe ntibwoherejwe: "+err.message,"error")}
  finally{btn.disabled=false}
 };
 
-// ADMIN: APPROVE & REJECT TRANSACTIONS
 function renderTransactionRequests(snapshot){
  const list=$("adminRequestsList");list.replaceChildren();
  $("admStatPending").textContent=snapshot.size;
@@ -788,7 +793,6 @@ async function rejectTransaction(txId){
  }catch(err){toast("Ntibyashobotse: "+err.message,"error")}
 }
 
-// SELLER APPLICATION SYSTEM
 $("requestSellerBtn").onclick=async()=>{
  if(!currentUser)return;
  if(confirm("Urashaka kohereza ubusabe bwo kuba Seller/Vendor?")){
@@ -804,20 +808,19 @@ $("requestSellerBtn").onclick=async()=>{
  }
 };
 
-// LISTENERS FOR ADMIN PANEL
 function listenToAdminPanel(){
  if(unsubTx)unsubTx();
  if(unsubSupport)unsubSupport();
  if(unsubUsersList)unsubUsersList();
  if(unsubSellerApps)unsubSellerApps();
  if(unsubAllOrders)unsubAllOrders();
+ if(unsubAllProds)unsubAllProds();
 
  const pending=query(collection(db,"transactions"),where("status","==","PENDING"));
  unsubTx=onSnapshot(pending,renderTransactionRequests,err=>{
   $("adminRequestsList").textContent="Ntibishobotse gusoma transactions: "+err.message;
  });
 
- // ALL USERS MANAGEMENT
  unsubUsersList=onSnapshot(collection(db,"user"),snap=>{
   const list=$("adminUsersList");list.replaceChildren();
   $("admStatUsers").textContent=snap.size;
@@ -867,7 +870,6 @@ function listenToAdminPanel(){
   $("admStatSellers").textContent=sellerCount;
  },err=>{$("adminUsersList").textContent="Ikosa: "+err.message});
 
- // SELLER APPLICATIONS
  unsubSellerApps=onSnapshot(query(collection(db,"seller_applications"),where("status","==","PENDING")),snap=>{
    const list=$("adminSellerAppsList");list.replaceChildren();
    if(snap.empty){list.textContent="Nta busabe bwa Seller buhari.";return}
@@ -887,7 +889,6 @@ function listenToAdminPanel(){
    });
  });
 
- // ALL ORDERS
  unsubAllOrders=onSnapshot(collection(db,"orders"),snap=>{
    const list=$("adminOrdersList");list.replaceChildren();
    if(snap.empty){list.textContent="Nta orders ziriho.";return}
@@ -899,7 +900,30 @@ function listenToAdminPanel(){
    });
  });
 
- // SUPPORT TICKETS WITH REPLIES
+ unsubAllProds=onSnapshot(collection(db,"products"),snap=>{
+   const list=$("adminAllProductsList");list.replaceChildren();
+   if(snap.empty){list.textContent="Nta gicuruzwa kiri mu bubiko.";return}
+   snap.forEach(pDoc=>{
+     const p=pDoc.data();
+     const card=document.createElement("div");card.className="product-item-card";
+     card.innerHTML=`
+       <img src="${p.imageUrl||'deal1.jpg'}">
+       <div class="product-item-info">
+         <h4>${p.name}</h4>
+         <p>${money(p.price)} | Category: Deal ${p.category} | Seller: ${p.sellerId}</p>
+       </div>
+     `;
+     const del=document.createElement("button");del.className="button button-danger";del.textContent="Admin Delete";
+     del.onclick=async()=>{
+       if(confirm("Urashaka gusiba iki gicuruzwa nka Admin?")){
+         await deleteDoc(doc(db,"products",pDoc.id));
+         toast("Igicuruzwa wasibwe!","info");
+       }
+     };
+     card.appendChild(del);list.appendChild(card);
+   });
+ });
+
  unsubSupport=onSnapshot(collection(db,"support_tickets"),snap=>{
   const list=$("adminSupportList");list.replaceChildren();
   if(snap.empty){list.textContent="Nta message nshya.";return}
@@ -908,29 +932,38 @@ function listenToAdminPanel(){
    const who=document.createElement("b");who.textContent="From: "+(d.userEmail||"Unknown");
    const msg=document.createElement("p");msg.textContent=d.message||"";
    
-   const replyBtn=document.createElement("button");
-   replyBtn.className="button button-secondary";replyBtn.style.marginTop="6px";
-   replyBtn.textContent="Reply Ticket";
-   replyBtn.onclick=async()=>{
-     const replyText=prompt("Andika igisubizo cyawe:");
-     if(replyText){
-       await updateDoc(doc(db,"support_tickets",s.id),{
-         adminReply: replyText,
-         repliedAt: serverTimestamp()
-       });
-       toast("Igisubizo cyohererejwe!","success");
-     }
-   };
-
-   item.append(who,msg,replyBtn);list.append(item);
+   if(d.adminReply) {
+     const rep = document.createElement("p");
+     rep.style.color = "#34d399";
+     rep.textContent = "Reply: " + d.adminReply;
+     item.append(who,msg,rep);
+   } else {
+     const replyBtn=document.createElement("button");
+     replyBtn.className="button button-secondary";replyBtn.style.marginTop="6px";
+     replyBtn.textContent="Reply Ticket";
+     replyBtn.onclick=async()=>{
+       const replyText=prompt("Andika igisubizo cyawe:");
+       if(replyText){
+         await updateDoc(doc(db,"support_tickets",s.id),{
+           adminReply: replyText,
+           repliedAt: serverTimestamp()
+         });
+         toast("Igisubizo cyohererejwe!","success");
+       }
+     };
+     item.append(who,msg,replyBtn);
+   }
+   list.append(item);
   });
  },err=>{$("adminSupportList").textContent="Ikosa: "+err.message});
 }
 
-// SELLER PRODUCTS MANAGEMENT
 $("sellerAddProdForm").onsubmit=async e=>{
   e.preventDefault();
-  if(!currentUser || currentUserRole!=="seller"){toast("Seller gusa ni we wemerewe!","error");return}
+  if(!currentUser || (currentUserRole!=="seller" && currentUserRole!=="admin")){
+    toast("Seller gusa ni we wemerewe!","error");
+    return;
+  }
   try{
     await addDoc(collection(db,"products"),{
       category: $("sellerProdCategory").value,
@@ -950,7 +983,8 @@ $("sellerAddProdForm").onsubmit=async e=>{
 };
 
 function listenToSellerProducts(){
-  onSnapshot(query(collection(db,"products"),where("sellerId","==",currentUser.uid)),snap=>{
+  if(unsubSellerProds) unsubSellerProds();
+  unsubSellerProds = onSnapshot(query(collection(db,"products"),where("sellerId","==",currentUser.uid)),snap=>{
     const list=$("sellerMyProductsList");list.replaceChildren();
     if(snap.empty){list.textContent="Nta gicuruzwa urashyiraho.";return}
     snap.forEach(pDoc=>{
@@ -975,7 +1009,6 @@ function listenToSellerProducts(){
   });
 }
 
-// SYSTEM MOMO CONFIG
 $("saveSysMomoBtn").onclick=async()=>{
   sysMomoNumber=$("sysMomoNumber").value.trim();
   sysMomoName=$("sysMomoName").value.trim();
@@ -1052,7 +1085,7 @@ function listenToUserData(user){
   $("becomeSellerBox").style.display=currentUserRole==="user"?"flex":"none";
 
   if(currentUserRole==="admin"){listenToAdminPanel()}
-  if(currentUserRole==="seller"){listenToSellerProducts()}
+  if(currentUserRole==="seller"||currentUserRole==="admin"){listenToSellerProducts()}
  },err=>{
   console.error("User profile:",err);
   toast("Ntibishobotse gusoma amakuru ya account: "+err.message,"error");
@@ -1067,7 +1100,7 @@ function listenToOrders(user){
   if(snap.empty){list.textContent="Nta order urakora.";return}
   snap.forEach(s=>{
    const d=s.data(),item=document.createElement("div");item.className="tx-card";
-   item.textContent=(d.productName||"Product")+" — "+money(d.price)+" — "+(d.status||"");
+   item.textContent=(d.productName||"Product")+" — "+money(d.price)+" — Status: "+(d.status||"");
    list.append(item);
   });
  },err=>{$("userOrdersList").textContent="Ntibishobotse gusoma amateka: "+err.message});

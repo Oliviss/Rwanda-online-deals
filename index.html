@@ -22,6 +22,101 @@ button{cursor:pointer;transition:all 0.2s ease}
 .animated-glow { animation: pulseGlow 3s infinite ease-in-out; }
 .animated-float { animation: floatItem 4s infinite ease-in-out; }
 
+// ==========================================
+// 1. DEALS DATA (AMAFOTO 5 KURI BURI DEAL)
+// ==========================================
+const dealsWithPictures = [
+  {
+    id: "deal-tech",
+    title: "Mobile & Tech Pack",
+    category: "Electronics",
+    description: "Telefone, Smartwatch, Earbuds, Powerbank na Charger ziri ku discount.",
+    images: [
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800",
+      "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=800",
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800",
+      "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?q=80&w=800",
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800"
+    ]
+  },
+  {
+    id: "deal-fashion",
+    title: "Trending Fashion & Wear",
+    category: "Fashion",
+    description: "Inkweto zigezweho, Isaha, Isakoshi, n'ibikoresho by'imikino.",
+    images: [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800",
+      "https://images.unsplash.com/photo-1524805444758-089113d48a6d?q=80&w=800",
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=800",
+      "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=800",
+      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=800"
+    ]
+  },
+  {
+    id: "deal-home",
+    title: "Home & Kitchen Essentials",
+    category: "Home",
+    description: "Ibikoresho byo mu gikoni, decor z'inzu, na kettle z'amashanyarazi.",
+    images: [
+      "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?q=80&w=800",
+      "https://images.unsplash.com/photo-1570222094114-d054a817e56b?q=80&w=800",
+      "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f6?q=80&w=800",
+      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=800",
+      "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?q=80&w=800"
+    ]
+  }
+];
+
+// ==========================================
+// 2. FUNCTION YO KWEREKANA DEALS KURI SCREEN
+// ==========================================
+function renderSimpleDeals() {
+  const container = document.getElementById("deals-container");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  dealsWithPictures.forEach((deal) => {
+    const imagesHTML = deal.images
+      .map(
+        (imgUrl) => `
+        <img 
+          src="${imgUrl}" 
+          alt="Product Image" 
+          style="width: 130px; height: 130px; object-fit: cover; border-radius: 10px; flex-shrink: 0;"
+        />
+      `
+      )
+      .join("");
+
+    const card = document.createElement("div");
+    card.style.cssText = `
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    `;
+
+    card.innerHTML = `
+      <h3 style="margin: 0 0 5px 0; font-size: 18px; color: #333;">${deal.title}</h3>
+      <p style="margin: 0 0 10px 0; font-size: 13px; color: #666;">${deal.description}</p>
+      <div style="display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px;">
+        ${imagesHTML}
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+// Guhamagara function ngo yiyereke urubuga rufungutse
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", renderSimpleDeals);
+} else {
+  renderSimpleDeals();
+}
+ 
 /* TOAST NOTIFICATIONS */
 #toast-container {
  position: fixed; top: 20px; right: 20px; z-index: 9999;
@@ -182,6 +277,7 @@ footer p{margin:6px;font-size:13px}
    <p>Murakaza neza kuri Rwanda Online Deals — offers n'ibicuruzwa bitandukanye n'uburyo bwo kwishyura busezeranye.</p>
    <button class="primary-btn" id="openAuthHero">Tangira nonaha →</button>
   </div></div>
+  <div id="deals-container"></div>
  </section>
  <section class="quick">
   <div class="quick-card"><b>🔥 Deals 1–7 Sub-Stores</b><p>Shakisha offers zitandukanye mu masoko 7 yihariye.</p></div>
@@ -1343,6 +1439,7 @@ $("menuBtn").onclick=()=>{
 listenToProducts();
 loadCategories();
 updateUI();
+
 </script>
 </body>
 </html>

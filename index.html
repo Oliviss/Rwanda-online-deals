@@ -41,7 +41,6 @@ button{cursor:pointer;transition:all 0.2s ease}
 header{background:linear-gradient(135deg,#063821,#0b6b3a,#10894d);color:white;padding:18px;position:relative;overflow:hidden}
 header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,0.08) 10%,transparent 20%);transform:rotate(30deg);pointer-events:none}
 .brand{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;z-index:2}
-.brand-text{text-align:left}
 .brand h1{font-size:26px;font-weight:900;letter-spacing:-0.5px;background:linear-gradient(90deg,#fff,#a7f3d0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .brand p{font-size:13px;color:#a7f3d0}
 .header-actions{display:flex;align-items:center;gap:10px}
@@ -75,7 +74,7 @@ nav a:hover{color:#fff}
 .deals{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
 
 .card{display:flex;flex-direction:column;justify-content:space-between;gap:12px;position:relative;overflow:hidden}
-.card-img-wrapper{height:150px;width:100%;border-radius:12px;overflow:hidden;background:#1a2b23;margin-bottom:6px}
+.card-img-wrapper{height:160px;width:100%;border-radius:12px;overflow:hidden;background:#1a2b23;margin-bottom:6px}
 .card-img-wrapper img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease}
 .card:hover .card-img-wrapper img{transform:scale(1.08)}
 
@@ -83,6 +82,7 @@ nav a:hover{color:#fff}
 .button:hover{opacity:0.9}
 .button-secondary{background:#1e2e27;color:#34d399;border:1px solid #2e473b}
 .button-danger{background:#dc2626;color:white;border:0}
+.button-warning{background:#eab308;color:#000;border:0}
 
 /* MODALS */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(4,10,7,0.85);backdrop-filter:blur(8px);padding:20px;overflow:auto}
@@ -121,9 +121,14 @@ nav a:hover{color:#fff}
 .admin-tab-content{display:none}
 .admin-tab-content.active{display:block}
 
-.tx-card,.product-item-card{background:#16241e;border:1px solid #23382f;border-radius:12px;padding:14px;margin:10px 0;font-size:13px}
+.tx-card,.user-card,.product-item-card{background:#16241e;border:1px solid #23382f;border-radius:12px;padding:16px;margin:12px 0;font-size:13px}
+.user-card{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.user-info b{font-size:16px;color:#34d399}
+.user-info p{color:#9ca3af;margin-top:4px}
+.user-actions{display:flex;gap:6px;flex-wrap:wrap}
+
 .product-item-card{display:flex;gap:14px;align-items:center}
-.product-item-card img{width:85px;height:85px;object-fit:cover;border-radius:10px;background:#0b1310}
+.product-item-card img{width:90px;height:90px;object-fit:cover;border-radius:10px;background:#0b1310}
 .product-item-info{flex:1}
 .product-item-info h4{color:#34d399;font-size:15px;margin-bottom:4px}
 .product-item-info p{font-size:12px;color:#9ca3af;margin-bottom:6px}
@@ -139,6 +144,7 @@ footer p{margin:6px;font-size:13px}
  .header-actions{gap:6px}.login-top,.cart-icon-btn{padding:8px 12px;font-size:11px}
  .hero h2{font-size:28px}.quick{grid-template-columns:1fr}
  .action-grid{grid-template-columns:repeat(2,1fr)}
+ .user-card{flex-direction:column;align-items:flex-start}
  .product-item-card{flex-direction:column;text-align:center}
 }
 </style>
@@ -246,7 +252,7 @@ footer p{margin:6px;font-size:13px}
       <input class="field" id="sellerProdName" placeholder="Izina ry'Igicuruzwa" required>
       <input class="field" id="sellerProdPrice" type="number" min="1" placeholder="Igiciro (RWF)" required>
       <textarea class="field" id="sellerProdDesc" placeholder="Igisobanuro (Description)" rows="2" required></textarea>
-      <input class="field" id="sellerProdImg" placeholder="Ifoto (e.g. deal1.jpg or URL)" required>
+      <input class="field" id="sellerProdImg" placeholder="Ifoto Image URL (or SVG/PNG link)" required>
       <input class="field" id="sellerProdContact" placeholder="Contact Phone (078...)" required>
       <input class="field" id="sellerProdMomo" placeholder="MoMo Number ya Seller yihariye" required>
       <button type="submit" class="button">Bika Igicuruzwa</button>
@@ -264,14 +270,15 @@ footer p{margin:6px;font-size:13px}
 <section id="adminView">
  <div class="dashboard-wrap">
   <div class="dashboard-top">
-   <div><h2>⚙️ Admin Master Control Dashboard Room</h2><p style="color:#9ca3af;font-size:13px">Uburenganzira bwose bw'Umuyobozi Mukuru.</p></div>
+   <div><h2>⚙️ Admin Master Control Room</h2><p style="color:#9ca3af;font-size:13px">Uburenganzira bwose bw'Umuyobozi Mukuru.</p></div>
    <button onclick="showUserDashboard()" class="button button-secondary" style="width:auto">← Subira kuri Dashboard</button>
   </div>
 
   <div class="admin-tabs">
     <button class="admin-tab-btn active" onclick="switchAdminTab('overview', event)">📊 Overview Stats</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('wallet', event)">💸 Wallet Transactions</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('users', event)">👥 User & Seller Controls</button>
+    <button class="admin-tab-btn" onclick="switchAdminTab('users', event)">👥 Full User Management</button>
+    <button class="admin-tab-btn" onclick="switchAdminTab('wallet', event)">💸 Approve/Reject Transactions</button>
+    <button class="admin-tab-btn" onclick="switchAdminTab('sellers', event)">🏪 Seller Approvals</button>
     <button class="admin-tab-btn" onclick="switchAdminTab('products', event)">🛍️ Products & Deal Covers</button>
     <button class="admin-tab-btn" onclick="switchAdminTab('orders', event)">📦 All Orders</button>
     <button class="admin-tab-btn" onclick="switchAdminTab('support', event)">🎧 Support Tickets</button>
@@ -280,10 +287,16 @@ footer p{margin:6px;font-size:13px}
 
   <div id="admTab-overview" class="admin-tab-content active">
     <div class="quick" style="margin:0 0 20px">
-      <div class="quick-card"><b>👥 Total Users</b><p id="admStatUsers" style="font-size:20px;color:#34d399;font-weight:bold">0</p></div>
-      <div class="quick-card"><b>🏪 Active Sellers</b><p id="admStatSellers" style="font-size:20px;color:#34d399;font-weight:bold">0</p></div>
-      <div class="quick-card"><b>💰 Pending Wallet Requests</b><p id="admStatPending" style="font-size:20px;color:#f43f5e;font-weight:bold">0</p></div>
+      <div class="quick-card"><b>👥 Total Users</b><p id="admStatUsers" style="font-size:24px;color:#34d399;font-weight:bold">0</p></div>
+      <div class="quick-card"><b>🏪 Active Sellers</b><p id="admStatSellers" style="font-size:24px;color:#34d399;font-weight:bold">0</p></div>
+      <div class="quick-card"><b>💰 Pending Wallet Requests</b><p id="admStatPending" style="font-size:24px;color:#f43f5e;font-weight:bold">0</p></div>
     </div>
+  </div>
+
+  <div id="admTab-users" class="admin-tab-content">
+    <h3 style="color:#34d399;margin-bottom:10px">👥 Full User & Balance Management</h3>
+    <p style="font-size:12px;color:#9ca3af;margin-bottom:15px">Hano unafite ubushobozi bwo kureba amakuru y'abakoresha wose, guhindura Balance zabo, gubafunga (Block/Unblock), no kubasiba.</p>
+    <div id="adminUsersList">Loading Users...</div>
   </div>
 
   <div id="admTab-wallet" class="admin-tab-content">
@@ -291,12 +304,9 @@ footer p{margin:6px;font-size:13px}
     <div id="adminRequestsList">Loading Transactions...</div>
   </div>
 
-  <div id="admTab-users" class="admin-tab-content">
-    <h3 style="color:#34d399;margin-bottom:10px">👥 User & Seller Controls</h3>
-    <h4 style="color:#a7f3d0;margin:10px 0 5px">1. Seller Applications (Pending Approval)</h4>
-    <div id="adminSellerAppsList" style="margin-bottom:20px">Loading...</div>
-    <h4 style="color:#a7f3d0;margin:10px 0 5px">2. All Users Management</h4>
-    <div id="adminUsersList">Loading Users...</div>
+  <div id="admTab-sellers" class="admin-tab-content">
+    <h3 style="color:#34d399;margin-bottom:10px">🏪 Seller Requests Approval</h3>
+    <div id="adminSellerAppsList">Loading Seller Requests...</div>
   </div>
 
   <div id="admTab-products" class="admin-tab-content">
@@ -310,11 +320,11 @@ footer p{margin:6px;font-size:13px}
           <option value="5">Deal 5</option><option value="6">Deal 6</option>
           <option value="7">Deal 7</option>
         </select>
-        <input id="admCoverImgUrl" class="field" placeholder="Image Filename/URL (e.g. deal1.jpg)" style="flex:1">
+        <input id="admCoverImgUrl" class="field" placeholder="Image URL / SVG Graphic Link" style="flex:1">
         <button id="admSaveCoverBtn" class="button" style="width:auto">Save Cover</button>
       </div>
     </div>
-    <h4>Ibicuruzwa Byose mu Masoko</h4>
+    <h4>Ibicuruzwa Byose mu Masoko (35 Template + Seller Products)</h4>
     <div id="adminAllProductsList" style="margin-top:10px">Loading...</div>
   </div>
 
@@ -324,7 +334,7 @@ footer p{margin:6px;font-size:13px}
   </div>
 
   <div id="admTab-support" class="admin-tab-content">
-    <h3 style="color:#34d399;margin-bottom:10px">🎧 Support Tickets & Customer Replies</h3>
+    <h3 style="color:#34d399;margin-bottom:10px">🎧 Support Tickets & Direct Replies</h3>
     <div id="adminSupportList">Loading Tickets...</div>
   </div>
 
@@ -349,9 +359,9 @@ footer p{margin:6px;font-size:13px}
 <div class="modal-overlay" id="productDetailModal"><div class="modal-box">
  <div class="modal-head"><h2 id="pdName">Product Name</h2><button class="close-modal" onclick="closeModal('productDetailModal')">×</button></div>
  <div style="text-align:center">
-   <img id="pdImg" src="" style="max-height:200px;object-fit:cover;border-radius:12px;margin-bottom:12px;width:100%">
+   <img id="pdImg" src="" style="max-height:220px;object-fit:cover;border-radius:12px;margin-bottom:12px;width:100%">
    <p id="pdDesc" style="color:#9ca3af;font-size:13px;margin-bottom:10px"></p>
-   <p style="font-size:18px;color:#34d399;font-weight:bold;margin-bottom:10px" id="pdPrice"></p>
+   <p style="font-size:20px;color:#34d399;font-weight:bold;margin-bottom:10px" id="pdPrice"></p>
    <div style="background:#16241e;padding:12px;border-radius:10px;margin-bottom:12px;text-align:left;font-size:13px">
       <p style="margin:4px 0">📞 <b>Contact Seller:</b> <span id="pdContact">N/A</span></p>
       <p style="margin:4px 0">💳 <b>Seller MoMo Direct:</b> <span id="pdMomo">N/A</span></p>
@@ -405,6 +415,12 @@ footer p{margin:6px;font-size:13px}
  <div id="cartItemsList"></div>
  <p style="display:flex;justify-content:space-between;font-weight:bold;margin:18px 0;font-size:16px;color:#34d399"><span>Total:</span><span id="cartTotalAmt">0 RWF</span></p>
  <button class="button" id="checkoutCartBtn">⚡ Pay & Order Now</button>
+</div></div>
+
+<!-- USER DETAILS INSPECTOR MODAL FOR ADMIN -->
+<div class="modal-overlay" id="adminUserInspectorModal"><div class="modal-box">
+ <div class="modal-head"><h2>👤 User Full Account Details</h2><button class="close-modal" onclick="closeModal('adminUserInspectorModal')">×</button></div>
+ <div id="adminUserInspectorContent"></div>
 </div></div>
 
 <section id="auth-section" class="modal-overlay"><div class="modal-box">
@@ -478,28 +494,45 @@ function toast(msg, type = "success") {
  }, 3500);
 }
 
+// DYNAMIC GRAPHIC PLACEHOLDERS FOR DEALS 1 TO 7
+function makeDealImg(title, bgHex) {
+  return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="600" height="400" fill="%23${bgHex}"/><text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Segoe UI, sans-serif" font-size="32" font-weight="bold">${encodeURIComponent(title)}</text><text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" fill="%23a7f3d0" font-family="Segoe UI, sans-serif" font-size="18">Rwanda Online Deals</text></svg>`;
+}
+
 const dealCategories=[
- {id:1,name:"Deal 1 - Phone & Accessories",description:"Telephone, chargers, earphones n'ibindi bikoresho.",img:"deal1.jpg"},
- {id:2,name:"Deal 2 - Imyenda & Mode",description:"Imyenda n'imyambaro igezweho.",img:"deal2.jpg"},
- {id:3,name:"Deal 3 - Inkweto Zigezweho",description:"Inkweto z'amoko yose ku giciro kiza.",img:"deal3.jpg"},
- {id:4,name:"Deal 4 - Home & Living",description:"Ibikoresho byo mu nzu no mu gikoni.",img:"deal4.jpg"},
- {id:5,name:"Deal 5 - Beauty & Personal Care",description:"Ibikoresho by'isuku n'ubwiza.",img:"deal5.jpg"},
- {id:6,name:"Deal 6 - Food & Grocery",description:"Ibiribwa n'ibindi nkenerwa.",img:"deal6.jpg"},
- {id:7,name:"Deal 7 - Premium Super Package",description:"Package y'ibicuruzwa bitandukanye.",img:"deal7.jpg"}
+ {id:1,name:"Deal 1 - Phone & Accessories",description:"Telephone, chargers, earphones n'ibindi bikoresho.",img:makeDealImg("Deal 1: Phones & Tech","064e3b")},
+ {id:2,name:"Deal 2 - Imyenda & Mode",description:"Imyenda n'imyambaro igezweho.",img:makeDealImg("Deal 2: Fashion & Clothing","047857")},
+ {id:3,name:"Deal 3 - Inkweto Zigezweho",description:"Inkweto z'amoko yose ku giciro kiza.",img:makeDealImg("Deal 3: Shoes & Sneakers","0f766e")},
+ {id:4,name:"Deal 4 - Home & Living",description:"Ibikoresho byo mu nzu no mu gikoni.",img:makeDealImg("Deal 4: Home & Kitchen","115e59")},
+ {id:5,name:"Deal 5 - Beauty & Personal Care",description:"Ibikoresho by'isuku n'ubwiza.",img:makeDealImg("Deal 5: Beauty & Care","134e4a")},
+ {id:6,name:"Deal 6 - Food & Grocery",description:"Ibiribwa n'ibindi nkenerwa.",img:makeDealImg("Deal 6: Food & Market","065f46")},
+ {id:7,name:"Deal 7 - Premium Super Package",description:"Package y'ibicuruzwa bitandukanye.",img:makeDealImg("Deal 7: VIP Super Offers","022c22")}
 ];
 
+// GENERATE 35 FULL TEMPLATE PRODUCTS (5 PER DEAL)
 const initialProducts=[];
+const dealNamesMap = {
+  1: ["Smartphone Galaxy", "Wireless Earbuds", "Fast Charger 65W", "Powerbank 20000mAh", "Screen Protector HD"],
+  2: ["Jacket y'Imbeho", "Ipantalo ya Jean", "Ikemisi ya Coton", "Igikoba cya Fashion", "Urupira rw'Imyenda"],
+  3: ["Inkweto z'Iminsi YOSE", "Sneakers Sport", "Inkweto z'Icyinyabupfura", "Sandales z'Impeshyi", "Bottes de Cuir"],
+  4: ["Blender y'Igikoni", "Isahani z'Ikirahure", "Matelas Orthopedique", "Icyuma gushyushya maji", "Tapis y'Mu Nzu"],
+  5: ["Parfum Royale", "Isabune y'Ubwiza", "Crème de Visage", "Ibikoresho by'Inyagatsi", "Shampooing Pro"],
+  6: ["Umuceri wa Super 25kg", "Amavuta yo Guteka 5L", "Isukari 10kg", "Kahawa y'Umarwanda", "Igitebo cya Fruits"],
+  7: ["VIP Home Bundle", "Smart TV 55 Inch", "Laptop Core i7", "Sound System Subwoofer", "Solar Generator Kit"]
+};
+
 for(let i=1; i<=7; i++){
  for(let j=1; j<=5; j++){
+  const pName = dealNamesMap[i][j-1];
   initialProducts.push({
    id: `init_${i}_${j}`,
    dealId: i,
-   name: `Product ${j} (Deal ${i})`,
-   price: j * 4500 + i * 1500,
-   description: `Igicuruzwa cyiza kandi gipfupfuye cya nyacyo muri Deal category ${i}.`,
-   img: `deal${i}.jpg`,
-   contactPhone: "0788000000",
-   sellerMomo: "0788000000",
+   name: `${pName}`,
+   price: j * 5000 + i * 2000,
+   description: `Igicuruzwa cyiza kandi gipfupfuye cya nyacyo muri Deal category ${i}. Mfite Warranty n'Ubwquality.`,
+   img: makeDealImg(`${pName}`, "0d5c34"),
+   contactPhone: "0788123456",
+   sellerMomo: "0788123456",
    sellerId: "admin_default"
   });
  }
@@ -558,7 +591,7 @@ window.switchAdminTab=function(tabName, evt){
 };
 
 function productCategory(p){return Number(p.dealId??p.category??1)}
-function productImage(p){return p.img||p.imageUrl||"deal1.jpg"}
+function productImage(p){return p.img||p.imageUrl||makeDealImg("Product Image","111c17")}
 
 function loadCategories(){
  const root=$("dealsContainer");
@@ -574,12 +607,12 @@ function loadCategories(){
   imgWrap.className="card-img-wrapper";
   const img=document.createElement("img");
   img.src=cat.img;
-  img.onerror=()=>{img.onerror=null;img.src="https://via.placeholder.com/300x180?text=Deal+"+cat.id};
+  img.alt=cat.name;
   imgWrap.appendChild(img);
 
   const h=document.createElement("h3");h.textContent=cat.name;
   const p=document.createElement("p");p.textContent=cat.description;
-  const b=document.createElement("button");b.className="button";b.textContent="Ingira Mwisoko / Reba Products";
+  const b=document.createElement("button");b.className="button";b.textContent="Ingira Mwisoko / Reba Products (5)";
   b.onclick=()=>openDealCategory(cat);
   
   card.append(imgWrap,h,p,b);
@@ -601,7 +634,6 @@ function openDealCategory(category){
  matches.forEach(p=>{
   const card=document.createElement("div");card.className="product-item-card";
   const img=document.createElement("img");img.src=productImage(p);img.alt=p.name||"Product";
-  img.onerror=()=>{img.onerror=null;img.src="https://via.placeholder.com/100?text=Product"};
   const info=document.createElement("div");info.className="product-item-info";
   const name=document.createElement("h4");name.textContent=p.name||"Product";
   const desc=document.createElement("p");desc.textContent=p.description||"";
@@ -781,7 +813,7 @@ async function approveTransaction(txId){
 
 async function rejectTransaction(txId){
  if(!currentUser||currentUserRole!=="admin"){toast("Uburenganzira bwa admin burakenewe.","error");return}
- const reason = prompt("Andika impamvu / note yo kwangira iyi transaction:");
+ const reason = prompt("Andika impamvu / note yo kwangira iyi transaction (Reject Reason):");
  if(reason===null)return;
  try{
    await updateDoc(doc(db,"transactions",txId),{
@@ -789,7 +821,7 @@ async function rejectTransaction(txId){
      rejectReason: reason,
      rejectedAt: serverTimestamp()
    });
-   toast("Transaction yangiwe!","info");
+   toast("Transaction yangiwe! Reason bika.","info");
  }catch(err){toast("Ntibyashobotse: "+err.message,"error")}
 }
 
@@ -806,6 +838,32 @@ $("requestSellerBtn").onclick=async()=>{
      toast("Ubusabe bwo kuba Seller bwoherejwe neza! Tegereza approval.","success");
    }catch(e){toast("Ikosa: "+e.message,"error")}
  }
+};
+
+function inspectUserDetails(uDocId, uData) {
+  const content = $("adminUserInspectorContent");
+  content.innerHTML = `
+    <div style="font-size:14px;line-height:1.8">
+      <p><b>User ID:</b> ${uDocId}</p>
+      <p><b>Amazina:</b> ${uData.name || 'N/A'}</p>
+      <p><b>Email:</b> ${uData.email || 'N/A'}</p>
+      <p><b>Role:</b> <span style="color:#34d399;font-weight:bold">${uData.role || 'user'}</span></p>
+      <p><b>Current Balance:</b> <span style="color:#34d399;font-weight:bold;font-size:18px">${money(uData.balance || 0)}</span></p>
+      <p><b>Account Status:</b> ${uData.blocked ? '<span style="color:#f43f5e;font-weight:bold">BLOCKED</span>' : '<span style="color:#34d399;font-weight:bold">ACTIVE</span>'}</p>
+      <hr style="border-color:#23382f;margin:15px 0">
+      <button class="button" onclick="editUserBalanceFromModal('${uDocId}', ${uData.balance || 0})">✏️ Guhindura Balance</button>
+    </div>
+  `;
+  openModal("adminUserInspectorModal");
+}
+
+window.editUserBalanceFromModal = async function(uDocId, oldBal) {
+  const newBal = prompt("Andika balance nshya y'uyu mukoresha (RWF):", oldBal);
+  if(newBal!==null && !isNaN(newBal)){
+    await updateDoc(doc(db,"user",uDocId),{balance: Number(newBal)});
+    toast("Balance yavuguruwe neza!","success");
+    closeModal("adminUserInspectorModal");
+  }
 };
 
 function listenToAdminPanel(){
@@ -825,20 +883,27 @@ function listenToAdminPanel(){
   const list=$("adminUsersList");list.replaceChildren();
   $("admStatUsers").textContent=snap.size;
   let sellerCount=0;
-  if(snap.empty){list.textContent="Nta mukoresha ubonywe.";return}
+  if(snap.empty){list.textContent="Nta mukoresha ubonywe muri collection ya user.";return}
   snap.forEach(uDoc=>{
    const u=uDoc.data();
    if(u.role==="seller") sellerCount++;
-   const card=document.createElement("div");card.className="tx-card";
-   card.style.cssText="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap";
    
-   const info=document.createElement("div");
-   info.innerHTML=`<b>${u.name||'User'}</b> (${u.email||'No Email'})<br><span style="color:#34d399">${money(u.balance||0)}</span> | Role: <b>${u.role||'user'}</b> | Status: <b>${u.blocked?'BLOCKED':'ACTIVE'}</b>`;
+   const card=document.createElement("div");card.className="user-card";
    
-   const actions=document.createElement("div");actions.style.cssText="display:flex;gap:5px";
+   const info=document.createElement("div");info.className="user-info";
+   info.innerHTML=`
+     <b>${u.name||'User'}</b> (${u.email||'No Email'})
+     <p>Balance: <span style="color:#34d399;font-weight:bold">${money(u.balance||0)}</span> | Role: <b>${u.role||'user'}</b> | Status: <b>${u.blocked?'BLOCKED':'ACTIVE'}</b></p>
+   `;
+   
+   const actions=document.createElement("div");actions.className="user-actions";
+
+   const viewBtn=document.createElement("button");
+   viewBtn.className="button button-secondary";viewBtn.textContent="👁️ View Details";
+   viewBtn.onclick=()=>inspectUserDetails(uDoc.id, u);
 
    const editBtn=document.createElement("button");
-   editBtn.className="button button-secondary";editBtn.textContent="Edit Bal";
+   editBtn.className="button button-secondary";editBtn.textContent="✏️ Edit Bal";
    editBtn.onclick=async()=>{
     const newBal=prompt("Andika balance nshya ya "+(u.name||'User')+":", u.balance||0);
     if(newBal!==null && !isNaN(newBal)){
@@ -848,23 +913,23 @@ function listenToAdminPanel(){
    };
 
    const blockBtn=document.createElement("button");
-   blockBtn.className="button";blockBtn.style.background=u.blocked?"#059669":"#eab308";
-   blockBtn.textContent=u.blocked?"Unblock":"Block";
+   blockBtn.className="button "+(u.blocked?"":"button-warning");
+   blockBtn.textContent=u.blocked?"🔓 Unblock":"🔒 Block";
    blockBtn.onclick=async()=>{
      await updateDoc(doc(db,"user",uDoc.id),{blocked: !u.blocked});
      toast(u.blocked?"User unblocked!":"User blocked!","info");
    };
 
    const delBtn=document.createElement("button");
-   delBtn.className="button button-danger";delBtn.textContent="Delete";
+   delBtn.className="button button-danger";delBtn.textContent="🗑️ Delete";
    delBtn.onclick=async()=>{
-     if(confirm("Urashaka gusiba uyu user burundu?")){
+     if(confirm("Urashaka gusiba uyu user burundu muri database?")){
        await deleteDoc(doc(db,"user",uDoc.id));
        toast("User wasibwe!","info");
      }
    };
 
-   actions.append(editBtn,blockBtn,delBtn);
+   actions.append(viewBtn,editBtn,blockBtn,delBtn);
    card.append(info,actions);list.append(card);
   });
   $("admStatSellers").textContent=sellerCount;
@@ -872,14 +937,14 @@ function listenToAdminPanel(){
 
  unsubSellerApps=onSnapshot(query(collection(db,"seller_applications"),where("status","==","PENDING")),snap=>{
    const list=$("adminSellerAppsList");list.replaceChildren();
-   if(snap.empty){list.textContent="Nta busabe bwa Seller buhari.";return}
+   if(snap.empty){list.textContent="Nta busabe bwa Seller buhari kuri ubu.";return}
    snap.forEach(sDoc=>{
      const app=sDoc.data();
      const card=document.createElement("div");card.className="tx-card";
      card.innerHTML=`<b>${app.userEmail}</b> asaba kuba Seller.<br>`;
      
      const approve=document.createElement("button");
-     approve.className="button";approve.textContent="Approve Seller";approve.style.marginTop="5px";
+     approve.className="button";approve.textContent="Approve Seller";approve.style.marginTop="8px";
      approve.onclick=async()=>{
        await updateDoc(doc(db,"user",app.userId),{role: "seller"});
        await updateDoc(doc(db,"seller_applications",sDoc.id),{status: "APPROVED"});
@@ -895,19 +960,19 @@ function listenToAdminPanel(){
    snap.forEach(oDoc=>{
      const o=oDoc.data();
      const item=document.createElement("div");item.className="tx-card";
-     item.innerHTML=`<b>${o.productName}</b> — ${money(o.price)}<br>Buyer: ${o.userEmail} | Status: <b>${o.status}</b>`;
+     item.innerHTML=`<b>${o.productName}</b> — ${money(o.price)}<br>Buyer: ${o.userEmail} | Status: <b style="color:#34d399">${o.status}</b>`;
      list.appendChild(item);
    });
  });
 
  unsubAllProds=onSnapshot(collection(db,"products"),snap=>{
    const list=$("adminAllProductsList");list.replaceChildren();
-   if(snap.empty){list.textContent="Nta gicuruzwa kiri mu bubiko.";return}
+   if(snap.empty){list.textContent="Nta gicuruzwa gishya kinyuzemo kuko ukoresha n'igifuniko cya Template Products (35).";return}
    snap.forEach(pDoc=>{
      const p=pDoc.data();
      const card=document.createElement("div");card.className="product-item-card";
      card.innerHTML=`
-       <img src="${p.imageUrl||'deal1.jpg'}">
+       <img src="${p.imageUrl||p.img||makeDealImg('Product','111c17')}">
        <div class="product-item-info">
          <h4>${p.name}</h4>
          <p>${money(p.price)} | Category: Deal ${p.category} | Seller: ${p.sellerId}</p>
@@ -926,7 +991,7 @@ function listenToAdminPanel(){
 
  unsubSupport=onSnapshot(collection(db,"support_tickets"),snap=>{
   const list=$("adminSupportList");list.replaceChildren();
-  if(snap.empty){list.textContent="Nta message nshya.";return}
+  if(snap.empty){list.textContent="Nta ubutumwa/ticket nshya iriho.";return}
   snap.forEach(s=>{
    const d=s.data(),item=document.createElement("div");item.className="tx-card";
    const who=document.createElement("b");who.textContent="From: "+(d.userEmail||"Unknown");
@@ -935,20 +1000,21 @@ function listenToAdminPanel(){
    if(d.adminReply) {
      const rep = document.createElement("p");
      rep.style.color = "#34d399";
-     rep.textContent = "Reply: " + d.adminReply;
+     rep.style.marginTop = "6px";
+     rep.textContent = "Admin Reply: " + d.adminReply;
      item.append(who,msg,rep);
    } else {
      const replyBtn=document.createElement("button");
-     replyBtn.className="button button-secondary";replyBtn.style.marginTop="6px";
-     replyBtn.textContent="Reply Ticket";
+     replyBtn.className="button button-secondary";replyBtn.style.marginTop="8px";
+     replyBtn.textContent="Reply Ticket Direct";
      replyBtn.onclick=async()=>{
-       const replyText=prompt("Andika igisubizo cyawe:");
+       const replyText=prompt("Andika igisubizo cyawe cyo koherereza umukiriya:");
        if(replyText){
          await updateDoc(doc(db,"support_tickets",s.id),{
            adminReply: replyText,
            repliedAt: serverTimestamp()
          });
-         toast("Igisubizo cyohererejwe!","success");
+         toast("Igisubizo cyohererejwe neza!","success");
        }
      };
      item.append(who,msg,replyBtn);
@@ -991,7 +1057,7 @@ function listenToSellerProducts(){
       const p=pDoc.data();
       const card=document.createElement("div");card.className="product-item-card";
       card.innerHTML=`
-        <img src="${p.imageUrl||'deal1.jpg'}">
+        <img src="${p.imageUrl||p.img||makeDealImg('Product','111c17')}">
         <div class="product-item-info">
           <h4>${p.name}</h4>
           <p>${money(p.price)} | Deal ${p.category}</p>
@@ -1018,7 +1084,7 @@ $("saveSysMomoBtn").onclick=async()=>{
 $("admSaveCoverBtn").onclick=()=>{
  const catId=Number($("admCoverCategory").value);
  const imgUrl=$("admCoverImgUrl").value.trim();
- if(!imgUrl){toast("Shyiramo izina ry'ifoto cyangwa URL!","error");return}
+ if(!imgUrl){toast("Shyiramo URL y'ifoto!","error");return}
  const catIndex = dealCategories.findIndex(c=>c.id===catId);
  if(catIndex!==-1){
    dealCategories[catIndex].img = imgUrl;
@@ -1038,7 +1104,7 @@ function listenToProducts(){
    firestoreProducts.push({
     id:s.id,dealId:Number(d.category??d.dealId??1),
     name:d.name||"Product",price:Number(d.price)||0,
-    description:d.description||"",img:d.imageUrl||d.img||"deal1.jpg",
+    description:d.description||"",img:d.imageUrl||d.img||makeDealImg("Product","111c17"),
     contactPhone:d.contactPhone||"0788000000",
     sellerMomo:d.sellerMomo||"0788000000",
     sellerId:d.sellerId||"admin",

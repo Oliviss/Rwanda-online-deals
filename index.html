@@ -202,7 +202,7 @@ footer p{margin:6px;font-size:13px}
             <!-- ADMIN PANEL (RESTRICTED VIA FIRESTORE ROLE) -->
             <div id="adminPanelBox" class="admin-box" style="display: none;">
                 <h3 style="color: #075d34; margin-bottom: 8px;">⚙️ Admin Control Panel</h3>
-                
+
                 <h4 style="margin-top:10px; font-size:13px;">1. Pending Wallet Requests (Deposit/Cashout):</h4>
                 <div id="adminRequestsList" style="margin: 8px 0;">Loading pending transactions...</div>
 
@@ -481,7 +481,7 @@ async function buyProduct(product) {
 
     try {
         const newBal = userWallet - product.price;
-        await updateDoc(doc(db, "users", currentUser.uid), { balance: newBal });
+        await updateDoc(doc(db, "user", currentUser.uid), { balance: newBal });
         await addDoc(collection(db, "orders"), {
             userId: currentUser.uid,
             productName: product.name,
@@ -542,7 +542,7 @@ document.getElementById("paymentForm").onsubmit = async (e) => {
 
 // LISTEN TO REALTIME FIRESTORE USER DATA
 function listenToUserData(user) {
-    const userRef = doc(db, "users", user.uid);
+    const userRef = doc(db, "user", user.uid);
     onSnapshot(userRef, (docSnap) => {
         if(docSnap.exists()) {
             const data = docSnap.data();
@@ -605,7 +605,7 @@ function listenToAdminPanel() {
 
 window.approveTx = async (txId, userId, amount, type) => {
     try {
-        const uRef = doc(db, "users", userId);
+        const uRef = doc(db, "user", userId);
         const uSnap = await getDoc(uRef);
         let curBal = uSnap.exists() ? (uSnap.data().balance || 0) : 0;
 
@@ -724,7 +724,7 @@ onAuthStateChanged(auth, async (user) => {
     currentUser = user;
 
     try {
-      const userRef = doc(db, "users", user.uid);
+      const userRef = doc(db, "user", user.uid);
       const userSnap = await getDoc(userRef);
 
       const role = userSnap.exists()

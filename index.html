@@ -3,76 +3,132 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rwanda Online Deals</title>
+<title>Rwanda Online Deals - VIP Shopping & Wallet</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#f4f8f6;color:#17231d}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+body{background:#0b1310;color:#e1e9e5;min-height:100vh}
 button,input,select,textarea{font-family:inherit}
-button{cursor:pointer}
-header{background:linear-gradient(135deg,#075b32,#0b7a45);color:white;padding:18px;text-align:center}
-.brand{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+button{cursor:pointer;transition:all 0.2s ease}
+
+/* ANIMATIONS & GRAPHICS */
+@keyframes pulseGlow {
+ 0%, 100% { box-shadow: 0 0 15px rgba(11, 160, 91, 0.3); }
+ 50% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.6); }
+}
+@keyframes floatItem {
+ 0%, 100% { transform: translateY(0px); }
+ 50% { transform: translateY(-6px); }
+}
+.animated-glow { animation: pulseGlow 3s infinite ease-in-out; }
+.animated-float { animation: floatItem 4s infinite ease-in-out; }
+
+/* TOAST NOTIFICATIONS */
+#toast-container {
+ position: fixed; top: 20px; right: 20px; z-index: 9999;
+ display: flex; flex-direction: column; gap: 10px; max-width: 320px;
+}
+.toast {
+ padding: 14px 18px; border-radius: 12px; font-weight: bold; font-size: 13px;
+ color: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+ opacity: 0; transform: translateX(30px); transition: all 0.3s ease;
+}
+.toast.show { opacity: 1; transform: translateX(0); }
+.toast.success { background: linear-gradient(135deg, #059669, #10b981); }
+.toast.error { background: linear-gradient(135deg, #dc2626, #f43f5e); }
+.toast.info { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+
+/* HEADER & NAVBAR */
+header{background:linear-gradient(135deg,#063821,#0b6b3a,#10894d);color:white;padding:18px;position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,0.08) 10%,transparent 20%);transform:rotate(30deg);pointer-events:none}
+.brand{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;z-index:2}
 .brand-text{text-align:left}
-.brand h1{font-size:24px;margin-bottom:5px}
-.brand p{font-size:13px}
-.header-actions{display:flex;align-items:center;gap:8px}
-.login-top,.cart-icon-btn,.menu-btn{border:0;border-radius:20px;padding:10px 13px;font-weight:bold}
-.login-top{background:white;color:#08703d}
-.cart-icon-btn,.menu-btn{background:#ffffff25;color:white}
-.menu-btn{font-size:22px}
-nav{background:white;padding:13px;text-align:center;box-shadow:0 2px 10px #0001;position:sticky;top:0;z-index:20}
-nav a{color:#086d3b;text-decoration:none;margin:0 8px;font-weight:bold;font-size:14px}
-.hero,.section,.quick{max-width:1100px;margin:20px auto;padding:0 16px}
-.hero-box{border-radius:24px;min-height:280px;padding:35px 25px;display:flex;align-items:center;background:linear-gradient(135deg,#073f27,#0b7541,#16a05b);color:white}
+.brand h1{font-size:26px;font-weight:900;letter-spacing:-0.5px;background:linear-gradient(90deg,#fff,#a7f3d0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.brand p{font-size:13px;color:#a7f3d0}
+.header-actions{display:flex;align-items:center;gap:10px}
+.login-top,.cart-icon-btn,.menu-btn{border:0;border-radius:20px;padding:10px 16px;font-weight:bold;font-size:13px}
+.login-top{background:#10b981;color:white;box-shadow:0 4px 12px rgba(16,185,129,0.3)}
+.login-top:hover{background:#059669}
+.cart-icon-btn,.menu-btn{background:rgba(255,255,255,0.15);color:white;backdrop-filter:blur(5px)}
+.menu-btn{font-size:20px;padding:6px 12px}
+
+nav{background:#111c17;padding:13px;text-align:center;border-bottom:1px solid #1e2e27;position:sticky;top:0;z-index:20}
+nav a{color:#34d399;text-decoration:none;margin:0 12px;font-weight:bold;font-size:14px}
+nav a:hover{color:#fff}
+
+/* HERO & SECTIONS */
+.hero,.section,.quick{max-width:1100px;margin:24px auto;padding:0 16px}
+.hero-box{border-radius:24px;min-height:280px;padding:40px 30px;display:flex;align-items:center;background:linear-gradient(135deg,#062b1a,#0d5c34,#059669);color:white;border:1px solid rgba(255,255,255,0.1)}
 .hero-content{max-width:620px}
-.badge{display:inline-block;background:#ffffff25;padding:7px 12px;border-radius:20px;font-size:12px;margin-bottom:13px}
-.hero h2{font-size:34px;line-height:1.1;margin-bottom:12px}
-.hero p{line-height:1.6;margin-bottom:20px}
-.primary-btn{background:white;color:#086d3b;padding:13px 20px;border-radius:10px;border:0;font-weight:bold}
-.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.quick-card,.card{background:white;padding:18px;border-radius:16px;box-shadow:0 5px 18px #0000000d;border:1px solid #edf1ee}
-.quick-card b,.card h3{color:#08703d}
-.quick-card p,.card p{font-size:13px;color:#66736c;margin-top:7px;line-height:1.5}
-.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;gap:10px}
-.section-title h2{color:#086d3b;font-size:22px}
-.deals{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-.card{display:flex;flex-direction:column;gap:12px}
-.button{display:block;background:#0b6b3a;color:white;padding:11px 14px;border-radius:9px;border:0;font-weight:bold;text-align:center;width:100%}
-.button-secondary{background:#eef5f1;color:#086d3b;border:1px solid #c2ded0}
-.modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:#091e14aa;padding:20px;overflow:auto}
-.modal-box{background:white;max-width:600px;margin:25px auto;padding:22px;border-radius:18px;position:relative}
-.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.modal-head h2{color:#086d3b;font-size:20px}
-.close-modal{border:0;background:#eef5f1;color:#075d34;width:36px;height:36px;border-radius:50%;font-size:20px}
-.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
-.auth-tab{padding:11px;border:1px solid #d9e5de;border-radius:9px;background:#f7faf8;color:#086d3b;font-weight:bold}
-.auth-tab.active{background:#0b6b3a;color:white}
-.auth-form{display:none;flex-direction:column;gap:10px}
+.badge{display:inline-block;background:rgba(16,185,129,0.2);color:#34d399;padding:7px 14px;border-radius:20px;font-size:12px;margin-bottom:15px;font-weight:bold;border:1px solid rgba(52,211,153,0.3)}
+.hero h2{font-size:36px;line-height:1.15;margin-bottom:14px;font-weight:800}
+.hero p{line-height:1.6;margin-bottom:22px;color:#d1fae5}
+.primary-btn{background:#10b981;color:white;padding:14px 24px;border-radius:12px;border:0;font-weight:bold;font-size:15px}
+.primary-btn:hover{background:#059669;transform:translateY(-2px)}
+
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.quick-card,.card{background:#111c17;padding:20px;border-radius:18px;border:1px solid #1e2e27;box-shadow:0 8px 20px rgba(0,0,0,0.3)}
+.quick-card b,.card h3{color:#34d399;font-size:18px}
+.quick-card p,.card p{font-size:13px;color:#9ca3af;margin-top:8px;line-height:1.5}
+
+.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:10px}
+.section-title h2{color:#34d399;font-size:22px}
+.deals{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+
+.card{display:flex;flex-direction:column;justify-content:space-between;gap:12px;position:relative;overflow:hidden}
+.card-img-wrapper{height:150px;width:100%;border-radius:12px;overflow:hidden;background:#1a2b23;margin-bottom:6px}
+.card-img-wrapper img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease}
+.card:hover .card-img-wrapper img{transform:scale(1.08)}
+
+.button{display:block;background:linear-gradient(135deg,#059669,#10b981);color:white;padding:12px 16px;border-radius:10px;border:0;font-weight:bold;text-align:center;width:100%}
+.button:hover{opacity:0.9}
+.button-secondary{background:#1e2e27;color:#34d399;border:1px solid #2e473b}
+
+/* MODALS */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(4,10,7,0.85);backdrop-filter:blur(8px);padding:20px;overflow:auto}
+.modal-box{background:#111c17;max-width:620px;margin:30px auto;padding:25px;border-radius:20px;position:relative;border:1px solid #23382f;box-shadow:0 20px 40px rgba(0,0,0,0.6)}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.modal-head h2{color:#34d399;font-size:22px}
+.close-modal{border:0;background:#1e2e27;color:#34d399;width:36px;height:36px;border-radius:50%;font-size:22px;display:flex;align-items:center;justify-content:center}
+
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.auth-tab{padding:12px;border:1px solid #23382f;border-radius:10px;background:#16241e;color:#9ca3af;font-weight:bold}
+.auth-tab.active{background:#059669;color:white;border-color:#10b981}
+.auth-form{display:none;flex-direction:column;gap:12px}
 .auth-form.active{display:flex}
-.auth-form input,.auth-form select,.auth-form textarea,.field{padding:12px;border:1px solid #ccd8d1;border-radius:9px;font-size:14px;width:100%}
-.auth-form button{padding:12px;border:0;border-radius:9px;background:#0b6b3a;color:white;font-weight:bold}
-#dashboard{display:none;background:#eef7f1;min-height:100vh;padding:24px 16px 40px}
+.auth-form input,.auth-form select,.auth-form textarea,.field{padding:12px;background:#16241e;border:1px solid #23382f;border-radius:10px;font-size:14px;color:white;width:100%}
+.auth-form input:focus,.field:focus{outline:none;border-color:#10b981}
+.auth-form button{padding:13px;border:0;border-radius:10px;background:#10b981;color:white;font-weight:bold;font-size:15px}
+
+/* DASHBOARD */
+#dashboard{display:none;background:#0b1310;min-height:100vh;padding:24px 16px 50px}
 .dashboard-wrap{max-width:1100px;margin:auto}
-.dashboard-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-.dashboard-top h2{color:#075d34}
-.logout-btn{background:white;color:#b42318;border:1px solid #f0c6c1;padding:10px 14px;border-radius:9px;font-weight:bold}
-.balance-box{background:linear-gradient(135deg,#075d34,#0d8950);color:white;border-radius:20px;padding:22px;margin-bottom:18px}
-.balance-box h3{font-size:30px;margin:8px 0 16px}
-.action-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.action{background:#ffffff24;border:1px solid #ffffff44;color:white;border-radius:12px;padding:12px;font-weight:bold}
-.admin-box{background:white;border:2px dashed #075d34;border-radius:16px;padding:18px;margin-bottom:20px}
-.tx-card,.product-item-card{background:#f8faf9;border:1px solid #dce8e1;border-radius:10px;padding:12px;margin:8px 0;font-size:13px}
-.product-item-card{display:flex;gap:12px;align-items:center}
-.product-item-card img{width:80px;height:80px;object-fit:cover;border-radius:8px}
+.dashboard-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
+.dashboard-top h2{color:#34d399}
+.logout-btn{background:#1a231f;color:#f43f5e;border:1px solid #3a2227;padding:10px 16px;border-radius:10px;font-weight:bold}
+
+.balance-box{background:linear-gradient(135deg,#063821,#0b6b3a,#059669);color:white;border-radius:22px;padding:26px;margin-bottom:24px;border:1px solid rgba(255,255,255,0.1)}
+.balance-box h3{font-size:34px;margin:10px 0 20px;font-weight:900}
+.action-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.action{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;border-radius:12px;padding:14px;font-weight:bold;backdrop-filter:blur(5px)}
+.action:hover{background:rgba(255,255,255,0.22)}
+
+.admin-box{background:#111c17;border:2px dashed #10b981;border-radius:18px;padding:20px;margin-bottom:24px}
+.tx-card,.product-item-card{background:#16241e;border:1px solid #23382f;border-radius:12px;padding:14px;margin:10px 0;font-size:13px}
+.product-item-card{display:flex;gap:14px;align-items:center}
+.product-item-card img{width:85px;height:85px;object-fit:cover;border-radius:10px;background:#0b1310}
 .product-item-info{flex:1}
-.product-item-info h4{color:#075d34;margin-bottom:5px}
-.product-item-info p{font-size:12px;color:#666;margin-bottom:5px}
-.menu-panel{display:none;position:absolute;right:15px;top:70px;background:white;border-radius:12px;box-shadow:0 10px 30px #0002;padding:8px;z-index:50;min-width:150px}
-.menu-panel a{display:block;padding:10px;color:#075d34;text-decoration:none;font-weight:bold;font-size:13px}
-footer{background:#075d34;color:white;text-align:center;padding:25px;margin-top:35px}
+.product-item-info h4{color:#34d399;font-size:15px;margin-bottom:4px}
+.product-item-info p{font-size:12px;color:#9ca3af;margin-bottom:6px}
+
+.menu-panel{display:none;position:absolute;right:15px;top:70px;background:#111c17;border-radius:12px;border:1px solid #23382f;box-shadow:0 10px 30px rgba(0,0,0,0.5);padding:10px;z-index:50;min-width:160px}
+.menu-panel a{display:block;padding:10px;color:#34d399;text-decoration:none;font-weight:bold;font-size:13px}
+
+footer{background:#062b1a;color:#a7f3d0;text-align:center;padding:30px;margin-top:40px;border-top:1px solid #105936}
 footer p{margin:6px;font-size:13px}
+
 @media(max-width:760px){
- .brand h1{font-size:18px}.brand p{font-size:11px}
- .header-actions{gap:4px}.login-top,.cart-icon-btn{padding:8px;font-size:11px}
+ .brand h1{font-size:20px}.brand p{font-size:11px}
+ .header-actions{gap:6px}.login-top,.cart-icon-btn{padding:8px 12px;font-size:11px}
  .hero h2{font-size:28px}.quick{grid-template-columns:1fr}
  .action-grid{grid-template-columns:repeat(2,1fr)}
  .product-item-card{flex-direction:column;text-align:center}
@@ -80,12 +136,16 @@ footer p{margin:6px;font-size:13px}
 </style>
 </head>
 <body>
+
+<!-- TOAST CONTAINER -->
+<div id="toast-container"></div>
+
 <header id="siteHeader">
  <div class="brand">
-  <div class="brand-text"><h1>Rwanda Online Deals</h1><p>Deals nziza kandi zorohereza Abanyarwanda</p></div>
+  <div class="brand-text"><h1>Rwanda Online Deals</h1><p>Isoko Rigezweho ry'Abanyarwanda</p></div>
   <div class="header-actions">
-   <button class="cart-icon-btn" id="openCartBtn">🛒 Cart <span id="cartCount">0</span></button>
-   <button class="login-top" id="openAuthTop">Injira / Kora Account</button>
+   <button class="cart-icon-btn" id="openCartBtn">🛒 Cart (<span id="cartCount">0</span>)</button>
+   <button class="login-top" id="openAuthTop">Injira / Account</button>
    <button class="menu-btn" id="menuBtn" aria-label="Menu">⋮</button>
   </div>
  </div>
@@ -98,36 +158,33 @@ footer p{margin:6px;font-size:13px}
 
 <main id="homePage">
  <section class="hero" id="home">
-  <div class="hero-box"><div class="hero-content">
+  <div class="hero-box animated-glow"><div class="hero-content">
    <span class="badge">🇷🇼 ONLINE SHOPPING • RWANDA</span>
-   <h2>Shaka deals. Hitamo neza. Korera online.</h2>
-   <p>Murakaza neza kuri Rwanda Online Deals — offers n'ibicuruzwa bitandukanye.</p>
+   <h2>Shaka deals 1–7. Hitamo neza. Korera online.</h2>
+   <p>Murakaza neza kuri Rwanda Online Deals — offers n'ibicuruzwa bitandukanye n'uburyo bwo kwishyura busezeranye.</p>
    <button class="primary-btn" id="openAuthHero">Tangira nonaha →</button>
   </div></div>
  </section>
  <section class="quick">
-  <div class="quick-card"><b>🔥 Deals zatoranyijwe</b><p>Shakisha offers zitandukanye ahantu hamwe.</p></div>
-  <div class="quick-card"><b>🔐 Account yawe</b><p>Login maze winjire mu gice cyihariye.</p></div>
-  <div class="quick-card"><b>🤝 Support</b><p>Ubufasha n'ubuyobozi mu buryo bwihuse.</p></div>
+  <div class="quick-card"><b>🔥 Deals 1–7 Categories</b><p>Shakisha offers zitandukanye mu masoko 7 yihariye.</p></div>
+  <div class="quick-card"><b>🔐 Wallet System</b><p>Bika amafaranga muri Wallet wiyishyurire mu buryo bworoshye.</p></div>
+  <div class="quick-card"><b>📲 Mobile Money Payments</b><p>Deposit & Cash Out zikoresha MTN & Airtel Money.</p></div>
  </section>
  <section class="section" id="homeDeals">
-  <div class="section-title"><h2>🔥 Categories Preview</h2></div>
-  <div class="deals">
-   <div class="card"><h3>Deals 1–7 Store</h3><p>Isoko ry'ibicuruzwa 7 bitandukanye.</p></div>
-   <div class="card"><h3>Wallet System</h3><p>Balance, Deposit & Cash Out.</p></div>
-   <div class="card"><h3>Fast Support</h3><p>Mubaze ubufasha ibyo ari byo byose.</p></div>
-  </div>
+  <div class="section-title"><h2>🔥 Category Preview</h2></div>
+  <div class="deals" id="homePreviewContainer"></div>
  </section>
 </main>
 
 <section id="dashboard">
  <div class="dashboard-wrap">
   <div class="dashboard-top">
-   <div><h2>Murakaza neza, <span id="userName">User</span> 👋</h2><p id="userEmail"></p></div>
+   <div><h2>Murakaza neza, <span id="userName">User</span> 👋</h2><p id="userEmail" style="color:#9ca3af;font-size:13px"></p></div>
    <button class="logout-btn" id="logoutButton">Logout</button>
   </div>
-  <div class="balance-box">
-   <small>💰 Wallet Balance</small><h3 id="userBalanceText">0 RWF</h3>
+  <div class="balance-box animated-glow">
+   <small style="color:#a7f3d0;font-weight:bold">💰 Wallet Balance</small>
+   <h3 id="userBalanceText">0 RWF</h3>
    <div class="action-grid">
     <button class="action" id="depositBtn">➕ Deposit</button>
     <button class="action" id="cashoutBtn">💸 Cash Out</button>
@@ -137,51 +194,63 @@ footer p{margin:6px;font-size:13px}
   </div>
   <div class="dashboard-deals">
    <div class="section-title">
-    <h2>🔥 Deals Categories</h2>
-    <button id="toggleAdminBtn" style="display:none;padding:8px 12px;background:#075d34;color:white;border:0;border-radius:8px">⚙️ Admin Panel</button>
+    <h2>🔥 Deals Categories (1–7)</h2>
+    <button id="toggleAdminBtn" style="display:none;padding:10px 16px;background:#059669;color:white;border:0;border-radius:10px;font-weight:bold">⚙️ Admin Control Panel</button>
    </div>
+
+   <!-- ADMIN CONTROL PANEL -->
    <div id="adminPanelBox" class="admin-box" style="display:none">
-    <h3 style="color:#075d34">⚙️ Admin Control Panel</h3>
-    <h4 style="margin-top:12px">1. Pending Wallet Requests</h4>
-    <div id="adminRequestsList">Loading...</div>
-    <h4 style="margin-top:15px">2. Add Product</h4>
-    <select id="adminDealCategory" class="field">
+    <h3 style="color:#34d399;margin-bottom:12px">⚙️ Admin Control Dashboard</h3>
+    
+    <h4 style="margin-top:12px;color:#a7f3d0">1. Pending Wallet Requests (Deposit / Cashout)</h4>
+    <div id="adminRequestsList" style="margin-top:8px">Loading...</div>
+    
+    <hr style="border-color:#23382f;margin:18px 0">
+    <h4 style="color:#a7f3d0">2. Add Product to Store</h4>
+    <select id="adminDealCategory" class="field" style="margin-top:8px">
      <option value="1">Deal 1 - Phone & Accessories</option><option value="2">Deal 2 - Imyenda & Mode</option>
      <option value="3">Deal 3 - Inkweto Zigezweho</option><option value="4">Deal 4 - Home & Living</option>
      <option value="5">Deal 5 - Beauty & Personal Care</option><option value="6">Deal 6 - Food & Grocery</option>
      <option value="7">Deal 7 - Premium Super Package</option>
     </select>
-    <input class="field" id="adminProdName" placeholder="Product Name" style="margin-top:7px">
-    <input class="field" id="adminProdPrice" type="number" min="1" placeholder="Price (RWF)" style="margin-top:7px">
-    <input class="field" id="adminProdDesc" placeholder="Description" style="margin-top:7px">
-    <input class="field" id="adminProdImg" placeholder="Image Name (e.g. deal1.jpg)" style="margin-top:7px">
-    <button id="adminSaveProdBtn" class="button" style="margin-top:8px">Save Product</button>
-    <h4 style="margin-top:15px">3. User Support Tickets</h4>
-    <div id="adminSupportList"></div>
+    <input class="field" id="adminProdName" placeholder="Product Name" style="margin-top:8px">
+    <input class="field" id="adminProdPrice" type="number" min="1" placeholder="Price (RWF)" style="margin-top:8px">
+    <input class="field" id="adminProdDesc" placeholder="Description" style="margin-top:8px">
+    <input class="field" id="adminProdImg" placeholder="Image Name / URL (e.g. deal1.jpg)" style="margin-top:8px">
+    <button id="adminSaveProdBtn" class="button" style="margin-top:12px">Save Product</button>
+    
+    <hr style="border-color:#23382f;margin:18px 0">
+    <h4 style="color:#a7f3d0">3. User Support Tickets</h4>
+    <div id="adminSupportList" style="margin-top:8px"></div>
    </div>
+
    <div class="deals" id="dealsContainer"></div>
   </div>
  </div>
 </section>
 
-<!-- DEAL CATEGORY MODAL -->
+<!-- DEAL CATEGORY SUB-SHOP MODAL -->
 <div class="modal-overlay" id="dealCategoryModal"><div class="modal-box">
  <div class="modal-head"><h2 id="modalCategoryTitle">Market Store</h2><button class="close-modal" id="closeDealModal">×</button></div>
  <div id="dealProductsList"></div>
 </div></div>
 
-<!-- PAYMENT MODAL -->
+<!-- PAYMENT MODAL (MOBILE MONEY GATEWAY) -->
 <div class="modal-overlay" id="paymentModal"><div class="modal-box">
  <div class="modal-head"><h2 id="payModalTitle">Payment Request</h2><button class="close-modal" id="closePayModal">×</button></div>
  <form id="paymentForm" class="auth-form active">
-  <select id="payMethod"><option value="MTN MoMo">MTN Mobile Money</option><option value="Airtel Money">Airtel Money</option></select>
-  <input type="tel" id="payPhone" placeholder="Telephone (078... / 072...)" required>
+  <label style="font-size:12px;color:#a7f3d0">Hitamo Gateway Company</label>
+  <select id="payMethod">
+    <option value="MTN MoMo (Paypack)">MTN Mobile Money (Paypack Aggregator)</option>
+    <option value="Airtel Money (Paypack)">Airtel Money (Paypack Aggregator)</option>
+  </select>
+  <input type="tel" id="payPhone" placeholder="Telephone Number (078... / 072...)" required>
   <input type="number" id="payAmount" placeholder="Amount (RWF)" min="100" required>
-  <button type="submit" id="paySubmitBtn">Submit Request</button>
+  <button type="submit" id="paySubmitBtn">Emeza Ubusabe</button>
  </form>
  <div id="paymentLoadingBox" style="display:none;text-align:center;padding:20px">
-  <p style="font-weight:bold;color:#075d34">Transaction pending verification...</p>
-  <p style="font-size:12px;color:#666;margin-top:7px">Ubusabe bwawe bwoherejwe gutegereza igenzura.</p>
+  <p style="font-weight:bold;color:#34d399">Transaction Pending Verification...</p>
+  <p style="font-size:12px;color:#9ca3af;margin-top:7px">Ubusabe bwawe bwoherejwe kuri Paypack Gateway. Mugihe gito buraba verified!</p>
  </div>
 </div></div>
 
@@ -189,26 +258,26 @@ footer p{margin:6px;font-size:13px}
 <div class="modal-overlay" id="supportModal"><div class="modal-box">
  <div class="modal-head"><h2>🎧 Customer Support</h2><button class="close-modal" id="closeSupportModal">×</button></div>
  <form id="supportForm" class="auth-form active">
-  <textarea id="supportText" placeholder="Andika ubutumwa cyangwa ikibazo hano..." rows="4" required></textarea>
+  <textarea id="supportText" placeholder="Andika ubutumwa cyangwa ikibazo ufite hano..." rows="4" required></textarea>
   <button type="submit">Ohereza Message</button>
  </form>
 </div></div>
 
 <!-- ACCOUNT MODAL -->
 <div class="modal-overlay" id="accountModal"><div class="modal-box">
- <div class="modal-head"><h2>👤 Account History</h2><button class="close-modal" id="closeAccountModal">×</button></div>
- <p><b>Name:</b> <span id="accName">User</span></p>
- <p><b>Email:</b> <span id="accEmail"></span></p>
- <p><b>Wallet:</b> <span id="accBalance">0 RWF</span></p>
- <hr style="margin:12px 0">
- <h4 style="color:#086d3b">📦 Orders History</h4><div id="userOrdersList"></div>
+ <div class="modal-head"><h2>👤 Account Details & History</h2><button class="close-modal" id="closeAccountModal">×</button></div>
+ <p style="margin:6px 0"><b>Name:</b> <span id="accName">User</span></p>
+ <p style="margin:6px 0"><b>Email:</b> <span id="accEmail"></span></p>
+ <p style="margin:6px 0"><b>Wallet:</b> <span id="accBalance" style="color:#34d399;font-weight:bold">0 RWF</span></p>
+ <hr style="border-color:#23382f;margin:15px 0">
+ <h4 style="color:#34d399">📦 Order History</h4><div id="userOrdersList" style="margin-top:10px"></div>
 </div></div>
 
 <!-- CART MODAL -->
 <div class="modal-overlay" id="cartModal"><div class="modal-box">
- <div class="modal-head"><h2>🛒 Agaseke kawe</h2><button class="close-modal" id="closeCartModal">×</button></div>
+ <div class="modal-head"><h2>🛒 Agaseke Kawe</h2><button class="close-modal" id="closeCartModal">×</button></div>
  <div id="cartItemsList"></div>
- <p style="display:flex;justify-content:space-between;font-weight:bold;margin:15px 0"><span>Total:</span><span id="cartTotalAmt">0 RWF</span></p>
+ <p style="display:flex;justify-content:space-between;font-weight:bold;margin:18px 0;font-size:16px;color:#34d399"><span>Total:</span><span id="cartTotalAmt">0 RWF</span></p>
  <button class="button" id="checkoutCartBtn">⚡ Pay & Order Now</button>
 </div></div>
 
@@ -222,7 +291,7 @@ footer p{margin:6px;font-size:13px}
  <form id="registerForm" class="auth-form active">
   <input type="text" id="registerName" placeholder="Amazina yawe" required>
   <input type="email" id="registerEmail" placeholder="Email Address" required>
-  <input type="password" id="registerPassword" placeholder="Password (minimum 6)" minlength="6" required>
+  <input type="password" id="registerPassword" placeholder="Password (minimum 6 characters)" minlength="6" required>
   <button type="submit">Create Account</button>
  </form>
  <form id="loginForm" class="auth-form">
@@ -230,7 +299,6 @@ footer p{margin:6px;font-size:13px}
   <input type="password" id="loginPassword" placeholder="Password" required>
   <button type="submit">Login</button>
  </form>
- <p id="authMessage" style="margin-top:12px;font-weight:bold;text-align:center;font-size:13px"></p>
 </div></section>
 
 <footer id="contact"><p><strong>Rwanda Online Deals</strong></p><p>© 2026 Rwanda Online Deals. All Rights Reserved.</p></footer>
@@ -270,31 +338,45 @@ let products=[];
 let unsubUser=null,unsubTx=null,unsubSupport=null,unsubOrders=null,unsubProducts=null;
 let profileLoadId=0;
 
-const dealCategories=[
- {id:1,name:"Deal 1 - Phone & Accessories",description:"Telephone, chargers, earphones n'ibindi."},
- {id:2,name:"Deal 2 - Imyenda & Mode",description:"Imyenda n'imyambaro igezweho."},
- {id:3,name:"Deal 3 - Inkweto Zigezweho",description:"Inkweto z'amoko yose ku giciro kiza."},
- {id:4,name:"Deal 4 - Home & Living",description:"Ibikoresho byo mu nzu no mu gikoni."},
- {id:5,name:"Deal 5 - Beauty & Personal Care",description:"Ibikoresho by'isuku n'ubwiza."},
- {id:6,name:"Deal 6 - Food & Grocery",description:"Ibiribwa n'ibindi nkenerwa."},
- {id:7,name:"Deal 7 - Premium Super Package",description:"Package y'ibicuruzwa bitandukanye."}
-];
-
-const initialProducts=[
- {id:"101",dealId:1,name:"Smart Phone Cover & Glass",price:5000,description:"Protector nshya kandi ikomeye.",img:"deal1.jpg"},
- {id:"102",dealId:1,name:"Fast Charger Original 20W",price:12000,description:"Charger ya Type-C.",img:"deal1.jpg"},
- {id:"201",dealId:2,name:"Ijacket y'Imbeho",price:25000,description:"Ijacket yo mu mbeho.",img:"deal1.jpg"},
- {id:"301",dealId:3,name:"Inkweto za Sneakers",price:18000,description:"Inkweto zo gutemberana.",img:"deal1.jpg"},
- {id:"401",dealId:4,name:"Blender ya Electric 1.5L",price:32000,description:"Igikoresho cyo gusya imbuto.",img:"deal1.jpg"},
- {id:"501",dealId:5,name:"Set y'Amavuta y'Umubiri",price:15000,description:"Amavuta yo kwita ku ruhu.",img:"deal1.jpg"},
- {id:"601",dealId:6,name:"Grocery Gift Box Standard",price:20000,description:"Ibiribwa bitandukanye.",img:"deal1.jpg"},
- {id:"701",dealId:7,name:"Super Pack Item VIP",price:50000,description:"Ibicuruzwa bitandukanye.",img:"deal1.jpg"}
-];
-
-function showMessage(message,color="#08703d"){
- $("authMessage").textContent=message;
- $("authMessage").style.color=color;
+// TOAST SYSTEM
+function toast(msg, type = "success") {
+ const container = $("toast-container");
+ const div = document.createElement("div");
+ div.className = `toast ${type}`;
+ div.textContent = msg;
+ container.appendChild(div);
+ setTimeout(() => div.classList.add("show"), 50);
+ setTimeout(() => {
+  div.classList.remove("show");
+  setTimeout(() => div.remove(), 300);
+ }, 3500);
 }
+
+const dealCategories=[
+ {id:1,name:"Deal 1 - Phone & Accessories",description:"Telephone, chargers, earphones n'ibindi bikoresho.",img:"deal1.jpg"},
+ {id:2,name:"Deal 2 - Imyenda & Mode",description:"Imyenda n'imyambaro igezweho.",img:"deal2.jpg"},
+ {id:3,name:"Deal 3 - Inkweto Zigezweho",description:"Inkweto z'amoko yose ku giciro kiza.",img:"deal3.jpg"},
+ {id:4,name:"Deal 4 - Home & Living",description:"Ibikoresho byo mu nzu no mu gikoni.",img:"deal4.jpg"},
+ {id:5,name:"Deal 5 - Beauty & Personal Care",description:"Ibikoresho by'isuku n'ubwiza.",img:"deal5.jpg"},
+ {id:6,name:"Deal 6 - Food & Grocery",description:"Ibiribwa n'ibindi nkenerwa.",img:"deal6.jpg"},
+ {id:7,name:"Deal 7 - Premium Super Package",description:"Package y'ibicuruzwa bitandukanye.",img:"deal7.jpg"}
+];
+
+// 5 Default Products for each Deal Category
+const initialProducts=[];
+for(let i=1; i<=7; i++){
+ for(let j=1; j<=5; j++){
+  initialProducts.push({
+   id: `init_${i}_${j}`,
+   dealId: i,
+   name: `Product ${j} (Deal ${i})`,
+   price: j * 5000 + i * 2000,
+   description: `Igicuruzwa cyiza cya nyacyo muri Deal category ${i}.`,
+   img: `deal${i}.jpg`
+  });
+ }
+}
+
 function openModal(id){$(id).style.display="block"}
 function closeModal(id){$(id).style.display="none"}
 function cleanupListeners(){
@@ -314,17 +396,37 @@ function productImage(p){return p.img||p.imageUrl||"deal1.jpg"}
 
 function loadCategories(){
  const root=$("dealsContainer");
+ const previewRoot=$("homePreviewContainer");
  root.replaceChildren();
+ if(previewRoot) previewRoot.replaceChildren();
+
  dealCategories.forEach(cat=>{
   const card=document.createElement("div");
-  card.className="card";
+  card.className="card animated-float";
+  
+  const imgWrap=document.createElement("div");
+  imgWrap.className="card-img-wrapper";
+  const img=document.createElement("img");
+  img.src=cat.img;
+  img.onerror=()=>{img.onerror=null;img.src="https://via.placeholder.com/300x180?text=Deal+"+cat.id};
+  imgWrap.appendChild(img);
+
   const h=document.createElement("h3");h.textContent=cat.name;
   const p=document.createElement("p");p.textContent=cat.description;
-  const b=document.createElement("button");b.className="button";b.textContent="Ingira Mwisoko / Reba";
+  const b=document.createElement("button");b.className="button";b.textContent="Ingira Mwisoko / Reba Products (5)";
   b.onclick=()=>openDealCategory(cat);
-  card.append(h,p,b);root.append(card);
+  
+  card.append(imgWrap,h,p,b);
+  root.append(card);
+
+  if(previewRoot) {
+    const cardClone = card.cloneNode(true);
+    cardClone.querySelector("button").onclick=()=>openDealCategory(cat);
+    previewRoot.append(cardClone);
+  }
  });
 }
+
 function openDealCategory(category){
  $("modalCategoryTitle").textContent=category.name;
  const list=$("dealProductsList");list.replaceChildren();
@@ -337,13 +439,13 @@ function openDealCategory(category){
   const info=document.createElement("div");info.className="product-item-info";
   const name=document.createElement("h4");name.textContent=p.name||"Product";
   const desc=document.createElement("p");desc.textContent=p.description||"";
-  const price=document.createElement("b");price.textContent=money(p.price);
+  const price=document.createElement("b");price.style.color="#34d399";price.textContent=money(p.price);
   info.append(name,desc,price);
   const actions=document.createElement("div");
   const buy=document.createElement("button");buy.className="button button-secondary";buy.textContent="Gura Nonaha";
   buy.onclick=()=>buyProduct(p);
-  const cart=document.createElement("button");cart.className="button";cart.style.marginTop="5px";cart.textContent="🛒 Cart";
-  cart.onclick=()=>{userCart.push(p);updateUI();alert("Igicuruzwa cyongewe mu gaseke.")};
+  const cart=document.createElement("button");cart.className="button";cart.style.marginTop="6px";cart.textContent="🛒 Cart";
+  cart.onclick=()=>{userCart.push(p);updateUI();toast("Igicuruzwa cyongewe mu gaseke!","info")};
   actions.append(buy,cart);card.append(img,info,actions);list.append(card);
  });
  openModal("dealCategoryModal");
@@ -351,9 +453,10 @@ function openDealCategory(category){
 $("closeDealModal").onclick=()=>closeModal("dealCategoryModal");
 
 async function buyProduct(product){
- if(!currentUser){alert("Banza winjire muri account.");openAuth("login");return}
+ if(!currentUser){toast("Banza winjire muri account.","error");openAuth("login");return}
  try{
-  const userRef=doc(db,"users",currentUser.uid);
+  // UPDATED: "user" collection instead of "users"
+  const userRef=doc(db,"user",currentUser.uid);
   const orderRef=doc(collection(db,"orders"));
   await runTransaction(db,async tx=>{
    const snap=await tx.get(userRef);
@@ -367,15 +470,15 @@ async function buyProduct(product){
     status:"PAID",createdAt:serverTimestamp()
    });
   });
-  alert("Order yawe yakiriwe neza.");
+  toast("Order yawe yakiriwe neza!","success");
   closeModal("dealCategoryModal");
- }catch(err){alert(err.message||"Ntibyashobotse gukora order.")}
+ }catch(err){toast(err.message||"Ntibyashobotse gukora order.","error")}
 }
 
 function openPaymentModal(isDeposit){
  if(!currentUser){openAuth("login");return}
  isDepositMode=isDeposit;
- $("payModalTitle").textContent=isDeposit?"➕ Deposit Request":"💸 Cash Out Request";
+ $("payModalTitle").textContent=isDeposit?"➕ Deposit Request (Mobile Money)":"💸 Cash Out Request";
  $("paymentForm").style.display="flex";
  $("paymentLoadingBox").style.display="none";
  $("paymentForm").reset();
@@ -390,9 +493,9 @@ $("paymentForm").onsubmit=async e=>{
  if(!currentUser)return;
  const phone=$("payPhone").value.trim();
  const amount=Number($("payAmount").value);
- if(!/^(07[2389]\d{7})$/.test(phone)){alert("Andika nimero ya telefone nyayo, urugero 078xxxxxxx.");return}
- if(!Number.isInteger(amount)||amount<100){alert("Amafaranga agomba kuba nibura 100 RWF.");return}
- if(!isDepositMode&&amount>userWallet){alert("Ntabwo ufite amafaranga ahagije.");return}
+ if(!/^(07[2389]\d{7})$/.test(phone)){toast("Andika nimero ya telefone nyayo, urugero 078xxxxxxx.","error");return}
+ if(!Number.isInteger(amount)||amount<100){toast("Amafaranga agomba kuba nibura 100 RWF.","error");return}
+ if(!isDepositMode&&amount>userWallet){toast("Ntabwo ufite amafaranga ahagije muri Wallet.","error");return}
  const btn=$("paySubmitBtn");btn.disabled=true;
  try{
   await addDoc(collection(db,"transactions"),{
@@ -403,7 +506,8 @@ $("paymentForm").onsubmit=async e=>{
   });
   $("paymentForm").style.display="none";
   $("paymentLoadingBox").style.display="block";
- }catch(err){alert("Ubusabe ntibwoherejwe: "+err.message)}
+  toast("Ubusabe bwawe bwoherejwe neza!","success");
+ }catch(err){toast("Ubusabe ntibwoherejwe: "+err.message,"error")}
  finally{btn.disabled=false}
 };
 
@@ -413,17 +517,19 @@ function renderTransactionRequests(snapshot){
  snapshot.forEach(s=>{
   const t=s.data(),card=document.createElement("div");card.className="tx-card";
   const title=document.createElement("b");
+  title.style.color="#34d399";
   title.textContent=(t.type||"request").toUpperCase()+" — "+money(t.amount);
   const details=document.createElement("p");
-  details.textContent="User: "+(t.userEmail||t.userId||"Unknown")+" | Tel: "+(t.phone||"");
+  details.textContent="User: "+(t.userEmail||t.userId||"Unknown")+" | Tel: "+(t.phone||"")+" | Method: "+(t.method||"");
   const approve=document.createElement("button");
-  approve.className="button";approve.style.marginTop="8px";approve.textContent="Approve";
+  approve.className="button";approve.style.marginTop="8px";approve.textContent="Approve Request";
   approve.onclick=()=>approveTransaction(s.id);
   card.append(title,details,approve);list.append(card);
  });
 }
+
 async function approveTransaction(txId){
- if(!currentUser||!isAdmin){alert("Uburenganzira bwa admin burakenewe.");return}
+ if(!currentUser||!isAdmin){toast("Uburenganzira bwa admin burakenewe.","error");return}
  if(!confirm("Urashaka kwemeza iyi transaction?"))return;
  try{
   await runTransaction(db,async tx=>{
@@ -432,7 +538,9 @@ async function approveTransaction(txId){
    if(!txSnap.exists())throw new Error("Transaction ntiyabonetse.");
    const data=txSnap.data();
    if(data.status!=="PENDING")throw new Error("Iyi transaction yamaze gukorerwa.");
-   const userRef=doc(db,"users",data.userId);
+   
+   // UPDATED: "user" collection
+   const userRef=doc(db,"user",data.userId);
    const userSnap=await tx.get(userRef);
    if(!userSnap.exists())throw new Error("User ntiyabonetse.");
    const balance=Number(userSnap.data().balance)||0;
@@ -443,8 +551,8 @@ async function approveTransaction(txId){
    tx.update(userRef,{balance:next});
    tx.update(txRef,{status:"APPROVED",approvedBy:currentUser.uid,approvedAt:serverTimestamp()});
   });
-  alert("Transaction yemejwe.");
- }catch(err){alert("Ntibyashobotse: "+err.message)}
+  toast("Transaction yemejwe neza!","success");
+ }catch(err){toast("Ntibyashobotse: "+err.message,"error")}
 }
 
 function listenToAdminPanel(){
@@ -486,7 +594,8 @@ function listenToProducts(){
 
 function listenToUserData(user){
  if(unsubUser)unsubUser();
- const userRef=doc(db,"users",user.uid);
+ // UPDATED: "user" collection
+ const userRef=doc(db,"user",user.uid);
  unsubUser=onSnapshot(userRef,async snap=>{
   if(!currentUser||currentUser.uid!==user.uid)return;
   if(!snap.exists()){
@@ -514,7 +623,7 @@ function listenToUserData(user){
   }
  },err=>{
   console.error("User profile:",err);
-  alert("Ntibishobotse gusoma amakuru ya account: "+err.message);
+  toast("Ntibishobotse gusoma amakuru ya account: "+err.message,"error");
  });
 }
 
@@ -536,7 +645,7 @@ $("supportBtn").onclick=()=>{if(!currentUser){openAuth("login");return}openModal
 $("closeSupportModal").onclick=()=>closeModal("supportModal");
 $("supportForm").onsubmit=async e=>{
  e.preventDefault();
- if(!currentUser){alert("Banza winjire.");return}
+ if(!currentUser){toast("Banza winjire.","error");return}
  const message=$("supportText").value.trim();
  if(!message)return;
  try{
@@ -544,9 +653,9 @@ $("supportForm").onsubmit=async e=>{
    userId:currentUser.uid,userEmail:currentUser.email||"",
    message,status:"OPEN",createdAt:serverTimestamp()
   });
-  alert("Ubutumwa bwoherejwe.");
+  toast("Ubutumwa bwoherejwe neza!","success");
   $("supportForm").reset();closeModal("supportModal");
- }catch(err){alert("Ntibyashobotse kohereza ubutumwa: "+err.message)}
+ }catch(err){toast("Ntibyashobotse kohereza ubutumwa: "+err.message,"error")}
 };
 
 $("myAccountBtn").onclick=()=>openModal("accountModal");
@@ -559,9 +668,10 @@ function renderCart(){
  userCart.forEach((item,index)=>{
   total+=Number(item.price)||0;
   const row=document.createElement("div");
-  row.style.cssText="display:flex;justify-content:space-between;gap:8px;margin:8px 0";
+  row.style.cssText="display:flex;justify-content:space-between;gap:8px;margin:10px 0;align-items:center";
   const label=document.createElement("span");label.textContent=item.name+" — "+money(item.price);
   const remove=document.createElement("button");remove.textContent="Kuramo";
+  remove.style.cssText="background:#f43f5e;color:white;border:0;padding:5px 10px;border-radius:6px;font-weight:bold";
   remove.onclick=()=>{userCart.splice(index,1);updateUI();renderCart()};
   row.append(label,remove);list.append(row);
  });
@@ -572,18 +682,19 @@ $("closeCartModal").onclick=()=>closeModal("cartModal");
 
 $("checkoutCartBtn").onclick=async()=>{
  if(!currentUser){closeModal("cartModal");openAuth("login");return}
- if(!userCart.length){alert("Agaseke karimo ubusa.");return}
+ if(!userCart.length){toast("Agaseke karimo ubusa.","error");return}
  const items=[...userCart];
- const userRef=doc(db,"users",currentUser.uid);
+ 
+ // UPDATED: "user" collection
+ const userRef=doc(db,"user",currentUser.uid);
  const batch=writeBatch(db);
  const orderRefs=items.map(()=>doc(collection(db,"orders")));
  try{
-  // Balance is read before creating the atomic batch.
   const userSnap=await getDoc(userRef);
   if(!userSnap.exists())throw new Error("Account ntiyabonetse.");
   const balance=Number(userSnap.data().balance)||0;
   const total=items.reduce((sum,p)=>sum+(Number(p.price)||0),0);
-  if(balance<total){alert("Wallet balance ntihagije. Banza ukore Deposit.");return}
+  if(balance<total){toast("Wallet balance ntihagije. Banza ukore Deposit.","error");return}
   batch.update(userRef,{balance:balance-total});
   items.forEach((p,i)=>batch.set(orderRefs[i],{
    userId:currentUser.uid,productId:String(p.id||""),
@@ -592,9 +703,9 @@ $("checkoutCartBtn").onclick=async()=>{
   }));
   await batch.commit();
   userCart=[];updateUI();renderCart();
-  alert("Orders zawe zakiriwe.");
+  toast("Orders zawe zakiriwe neza!","success");
   closeModal("cartModal");
- }catch(err){alert("Ntibyashobotse: "+err.message)}
+ }catch(err){toast("Ntibyashobotse: "+err.message,"error")}
 };
 
 $("toggleAdminBtn").onclick=()=>{
@@ -603,13 +714,13 @@ $("toggleAdminBtn").onclick=()=>{
 };
 
 $("adminSaveProdBtn").onclick=async()=>{
- if(!currentUser||!isAdmin){alert("Admin gusa ni we wemerewe.");return}
+ if(!currentUser||!isAdmin){toast("Admin gusa ni we wemerewe.","error");return}
  const category=Number($("adminDealCategory").value);
  const name=$("adminProdName").value.trim();
  const price=Number($("adminProdPrice").value);
  const description=$("adminProdDesc").value.trim();
  const imageUrl=$("adminProdImg").value.trim()||"deal1.jpg";
- if(!name||!Number.isInteger(price)||price<=0){alert("Andika izina n'igiciro nyacyo.");return}
+ if(!name||!Number.isInteger(price)||price<=0){toast("Andika izina n'igiciro nyacyo.","error");return}
  const btn=$("adminSaveProdBtn");btn.disabled=true;
  try{
   await addDoc(collection(db,"products"),{
@@ -618,13 +729,13 @@ $("adminSaveProdBtn").onclick=async()=>{
   });
   $("adminProdName").value="";$("adminProdPrice").value="";
   $("adminProdDesc").value="";$("adminProdImg").value="";
-  alert("Product yongewe muri Firestore.");
- }catch(err){alert("Ntibyashobotse kubika product: "+err.message)}
+  toast("Product yongewe muri Firestore!","success");
+ }catch(err){toast("Ntibyashobotse kubika product: "+err.message,"error")}
  finally{btn.disabled=false}
 };
 
 function openAuth(tab="register"){
- openModal("auth-section");showTab(tab);showMessage("");
+ openModal("auth-section");showTab(tab);
 }
 function closeAuthBox(){closeModal("auth-section")}
 function showTab(tab){
@@ -633,7 +744,6 @@ function showTab(tab){
  $("loginTab").classList.toggle("active",!reg);
  $("registerForm").classList.toggle("active",reg);
  $("loginForm").classList.toggle("active",!reg);
- showMessage("");
 }
 $("openAuthTop").onclick=()=>openAuth("register");
 $("openAuthHero").onclick=()=>openAuth("register");
@@ -646,15 +756,17 @@ $("registerForm").onsubmit=async e=>{
  const name=$("registerName").value.trim();
  const email=$("registerEmail").value.trim();
  const password=$("registerPassword").value;
- if(!name){showMessage("Andika amazina yawe.","#b42318");return}
+ if(!name){toast("Andika amazina yawe.","error");return}
  const btn=$("registerForm").querySelector("button");btn.disabled=true;
  try{
   const credential=await createUserWithEmailAndPassword(auth,email,password);
-  await setDoc(doc(db,"users",credential.user.uid),{
+  
+  // UPDATED: "user" collection
+  await setDoc(doc(db,"user",credential.user.uid),{
    name,email,balance:0,role:"user",createdAt:serverTimestamp()
   });
   localStorage.setItem("rwandaOnlineDealsName",name);
-  showMessage("Account yakozwe neza.");
+  toast("Account yakozwe neza! Murakaza neza.","success");
   closeAuthBox();
  }catch(err){
   const messages={
@@ -662,7 +774,7 @@ $("registerForm").onsubmit=async e=>{
    "auth/invalid-email":"Email wanditse si yo.",
    "auth/weak-password":"Password iroroshye cyane."
   };
-  showMessage(messages[err.code]||("Registration yanze: "+err.message),"#b42318");
+  toast(messages[err.code]||("Registration yanze: "+err.message),"error");
  }finally{btn.disabled=false}
 };
 
@@ -673,7 +785,7 @@ $("loginForm").onsubmit=async e=>{
  const btn=$("loginForm").querySelector("button");btn.disabled=true;
  try{
   await signInWithEmailAndPassword(auth,email,password);
-  showMessage("Winjiye neza.");
+  toast("Winjiye neza! Murakaza neza.","success");
   closeAuthBox();
  }catch(err){
   const messages={
@@ -682,17 +794,19 @@ $("loginForm").onsubmit=async e=>{
    "auth/wrong-password":"Password si yo.",
    "auth/too-many-requests":"Wagerageje kenshi. Ongera ugerageze nyuma."
   };
-  showMessage(messages[err.code]||("Login yanze: "+err.message),"#b42318");
+  toast(messages[err.code]||("Login yanze: "+err.message),"error");
  }finally{btn.disabled=false}
 };
 
 $("logoutButton").onclick=async()=>{
- try{await signOut(auth)}catch(err){alert("Logout yanze: "+err.message)}
+ try{
+  await signOut(auth);
+  toast("Mwasohotse mu sisitemu.","info");
+ }catch(err){toast("Logout yanze: "+err.message,"error")}
 };
 
 onAuthStateChanged(auth,async user=>{
  profileLoadId++;
- const loadId=profileLoadId;
  cleanupListeners();
  currentUser=user;
  userWallet=0;isAdmin=false;

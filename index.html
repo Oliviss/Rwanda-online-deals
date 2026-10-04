@@ -250,7 +250,7 @@ footer p{margin:6px;font-size:13px}
 
 <header id="siteHeader">
  <div class="brand">
-  <div class="brand-text"><h1>Rwanda Online Deals</h1><p>Isoko Rigezweho ry'Abanyarwanda</p></div>
+  <div class="brand-text"><h1>Rwanda Online Deals</h1><p>Isoko Rigezweho cururiza hano</p></div>
   <div class="header-actions">
    <button class="cart-icon-btn" id="openCartBtn">🛒 Cart (<span id="cartCount">0</span>)</button>
    <button class="login-top" id="openAuthTop">Injira / Account</button>
@@ -273,8 +273,8 @@ footer p{margin:6px;font-size:13px}
  <section class="hero" id="home">
   <div class="hero-box animated-glow"><div class="hero-content">
    <span class="badge">🇷🇼 ONLINE SHOPPING • RWANDA</span>
-   <h2>Shaka deals 1–7. Hitamo neza. Korera online.</h2>
-   <p>Murakaza neza kuri Rwanda Online Deals — offers n'ibicuruzwa bitandukanye n'uburyo bwo kwishyura busezeranye.</p>
+   <h2>Shaka deals zose. Hitamo neza. Korera online.</h2>
+   <p>Murakaza neza kuri Rwanda Online Deals — offers n'ibicuruzwa bitandukanye n'uburyo bwo kwishyura bworoshye.</p>
    <button class="primary-btn" id="openAuthHero">Tangira nonaha →</button>
   </div></div>
   <div id="deals-container"></div>
@@ -627,8 +627,8 @@ for(let i=1; i<=7; i++){
    price: j * 5000 + i * 2000,
    description: `Igicuruzwa cyiza kandi gipfupfuye cya nyacyo muri Deal category ${i}. Mfite Warranty n'Ubwquality.`,
    img: makeDealImg(`${pName}`, "0d5c34"),
-   contactPhone: "0788123456",
-   sellerMomo: "0788123456",
+   contactPhone: "xxxx",
+   sellerMomo: "xxxx",
    sellerId: "admin_default"
   });
  }
@@ -763,7 +763,7 @@ function openProductDetail(p){
 
 async function buyProduct(product){
  if(!currentUser){
-   toast("Banza winjire muri account kugira ngo ukore order!","error");
+   toast("Banza winjire muri account ukore order!","error");
    openAuth("login");
    return;
  }
@@ -827,7 +827,7 @@ $("paymentForm").onsubmit=async e=>{
   
   $("paymentForm").style.display="none";
   $("paymentLoadingBox").style.display="block";
-  toast("Ubusabe bwawe bwoherejwe kuri Paypack Gateway!","info");
+  toast("Ubusabe bwawe bwoherejwe neza!","info");
 
   /* BACKEND GATEWAY AUTOMATED CALLBACK SIMULATION */
   setTimeout(async ()=>{
@@ -841,9 +841,9 @@ $("paymentForm").onsubmit=async e=>{
           tx.update(userRef, { balance: currBal + amount });
           tx.update(tRef, { status: "APPROVED", approvedAt: serverTimestamp() });
         });
-        toast("Deposit yemejwe neza na Paypack Gateway! Wallet yavuguruwe.","success");
+        toast("Deposit yemejwe neza Wallet yavuguruwe.","success");
       } else {
-        toast("Withdraw Request yoherejwe kuri Admin. Naza kuyiverifya urahita ubona SMS!","info");
+        toast("Withdraw Request yoherejwe  !","info");
       }
       closeModal("paymentModal");
     } catch(err){ console.error(err); }
@@ -1201,8 +1201,8 @@ function listenToProducts(){
     id:s.id,dealId:Number(d.category??d.dealId??1),
     name:d.name||"Product",price:Number(d.price)||0,
     description:d.description||"",img:d.imageUrl||d.img||makeDealImg("Product","111c17"),
-    contactPhone:d.contactPhone||"0788000000",
-    sellerMomo:d.sellerMomo||"0788000000",
+    contactPhone:d.contactPhone||"xxxx",
+    sellerMomo:d.sellerMomo||"xxxxxxxxxx",
     sellerId:d.sellerId||"admin",
     active:d.active
    });
@@ -1407,7 +1407,7 @@ $("loginForm").onsubmit=async e=>{
 $("logoutButton").onclick=async()=>{
  try{
   await signOut(auth);
-  toast("Mwasohotse mu sisitemu.","info");
+  toast("Mwasohotse neza.","info");
  }catch(err){toast("Logout yanze: "+err.message,"error")}
 };
 

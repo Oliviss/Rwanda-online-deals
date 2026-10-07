@@ -190,7 +190,6 @@ footer p{margin:6px;font-size:13px}
   <div class="quick-card"><b>🚚 Free Delivery Rwanda</b><p>Buri order uyihabwa ku buntu hose mu Rwanda!</p></div>
  </section>
 
- <!-- SMART ROTATION / RECOMMENDED SELLER PRODUCTS ON HOME PAGE -->
  <section class="section">
   <div class="section-title">
      <h2>✨ Dynamic Vendor Recommendations (Seller Highlights)</h2>
@@ -222,7 +221,6 @@ footer p{margin:6px;font-size:13px}
    </div>
   </div>
 
-  <!-- ACCOUNT VERIFICATION NOTICE & FORM CARD -->
   <div id="verificationNoticeCard" class="card" style="display:none;background:#1a231f;border:1px solid #10b981;margin-bottom:20px">
      <h3 style="color:#34d399">🔐 Verification y'Umutekano wa Account</h3>
      <p style="color:#9ca3af;font-size:13px">Gusa kugira ngo wemererwe kuryoza **Deposit** no **Kubikuza (Cash Out)**, ugomba kuzuza Amazina yawe yombi ahura neza n'ay'i MoMo hamwe na Nimero ya MoMo. Iyo umaze kubyuzuza, **MoMo Number ihita ifungwa (Locked)** ntishobore guhindurwa!</p>
@@ -409,18 +407,22 @@ footer p{margin:6px;font-size:13px}
  <div class="modal-head"><h2 id="payModalTitle">Payment Request</h2><button class="close-modal" id="closePayModal">×</button></div>
  <form id="paymentForm" class="auth-form active">
   <div style="background:#16241e;padding:12px;border-radius:10px;font-size:12px;color:#a7f3d0">
-    <p><b>Deposit MoMo Number:</b> <span id="displaySysMomoNum">0784374288</span></p>
+    <p><b>System Merchant MoMo:</b> <span id="displaySysMomoNum">0784374288</span></p>
     <p><b>Account Name:</b> <span id="displaySysMomoName">Rwanda Online Deals</span></p>
   </div>
   <select id="payMethod">
-    <option value="MTN MoMo">MTN Mobile Money</option>
-    <option value="Airtel Money">Airtel Money</option>
+    <option value="MTN MoMo (PawaPay API)">MTN Mobile Money (PawaPay Push Prompt)</option>
+    <option value="Airtel Money (PawaPay API)">Airtel Money (PawaPay Push Prompt)</option>
   </select>
-  <label style="font-size:12px;color:#9ca3af;margin-top:6px;display:block">Nimero ya MoMo (078/079/072/073):</label>
+  <label style="font-size:12px;color:#9ca3af;margin-top:6px;display:block">Nimero ya MoMo ikora (078/079/072/073):</label>
   <input type="tel" id="payPhone" placeholder="078XXXXXXX" style="background:#16241e;color:#34d399;font-weight:bold" required>
   <input type="number" id="payAmount" placeholder="Amount (RWF)" min="100" required>
-  <button type="submit" id="paySubmitBtn">Ohereza Ubusabe bwa Deposit</button>
+  <button type="submit" id="paySubmitBtn">⚡ Ohereza MoMo Push Prompt Kuri Telefone</button>
  </form>
+ <div id="paymentLoadingBox" style="display:none;text-align:center;padding:20px">
+  <p style="font-weight:bold;color:#34d399">⏳ PawaPay Prompt sent! Reba kuri telefone yawe utange PIN ya MoMo...</p>
+  <p style="font-size:12px;color:#9ca3af;margin-top:7px">Iyo uhejeje gushyiramo PIN, amafaranga ahita yongerwa muri Wallet yawe instant!</p>
+ </div>
 </div></div>
 
 <div class="modal-overlay" id="supportModal"><div class="modal-box">
@@ -451,13 +453,11 @@ footer p{margin:6px;font-size:13px}
  <button class="button" id="checkoutCartBtn">⚡ Place Order & Free Delivery</button>
 </div></div>
 
-<!-- USER DETAILS INSPECTOR MODAL FOR ADMIN -->
 <div class="modal-overlay" id="adminUserInspectorModal"><div class="modal-box">
  <div class="modal-head"><h2>👤 User Full Account Details</h2><button class="close-modal" onclick="closeModal('adminUserInspectorModal')">×</button></div>
  <div id="adminUserInspectorContent"></div>
 </div></div>
 
-<!-- FORGOT PASSWORD MODAL -->
 <div class="modal-overlay" id="forgotPasswordModal"><div class="modal-box">
  <div class="modal-head"><h2>🔑 Wibagiwe Password?</h2><button class="close-modal" onclick="closeModal('forgotPasswordModal')">×</button></div>
  <p style="font-size:13px;color:#9ca3af;margin-bottom:14px">Andika Email yawe dukoresha kuyoherereza link yo guhindura password y'umutekano.</p>
@@ -515,6 +515,8 @@ const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
 
+const RENDER_BACKEND_URL = "https://momo-paypack-server.onrender.com";
+
 const $=id=>document.getElementById(id);
 const money=n=>(Number(n)||0).toLocaleString()+" RWF";
 let currentUser=null;
@@ -553,7 +555,6 @@ const dealCategories=[
  {id:7,name:"Deal 7 - Premium Super Package",description:"Package y'ibicuruzwa bitandukanye.",img:"https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800"}
 ];
 
-// INITIAL DYNAMIC REAL TEMPLATE PRODUCTS (35 ITEMS TOTAL)
 const initialProducts=[];
 const dealNamesMap = {
   1: ["Smartphone Galaxy", "Wireless Earbuds", "Fast Charger 65W", "Powerbank 20000mAh", "Screen Protector HD"],
@@ -566,55 +567,13 @@ const dealNamesMap = {
 };
 
 const dealImagesMap = {
-  1: [
-    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800",
-    "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=800",
-    "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?q=80&w=800",
-    "https://images.unsplash.com/photo-1609592424109-dd9892f1b177?q=80&w=800",
-    "https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=800"
-  ],
-  2: [
-    "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800",
-    "https://images.unsplash.com/photo-1542272604-780c36856d62?q=80&w=800",
-    "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800",
-    "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=800",
-    "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800"
-  ],
-  3: [
-    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800",
-    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=800",
-    "https://images.unsplash.com/photo-1533867617858-e7b97e060509?q=80&w=800",
-    "https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=800",
-    "https://images.unsplash.com/photo-1520639888713-7851133b1ed0?q=80&w=800"
-  ],
-  4: [
-    "https://images.unsplash.com/photo-1570222094114-d054a817e56b?q=80&w=800",
-    "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?q=80&w=800",
-    "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=800",
-    "https://images.unsplash.com/photo-1585338107529-13afc5f02586?q=80&w=800",
-    "https://images.unsplash.com/photo-1600121848594-d8644e57abab?q=80&w=800"
-  ],
-  5: [
-    "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800",
-    "https://images.unsplash.com/photo-1608248597260-1e5828f7311d?q=80&w=800",
-    "https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=800",
-    "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=800",
-    "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?q=80&w=800"
-  ],
-  6: [
-    "https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800",
-    "https://images.unsplash.com/photo-1628088062854-d1870b4553da?q=80&w=800",
-    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=800",
-    "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800",
-    "https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=800"
-  ],
-  7: [
-    "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800",
-    "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=800",
-    "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800",
-    "https://images.unsplash.com/photo-1545454675-3531b543be5d?q=80&w=800",
-    "https://images.unsplash.com/photo-1509391365360-2e959784a276?q=80&w=800"
-  ]
+  1: ["https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800","https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=800","https://images.unsplash.com/photo-1583863788434-e58a36330cf0?q=80&w=800","https://images.unsplash.com/photo-1609592424109-dd9892f1b177?q=80&w=800","https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=800"],
+  2: ["https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800","https://images.unsplash.com/photo-1542272604-780c36856d62?q=80&w=800","https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800","https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=800","https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800"],
+  3: ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800","https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=800","https://images.unsplash.com/photo-1533867617858-e7b97e060509?q=80&w=800","https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=800","https://images.unsplash.com/photo-1520639888713-7851133b1ed0?q=80&w=800"],
+  4: ["https://images.unsplash.com/photo-1570222094114-d054a817e56b?q=80&w=800","https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?q=80&w=800","https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=800","https://images.unsplash.com/photo-1585338107529-13afc5f02586?q=80&w=800","https://images.unsplash.com/photo-1600121848594-d8644e57abab?q=80&w=800"],
+  5: ["https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800","https://images.unsplash.com/photo-1608248597260-1e5828f7311d?q=80&w=800","https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=800","https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=800","https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?q=80&w=800"],
+  6: ["https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800","https://images.unsplash.com/photo-1628088062854-d1870b4553da?q=80&w=800","https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=800","https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800","https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=800"],
+  7: ["https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800","https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=800","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800","https://images.unsplash.com/photo-1545454675-3531b543be5d?q=80&w=800","https://images.unsplash.com/photo-1509391365360-2e959784a276?q=80&w=800"]
 };
 
 for(let i=1; i<=7; i++){
@@ -879,11 +838,12 @@ function openPaymentModal(isDeposit){
  if(!currentUser){openAuth("login");return}
 
  isDepositMode=isDeposit;
- $("payModalTitle").textContent=isDeposit?"➕ Deposit Request":"💸 Cash Out Request";
+ $("payModalTitle").textContent=isDeposit?"➕ Deposit Request (PawaPay Push Prompt)":"💸 Cash Out Request";
  $("displaySysMomoNum").textContent=sysMomoNumber;
  $("displaySysMomoName").textContent=sysMomoName;
  $("payPhone").value=currentUserLockedPhone || "";
  $("paymentForm").style.display="flex";
+ $("paymentLoadingBox").style.display="none";
  $("payAmount").value="";
  openModal("paymentModal");
 }
@@ -891,6 +851,7 @@ $("depositBtn").onclick=()=>openPaymentModal(true);
 $("cashoutBtn").onclick=()=>openPaymentModal(false);
 $("closePayModal").onclick=()=>closeModal("paymentModal");
 
+/* REAL AUTOMATED PAWAPAY MOMO DEPOSIT PROMPT INTEGRATION */
 $("paymentForm").onsubmit=async e=>{
  e.preventDefault();
  if(!currentUser)return;
@@ -898,7 +859,7 @@ $("paymentForm").onsubmit=async e=>{
  const amount=Number($("payAmount").value);
  
  if(!phone || !/^(07[2389]\d{7})$/.test(phone)){
-   toast("Andika nimero ya MoMo nyayo!","error");
+   toast("Andika nimero ya MoMo nyayo (078... / 072... / 073...)","error");
    return;
  }
 
@@ -906,28 +867,50 @@ $("paymentForm").onsubmit=async e=>{
    toast("Amafaranga ari muri wallet ntahagije ("+money(userWallet)+").","error");
    return;
  }
- const btn=$("paySubmitBtn");btn.disabled=true;
+
+ const btn=$("paySubmitBtn"); btn.disabled=true;
  try{
-  const depositId = "DEPOSIT-" + Date.now();
+  const depositId = "ORD-" + Date.now();
+
+  if(isDepositMode) {
+    // Hamagara backend ya Render no kohereza PawaPay Push Prompt kuri MoMo
+    const renderRes = await fetch(`${RENDER_BACKEND_URL}/api/pay`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phoneNumber: phone, amount: amount, depositId: depositId, userId: currentUser.uid })
+    });
+    const resData = await renderRes.json();
+    if(!resData.success) {
+      throw new Error("PawaPay Payment Prompt Error: " + (resData.error || "Ubwishyu bwanzwe"));
+    }
+  }
 
   await addDoc(collection(db,"transactions"),{
-   userId:currentUser.uid,
-   userEmail:currentUser.email||"",
+   userId: currentUser.uid,
+   userEmail: currentUser.email||"",
    userName: $("userName").textContent||"User",
    phone: phone,
    depositId: depositId,
-   method:$("payMethod").value,
+   method: $("payMethod").value,
    amount: amount,
-   type:isDepositMode?"deposit":"withdraw",
-   status:"PENDING",
-   createdAt:serverTimestamp()
+   type: isDepositMode ? "deposit" : "withdraw",
+   status: "PENDING_MOMO_PIN",
+   createdAt: serverTimestamp()
   });
   
-  toast("Ubusabe bwa Deposit boherejwe neza! Admin arahuza na MoMo ayemeze.","success");
-  closeModal("paymentModal");
+  $("paymentForm").style.display="none";
+  $("paymentLoadingBox").style.display="block";
+  toast("PawaPay Push Prompt yoherejwe! Reba kuri telefone yawe utange PIN ya MoMo.","info");
 
- }catch(err){toast("Ubusabe ntibwoherejwe: "+err.message,"error")}
- finally{btn.disabled=false}
+  setTimeout(()=>{
+    closeModal("paymentModal");
+  }, 4000);
+
+ }catch(err){
+   toast("Ubusabe ntibwoherejwe: "+err.message,"error");
+ }finally{
+   btn.disabled=false;
+ }
 };
 
 function renderTransactionRequests(snapshot){
@@ -965,7 +948,6 @@ function renderTransactionRequests(snapshot){
  });
 }
 
-// SECURE DIRECT APPROVAL & WALLET CREDIT
 async function approveTransaction(txId){
  if(!currentUser||currentUserRole!=="admin"){toast("Uburenganzira bwa admin burakenewe.","error");return}
  if(!confirm("Urashaka kwemeza iyi transaction maze unongere ku Wallet y'umukoresha?"))return;
@@ -1063,7 +1045,7 @@ function listenToAdminPanel(){
  if(unsubAllProds)unsubAllProds();
  if(unsubPendingVerifs)unsubPendingVerifs();
 
- const pending=query(collection(db,"transactions"),where("status","==","PENDING"));
+ const pending=query(collection(db,"transactions"),where("status","in",["PENDING","PENDING_MOMO_PIN"]));
  unsubTx=onSnapshot(pending,renderTransactionRequests,err=>{
   $("adminRequestsList").textContent="Ntibishobotse gusoma transactions: "+err.message;
  });
@@ -1525,7 +1507,6 @@ $("registerTab").onclick=()=>showTab("register");
 $("loginTab").onclick=()=>showTab("login");
 $("closeAuth").onclick=closeAuthBox;
 
-// FORGOT PASSWORD SYSTEM HANDLER
 $("forgotPasswordLink").onclick=(e)=>{
   e.preventDefault();
   closeAuthBox();
@@ -1634,5 +1615,3 @@ updateUI();
 
 </body>
 </html>
-
-```

@@ -10,6 +10,7 @@ body{background:#0b1310;color:#e1e9e5;min-height:100vh}
 button,input,select,textarea{font-family:inherit}
 button{cursor:pointer;transition:all 0.2s ease}
 
+/* ANIMATIONS & GRAPHICS */
 @keyframes pulseGlow {
  0%, 100% { box-shadow: 0 0 15px rgba(11, 160, 91, 0.3); }
  50% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.6); }
@@ -21,6 +22,7 @@ button{cursor:pointer;transition:all 0.2s ease}
 .animated-glow { animation: pulseGlow 3s infinite ease-in-out; }
 .animated-float { animation: floatItem 4s infinite ease-in-out; }
 
+/* TOAST NOTIFICATIONS */
 #toast-container {
  position: fixed; top: 20px; right: 20px; z-index: 9999;
  display: flex; flex-direction: column; gap: 10px; max-width: 340px;
@@ -35,6 +37,7 @@ button{cursor:pointer;transition:all 0.2s ease}
 .toast.error { background: linear-gradient(135deg, #dc2626, #f43f5e); }
 .toast.info { background: linear-gradient(135deg, #2563eb, #3b82f6); }
 
+/* HEADER & NAVBAR */
 header{background:linear-gradient(135deg,#063821,#0b6b3a,#10894d);color:white;padding:18px;position:relative;overflow:hidden}
 header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,0.08) 10%,transparent 20%);transform:rotate(30deg);pointer-events:none}
 .brand{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;z-index:2}
@@ -51,6 +54,7 @@ nav{background:#111c17;padding:13px;text-align:center;border-bottom:1px solid #1
 nav a{color:#34d399;text-decoration:none;margin:0 12px;font-weight:bold;font-size:14px}
 nav a:hover{color:#fff}
 
+/* HERO & SECTIONS */
 .hero,.section,.quick{max-width:1100px;margin:24px auto;padding:0 16px}
 .hero-box{border-radius:24px;min-height:280px;padding:40px 30px;display:flex;align-items:center;background:linear-gradient(135deg,#062b1a,#0d5c34,#059669);color:white;border:1px solid rgba(255,255,255,0.1)}
 .hero-content{max-width:620px}
@@ -79,7 +83,9 @@ nav a:hover{color:#fff}
 .button-secondary{background:#1e2e27;color:#34d399;border:1px solid #2e473b}
 .button-danger{background:#dc2626;color:white;border:0}
 .button-warning{background:#eab308;color:#000;border:0}
+.button-disabled{background:#374151 !important;color:#9ca3af !important;cursor:not-allowed !important;border:0 !important}
 
+/* MODALS */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(4,10,7,0.85);backdrop-filter:blur(8px);padding:20px;overflow:auto}
 .modal-box{background:#111c17;max-width:640px;margin:30px auto;padding:25px;border-radius:20px;position:relative;border:1px solid #23382f;box-shadow:0 20px 40px rgba(0,0,0,0.6)}
 .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
@@ -95,6 +101,7 @@ nav a:hover{color:#fff}
 .auth-form input:focus,.field:focus{outline:none;border-color:#10b981}
 .auth-form button{padding:13px;border:0;border-radius:10px;background:#10b981;color:white;font-weight:bold;font-size:15px}
 
+/* DASHBOARD VIEWS */
 #dashboard,#adminView,#sellerView{display:none;background:#0b1310;min-height:100vh;padding:24px 16px 50px}
 .dashboard-wrap{max-width:1100px;margin:auto}
 .dashboard-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
@@ -107,6 +114,7 @@ nav a:hover{color:#fff}
 .action{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;border-radius:12px;padding:14px;font-weight:bold;backdrop-filter:blur(5px)}
 .action:hover{background:rgba(255,255,255,0.22)}
 
+/* ADMIN TABS UI */
 .admin-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:20px;border-bottom:1px solid #23382f}
 .admin-tab-btn{padding:10px 16px;background:#16241e;border:1px solid #23382f;border-radius:10px;color:#9ca3af;font-weight:bold;white-space:nowrap}
 .admin-tab-btn.active{background:#059669;color:white;border-color:#10b981}
@@ -166,6 +174,7 @@ footer p{margin:6px;font-size:13px}
  <a href="#home" onclick="showMainHome()">Ahabanza</a><a href="#homeDeals">Deals (1–7)</a><a href="#contact">Twandikire</a>
 </nav>
 
+<!-- GUEST HOME PAGE -->
 <main id="homePage">
  <section class="hero" id="home">
   <div class="hero-box animated-glow"><div class="hero-content">
@@ -196,6 +205,7 @@ footer p{margin:6px;font-size:13px}
  </section>
 </main>
 
+<!-- USER DASHBOARD VIEW -->
 <section id="dashboard">
  <div class="dashboard-wrap">
   <div class="dashboard-top">
@@ -481,3 +491,1129 @@ footer p{margin:6px;font-size:13px}
 </div></section>
 
 <footer id="contact"><p><strong>Rwanda Online Deals</strong></p><p>© 2026 Rwanda Online Deals. All Rights Reserved. Free Delivery across Rwanda.</p></footer>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import {
+ getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,
+ sendPasswordResetEmail,signOut,onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import {
+ getFirestore,doc,getDoc,setDoc,updateDoc,deleteDoc,collection,addDoc,
+ onSnapshot,query,where,serverTimestamp,runTransaction,writeBatch
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyCOOEbhkKrv0ysHarRZvjw2DlgsRlcN180",
+ authDomain:"rwanda-online-deals.firebaseapp.com",
+ projectId:"rwanda-online-deals",
+ storageBucket:"rwanda-online-deals.firebasestorage.app",
+ messagingSenderId:"74305121142",
+ appId:"1:74305121142:web:c3c0a305a82fa78f03e857"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const RENDER_BACKEND_URL = "https://momo-paypack-server.onrender.com";
+
+const $=id=>document.getElementById(id);
+const money=n=>(Number(n)||0).toLocaleString()+" RWF";
+let currentUser=null;
+let currentUserRole="user";
+let currentUserStatus="unverified";
+let currentUserLockedPhone="";
+let userWallet=0;
+let isDepositMode=true;
+let userCart=JSON.parse(localStorage.getItem("app_user_cart")||"[]");
+let products=[];
+let sysMomoNumber="0784374288";
+let sysMomoName="Rwanda Online Deals Ltd";
+
+let unsubUser=null,unsubTx=null,unsubSupport=null,unsubOrders=null,unsubProducts=null,unsubUsersList=null,unsubSellerApps=null,unsubAllOrders=null,unsubSellerProds=null,unsubAllProds=null,unsubPendingVerifs=null;
+
+function toast(msg, type = "success") {
+ const container = $("toast-container");
+ const div = document.createElement("div");
+ div.className = `toast ${type}`;
+ div.textContent = msg;
+ container.appendChild(div);
+ setTimeout(() => div.classList.add("show"), 50);
+ setTimeout(() => {
+  div.classList.remove("show");
+  setTimeout(() => div.remove(), 300);
+ }, 3500);
+}
+
+const dealCategories=[
+ {id:1,name:"Deal 1 - Phone & Accessories",description:"Telephone, chargers, earphones n'ibindi bikoresho.",img:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800"},
+ {id:2,name:"Deal 2 - Imyenda & Mode",description:"Imyenda n'imyambaro igezweho.",img:"https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=800"},
+ {id:3,name:"Deal 3 - Inkweto Zigezweho",description:"Inkweto z'amoko yose ku giciro kiza.",img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800"},
+ {id:4,name:"Deal 4 - Home & Living",description:"Ibikoresho byo mu nzu no mu gikoni.",img:"https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=800"},
+ {id:5,name:"Deal 5 - Beauty & Personal Care",description:"Ibikoresho by'isuku n'ubwiza.",img:"https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800"},
+ {id:6,name:"Deal 6 - Food & Grocery",description:"Ibiribwa n'ibindi nkenerwa.",img:"https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800"},
+ {id:7,name:"Deal 7 - Premium Super Package",description:"Package y'ibicuruzwa bitandukanye.",img:"https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800"}
+];
+
+const initialProducts=[];
+const dealNamesMap = {
+  1: ["Smartphone Galaxy", "Wireless Earbuds", "Fast Charger 65W", "Powerbank 20000mAh", "Screen Protector HD"],
+  2: ["Jacket y'Imbeho", "Ipantalo ya Jean", "Ikemisi ya Coton", "Igikoba cya Fashion", "Urupira rw'Imyenda"],
+  3: ["Inkweto z'Iminsi YOSE", "Sneakers Sport", "Inkweto z'Icyinyabupfura", "Sandales z'Impeshyi", "Bottes de Cuir"],
+  4: ["Blender y'Igikoni", "Isahani z'Ikirahure", "Matelas Orthopedique", "Icyuma gushyushya maji", "Tapis y'Mu Nzu"],
+  5: ["Parfum Royale", "Isabune y'Ubwiza", "Crème de Visage", "Ibikoresho by'Inyagatsi", "Shampooing Pro"],
+  6: ["Umuceri wa Super 25kg", "Amavuta yo Guteka 5L", "Isukari 10kg", "Kahawa y'Umarwanda", "Igitebo cya Fruits"],
+  7: ["VIP Home Bundle", "Smart TV 55 Inch", "Laptop Core i7", "Sound System Subwoofer", "Solar Generator Kit"]
+};
+
+const dealImagesMap = {
+  1: ["https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800","https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=800","https://images.unsplash.com/photo-1583863788434-e58a36330cf0?q=80&w=800","https://images.unsplash.com/photo-1609592424109-dd9892f1b177?q=80&w=800","https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=800"],
+  2: ["https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800","https://images.unsplash.com/photo-1542272604-780c36856d62?q=80&w=800","https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800","https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=800","https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800"],
+  3: ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800","https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=800","https://images.unsplash.com/photo-1533867617858-e7b97e060509?q=80&w=800","https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=800","https://images.unsplash.com/photo-1520639888713-7851133b1ed0?q=80&w=800"],
+  4: ["https://images.unsplash.com/photo-1570222094114-d054a817e56b?q=80&w=800","https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?q=80&w=800","https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=800","https://images.unsplash.com/photo-1585338107529-13afc5f02586?q=80&w=800","https://images.unsplash.com/photo-1600121848594-d8644e57abab?q=80&w=800"],
+  5: ["https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800","https://images.unsplash.com/photo-1608248597260-1e5828f7311d?q=80&w=800","https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=800","https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=800","https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?q=80&w=800"],
+  6: ["https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800","https://images.unsplash.com/photo-1628088062854-d1870b4553da?q=80&w=800","https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=800","https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800","https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=800"],
+  7: ["https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800","https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=800","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800","https://images.unsplash.com/photo-1545454675-3531b543be5d?q=80&w=800","https://images.unsplash.com/photo-1509391365360-2e959784a276?q=80&w=800"]
+};
+
+for(let i=1; i<=7; i++){
+ for(let j=1; j<=5; j++){
+  const pName = dealNamesMap[i][j-1];
+  const pImg = dealImagesMap[i][j-1];
+  initialProducts.push({
+   id: `init_${i}_${j}`,
+   dealId: i,
+   name: `${pName}`,
+   price: j * 5000 + i * 2000,
+   description: `Igicuruzwa cyiza cya nyacyo muri Deal category ${i}. Mfite Warranty n'Ubwquality kandi turaguha Free Delivery!`,
+   img: pImg,
+   contactPhone: "0788123456",
+   sellerMomo: "0788123456",
+   sellerId: "admin_default"
+  });
+ }
+}
+
+products = [...initialProducts];
+
+function openModal(id){$(id).style.display="block"}
+function closeModal(id){$(id).style.display="none"}
+window.closeModal = closeModal;
+
+function cleanupListeners(){
+ [unsubUser,unsubTx,unsubSupport,unsubOrders,unsubProducts,unsubUsersList,unsubSellerApps,unsubAllOrders,unsubSellerProds,unsubAllProds,unsubPendingVerifs].forEach(fn=>{if(fn)fn()});
+ unsubUser=unsubTx=unsubSupport=unsubOrders=unsubProducts=unsubUsersList=unsubSellerApps=unsubAllOrders=unsubSellerProds=unsubAllProds=unsubPendingVerifs=null;
+}
+
+function updateUI(){
+ $("userBalanceText").textContent=money(userWallet);
+ $("accBalance").textContent=money(userWallet);
+ $("cartCount").textContent=userCart.length;
+ localStorage.setItem("app_user_cart",JSON.stringify(userCart));
+}
+
+window.showMainHome=function(){
+ $("dashboard").style.display="none";
+ $("adminView").style.display="none";
+ $("sellerView").style.display="none";
+ $("homePage").style.display="block";
+ $("homeNav").style.display="block";
+};
+window.showUserDashboard=function(){
+ $("homePage").style.display="none";
+ $("homeNav").style.display="none";
+ $("adminView").style.display="none";
+ $("sellerView").style.display="none";
+ $("dashboard").style.display="block";
+};
+window.showAdminRoom=function(){
+ $("homePage").style.display="none";
+ $("homeNav").style.display="none";
+ $("dashboard").style.display="none";
+ $("sellerView").style.display="none";
+ $("adminView").style.display="block";
+};
+window.showSellerRoom=function(){
+ $("homePage").style.display="none";
+ $("homeNav").style.display="none";
+ $("dashboard").style.display="none";
+ $("adminView").style.display="none";
+ $("sellerView").style.display="block";
+};
+
+window.switchAdminTab=function(tabName, evt){
+ document.querySelectorAll('.admin-tab-btn').forEach(b=>b.classList.remove('active'));
+ document.querySelectorAll('.admin-tab-content').forEach(c=>c.classList.remove('active'));
+ if(evt) evt.target.classList.add('active');
+ $(`admTab-${tabName}`).classList.add('active');
+};
+
+function productCategory(p){return Number(p.dealId??p.category??1)}
+function productImage(p){return p.img||p.imageUrl||"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800"}
+
+window.renderHomeRecommendations = function() {
+ const container = $("homeRecommendationsContainer");
+ if(!container) return;
+ container.replaceChildren();
+
+ const shuffled = [...products].sort(() => 0.5 - Math.random());
+ const topRecommendations = shuffled.slice(0, 8);
+
+ topRecommendations.forEach(p => {
+  const card = document.createElement("div");
+  card.className = "card animated-float";
+  
+  const imgWrap = document.createElement("div");
+  imgWrap.className = "card-img-wrapper";
+  const img = document.createElement("img");
+  img.src = productImage(p);
+  img.alt = p.name || "Product";
+  imgWrap.appendChild(img);
+
+  const h = document.createElement("h3"); h.textContent = p.name || "Product";
+  const sellerInfo = document.createElement("small");
+  sellerInfo.style.color = "#34d399";
+  sellerInfo.textContent = `🏪 Seller Store: ${p.sellerId === 'admin_default' ? 'VIP Platform' : 'Verified Vendor'}`;
+  
+  const price = document.createElement("b");
+  price.style.cssText = "font-size:16px;color:#34d399;margin-top:4px";
+  price.textContent = money(p.price);
+
+  const buyBtn = document.createElement("button");
+  buyBtn.className = "button";
+  buyBtn.textContent = "⚡ Place Order / Buy Now";
+  buyBtn.onclick = () => buyProduct(p);
+
+  card.append(imgWrap, h, sellerInfo, price, buyBtn);
+  container.append(card);
+ });
+};
+
+function loadCategories(){
+ const root=$("dealsContainer");
+ const previewRoot=$("homePreviewContainer");
+ root.replaceChildren();
+ if(previewRoot) previewRoot.replaceChildren();
+
+ dealCategories.forEach(cat=>{
+  const card=document.createElement("div");
+  card.className="card animated-float";
+  
+  const imgWrap=document.createElement("div");
+  imgWrap.className="card-img-wrapper";
+  const img=document.createElement("img");
+  img.src=cat.img;
+  img.alt=cat.name;
+  imgWrap.appendChild(img);
+
+  const h=document.createElement("h3");h.textContent=cat.name;
+  const p=document.createElement("p");p.textContent=cat.description;
+  const b=document.createElement("button");b.className="button";b.textContent="Injira mwisoko Reba products";
+  b.onclick=()=>openDealCategory(cat);
+  
+  card.append(imgWrap,h,p,b);
+  root.append(card);
+
+  if(previewRoot) {
+    const cardClone = card.cloneNode(true);
+    cardClone.querySelector("button").onclick=()=>openDealCategory(cat);
+    previewRoot.append(cardClone);
+  }
+ });
+}
+
+function openDealCategory(category){
+ $("modalCategoryTitle").textContent=category.name;
+ const list=$("dealProductsList");list.replaceChildren();
+ 
+ const matches=products.filter(p=>productCategory(p)===category.id && p.active!==false);
+ if(!matches.length){list.textContent="Nta product irashyirwa muri iyi category."}
+ matches.forEach(p=>{
+  const card=document.createElement("div");card.className="product-item-card";
+  const img=document.createElement("img");img.src=productImage(p);img.alt=p.name||"Product";
+  const info=document.createElement("div");info.className="product-item-info";
+  const name=document.createElement("h4");name.textContent=p.name||"Product";
+  const desc=document.createElement("p");desc.textContent=p.description||"";
+  const price=document.createElement("b");price.style.color="#34d399";price.textContent=money(p.price);
+  const sellerTag=document.createElement("small");
+  sellerTag.style.cssText="display:block;font-size:11px;color:#9ca3af;margin-top:2px";
+  sellerTag.textContent=`🏪 Vendor ID: ${p.sellerId}`;
+  
+  info.append(name,desc,price,sellerTag);
+  
+  const actions=document.createElement("div");
+  actions.style.cssText="display:flex;flex-direction:column;gap:6px";
+  
+  const placeOrderBtn=document.createElement("button");
+  placeOrderBtn.className="button";
+  placeOrderBtn.textContent="⚡ Place Order / Buy Now";
+  placeOrderBtn.onclick=()=>buyProduct(p);
+
+  const viewBtn=document.createElement("button");
+  viewBtn.className="button button-secondary";
+  viewBtn.textContent="👁️ Details";
+  viewBtn.onclick=()=>openProductDetail(p);
+  
+  actions.append(placeOrderBtn, viewBtn);
+  card.append(img,info,actions);
+  list.append(card);
+ });
+ openModal("dealCategoryModal");
+}
+$("closeDealModal").onclick=()=>closeModal("dealCategoryModal");
+
+function openProductDetail(p){
+ $("pdName").textContent=p.name;
+ $("pdImg").src=productImage(p);
+ $("pdDesc").textContent=p.description||"Nta bisobanuro bihari.";
+ $("pdPrice").textContent=money(p.price);
+ $("pdContact").textContent=p.contactPhone||"N/A";
+ $("pdMomo").textContent=p.sellerMomo||"N/A";
+ 
+ $("pdBuyBtn").onclick=()=>{
+   closeModal("productDetailModal");
+   buyProduct(p);
+ };
+ openModal("productDetailModal");
+}
+
+/* PLACE ORDER / BUY NOW FUNCTION */
+async function buyProduct(product){
+ if(!currentUser){
+   toast("Banza winjire muri account kugira ngo ukore order!","error");
+   openAuth("login");
+   return;
+ }
+ try{
+  const userRef=doc(db,"user",currentUser.uid);
+  const orderRef=doc(collection(db,"orders"));
+  await runTransaction(db,async tx=>{
+   const snap=await tx.get(userRef);
+   if(!snap.exists())throw new Error("Account yawe ntiyabonetse.");
+   const balance=Number(snap.data().balance)||0;
+   if(balance<Number(product.price))throw new Error("Amafaranga ari muri wallet ntahagije ("+money(balance)+"). Banza ukore Deposit.");
+   tx.update(userRef,{balance:balance-Number(product.price)});
+   tx.set(orderRef,{
+    userId:currentUser.uid,
+    userEmail:currentUser.email||"",
+    productId:String(product.id||""),
+    productName:product.name,
+    price:Number(product.price),
+    sellerId:product.sellerId||"admin",
+    status:"PAID (FREE DELIVERY)",
+    deliveryStatus:"Pending Delivery",
+    createdAt:serverTimestamp()
+   });
+  });
+  toast("Order ya "+product.name+" yakiriwe neza! Ni Free Delivery.","success");
+  closeModal("dealCategoryModal");
+ }catch(err){toast(err.message||"Ntibyashobotse gukora order.","error")}
+}
+
+// USER VERIFICATION FORM LOGIC
+$("userVerificationForm").onsubmit=async e=>{
+  e.preventDefault();
+  if(!currentUser) return;
+  const fullName=$("verifFullName").value.trim();
+  const momoNumber=$("verifMomoNumber").value.trim();
+
+  if(!/^(07[2389]\d{7})$/.test(momoNumber)){
+    toast("Andika nimero ya MoMo nyayo (078... / 072... / 073...)","error");
+    return;
+  }
+
+  try{
+    await updateDoc(doc(db,"user",currentUser.uid),{
+      claimedMomoName: fullName,
+      lockedPhoneNumber: momoNumber,
+      verificationStatus: "pending_verification",
+      submittedVerifAt: serverTimestamp()
+    });
+    toast("Amakuru yawe yakiriwe neza! Tegereza ko Admin ayasuzuma ngo ube verified.","success");
+  }catch(err){
+    toast("Ikosa ryaje: "+err.message,"error");
+  }
+};
+
+function openPaymentModal(isDeposit){
+ if(!currentUser){openAuth("login");return}
+
+ isDepositMode=isDeposit;
+ $("payModalTitle").textContent=isDeposit?"➕ Deposit Request (MoMo Push Prompt Direct)":"💸 Cash Out Request";
+ $("displaySysMomoNum").textContent=sysMomoNumber;
+ $("displaySysMomoName").textContent=sysMomoName;
+ $("payPhone").value=currentUserLockedPhone || "";
+ $("depositPaymentForm").style.display="flex";
+ $("paymentLoadingBox").style.display="none";
+ $("payAmount").value="";
+ openModal("paymentModal");
+}
+$("depositBtn").onclick=()=>openPaymentModal(true);
+$("cashoutBtn").onclick=()=>openPaymentModal(false);
+$("closePayModal").onclick=()=>closeModal("paymentModal");
+
+/* REAL AUTOMATED DEPOSIT DIRECT FORM LOGIC */
+$("depositPaymentForm").onsubmit=async e=>{
+ e.preventDefault();
+ e.stopPropagation();
+ if(!currentUser)return;
+ const phone=$("payPhone").value.trim();
+ const amount=Number($("payAmount").value);
+ 
+ if(!phone || !/^(07[2389]\d{7})$/.test(phone)){
+   toast("Andika nimero ya MoMo nyayo (078... / 072... / 073...)","error");
+   return;
+ }
+
+ if(!isDepositMode && amount>userWallet){
+   toast("Amafaranga ari muri wallet ntahagije ("+money(userWallet)+").","error");
+   return;
+ }
+
+ const btn=$("paySubmitBtn"); btn.disabled=true;
+ try{
+  const depositId = "ORD-" + Date.now();
+
+  if(isDepositMode) {
+    const renderRes = await fetch(`${RENDER_BACKEND_URL}/api/pay`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phoneNumber: phone, amount: amount, depositId: depositId, userId: currentUser.uid })
+    });
+    const resData = await renderRes.json();
+    if(!resData.success) {
+      throw new Error("PawaPay Payment Prompt Error: " + (resData.error || "Ubwishyu bwanzwe"));
+    }
+  }
+
+  await addDoc(collection(db,"transactions"),{
+   userId: currentUser.uid,
+   userEmail: currentUser.email||"",
+   userName: $("userName").textContent||"User",
+   phone: phone,
+   depositId: depositId,
+   method: $("payMethod").value,
+   amount: amount,
+   type: isDepositMode ? "deposit" : "withdraw",
+   status: "PENDING_MOMO_PIN",
+   createdAt: serverTimestamp()
+  });
+  
+  $("depositPaymentForm").style.display="none";
+  $("paymentLoadingBox").style.display="block";
+  toast("MoMo Push Prompt yoherejwe! Reba kuri telefone yawe utange PIN ya MoMo.","info");
+
+  setTimeout(()=>{
+    closeModal("paymentModal");
+  }, 4000);
+
+ }catch(err){
+   toast("Ubusabe ntibwoherejwe: "+err.message,"error");
+ }finally{
+   btn.disabled=false;
+ }
+};
+
+function renderTransactionRequests(snapshot){
+ const list=$("adminRequestsList");list.replaceChildren();
+ $("admStatPending").textContent=snapshot.size;
+ if(snapshot.empty){list.textContent="Nta transaction pending iriho.";return}
+ snapshot.forEach(s=>{
+  const t=s.data(),card=document.createElement("div");card.className="tx-card";
+  const title=document.createElement("b");
+  title.style.color="#34d399";
+  title.textContent=(t.type||"request").toUpperCase()+" — "+money(t.amount);
+  
+  const details=document.createElement("p");
+  details.style.marginTop="4px";
+  details.innerHTML=`
+    User: <b>${t.userName||t.userEmail}</b> (${t.userEmail})<br>
+    MoMo Phone: <b style="color:#10b981">${t.phone||'N/A'}</b><br>
+    Deposit ID: <b>${t.depositId||'N/A'}</b><br>
+    Method: ${t.method||'MoMo'}
+  `;
+  
+  const btnGroup=document.createElement("div");
+  btnGroup.style.cssText="display:flex;gap:8px;margin-top:10px";
+  
+  const approve=document.createElement("button");
+  approve.className="button";approve.textContent="Approve / Wemerewe";
+  approve.onclick=()=>approveTransaction(s.id);
+  
+  const reject=document.createElement("button");
+  reject.className="button button-danger";reject.textContent="Reject / Hakaniwe";
+  reject.onclick=()=>rejectTransaction(s.id);
+
+  btnGroup.append(approve,reject);
+  card.append(title,details,btnGroup);list.append(card);
+ });
+}
+
+async function approveTransaction(txId){
+ if(!currentUser||currentUserRole!=="admin"){toast("Uburenganzira bwa admin burakenewe.","error");return}
+ if(!confirm("Urashaka kwemeza iyi transaction maze unongere ku Wallet y'umukoresha?"))return;
+ try{
+  const txRef=doc(db,"transactions",txId);
+  const txSnap=await getDoc(txRef);
+  if(!txSnap.exists())throw new Error("Transaction ntiyabonetse.");
+  const data=txSnap.data();
+
+  if(data.status === "APPROVED"){
+    toast("Iyi transaction yari yarajyanye mu kemezo!","info");
+    return;
+  }
+
+  await runTransaction(db,async tx=>{
+   const userRef=doc(db,"user",data.userId);
+   const userSnap=await tx.get(userRef);
+   if(!userSnap.exists())throw new Error("User ntiyabonetse.");
+   const balance=Number(userSnap.data().balance)||0;
+   const amount=Number(data.amount);
+   if(!Number.isFinite(amount)||amount<=0)throw new Error("Amafaranga si yo.");
+   const next=data.type==="deposit"?balance+amount:balance-amount;
+   if(next<0)throw new Error("Balance y'umukoresha ntihagije.");
+   tx.update(userRef,{balance:next});
+   tx.update(txRef,{status:"APPROVED",approvedBy:currentUser.uid,approvedAt:serverTimestamp()});
+  });
+  toast("Deposit yemejwe kandi balance yongeuwe neza!","success");
+ }catch(err){toast("Ntibyashobotse kwemeza: "+err.message,"error")}
+}
+
+async function rejectTransaction(txId){
+ if(!currentUser||currentUserRole!=="admin"){toast("Uburenganzira bwa admin burakenewe.","error");return}
+ let reason = prompt("Andika impamvu / note yo kwangira iyi transaction (Reject Reason):", "Amazina watanze ntidahura n'a nimero ya MoMo.");
+ if(reason===null)return;
+ try{
+   await updateDoc(doc(db,"transactions",txId),{
+     status: "REJECTED",
+     rejectReason: reason,
+     rejectedAt: serverTimestamp()
+   });
+   toast("Transaction yangiwe! Reason: "+reason,"info");
+ }catch(err){toast("Ntibyashobotse: "+err.message,"error")}
+}
+
+$("requestSellerBtn").onclick=async()=>{
+ if(!currentUser)return;
+ if(confirm("Urashaka kohereza ubusabe bwo kuba Seller/Vendor?")){
+   try{
+     await addDoc(collection(db,"seller_applications"),{
+       userId: currentUser.uid,
+       userEmail: currentUser.email||"",
+       status: "PENDING",
+       createdAt: serverTimestamp()
+     });
+     toast("Ubusabe bwo kuba Seller bwoherejwe neza! Tegereza approval.","success");
+   }catch(e){toast("Ikosa: "+e.message,"error")}
+ }
+};
+
+function inspectUserDetails(uDocId, uData) {
+  const content = $("adminUserInspectorContent");
+  content.innerHTML = `
+    <div style="font-size:14px;line-height:1.8">
+      <p><b>User ID:</b> ${uDocId}</p>
+      <p><b>Amazina ya App:</b> ${uData.name || 'N/A'}</p>
+      <p><b>Amazina y'i MoMo:</b> <b style="color:#34d399">${uData.claimedMomoName || 'N/A'}</b></p>
+      <p><b>Email:</b> ${uData.email || 'N/A'}</p>
+      <p><b>MoMo Number (Locked):</b> <b style="color:#10b981">${uData.lockedPhoneNumber || 'N/A'}</b></p>
+      <p><b>Verification Status:</b> <b>${uData.verificationStatus || 'unverified'}</b></p>
+      <p><b>Role:</b> <span style="color:#34d399;font-weight:bold">${uData.role || 'user'}</span></p>
+      <p><b>Current Balance:</b> <span style="color:#34d399;font-weight:bold;font-size:18px">${money(uData.balance || 0)}</span></p>
+      <p><b>Account Status:</b> ${uData.blocked ? '<span style="color:#f43f5e;font-weight:bold">BLOCKED</span>' : '<span style="color:#34d399;font-weight:bold">ACTIVE</span>'}</p>
+      <hr style="border-color:#23382f;margin:15px 0">
+      <button class="button" onclick="editUserBalanceFromModal('${uDocId}', ${uData.balance || 0})">✏️ Guhindura Balance</button>
+    </div>
+  `;
+  openModal("adminUserInspectorModal");
+}
+
+window.editUserBalanceFromModal = async function(uDocId, oldBal) {
+  const newBal = prompt("Andika balance nshya y'uyu mukoresha (RWF):", oldBal);
+  if(newBal!==null && !isNaN(newBal)){
+    await updateDoc(doc(db,"user",uDocId),{balance: Number(newBal)});
+    toast("Balance yavuguruwe neza!","success");
+    closeModal("adminUserInspectorModal");
+  }
+};
+
+function listenToAdminPanel(){
+ if(unsubTx)unsubTx();
+ if(unsubSupport)unsubSupport();
+ if(unsubUsersList)unsubUsersList();
+ if(unsubSellerApps)unsubSellerApps();
+ if(unsubAllOrders)unsubAllOrders();
+ if(unsubAllProds)unsubAllProds();
+ if(unsubPendingVerifs)unsubPendingVerifs();
+
+ const pending=query(collection(db,"transactions"),where("status","in",["PENDING","PENDING_MOMO_PIN"]));
+ unsubTx=onSnapshot(pending,renderTransactionRequests,err=>{
+  $("adminRequestsList").textContent="Ntibishobotse gusoma transactions: "+err.message;
+ });
+
+ const verifQuery = query(collection(db,"user"),where("verificationStatus","==","pending_verification"));
+ unsubPendingVerifs = onSnapshot(verifQuery, snap=>{
+    const list = $("adminVerificationsList"); list.replaceChildren();
+    $("admStatPendingVerifs").textContent = snap.size;
+    if(snap.empty){
+      list.textContent = "Nta ubusabe bw'abakoresha bashya bo kwemezwa buhari.";
+      return;
+    }
+    snap.forEach(uDoc=>{
+      const u = uDoc.data();
+      const card = document.createElement("div"); card.className = "user-card";
+      card.innerHTML = `
+        <div class="user-info">
+          <b>User Email:</b> ${u.email||'N/A'}<br>
+          <b>Amazina ku Urubuga (User Name):</b> ${u.name||'N/A'}<br>
+          <b>Amazina yemeza ko ari ay'i MoMo (Claimed MoMo Name):</b> <b style="color:#34d399">${u.claimedMomoName||'N/A'}</b><br>
+          <b>Nimero ya MoMo (Locked Phone):</b> <b style="color:#10b981">${u.lockedPhoneNumber||'N/A'}</b>
+        </div>
+      `;
+      
+      const act = document.createElement("div"); act.className="user-actions";
+      
+      const approveBtn = document.createElement("button");
+      approveBtn.className="button"; approveBtn.textContent="Approve / Wemerewe";
+      approveBtn.onclick = async () => {
+        await updateDoc(doc(db,"user",uDoc.id),{ verificationStatus: "verified" });
+        toast("Account y'uyu mukoresha yajyanye muri Verified neza!","success");
+      };
+
+      const rejectBtn = document.createElement("button");
+      rejectBtn.className="button button-danger"; rejectBtn.textContent="Reject / Hakaniwe";
+      rejectBtn.onclick = async () => {
+        const reason = prompt("Impamvu yo kwanga verification:", "Amazina watanze ntidahura n'a nimero ya MoMo.");
+        if(reason !== null){
+          await updateDoc(doc(db,"user",uDoc.id),{ 
+            verificationStatus: "unverified",
+            verifRejectReason: reason
+          });
+          toast("Verification yangiwe! User yagaruwe kuri unverified.","info");
+        }
+      };
+
+      act.append(approveBtn, rejectBtn);
+      card.append(act);
+      list.append(card);
+    });
+ });
+
+ unsubUsersList=onSnapshot(collection(db,"user"),snap=>{
+  const list=$("adminUsersList");list.replaceChildren();
+  $("admStatUsers").textContent=snap.size;
+  let sellerCount=0;
+  if(snap.empty){list.textContent="Nta mukoresha ubonywe muri collection ya user.";return}
+  snap.forEach(uDoc=>{
+   const u=uDoc.data();
+   if(u.role==="seller") sellerCount++;
+   
+   const card=document.createElement("div");card.className="user-card";
+   
+   const info=document.createElement("div");info.className="user-info";
+   info.innerHTML=`
+     <b>${u.name||'User'}</b> (${u.email||'No Email'})
+     <p>Balance: <span style="color:#34d399;font-weight:bold">${money(u.balance||0)}</span> | Verif: <b>${u.verificationStatus||'unverified'}</b> | Status: <b>${u.blocked?'BLOCKED':'ACTIVE'}</b></p>
+   `;
+   
+   const actions=document.createElement("div");actions.className="user-actions";
+
+   const viewBtn=document.createElement("button");
+   viewBtn.className="button button-secondary";viewBtn.textContent="👁 View Details";
+   viewBtn.onclick=()=>inspectUserDetails(uDoc.id, u);
+
+   const editBtn=document.createElement("button");
+   editBtn.className="button button-secondary";editBtn.textContent="✏️ Edit Bal";
+   editBtn.onclick=async()=>{
+    const newBal=prompt("Andika balance nshya ya "+(u.name||'User')+":", u.balance||0);
+    if(newBal!==null && !isNaN(newBal)){
+      await updateDoc(doc(db,"user",uDoc.id),{balance: Number(newBal)});
+      toast("Balance yavuguruwe neza!","success");
+    }
+   };
+
+   const blockBtn=document.createElement("button");
+   blockBtn.className="button "+(u.blocked?"":"button-warning");
+   blockBtn.textContent=u.blocked?"🔓 Unblock":"🔒 Block";
+   blockBtn.onclick=async()=>{
+     await updateDoc(doc(db,"user",uDoc.id),{blocked: !u.blocked});
+     toast(u.blocked?"User unblocked!":"User blocked!","info");
+   };
+
+   const delBtn=document.createElement("button");
+   delBtn.className="button button-danger";delBtn.textContent="🗑️ Delete";
+   delBtn.onclick=async()=>{
+     if(confirm("Urashaka gusiba uyu user burundu muri database?")){
+       await deleteDoc(doc(db,"user",uDoc.id));
+       toast("User wasibwe!","info");
+     }
+   };
+
+   actions.append(viewBtn,editBtn,blockBtn,delBtn);
+   card.append(info,actions);list.append(card);
+  });
+ },err=>{$("adminUsersList").textContent="Ikosa: "+err.message});
+
+ unsubSellerApps=onSnapshot(query(collection(db,"seller_applications"),where("status","==","PENDING")),snap=>{
+   const list=$("adminSellerAppsList");list.replaceChildren();
+   if(snap.empty){list.textContent="Nta busabe bwa Seller buhari kuri ubu.";return}
+   snap.forEach(sDoc=>{
+     const app=sDoc.data();
+     const card=document.createElement("div");card.className="tx-card";
+     card.innerHTML=`<b>${app.userEmail}</b> asaba kuba Seller.<br>`;
+     
+     const approve=document.createElement("button");
+     approve.className="button";approve.textContent="Approve Seller";approve.style.marginTop="8px";
+     approve.onclick=async()=>{
+       await updateDoc(doc(db,"user",app.userId),{role: "seller"});
+       await updateDoc(doc(db,"seller_applications",sDoc.id),{status: "APPROVED"});
+       toast("User yabaye Seller neza!","success");
+     };
+     card.appendChild(approve);list.appendChild(card);
+   });
+ });
+
+ unsubAllOrders=onSnapshot(collection(db,"orders"),snap=>{
+   const list=$("adminOrdersList");list.replaceChildren();
+   if(snap.empty){list.textContent="Nta orders ziriho.";return}
+   snap.forEach(oDoc=>{
+     const o=oDoc.data();
+     const item=document.createElement("div");item.className="tx-card";
+     item.innerHTML=`<b>${o.productName}</b> — ${money(o.price)}<br>Buyer: ${o.userEmail} | Status: <b style="color:#34d399">${o.status}</b> | Delivery: <b style="color:#34d399">FREE DELIVERY</b>`;
+     list.appendChild(item);
+   });
+ });
+
+ unsubAllProds=onSnapshot(collection(db,"products"),snap=>{
+   const list=$("adminAllProductsList");list.replaceChildren();
+   snap.forEach(pDoc=>{
+     const p=pDoc.data();
+     const card=document.createElement("div");card.className="product-item-card";
+     card.innerHTML=`
+       <img src="${p.imageUrl||p.img||'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800'}">
+       <div class="product-item-info">
+         <h4>${p.name}</h4>
+         <p>${money(p.price)} | Category: Deal ${p.category} | Seller: ${p.sellerId}</p>
+       </div>
+     `;
+     const del=document.createElement("button");del.className="button button-danger";del.textContent="Admin Delete";
+     del.onclick=async()=>{
+       if(confirm("Urashaka gusiba iki gicuruzwa nka Admin?")){
+         await deleteDoc(doc(db,"products",pDoc.id));
+         toast("Igicuruzwa wasibwe!","info");
+       }
+     };
+     card.appendChild(del);list.appendChild(card);
+   });
+ });
+
+ unsubSupport=onSnapshot(collection(db,"support_tickets"),snap=>{
+  const list=$("adminSupportList");list.replaceChildren();
+  if(snap.empty){list.textContent="Nta ubutumwa/ticket nshya iriho.";return}
+  snap.forEach(s=>{
+   const d=s.data(),item=document.createElement("div");item.className="tx-card";
+   const who=document.createElement("b");who.textContent="From: "+(d.userEmail||"Unknown");
+   const msg=document.createElement("p");msg.textContent=d.message||"";
+   
+   if(d.adminReply) {
+     const rep = document.createElement("p");
+     rep.style.color = "#34d399";
+     rep.style.marginTop = "6px";
+     rep.textContent = "Admin Reply: " + d.adminReply;
+     item.append(who,msg,rep);
+   } else {
+     const replyBtn=document.createElement("button");
+     replyBtn.className="button button-secondary";replyBtn.style.marginTop="8px";
+     replyBtn.textContent="Reply Ticket Direct";
+     replyBtn.onclick=async()=>{
+       const replyText=prompt("Andika igisubizo cyawe cyo koherereza umukiriya:");
+       if(replyText){
+         await updateDoc(doc(db,"support_tickets",s.id),{
+           adminReply: replyText,
+           repliedAt: serverTimestamp()
+         });
+         toast("Igisubizo cyohererejwe neza!","success");
+       }
+     };
+     item.append(who,msg,replyBtn);
+   }
+   list.append(item);
+  });
+ },err=>{$("adminSupportList").textContent="Ikosa: "+err.message});
+}
+
+$("sellerAddProdForm").onsubmit=async e=>{
+  e.preventDefault();
+  if(!currentUser || (currentUserRole!=="seller" && currentUserRole!=="admin")){
+    toast("Seller gusa ni we wemerewe!","error");
+    return;
+  }
+  try{
+    await addDoc(collection(db,"products"),{
+      category: $("sellerProdCategory").value,
+      name: $("sellerProdName").value.trim(),
+      price: Number($("sellerProdPrice").value),
+      description: $("sellerProdDesc").value.trim(),
+      imageUrl: $("sellerProdImg").value.trim(),
+      contactPhone: $("sellerProdContact").value.trim(),
+      sellerMomo: $("sellerProdMomo").value.trim(),
+      sellerId: currentUser.uid,
+      active: true,
+      createdAt: serverTimestamp()
+    });
+    toast("Igicuruzwa cyongewe neza mu masoko!","success");
+    $("sellerAddProdForm").reset();
+  }catch(err){toast("Ikosa: "+err.message,"error")}
+};
+
+function listenToSellerProducts(){
+  if(unsubSellerProds) unsubSellerProds();
+  unsubSellerProds = onSnapshot(query(collection(db,"products"),where("sellerId","==",currentUser.uid)),snap=>{
+    const list=$("sellerMyProductsList");list.replaceChildren();
+    if(snap.empty){list.textContent="Nta gicuruzwa urashyiraho.";return}
+    snap.forEach(pDoc=>{
+      const p=pDoc.data();
+      const card=document.createElement("div");card.className="product-item-card";
+      card.innerHTML=`
+        <img src="${p.imageUrl||p.img||'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800'}">
+        <div class="product-item-info">
+          <h4>${p.name}</h4>
+          <p>${money(p.price)} | Deal ${p.category}</p>
+        </div>
+      `;
+      const del=document.createElement("button");del.className="button button-danger";del.textContent="Delete";
+      del.onclick=async()=>{
+        if(confirm("Urashaka gusiba uyu product?")){
+          await deleteDoc(doc(db,"products",pDoc.id));
+          toast("Igicuruzwa wasibwe!","info");
+        }
+      };
+      card.appendChild(del);list.appendChild(card);
+    });
+  });
+}
+
+$("saveSysMomoBtn").onclick=async()=>{
+  sysMomoNumber=$("sysMomoNumber").value.trim();
+  sysMomoName=$("sysMomoName").value.trim();
+  toast("MoMo Settings za Website zavuguruwe!","success");
+};
+
+$("admSaveCoverBtn").onclick=async()=>{
+ const catId=Number($("admCoverCategory").value);
+ const imgUrl=$("admCoverImgUrl").value.trim();
+ if(!imgUrl){toast("Shyiramo URL y'ifoto!","error");return}
+ const catIndex = dealCategories.findIndex(c=>c.id===catId);
+ if(catIndex!==-1){
+   dealCategories[catIndex].img = imgUrl;
+   loadCategories();
+   toast(`Ifoto ya Deal ${catId} yahinduwe neza!`,"success");
+   $("admCoverImgUrl").value="";
+ }
+};
+
+function listenToProducts(){
+ if(unsubProducts)unsubProducts();
+ unsubProducts=onSnapshot(collection(db,"products"),snap=>{
+  const firestoreProducts=[];
+  snap.forEach(s=>{
+   const d=s.data();
+   if(d.active===false)return;
+   firestoreProducts.push({
+    id:s.id,dealId:Number(d.category??d.dealId??1),
+    name:d.name||"Product",price:Number(d.price)||0,
+    description:d.description||"",img:d.imageUrl||d.img||"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800",
+    contactPhone:d.contactPhone||"0788000000",
+    sellerMomo:d.sellerMomo||"0788000000",
+    sellerId:d.sellerId||"admin",
+    active:d.active
+   });
+  });
+  products=[...initialProducts,...firestoreProducts];
+  renderHomeRecommendations();
+ },err=>console.error("Products:",err.message));
+}
+
+function listenToUserData(user){
+ if(unsubUser)unsubUser();
+ const userRef=doc(db,"user",user.uid);
+ unsubUser=onSnapshot(userRef,async snap=>{
+  if(!currentUser||currentUser.uid!==user.uid)return;
+  if(!snap.exists()){
+   try{
+    await setDoc(userRef,{
+     name:user.displayName||localStorage.getItem("rwandaOnlineDealsName")||"User",
+     email:user.email||"",
+     balance:0,
+     role:"user",
+     verificationStatus:"unverified",
+     createdAt:serverTimestamp()
+    });
+   }catch(err){console.error("Profile creation:",err.message)}
+   return;
+  }
+  const data=snap.data();
+  
+  if(data.blocked){
+    alert("Konti yawe yarahanwe (BLOCKED). Ntabwo wemerewe kwinjira!");
+    signOut(auth);
+    return;
+  }
+
+  userWallet=Number(data.balance)||0;
+  currentUserRole=data.role||"user";
+  currentUserStatus=data.verificationStatus||"unverified";
+  currentUserLockedPhone=data.lockedPhoneNumber||"";
+  
+  $("userName").textContent=data.name||"User";
+  $("accName").textContent=data.name||"User";
+  $("accRole").textContent=currentUserRole;
+  $("accLockedPhone").textContent=currentUserLockedPhone||"N/A";
+  $("accVerifStatus").textContent=currentUserStatus.toUpperCase();
+  $("userBalanceText").textContent=money(userWallet);
+  $("accBalance").textContent=money(userWallet);
+  
+  const badgeDiv = $("userVerificationBadge");
+  const verifNotice = $("verificationNoticeCard");
+
+  if(currentUserStatus === "verified"){
+    badgeDiv.innerHTML = `<span style="background:#059669;color:white;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold">✓ VERIFIED ACCOUNT</span>`;
+    verifNotice.style.display = "none";
+  } else if(currentUserStatus === "pending_verification"){
+    badgeDiv.innerHTML = `<span style="background:#eab308;color:black;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold">⏳ VERIFICATION PENDING</span>`;
+    verifNotice.style.display = "block";
+    verifNotice.querySelector("h3").textContent = "⏳ Verification yawe iri gukorwa Igenzura!";
+    verifNotice.querySelector("p").textContent = "Amakuru yawe y'amazina na MoMo yoherejwe kuri Admin. Niba amaze kuyasuzuma araguha Verified badge ubashe gukora Deposit no Kubikuza!";
+    $("userVerificationForm").style.display = "none";
+  } else {
+    badgeDiv.innerHTML = `<span style="background:#f43f5e;color:white;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold">⚠ UNVERIFIED ACCOUNT</span>`;
+    verifNotice.style.display = "block";
+    $("userVerificationForm").style.display = "flex";
+  }
+
+  $("navAdminBtn").style.display=currentUserRole==="admin"?"inline-block":"none";
+  $("navSellerBtn").style.display=(currentUserRole==="seller"||currentUserRole==="admin")?"inline-block":"none";
+  $("becomeSellerBox").style.display=currentUserRole==="user"?"flex":"none";
+
+  if(currentUserRole==="admin"){listenToAdminPanel()}
+  if(currentUserRole==="seller"||currentUserRole==="admin"){listenToSellerProducts()}
+ },err=>{
+  console.error("User profile:",err);
+  toast("Ntibishobotse gusoma amakuru ya account: "+err.message,"error");
+ });
+}
+
+function listenToOrders(user){
+ if(unsubOrders)unsubOrders();
+ const q=query(collection(db,"orders"),where("userId","==",user.uid));
+ unsubOrders=onSnapshot(q,snap=>{
+  const list=$("userOrdersList");list.replaceChildren();
+  if(snap.empty){list.textContent="Nta order urakora.";return}
+  snap.forEach(s=>{
+   const d=s.data(),item=document.createElement("div");item.className="tx-card";
+   item.innerHTML=`<b>${d.productName||"Product"}</b> — ${money(d.price)} <br><span style="color:#34d399">Status: ${d.status||""}</span> | <b style="color:#10b981">Free Delivery</b>`;
+   list.append(item);
+  });
+ },err=>{$("userOrdersList").textContent="Ntibishobotse gusoma amateka: "+err.message});
+}
+
+$("navAdminBtn").onclick=showAdminRoom;
+$("navSellerBtn").onclick=showSellerRoom;
+
+$("supportBtn").onclick=()=>{if(!currentUser){openAuth("login");return}openModal("supportModal")};
+$("closeSupportModal").onclick=()=>closeModal("supportModal");
+$("supportForm").onsubmit=async e=>{
+ e.preventDefault();
+ if(!currentUser){toast("Banza winjire.","error");return}
+ const message=$("supportText").value.trim();
+ if(!message)return;
+ try{
+  await addDoc(collection(db,"support_tickets"),{
+   userId:currentUser.uid,userEmail:currentUser.email||"",
+   message,status:"OPEN",createdAt:serverTimestamp()
+  });
+  toast("Ubutumwa bwoherejwe neza!","success");
+  $("supportForm").reset();closeModal("supportModal");
+ }catch(err){toast("Ntibyashobotse kohereza ubutumwa: "+err.message,"error")}
+};
+
+$("myAccountBtn").onclick=()=>openModal("accountModal");
+$("closeAccountModal").onclick=()=>closeModal("accountModal");
+
+function renderCart(){
+ const list=$("cartItemsList");list.replaceChildren();
+ let total=0;
+ if(!userCart.length)list.textContent="Agaseke kagusaye.";
+ userCart.forEach((item,index)=>{
+  total+=Number(item.price)||0;
+  const row=document.createElement("div");
+  row.style.cssText="display:flex;justify-content:space-between;gap:8px;margin:10px 0;align-items:center";
+  const label=document.createElement("span");label.textContent=item.name+" — "+money(item.price);
+  const remove=document.createElement("button");remove.textContent="Kuramo";
+  remove.style.cssText="background:#f43f5e;color:white;border:0;padding:5px 10px;border-radius:6px;font-weight:bold";
+  remove.onclick=()=>{userCart.splice(index,1);updateUI();renderCart()};
+  row.append(label,remove);list.append(row);
+ });
+ $("cartTotalAmt").textContent=money(total);
+}
+$("openCartBtn").onclick=()=>{renderCart();openModal("cartModal")};
+$("closeCartModal").onclick=()=>closeModal("cartModal");
+
+$("checkoutCartBtn").onclick=async()=>{
+ if(!currentUser){closeModal("cartModal");openAuth("login");return}
+ if(!userCart.length){toast("Agaseke karimo ubusa.","error");return}
+ const items=[...userCart];
+ 
+ const userRef=doc(db,"user",currentUser.uid);
+ const batch=writeBatch(db);
+ const orderRefs=items.map(()=>doc(collection(db,"orders")));
+ try{
+  const userSnap=await getDoc(userRef);
+  if(!userSnap.exists())throw new Error("Account ntiyabonetse.");
+  const balance=Number(userSnap.data().balance)||0;
+  const total=items.reduce((sum,p)=>sum+(Number(p.price)||0),0);
+  if(balance<total){toast("Wallet balance ntihagije. Banza ukore Deposit.","error");return}
+  batch.update(userRef,{balance:balance-total});
+  items.forEach((p,i)=>batch.set(orderRefs[i],{
+   userId:currentUser.uid,
+   userEmail:currentUser.email||"",
+   productId:String(p.id||""),
+   productName:p.name,
+   price:Number(p.price)||0,
+   sellerId:p.sellerId||"admin",
+   status:"PAID (FREE DELIVERY)",
+   createdAt:serverTimestamp()
+  }));
+  await batch.commit();
+  userCart=[];updateUI();renderCart();
+  toast("Orders zawe zakiriwe neza! Ni Free Delivery.","success");
+  closeModal("cartModal");
+ }catch(err){toast("Ntibyashobotse: "+err.message,"error")}
+};
+
+function openAuth(tab="register"){
+ openModal("auth-section");showTab(tab);
+}
+function closeAuthBox(){closeModal("auth-section")}
+function showTab(tab){
+ const reg=tab==="register";
+ $("registerTab").classList.toggle("active",reg);
+ $("loginTab").classList.toggle("active",!reg);
+ $("registerForm").classList.toggle("active",reg);
+ $("loginForm").classList.toggle("active",!reg);
+}
+$("openAuthTop").onclick=()=>openAuth("register");
+$("openAuthHero").onclick=()=>openAuth("register");
+$("registerTab").onclick=()=>showTab("register");
+$("loginTab").onclick=()=>showTab("login");
+$("closeAuth").onclick=closeAuthBox;
+
+$("forgotPasswordLink").onclick=(e)=>{
+  e.preventDefault();
+  closeAuthBox();
+  openModal("forgotPasswordModal");
+};
+
+$("forgotPasswordForm").onsubmit=async e=>{
+  e.preventDefault();
+  const resetEmail = $("forgotEmail").value.trim();
+  if(!resetEmail){
+    toast("Andika email yawe!","error");
+    return;
+  }
+  try{
+    await sendPasswordResetEmail(auth, resetEmail);
+    toast("Link yo guhindura password yoherejwe kuri email yawe! Reba mu Inbox/Spam.","success");
+    closeModal("forgotPasswordModal");
+  }catch(err){
+    toast("Ikosa ryaje: "+err.message,"error");
+  }
+};
+
+$("registerForm").onsubmit=async e=>{
+ e.preventDefault();
+ const name=$("registerName").value.trim();
+ const email=$("registerEmail").value.trim();
+ const password=$("registerPassword").value;
+ if(!name){toast("Andika amazina yawe.","error");return}
+ const btn=$("registerForm").querySelector("button");btn.disabled=true;
+ try{
+  const credential=await createUserWithEmailAndPassword(auth,email,password);
+  await setDoc(doc(db,"user",credential.user.uid),{
+   name,email,balance:0,role:"user",verificationStatus:"unverified",createdAt:serverTimestamp()
+  });
+  localStorage.setItem("rwandaOnlineDealsName",name);
+  toast("Account yakozwe neza! Murakaza neza.","success");
+  closeAuthBox();
+ }catch(err){
+  const messages={
+   "auth/email-already-in-use":"Iyi email isanzwe ifite account.",
+   "auth/invalid-email":"Email wanditse si yo.",
+   "auth/weak-password":"Password iroroshye cyane."
+  };
+  toast(messages[err.code]||("Registration yanze: "+err.message),"error");
+ }finally{btn.disabled=false}
+};
+
+$("loginForm").onsubmit=async e=>{
+ e.preventDefault();
+ const email=$("loginEmail").value.trim();
+ const password=$("loginPassword").value;
+ const btn=$("loginForm").querySelector("button");btn.disabled=true;
+ try{
+  await signInWithEmailAndPassword(auth,email,password);
+  toast("Winjiye neza! Murakaza neza.","success");
+  closeAuthBox();
+ }catch(err){
+  const messages={
+   "auth/invalid-credential":"Email cyangwa password si byo.",
+   "auth/user-not-found":"Nta account ibonetse kuri iyi email.",
+   "auth/wrong-password":"Password si yo.",
+   "auth/too-many-requests":"Wagerageze kenshi. Ongera ugerageze nyuma."
+  };
+  toast(messages[err.code]||("Login yanze: "+err.message),"error");
+ }finally{btn.disabled=false}
+};
+
+$("logoutButton").onclick=async()=>{
+ try{
+  await signOut(auth);
+  toast("Mwasohotse mu sisitemu.","info");
+ }catch(err){toast("Logout yanze: "+err.message,"error")}
+};
+
+onAuthStateChanged(auth,async user=>{
+ cleanupListeners();
+ currentUser=user;
+ userWallet=0;
+ currentUserRole="user";
+ currentUserStatus="unverified";
+ currentUserLockedPhone="";
+ if(user){
+  showUserDashboard();
+  $("userEmail").textContent=user.email||"";
+  $("accEmail").textContent=user.email||"";
+  listenToUserData(user);
+  listenToOrders(user);
+ }else{
+  showMainHome();
+  $("userName").textContent="User";
+  $("userBalanceText").textContent="0 RWF";
+  $("accBalance").textContent="0 RWF";
+ }
+ updateUI();
+});
+
+$("menuBtn").onclick=()=>{
+ const p=$("menuPanel");
+ p.style.display=p.style.display==="block"?"none":"block";
+};
+
+listenToProducts();
+loadCategories();
+updateUI();
+</script>
+
+</body>
+</html>

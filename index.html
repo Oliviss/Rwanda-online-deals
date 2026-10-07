@@ -407,20 +407,20 @@ footer p{margin:6px;font-size:13px}
  <div class="modal-head"><h2 id="payModalTitle">Payment Request</h2><button class="close-modal" id="closePayModal">×</button></div>
  <form id="paymentForm" class="auth-form active">
   <div style="background:#16241e;padding:12px;border-radius:10px;font-size:12px;color:#a7f3d0">
-    <p><b>System Merchant MoMo:</b> <span id="displaySysMomoNum">0784374288</span></p>
+    <p><b>System MoMo Number:</b> <span id="displaySysMomoNum">0784374288</span></p>
     <p><b>Account Name:</b> <span id="displaySysMomoName">Rwanda Online Deals</span></p>
   </div>
   <select id="payMethod">
-    <option value="MTN MoMo (PawaPay API)">MTN Mobile Money (PawaPay Push Prompt)</option>
-    <option value="Airtel Money (PawaPay API)">Airtel Money (PawaPay Push Prompt)</option>
+    <option value="MTN MoMo Direct">MTN Mobile Money (PIN Prompt Direct)</option>
+    <option value="Airtel Money Direct">Airtel Money (PIN Prompt Direct)</option>
   </select>
   <label style="font-size:12px;color:#9ca3af;margin-top:6px;display:block">Nimero ya MoMo ikora (078/079/072/073):</label>
   <input type="tel" id="payPhone" placeholder="078XXXXXXX" style="background:#16241e;color:#34d399;font-weight:bold" required>
   <input type="number" id="payAmount" placeholder="Amount (RWF)" min="100" required>
-  <button type="submit" id="paySubmitBtn">⚡ Ohereza MoMo Push Prompt Kuri Telefone</button>
+  <button type="submit" id="paySubmitBtn">⚡ Ohereza MoMo PIN Push Prompt Direct</button>
  </form>
  <div id="paymentLoadingBox" style="display:none;text-align:center;padding:20px">
-  <p style="font-weight:bold;color:#34d399">⏳ PawaPay Prompt sent! Reba kuri telefone yawe utange PIN ya MoMo...</p>
+  <p style="font-weight:bold;color:#34d399">⏳ MoMo PIN Prompt YOHEREJWE! Reba kuri telefone yawe utange PIN...</p>
   <p style="font-size:12px;color:#9ca3af;margin-top:7px">Iyo uhejeje gushyiramo PIN, amafaranga ahita yongerwa muri Wallet yawe instant!</p>
  </div>
 </div></div>
@@ -681,7 +681,7 @@ window.renderHomeRecommendations = function() {
 
   const buyBtn = document.createElement("button");
   buyBtn.className = "button";
-  buyBtn.textContent = "⚡ Buy Now / Order";
+  buyBtn.textContent = "⚡ Place Order / Buy Now";
   buyBtn.onclick = () => buyProduct(p);
 
   card.append(imgWrap, h, sellerInfo, price, buyBtn);
@@ -777,6 +777,7 @@ function openProductDetail(p){
  openModal("productDetailModal");
 }
 
+/* PLACE ORDER / BUY NOW FUNCTION INTEGRATION */
 async function buyProduct(product){
  if(!currentUser){
    toast("Banza winjire muri account kugira ngo ukore order!","error");
@@ -838,7 +839,7 @@ function openPaymentModal(isDeposit){
  if(!currentUser){openAuth("login");return}
 
  isDepositMode=isDeposit;
- $("payModalTitle").textContent=isDeposit?"➕ Deposit Request (PawaPay Push Prompt)":"💸 Cash Out Request";
+ $("payModalTitle").textContent=isDeposit?"➕ Deposit Request (MoMo Push Prompt Direct)":"💸 Cash Out Request";
  $("displaySysMomoNum").textContent=sysMomoNumber;
  $("displaySysMomoName").textContent=sysMomoName;
  $("payPhone").value=currentUserLockedPhone || "";
@@ -873,7 +874,6 @@ $("paymentForm").onsubmit=async e=>{
   const depositId = "ORD-" + Date.now();
 
   if(isDepositMode) {
-    // Hamagara backend ya Render no kohereza PawaPay Push Prompt kuri MoMo
     const renderRes = await fetch(`${RENDER_BACKEND_URL}/api/pay`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -900,7 +900,7 @@ $("paymentForm").onsubmit=async e=>{
   
   $("paymentForm").style.display="none";
   $("paymentLoadingBox").style.display="block";
-  toast("PawaPay Push Prompt yoherejwe! Reba kuri telefone yawe utange PIN ya MoMo.","info");
+  toast("MoMo Push Prompt yoherejwe! Reba kuri telefone yawe utange PIN ya MoMo.","info");
 
   setTimeout(()=>{
     closeModal("paymentModal");

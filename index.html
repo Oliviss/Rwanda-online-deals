@@ -409,23 +409,18 @@ footer p{margin:6px;font-size:13px}
  <div class="modal-head"><h2 id="payModalTitle">Payment Request</h2><button class="close-modal" id="closePayModal">×</button></div>
  <form id="paymentForm" class="auth-form active">
   <div style="background:#16241e;padding:12px;border-radius:10px;font-size:12px;color:#a7f3d0">
-    <p><b>Deposit MoMo Number:</b> <span id="displaySysMomoNum">078XXXXXXX</span></p>
+    <p><b>Deposit MoMo Number:</b> <span id="displaySysMomoNum">0784374288</span></p>
     <p><b>Account Name:</b> <span id="displaySysMomoName">Rwanda Online Deals</span></p>
   </div>
   <select id="payMethod">
-    <option value="MTN MoMo (Paypack / PawaPay)">MTN Mobile Money (PawaPay Aggregator)</option>
-    <option value="Airtel Money (Paypack / PawaPay)">Airtel Money (PawaPay Aggregator)</option>
+    <option value="MTN MoMo">MTN Mobile Money</option>
+    <option value="Airtel Money">Airtel Money</option>
   </select>
-  <!-- LOCKED READONLY PHONE NUMBER INPUT -->
-  <label style="font-size:12px;color:#9ca3af;margin-top:6px;display:block">MoMo Number yawe (Locked):</label>
-  <input type="tel" id="payPhone" readonly style="background:#0b1310;color:#34d399;font-weight:bold;cursor:not-allowed" required>
+  <label style="font-size:12px;color:#9ca3af;margin-top:6px;display:block">Nimero ya MoMo (078/079/072/073):</label>
+  <input type="tel" id="payPhone" placeholder="078XXXXXXX" style="background:#16241e;color:#34d399;font-weight:bold" required>
   <input type="number" id="payAmount" placeholder="Amount (RWF)" min="100" required>
-  <button type="submit" id="paySubmitBtn">Emeza Ubusabe</button>
+  <button type="submit" id="paySubmitBtn">Ohereza Ubusabe bwa Deposit</button>
  </form>
- <div id="paymentLoadingBox" style="display:none;text-align:center;padding:20px">
-  <p style="font-weight:bold;color:#34d399">Transaction Pending Verification via PawaPay...</p>
-  <p style="font-size:12px;color:#9ca3af;margin-top:7px">Ubusabe bwawe bwoherejwe kuri Render Backend & PawaPay gateway. Mugihe gito buraba verified!</p>
- </div>
 </div></div>
 
 <div class="modal-overlay" id="supportModal"><div class="modal-box">
@@ -520,8 +515,6 @@ const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
 
-const RENDER_BACKEND_URL = "https://momo-paypack-server.onrender.com";
-
 const $=id=>document.getElementById(id);
 const money=n=>(Number(n)||0).toLocaleString()+" RWF";
 let currentUser=null;
@@ -560,7 +553,7 @@ const dealCategories=[
  {id:7,name:"Deal 7 - Premium Super Package",description:"Package y'ibicuruzwa bitandukanye.",img:"https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800"}
 ];
 
-// INITIAL DYNAMIC REAL TEMPLATE PRODUCTS
+// INITIAL DYNAMIC REAL TEMPLATE PRODUCTS (35 ITEMS TOTAL)
 const initialProducts=[];
 const dealNamesMap = {
   1: ["Smartphone Galaxy", "Wireless Earbuds", "Fast Charger 65W", "Powerbank 20000mAh", "Screen Protector HD"],
@@ -699,7 +692,6 @@ window.switchAdminTab=function(tabName, evt){
 function productCategory(p){return Number(p.dealId??p.category??1)}
 function productImage(p){return p.img||p.imageUrl||"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800"}
 
-// SMART ROTATION / RECOMMENDATION ALGORITHM FOR 100+ SELLERS ON HOME PAGE
 window.renderHomeRecommendations = function() {
  const container = $("homeRecommendationsContainer");
  if(!container) return;
@@ -771,7 +763,6 @@ function loadCategories(){
  });
 }
 
-// MULTI-VENDOR OVERALL CATEGORY VIEW (ALL SELLERS PRODUCTS APPEAR IN DEAL 1 TO 7)
 function openDealCategory(category){
  $("modalCategoryTitle").textContent=category.name;
  const list=$("dealProductsList");list.replaceChildren();
@@ -886,19 +877,13 @@ $("userVerificationForm").onsubmit=async e=>{
 
 function openPaymentModal(isDeposit){
  if(!currentUser){openAuth("login");return}
- 
- if(currentUserStatus !== "verified"){
-   toast("Banza wuzuze amakuru y'amazina n'imero yawe wemezwe (Verified) mbere yo gukora transaction!","error");
-   return;
- }
 
  isDepositMode=isDeposit;
- $("payModalTitle").textContent=isDeposit?"➕ Deposit Request (PawaPay)":"💸 Cash Out Request";
+ $("payModalTitle").textContent=isDeposit?"➕ Deposit Request":"💸 Cash Out Request";
  $("displaySysMomoNum").textContent=sysMomoNumber;
  $("displaySysMomoName").textContent=sysMomoName;
- $("payPhone").value=currentUserLockedPhone;
+ $("payPhone").value=currentUserLockedPhone || "";
  $("paymentForm").style.display="flex";
- $("paymentLoadingBox").style.display="none";
  $("payAmount").value="";
  openModal("paymentModal");
 }
@@ -909,28 +894,21 @@ $("closePayModal").onclick=()=>closeModal("paymentModal");
 $("paymentForm").onsubmit=async e=>{
  e.preventDefault();
  if(!currentUser)return;
- const phone=currentUserLockedPhone;
+ const phone=$("payPhone").value.trim();
  const amount=Number($("payAmount").value);
  
+ if(!phone || !/^(07[2389]\d{7})$/.test(phone)){
+   toast("Andika nimero ya MoMo nyayo!","error");
+   return;
+ }
+
  if(!isDepositMode && amount>userWallet){
    toast("Amafaranga ari muri wallet ntahagije ("+money(userWallet)+").","error");
    return;
  }
  const btn=$("paySubmitBtn");btn.disabled=true;
  try{
-  const depositId = "ORD-" + Date.now();
-  
-  if(isDepositMode) {
-    const renderRes = await fetch(`${RENDER_BACKEND_URL}/api/pay`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phoneNumber: phone, amount: amount, depositId: depositId })
-    });
-    const resData = await renderRes.json();
-    if(!resData.success) {
-      throw new Error("Render/PawaPay Error: " + (resData.error || "Ubwishyu bwanzwe"));
-    }
-  }
+  const depositId = "DEPOSIT-" + Date.now();
 
   await addDoc(collection(db,"transactions"),{
    userId:currentUser.uid,
@@ -945,13 +923,8 @@ $("paymentForm").onsubmit=async e=>{
    createdAt:serverTimestamp()
   });
   
-  $("paymentForm").style.display="none";
-  $("paymentLoadingBox").style.display="block";
-  toast("Ubusabe bwoherejwe kuri PawaPay & Admin Verification Panel! Reba kuri phone wemeze PIN.","info");
-
-  setTimeout(()=>{
-    closeModal("paymentModal");
-  }, 2500);
+  toast("Ubusabe bwa Deposit boherejwe neza! Admin arahuza na MoMo ayemeze.","success");
+  closeModal("paymentModal");
 
  }catch(err){toast("Ubusabe ntibwoherejwe: "+err.message,"error")}
  finally{btn.disabled=false}
@@ -980,7 +953,7 @@ function renderTransactionRequests(snapshot){
   btnGroup.style.cssText="display:flex;gap:8px;margin-top:10px";
   
   const approve=document.createElement("button");
-  approve.className="button";approve.textContent="Approve / Wemerewe (Via Backend Render & PawaPay)";
+  approve.className="button";approve.textContent="Approve / Wemerewe";
   approve.onclick=()=>approveTransaction(s.id);
   
   const reject=document.createElement("button");
@@ -992,32 +965,19 @@ function renderTransactionRequests(snapshot){
  });
 }
 
-// SECURE BACKEND APPROVAL VIA RENDER & PAWAPAY API
+// SECURE DIRECT APPROVAL & WALLET CREDIT
 async function approveTransaction(txId){
  if(!currentUser||currentUserRole!=="admin"){toast("Uburenganzira bwa admin burakenewe.","error");return}
- if(!confirm("Urashaka kwemeza iyi transaction binyuze kuri Backend Render & PawaPay API?"))return;
+ if(!confirm("Urashaka kwemeza iyi transaction maze unongere ku Wallet y'umukoresha?"))return;
  try{
   const txRef=doc(db,"transactions",txId);
   const txSnap=await getDoc(txRef);
   if(!txSnap.exists())throw new Error("Transaction ntiyabonetse.");
   const data=txSnap.data();
 
-  // Validate via Render PawaPay Gateway First before balance credit
-  const backendRes = await fetch(`${RENDER_BACKEND_URL}/api/admin-approve-deposit`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      transactionId: txId,
-      depositId: data.depositId || "",
-      amount: data.amount,
-      userId: data.userId,
-      adminUid: currentUser.uid
-    })
-  });
-
-  const resJson = await backendRes.json();
-  if(!resJson.success) {
-     throw new Error("Render Backend verification failed: " + (resJson.error || "PawaPay signature error"));
+  if(data.status === "APPROVED"){
+    toast("Iyi transaction yari yarajyanye mu kemezo!","info");
+    return;
   }
 
   await runTransaction(db,async tx=>{
@@ -1032,8 +992,8 @@ async function approveTransaction(txId){
    tx.update(userRef,{balance:next});
    tx.update(txRef,{status:"APPROVED",approvedBy:currentUser.uid,approvedAt:serverTimestamp()});
   });
-  toast("Transaction yemejwe na Render Backend & PawaPay neza!","success");
- }catch(err){toast("Ntibyashobotse: "+err.message,"error")}
+  toast("Deposit yemejwe kandi balance yongeuwe neza!","success");
+ }catch(err){toast("Ntibyashobotse kwemeza: "+err.message,"error")}
 }
 
 async function rejectTransaction(txId){
@@ -1432,28 +1392,20 @@ function listenToUserData(user){
   
   const badgeDiv = $("userVerificationBadge");
   const verifNotice = $("verificationNoticeCard");
-  const depBtn = $("depositBtn");
-  const cashBtn = $("cashoutBtn");
 
   if(currentUserStatus === "verified"){
     badgeDiv.innerHTML = `<span style="background:#059669;color:white;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold">✓ VERIFIED ACCOUNT</span>`;
     verifNotice.style.display = "none";
-    depBtn.classList.remove("button-disabled");
-    cashBtn.classList.remove("button-disabled");
   } else if(currentUserStatus === "pending_verification"){
     badgeDiv.innerHTML = `<span style="background:#eab308;color:black;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold">⏳ VERIFICATION PENDING</span>`;
     verifNotice.style.display = "block";
     verifNotice.querySelector("h3").textContent = "⏳ Verification yawe iri gukorwa Igenzura!";
     verifNotice.querySelector("p").textContent = "Amakuru yawe y'amazina na MoMo yoherejwe kuri Admin. Niba amaze kuyasuzuma araguha Verified badge ubashe gukora Deposit no Kubikuza!";
     $("userVerificationForm").style.display = "none";
-    depBtn.classList.add("button-disabled");
-    cashBtn.classList.add("button-disabled");
   } else {
     badgeDiv.innerHTML = `<span style="background:#f43f5e;color:white;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold">⚠ UNVERIFIED ACCOUNT</span>`;
     verifNotice.style.display = "block";
     $("userVerificationForm").style.display = "flex";
-    depBtn.classList.add("button-disabled");
-    cashBtn.classList.add("button-disabled");
   }
 
   $("navAdminBtn").style.display=currentUserRole==="admin"?"inline-block":"none";
@@ -1682,3 +1634,5 @@ updateUI();
 
 </body>
 </html>
+
+```

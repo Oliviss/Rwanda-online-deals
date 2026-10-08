@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rwanda Online Deals - VIP Multi-Vendor & Wallet Platform</title>
+<title>Rwanda Online Deals - Multi-Vendor & Automated Wallet Platform</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
 body{background:#0b1310;color:#e1e9e5;min-height:100vh}
@@ -83,7 +83,6 @@ nav a:hover{color:#fff}
 .button-secondary{background:#1e2e27;color:#34d399;border:1px solid #2e473b}
 .button-danger{background:#dc2626;color:white;border:0}
 .button-warning{background:#eab308;color:#000;border:0}
-.button-disabled{background:#374151 !important;color:#9ca3af !important;cursor:not-allowed !important;border:0 !important}
 
 /* MODALS */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(4,10,7,0.85);backdrop-filter:blur(8px);padding:20px;overflow:auto}
@@ -99,7 +98,6 @@ nav a:hover{color:#fff}
 .auth-form.active{display:flex}
 .auth-form input,.auth-form select,.auth-form textarea,.field{padding:12px;background:#16241e;border:1px solid #23382f;border-radius:10px;font-size:14px;color:white;width:100%}
 .auth-form input:focus,.field:focus{outline:none;border-color:#10b981}
-.auth-form button{padding:13px;border:0;border-radius:10px;background:#10b981;color:white;font-weight:bold;font-size:15px}
 
 /* DASHBOARD VIEWS */
 #dashboard,#adminView,#sellerView{display:none;background:#0b1310;min-height:100vh;padding:24px 16px 50px}
@@ -114,7 +112,6 @@ nav a:hover{color:#fff}
 .action{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;border-radius:12px;padding:14px;font-weight:bold;backdrop-filter:blur(5px)}
 .action:hover{background:rgba(255,255,255,0.22)}
 
-/* ADMIN TABS UI */
 .admin-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:20px;border-bottom:1px solid #23382f}
 .admin-tab-btn{padding:10px 16px;background:#16241e;border:1px solid #23382f;border-radius:10px;color:#9ca3af;font-weight:bold;white-space:nowrap}
 .admin-tab-btn.active{background:#059669;color:white;border-color:#10b981}
@@ -164,38 +161,39 @@ footer p{margin:6px;font-size:13px}
   </div>
  </div>
  <div class="menu-panel" id="menuPanel">
-   <a href="#home" onclick="showMainHome()">Ahabanza</a>
-   <a href="#about">About Us</a>
-   <a href="#contact">Support</a>
+   <a href="#home" class="menu-link">Ahabanza</a>
+   <a href="#homeDeals" class="menu-link">Deals (1–7)</a>
+   <a href="#contact" class="menu-link">Support</a>
  </div>
 </header>
 
 <nav id="homeNav">
- <a href="#home" onclick="showMainHome()">Ahabanza</a><a href="#homeDeals">Deals (1–7)</a><a href="#contact">Twandikire</a>
+ <a href="#home" class="menu-link">Ahabanza</a>
+ <a href="#homeDeals" class="menu-link">Deals (1–7)</a>
+ <a href="#contact" class="menu-link">Twandikire</a>
 </nav>
-
-<!-- GUEST HOME PAGE -->
+ <!-- GUEST HOME PAGE -->
 <main id="homePage">
  <section class="hero" id="home">
   <div class="hero-box animated-glow"><div class="hero-content">
    <span class="badge">🇷🇼 ONLINE SHOPPING • RWANDA • FREE DELIVERY</span>
    <h2>Shaka deals 1–7. Hitamo neza. Korera online.</h2>
-   <p>Murakaza neza kuri Rwanda Online Deals — offers n'ibicuruzwa bitandukanye n'uburyo bwo kwishyura busezeranye, hamwe na Free Delivery ku bicuruzwa byose!</p>
+   <p>Murakaza neza kuri Rwanda Online Deals — offers n'ibicuruzwa bitandukanye hamwe na Free Delivery ku bicuruzwa byose muri Rwanda!</p>
    <button class="primary-btn" id="openAuthHero">Tangira nonaha →</button>
   </div></div>
  </section>
  <section class="quick">
   <div class="quick-card"><b>🔥 Deals 1–7 Sub-Stores</b><p>Shakisha offers zitandukanye mu masoko 7 yihariye.</p></div>
-  <div class="quick-card"><b>🔐 Wallet System</b><p>Bika amafaranga muri Wallet wiyishyurire mu buryo bworoshye.</p></div>
+  <div class="quick-card"><b>🔐 Instant Automated Wallet</b><p>Bika amafaranga muri Wallet wiyishyurire mu buryo bwihuse no kubikuza amasegonda 2.</p></div>
   <div class="quick-card"><b>🚚 Free Delivery Rwanda</b><p>Buri order uyihabwa ku buntu hose mu Rwanda!</p></div>
  </section>
 
  <section class="section">
   <div class="section-title">
-     <h2>✨ Dynamic Vendor Recommendations (Seller Highlights)</h2>
+     <h2>✨ Vendor Recommendations (Seller Highlights)</h2>
      <button onclick="renderHomeRecommendations()" class="button button-secondary" style="width:auto;padding:6px 14px;font-size:12px">🔄 Refresh Recommendations</button>
   </div>
-  <p style="font-size:12px;color:#9ca3af;margin-bottom:14px">Ibicuruzwa bishya bizenguruka mu ba Sellers batandukanye batangiye gucuruza muri platform!</p>
+  <p style="font-size:12px;color:#9ca3af;margin-bottom:14px">Ibicuruzwa bikorera kuri database z'abacuruzi nyakuri!</p>
   <div class="deals" id="homeRecommendationsContainer">Loading Recommended Deals...</div>
  </section>
 
@@ -212,23 +210,12 @@ footer p{margin:6px;font-size:13px}
    <div>
      <h2>Murakaza neza, <span id="userName">User</span> 👋</h2>
      <p id="userEmail" style="color:#9ca3af;font-size:13px"></p>
-     <div id="userVerificationBadge" style="margin-top:6px"></div>
    </div>
    <div style="display:flex;gap:8px">
      <button id="navAdminBtn" style="display:none;background:#059669;color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:bold">⚙ Admin Room</button>
      <button id="navSellerBtn" style="display:none;background:#2563eb;color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:bold">🏪 Seller Dashboard</button>
      <button class="logout-btn" id="logoutButton">Logout</button>
    </div>
-  </div>
-
-  <div id="verificationNoticeCard" class="card" style="display:none;background:#1a231f;border:1px solid #10b981;margin-bottom:20px">
-     <h3 style="color:#34d399">🔐 Verification y'Umutekano wa Account</h3>
-     <p style="color:#9ca3af;font-size:13px">Gusa kugira ngo wemererwe kuryoza **Deposit** no **Kubikuza (Cash Out)**, ugomba kuzuza Amazina yawe yombi ahura neza n'ay'i MoMo hamwe na Nimero ya MoMo. Iyo umaze kubyuzuza, **MoMo Number ihita ifungwa (Locked)** ntishobore guhindurwa!</p>
-     <form id="userVerificationForm" style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
-        <input class="field" id="verifFullName" placeholder="Amazina yombi ari ku Ikarita / MoMo (e.g. Jean Paul Habimana)" required>
-        <input class="field" id="verifMomoNumber" placeholder="Nimero ya MoMo (e.g. 078XXXXXXX)" required>
-        <button type="submit" class="button">Emeza Amakuru y'Umutekano</button>
-     </form>
   </div>
 
   <div class="balance-box animated-glow">
@@ -242,12 +229,7 @@ footer p{margin:6px;font-size:13px}
    </div>
   </div>
 
-  <div id="becomeSellerBox" style="background:#16241e;border:1px solid #23382f;padding:16px;border-radius:14px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center">
-     <div>
-       <h4 style="color:#34d399">Shaka gucuruza kuri Rwanda Online Deals?</h4>
-       <p style="font-size:12px;color:#9ca3af">Saba kuba Seller maze ubashe gushyiraho ibicuruzwa byawe mu masoko 7!</p>
-     </div>
-     <button id="requestSellerBtn" class="button" style="width:auto;padding:10px 18px">Saba Kuba Seller</button>
+  <div id="becomeSellerBox" style="background:#16241e;border:1px solid #23382f;padding:16px;border-radius:14px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
   </div>
 
   <div class="dashboard-deals">
@@ -279,13 +261,12 @@ footer p{margin:6px;font-size:13px}
       <textarea class="field" id="sellerProdDesc" placeholder="Igisobanuro (Description)" rows="2" required></textarea>
       <input class="field" id="sellerProdImg" placeholder="Ifoto Image URL (e.g. https://...)" required>
       <input class="field" id="sellerProdContact" placeholder="Contact Phone (078...)" required>
-      <input class="field" id="sellerProdMomo" placeholder="MoMo Number ya Seller yihariye" required>
       <button type="submit" class="button">Bika Igicuruzwa</button>
     </form>
   </div>
 
   <div class="card">
-    <h3>📦 Ibicuruzwa Byawe Biri mu Masoko (My Products Only)</h3>
+    <h3>📦 Ibicuruzwa Byawe Biri mu Masoko</h3>
     <div id="sellerMyProductsList" style="margin-top:10px">Loading...</div>
   </div>
  </div>
@@ -301,62 +282,26 @@ footer p{margin:6px;font-size:13px}
 
   <div class="admin-tabs">
     <button class="admin-tab-btn active" onclick="switchAdminTab('overview', event)">📊 Overview Stats</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('verifications', event)">🛡️ User Verifications</button>
     <button class="admin-tab-btn" onclick="switchAdminTab('users', event)">👥 Full User Management</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('wallet', event)">💸 Approve/Reject Transactions</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('sellers', event)">🏪 Seller Approvals</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('products', event)">🛍️ Products & Deal Covers</button>
+    <button class="admin-tab-btn" onclick="switchAdminTab('products', event)">🛍️ Manage All Products</button>
     <button class="admin-tab-btn" onclick="switchAdminTab('orders', event)">📦 All Orders</button>
     <button class="admin-tab-btn" onclick="switchAdminTab('support', event)">🎧 Support Tickets</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('config', event)">⚙️ System MoMo Config</button>
   </div>
 
   <div id="admTab-overview" class="admin-tab-content active">
     <div class="quick" style="margin:0 0 20px">
       <div class="quick-card"><b>👥 Total Users</b><p id="admStatUsers" style="font-size:24px;color:#34d399;font-weight:bold">0</p></div>
-      <div class="quick-card"><b>🛡️ Pending Verifications</b><p id="admStatPendingVerifs" style="font-size:24px;color:#eab308;font-weight:bold">0</p></div>
-      <div class="quick-card"><b>💰 Pending Wallet Requests</b><p id="admStatPending" style="font-size:24px;color:#f43f5e;font-weight:bold">0</p></div>
+      <div class="quick-card"><b>📦 Total Active Products</b><p id="admStatProds" style="font-size:24px;color:#eab308;font-weight:bold">0</p></div>
     </div>
-  </div>
-
-  <div id="admTab-verifications" class="admin-tab-content">
-    <h3 style="color:#34d399;margin-bottom:10px">🛡️ Pending Account Verification Requests</h3>
-    <p style="font-size:12px;color:#9ca3af;margin-bottom:15px">Sura kandi ugenzure niba Amazina y'Umuser ahura n'ay'i MoMo mbere yo kumuhaye uburenganzira bwo kubikuza.</p>
-    <div id="adminVerificationsList">Loading Verification Requests...</div>
   </div>
 
   <div id="admTab-users" class="admin-tab-content">
     <h3 style="color:#34d399;margin-bottom:10px">👥 Full User & Balance Management</h3>
-    <p style="font-size:12px;color:#9ca3af;margin-bottom:15px">Hano unafite ubushobozi bwo kureba amakuru y'abakoresha wose, guhindura Balance zabo, gubafunga (Block/Unblock), no kubasiba.</p>
     <div id="adminUsersList">Loading Users...</div>
   </div>
 
-  <div id="admTab-wallet" class="admin-tab-content">
-    <h3 style="color:#34d399;margin-bottom:10px">💸 Pending Wallet Requests (Deposit / Cashout)</h3>
-    <div id="adminRequestsList">Loading Transactions...</div>
-  </div>
-
-  <div id="admTab-sellers" class="admin-tab-content">
-    <h3 style="color:#34d399;margin-bottom:10px">🏪 Seller Requests Approval</h3>
-    <div id="adminSellerAppsList">Loading Seller Requests...</div>
-  </div>
-
   <div id="admTab-products" class="admin-tab-content">
-    <h3 style="color:#34d399;margin-bottom:10px">🛍️ Manage Deal Cover Photos & Products</h3>
-    <div class="card" style="margin-bottom:18px">
-      <h4>Guhindura Cover Photo ya Deal 1 - Deal 7</h4>
-      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
-        <select id="admCoverCategory" class="field" style="max-width:200px">
-          <option value="1">Deal 1</option><option value="2">Deal 2</option>
-          <option value="3">Deal 3</option><option value="4">Deal 4</option>
-          <option value="5">Deal 5</option><option value="6">Deal 6</option>
-          <option value="7">Deal 7</option>
-        </select>
-        <input id="admCoverImgUrl" class="field" placeholder="Image URL / Graphic Link" style="flex:1">
-        <button id="admSaveCoverBtn" class="button" style="width:auto">Save Cover</button>
-      </div>
-    </div>
-    <h4>Ibicuruzwa Byose mu Masoko (35 Dynamic Products + Seller Products)</h4>
+    <h3 style="color:#34d399;margin-bottom:10px">🛍️ Manage Products</h3>
     <div id="adminAllProductsList" style="margin-top:10px">Loading...</div>
   </div>
 
@@ -366,18 +311,8 @@ footer p{margin:6px;font-size:13px}
   </div>
 
   <div id="admTab-support" class="admin-tab-content">
-    <h3 style="color:#34d399;margin-bottom:10px">🎧 Support Tickets & Direct Replies</h3>
+    <h3 style="color:#34d399;margin-bottom:10px">🎧 Support Tickets</h3>
     <div id="adminSupportList">Loading Tickets...</div>
-  </div>
-
-  <div id="admTab-config" class="admin-tab-content">
-    <h3 style="color:#34d399;margin-bottom:10px">⚙️ Website System MoMo Settings</h3>
-    <div class="card">
-       <p style="font-size:12px;color:#9ca3af">Hano uhawe ubushobozi bwo guhindura Numero ya MoMo n'izina ry'akoreshwa kuri Deposit ya website.</p>
-       <input id="sysMomoNumber" class="field" placeholder="MoMo Phone (e.g., 078XXXXXXX)" style="margin-top:10px">
-       <input id="sysMomoName" class="field" placeholder="MoMo Name (e.g., Rwanda Online Deals Ltd)" style="margin-top:10px">
-       <button id="saveSysMomoBtn" class="button" style="margin-top:12px">Bika Settings za MoMo</button>
-    </div>
   </div>
  </div>
 </section>
@@ -397,7 +332,6 @@ footer p{margin:6px;font-size:13px}
    <div style="background:#16241e;padding:12px;border-radius:10px;margin-bottom:12px;text-align:left;font-size:13px">
       <p style="margin:4px 0">🚚 <b>Delivery:</b> <span style="color:#34d399;font-weight:bold">FREE DELIVERY (Muri Rwanda Yose)</span></p>
       <p style="margin:4px 0">📞 <b>Contact Seller:</b> <span id="pdContact">N/A</span></p>
-      <p style="margin:4px 0">💳 <b>Seller MoMo Direct:</b> <span id="pdMomo">N/A</span></p>
    </div>
    <button id="pdBuyBtn" class="button">⚡ Place Order Now (Free Delivery)</button>
  </div>
@@ -405,24 +339,20 @@ footer p{margin:6px;font-size:13px}
 
 <!-- DEPOSIT & PAYMENT MODAL -->
 <div class="modal-overlay" id="paymentModal"><div class="modal-box">
- <div class="modal-head"><h2 id="payModalTitle">Deposit / Payment Request</h2><button class="close-modal" id="closePayModal">×</button></div>
+ <div class="modal-head"><h2 id="payModalTitle">Deposit / Cash Out Request</h2><button class="close-modal" id="closePayModal">×</button></div>
  <form id="depositPaymentForm" class="auth-form active">
-  <div style="background:#16241e;padding:12px;border-radius:10px;font-size:12px;color:#a7f3d0">
-    <p><b>System Merchant MoMo:</b> <span id="displaySysMomoNum">0784374288</span></p>
-    <p><b>Account Name:</b> <span id="displaySysMomoName">Rwanda Online Deals</span></p>
-  </div>
   <select id="payMethod">
-    <option value="MTN MoMo Direct">MTN Mobile Money (PIN Prompt Direct)</option>
-    <option value="Airtel Money Direct">Airtel Money (PIN Prompt Direct)</option>
+    <option value="MTN MoMo Direct">MTN Mobile Money (PIN Push Direct)</option>
+    <option value="Airtel Money Direct">Airtel Money (PIN Push Direct)</option>
   </select>
-  <label style="font-size:12px;color:#9ca3af;margin-top:6px;display:block">Nimero ya MoMo ikora (078/079/072/073):</label>
+  <label style="font-size:12px;color:#9ca3af;margin-top:6px;display:block">Nimero ya MoMo (078/079/072/073):</label>
   <input type="tel" id="payPhone" placeholder="078XXXXXXX" style="background:#16241e;color:#34d399;font-weight:bold" required>
   <input type="number" id="payAmount" placeholder="Amount (RWF)" min="100" required>
-  <button type="submit" id="paySubmitBtn">⚡ Ohereza MoMo PIN Push Prompt Direct</button>
+  <button type="submit" id="paySubmitBtn">⚡ Ohereza Request Direct</button>
  </form>
  <div id="paymentLoadingBox" style="display:none;text-align:center;padding:20px">
-  <p style="font-weight:bold;color:#34d399">⏳ MoMo PIN Prompt YOHEREJWE! Reba kuri telefone yawe utange PIN...</p>
-  <p style="font-size:12px;color:#9ca3af;margin-top:7px">Iyo uhejeje gushyiramo PIN, amafaranga ahita yongerwa muri Wallet yawe instant!</p>
+  <p style="font-weight:bold;color:#34d399" id="paymentLoadingText">⏳ Transaction iri gukorwa...</p>
+  <p style="font-size:12px;color:#9ca3af;margin-top:7px" id="paymentLoadingSubtext">Urabona igisubizo mu amasegonda make!</p>
  </div>
 </div></div>
 
@@ -439,8 +369,6 @@ footer p{margin:6px;font-size:13px}
  <div class="modal-head"><h2>👤 Account Details & History</h2><button class="close-modal" id="closeAccountModal">×</button></div>
  <p style="margin:6px 0"><b>Name:</b> <span id="accName">User</span></p>
  <p style="margin:6px 0"><b>Email:</b> <span id="accEmail"></span></p>
- <p style="margin:6px 0"><b>MoMo Phone (Locked):</b> <span id="accLockedPhone" style="color:#34d399;font-weight:bold">N/A</span></p>
- <p style="margin:6px 0"><b>Verification Status:</b> <span id="accVerifStatus" style="font-weight:bold">unverified</span></p>
  <p style="margin:6px 0"><b>Role:</b> <span id="accRole" style="color:#34d399;font-weight:bold">user</span></p>
  <p style="margin:6px 0"><b>Wallet:</b> <span id="accBalance" style="color:#34d399;font-weight:bold">0 RWF</span></p>
  <hr style="border-color:#23382f;margin:15px 0">
@@ -452,20 +380,6 @@ footer p{margin:6px;font-size:13px}
  <div id="cartItemsList"></div>
  <p style="display:flex;justify-content:space-between;font-weight:bold;margin:18px 0;font-size:16px;color:#34d399"><span>Total:</span><span id="cartTotalAmt">0 RWF</span></p>
  <button class="button" id="checkoutCartBtn">⚡ Place Order & Free Delivery</button>
-</div></div>
-
-<div class="modal-overlay" id="adminUserInspectorModal"><div class="modal-box">
- <div class="modal-head"><h2>👤 User Full Account Details</h2><button class="close-modal" onclick="closeModal('adminUserInspectorModal')">×</button></div>
- <div id="adminUserInspectorContent"></div>
-</div></div>
-
-<div class="modal-overlay" id="forgotPasswordModal"><div class="modal-box">
- <div class="modal-head"><h2>🔑 Wibagiwe Password?</h2><button class="close-modal" onclick="closeModal('forgotPasswordModal')">×</button></div>
- <p style="font-size:13px;color:#9ca3af;margin-bottom:14px">Andika Email yawe dukoresha kuyoherereza link yo guhindura password y'umutekano.</p>
- <form id="forgotPasswordForm" class="auth-form active">
-  <input type="email" id="forgotEmail" placeholder="Andika Email yawe" required>
-  <button type="submit">Ohereza Link yo Reset-ing</button>
- </form>
 </div></div>
 
 <section id="auth-section" class="modal-overlay"><div class="modal-box">
@@ -483,15 +397,11 @@ footer p{margin:6px;font-size:13px}
  <form id="loginForm" class="auth-form">
   <input type="email" id="loginEmail" placeholder="Email Address" required>
   <input type="password" id="loginPassword" placeholder="Password" required>
-  <div style="text-align:right;margin-top:-5px">
-    <a href="#" id="forgotPasswordLink" style="color:#34d399;font-size:12px;text-decoration:none;font-weight:bold">Wibagiwe Password?</a>
-  </div>
   <button type="submit">Login</button>
  </form>
 </div></section>
 
 <footer id="contact"><p><strong>Rwanda Online Deals</strong></p><p>© 2026 Rwanda Online Deals. All Rights Reserved. Free Delivery across Rwanda.</p></footer>
-
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import {
@@ -522,16 +432,22 @@ const $=id=>document.getElementById(id);
 const money=n=>(Number(n)||0).toLocaleString()+" RWF";
 let currentUser=null;
 let currentUserRole="user";
-let currentUserStatus="unverified";
-let currentUserLockedPhone="";
 let userWallet=0;
 let isDepositMode=true;
 let userCart=JSON.parse(localStorage.getItem("app_user_cart")||"[]");
 let products=[];
-let sysMomoNumber="0784374288";
-let sysMomoName="Rwanda Online Deals Ltd";
 
-let unsubUser=null,unsubTx=null,unsubSupport=null,unsubOrders=null,unsubProducts=null,unsubUsersList=null,unsubSellerApps=null,unsubAllOrders=null,unsubSellerProds=null,unsubAllProds=null,unsubPendingVerifs=null;
+let unsubUser=null,unsubSupport=null,unsubOrders=null,unsubProducts=null,unsubUsersList=null,unsubSellerProds=null,unsubAllProds=null,unsubAllOrders=null;
+
+function formatRwandaPhone(phone) {
+  let cleaned = phone.replace(/\D/g, '');
+  if (cleaned.startsWith('07')) {
+    cleaned = '250' + cleaned.substring(1);
+  } else if (cleaned.startsWith('7')) {
+    cleaned = '250' + cleaned;
+  }
+  return cleaned;
+}
 
 function toast(msg, type = "success") {
  const container = $("toast-container");
@@ -556,54 +472,19 @@ const dealCategories=[
  {id:7,name:"Deal 7 - Premium Super Package",description:"Package y'ibicuruzwa bitandukanye.",img:"https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800"}
 ];
 
-const initialProducts=[];
-const dealNamesMap = {
-  1: ["Smartphone Galaxy", "Wireless Earbuds", "Fast Charger 65W", "Powerbank 20000mAh", "Screen Protector HD"],
-  2: ["Jacket y'Imbeho", "Ipantalo ya Jean", "Ikemisi ya Coton", "Igikoba cya Fashion", "Urupira rw'Imyenda"],
-  3: ["Inkweto z'Iminsi YOSE", "Sneakers Sport", "Inkweto z'Icyinyabupfura", "Sandales z'Impeshyi", "Bottes de Cuir"],
-  4: ["Blender y'Igikoni", "Isahani z'Ikirahure", "Matelas Orthopedique", "Icyuma gushyushya maji", "Tapis y'Mu Nzu"],
-  5: ["Parfum Royale", "Isabune y'Ubwiza", "Crème de Visage", "Ibikoresho by'Inyagatsi", "Shampooing Pro"],
-  6: ["Umuceri wa Super 25kg", "Amavuta yo Guteka 5L", "Isukari 10kg", "Kahawa y'Umarwanda", "Igitebo cya Fruits"],
-  7: ["VIP Home Bundle", "Smart TV 55 Inch", "Laptop Core i7", "Sound System Subwoofer", "Solar Generator Kit"]
-};
-
-const dealImagesMap = {
-  1: ["https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800","https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=800","https://images.unsplash.com/photo-1583863788434-e58a36330cf0?q=80&w=800","https://images.unsplash.com/photo-1609592424109-dd9892f1b177?q=80&w=800","https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=800"],
-  2: ["https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800","https://images.unsplash.com/photo-1542272604-780c36856d62?q=80&w=800","https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800","https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=800","https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800"],
-  3: ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800","https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=800","https://images.unsplash.com/photo-1533867617858-e7b97e060509?q=80&w=800","https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=800","https://images.unsplash.com/photo-1520639888713-7851133b1ed0?q=80&w=800"],
-  4: ["https://images.unsplash.com/photo-1570222094114-d054a817e56b?q=80&w=800","https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?q=80&w=800","https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=800","https://images.unsplash.com/photo-1585338107529-13afc5f02586?q=80&w=800","https://images.unsplash.com/photo-1600121848594-d8644e57abab?q=80&w=800"],
-  5: ["https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800","https://images.unsplash.com/photo-1608248597260-1e5828f7311d?q=80&w=800","https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=800","https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=800","https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?q=80&w=800"],
-  6: ["https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800","https://images.unsplash.com/photo-1628088062854-d1870b4553da?q=80&w=800","https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=800","https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800","https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=800"],
-  7: ["https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800","https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=800","https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800","https://images.unsplash.com/photo-1545454675-3531b543be5d?q=80&w=800","https://images.unsplash.com/photo-1509391365360-2e959784a276?q=80&w=800"]
-};
-
-for(let i=1; i<=7; i++){
- for(let j=1; j<=5; j++){
-  const pName = dealNamesMap[i][j-1];
-  const pImg = dealImagesMap[i][j-1];
-  initialProducts.push({
-   id: `init_${i}_${j}`,
-   dealId: i,
-   name: `${pName}`,
-   price: j * 5000 + i * 2000,
-   description: `Igicuruzwa cyiza cya nyacyo muri Deal category ${i}. Mfite Warranty n'Ubwquality kandi turaguha Free Delivery!`,
-   img: pImg,
-   contactPhone: "0788123456",
-   sellerMomo: "0788123456",
-   sellerId: "admin_default"
-  });
- }
-}
-
-products = [...initialProducts];
-
 function openModal(id){$(id).style.display="block"}
 function closeModal(id){$(id).style.display="none"}
 window.closeModal = closeModal;
 
+document.querySelectorAll('.menu-link').forEach(link => {
+  link.addEventListener('click', () => {
+    $("menuPanel").style.display = "none";
+  });
+});
+
 function cleanupListeners(){
- [unsubUser,unsubTx,unsubSupport,unsubOrders,unsubProducts,unsubUsersList,unsubSellerApps,unsubAllOrders,unsubSellerProds,unsubAllProds,unsubPendingVerifs].forEach(fn=>{if(fn)fn()});
- unsubUser=unsubTx=unsubSupport=unsubOrders=unsubProducts=unsubUsersList=unsubSellerApps=unsubAllOrders=unsubSellerProds=unsubAllProds=unsubPendingVerifs=null;
+ [unsubUser,unsubSupport,unsubOrders,unsubProducts,unsubUsersList,unsubSellerProds,unsubAllProds,unsubAllOrders].forEach(fn=>{if(fn)fn()});
+ unsubUser=unsubSupport=unsubOrders=unsubProducts=unsubUsersList=unsubSellerProds=unsubAllProds=unsubAllOrders=null;
 }
 
 function updateUI(){
@@ -649,13 +530,15 @@ window.switchAdminTab=function(tabName, evt){
  $(`admTab-${tabName}`).classList.add('active');
 };
 
-function productCategory(p){return Number(p.dealId??p.category??1)}
-function productImage(p){return p.img||p.imageUrl||"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800"}
-
 window.renderHomeRecommendations = function() {
  const container = $("homeRecommendationsContainer");
  if(!container) return;
  container.replaceChildren();
+
+ if(!products.length) {
+   container.textContent = "Nta gicuruzwa kiragera mu duka nyakuri kugeza ubu.";
+   return;
+ }
 
  const shuffled = [...products].sort(() => 0.5 - Math.random());
  const topRecommendations = shuffled.slice(0, 8);
@@ -667,14 +550,14 @@ window.renderHomeRecommendations = function() {
   const imgWrap = document.createElement("div");
   imgWrap.className = "card-img-wrapper";
   const img = document.createElement("img");
-  img.src = productImage(p);
+  img.src = p.imageUrl || p.img || "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800";
   img.alt = p.name || "Product";
   imgWrap.appendChild(img);
 
   const h = document.createElement("h3"); h.textContent = p.name || "Product";
   const sellerInfo = document.createElement("small");
   sellerInfo.style.color = "#34d399";
-  sellerInfo.textContent = `🏪 Seller Store: ${p.sellerId === 'admin_default' ? 'VIP Platform' : 'Verified Vendor'}`;
+  sellerInfo.textContent = `🏪 Verified Seller Store`;
   
   const price = document.createElement("b");
   price.style.cssText = "font-size:16px;color:#34d399;margin-top:4px";
@@ -727,58 +610,33 @@ function openDealCategory(category){
  $("modalCategoryTitle").textContent=category.name;
  const list=$("dealProductsList");list.replaceChildren();
  
- const matches=products.filter(p=>productCategory(p)===category.id && p.active!==false);
+ const matches=products.filter(p=>Number(p.category??p.dealId??1)===category.id && p.active!==false);
  if(!matches.length){list.textContent="Nta product irashyirwa muri iyi category."}
  matches.forEach(p=>{
   const card=document.createElement("div");card.className="product-item-card";
-  const img=document.createElement("img");img.src=productImage(p);img.alt=p.name||"Product";
+  const img=document.createElement("img");img.src=p.imageUrl||p.img||"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800";
   const info=document.createElement("div");info.className="product-item-info";
   const name=document.createElement("h4");name.textContent=p.name||"Product";
   const desc=document.createElement("p");desc.textContent=p.description||"";
   const price=document.createElement("b");price.style.color="#34d399";price.textContent=money(p.price);
-  const sellerTag=document.createElement("small");
-  sellerTag.style.cssText="display:block;font-size:11px;color:#9ca3af;margin-top:2px";
-  sellerTag.textContent=`🏪 Vendor ID: ${p.sellerId}`;
   
-  info.append(name,desc,price,sellerTag);
+  info.append(name,desc,price);
   
   const actions=document.createElement("div");
   actions.style.cssText="display:flex;flex-direction:column;gap:6px";
   
   const placeOrderBtn=document.createElement("button");
   placeOrderBtn.className="button";
-  placeOrderBtn.textContent="⚡ Place Order / Buy Now";
+  placeOrderBtn.textContent="⚡ Buy Now";
   placeOrderBtn.onclick=()=>buyProduct(p);
-
-  const viewBtn=document.createElement("button");
-  viewBtn.className="button button-secondary";
-  viewBtn.textContent="👁️ Details";
-  viewBtn.onclick=()=>openProductDetail(p);
   
-  actions.append(placeOrderBtn, viewBtn);
+  actions.append(placeOrderBtn);
   card.append(img,info,actions);
   list.append(card);
  });
  openModal("dealCategoryModal");
 }
-$("closeDealModal").onclick=()=>closeModal("dealCategoryModal");
 
-function openProductDetail(p){
- $("pdName").textContent=p.name;
- $("pdImg").src=productImage(p);
- $("pdDesc").textContent=p.description||"Nta bisobanuro bihari.";
- $("pdPrice").textContent=money(p.price);
- $("pdContact").textContent=p.contactPhone||"N/A";
- $("pdMomo").textContent=p.sellerMomo||"N/A";
- 
- $("pdBuyBtn").onclick=()=>{
-   closeModal("productDetailModal");
-   buyProduct(p);
- };
- openModal("productDetailModal");
-}
-
-/* PLACE ORDER / BUY NOW FUNCTION */
 async function buyProduct(product){
  if(!currentUser){
    toast("Banza winjire muri account kugira ngo ukore order!","error");
@@ -786,7 +644,7 @@ async function buyProduct(product){
    return;
  }
  try{
-  const userRef=doc(db,"user",currentUser.uid);
+  const userRef=doc(db,"users",currentUser.uid);
   const orderRef=doc(collection(db,"orders"));
   await runTransaction(db,async tx=>{
    const snap=await tx.get(userRef);
@@ -802,37 +660,37 @@ async function buyProduct(product){
     price:Number(product.price),
     sellerId:product.sellerId||"admin",
     status:"PAID (FREE DELIVERY)",
-    deliveryStatus:"Pending Delivery",
     createdAt:serverTimestamp()
    });
   });
-  toast("Order ya "+product.name+" yakiriwe neza! Ni Free Delivery.","success");
+  toast("⚡ Order ya "+product.name+" yakiriwe neza! Amafaranga yakuwe kuri Wallet (Free Delivery).","success");
   closeModal("dealCategoryModal");
  }catch(err){toast(err.message||"Ntibyashobotse gukora order.","error")}
 }
 
-// USER VERIFICATION FORM LOGIC
-$("userVerificationForm").onsubmit=async e=>{
-  e.preventDefault();
-  if(!currentUser) return;
-  const fullName=$("verifFullName").value.trim();
-  const momoNumber=$("verifMomoNumber").value.trim();
+window.buySellerPlan = async function(planType) {
+  if(!currentUser) { openAuth("login"); return; }
+  const amount = planType === 'monthly' ? 5000 : 30000;
+  const planName = planType === 'monthly' ? 'Monthly Seller Plan (5,000 RWF)' : 'Yearly Seller Plan (30,000 RWF)';
 
-  if(!/^(07[2389]\d{7})$/.test(momoNumber)){
-    toast("Andika nimero ya MoMo nyayo (078... / 072... / 073...)","error");
-    return;
-  }
-
-  try{
-    await updateDoc(doc(db,"user",currentUser.uid),{
-      claimedMomoName: fullName,
-      lockedPhoneNumber: momoNumber,
-      verificationStatus: "pending_verification",
-      submittedVerifAt: serverTimestamp()
-    });
-    toast("Amakuru yawe yakiriwe neza! Tegereza ko Admin ayasuzuma ngo ube verified.","success");
-  }catch(err){
-    toast("Ikosa ryaje: "+err.message,"error");
+  if(confirm(`Urashaka kwishyuza ${planName} ukanze kuri Wallet balance yawe?`)) {
+    try {
+      const userRef = doc(db, "users", currentUser.uid);
+      await runTransaction(db, async tx => {
+        const snap = await tx.get(userRef);
+        const bal = Number(snap.data().balance) || 0;
+        if(bal < amount) throw new Error(`Wallet Balance ntihagije (${money(bal)}). Banza ukore Deposit ya ${money(amount)}.`);
+        tx.update(userRef, {
+          balance: bal - amount,
+          role: "seller",
+          sellerPlan: planType,
+          sellerActivatedAt: serverTimestamp()
+        });
+      });
+      toast(`🎉 Urashimimiwe! Uhise uba Seller. Ubu wemerewe gushyiraho ibicuruzwa byawe!`, "success");
+    } catch(err) {
+      toast("Ikosa: " + err.message, "error");
+    }
   }
 };
 
@@ -841,9 +699,6 @@ function openPaymentModal(isDeposit){
 
  isDepositMode=isDeposit;
  $("payModalTitle").textContent=isDeposit?"➕ Deposit Request (MoMo Push Prompt Direct)":"💸 Cash Out Request";
- $("displaySysMomoNum").textContent=sysMomoNumber;
- $("displaySysMomoName").textContent=sysMomoName;
- $("payPhone").value=currentUserLockedPhone || "";
  $("depositPaymentForm").style.display="flex";
  $("paymentLoadingBox").style.display="none";
  $("payAmount").value="";
@@ -853,15 +708,15 @@ $("depositBtn").onclick=()=>openPaymentModal(true);
 $("cashoutBtn").onclick=()=>openPaymentModal(false);
 $("closePayModal").onclick=()=>closeModal("paymentModal");
 
-/* REAL AUTOMATED DEPOSIT DIRECT FORM LOGIC */
 $("depositPaymentForm").onsubmit=async e=>{
  e.preventDefault();
- e.stopPropagation();
  if(!currentUser)return;
- const phone=$("payPhone").value.trim();
+ const rawPhone=$("payPhone").value.trim();
  const amount=Number($("payAmount").value);
  
- if(!phone || !/^(07[2389]\d{7})$/.test(phone)){
+ const formattedPhone = formatRwandaPhone(rawPhone);
+
+ if(!/^2507[2389]\d{7}$/.test(formattedPhone)){
    toast("Andika nimero ya MoMo nyayo (078... / 072... / 073...)","error");
    return;
  }
@@ -872,381 +727,63 @@ $("depositPaymentForm").onsubmit=async e=>{
  }
 
  const btn=$("paySubmitBtn"); btn.disabled=true;
+ const loadingBox = $("paymentLoadingBox");
+ const loadingText = $("paymentLoadingText");
+ const loadingSubtext = $("paymentLoadingSubtext");
+
+ $("depositPaymentForm").style.display="none";
+ loadingBox.style.display="block";
+
+ if(isDepositMode) {
+   loadingText.textContent = "⏳ MoMo Push Prompt YOHEREJWE!";
+   loadingSubtext.textContent = `Reba kuri telefone yawe (${rawPhone}) utange PIN ya MoMo ngo amafaranga ahite ajya kuri Wallet instant.`;
+ } else {
+   loadingText.textContent = "💸 Cash Out Request Iri Gukorwa...";
+   loadingSubtext.textContent = `Amafaranga ${money(amount)} ari gukurwa muri Wallet yohererezwe kuri MoMo yawe (${rawPhone}) instant.`;
+ }
+
  try{
-  const depositId = "ORD-" + Date.now();
+  const endpoint = isDepositMode ? `${RENDER_BACKEND_URL}/api/pay` : `${RENDER_BACKEND_URL}/api/withdraw`;
 
-  if(isDepositMode) {
-    const renderRes = await fetch(`${RENDER_BACKEND_URL}/api/pay`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phoneNumber: phone, amount: amount, depositId: depositId, userId: currentUser.uid })
-    });
-    const resData = await renderRes.json();
-    if(!resData.success) {
-      throw new Error("PawaPay Payment Prompt Error: " + (resData.error || "Ubwishyu bwanzwe"));
-    }
-  }
-
-  await addDoc(collection(db,"transactions"),{
-   userId: currentUser.uid,
-   userEmail: currentUser.email||"",
-   userName: $("userName").textContent||"User",
-   phone: phone,
-   depositId: depositId,
-   method: $("payMethod").value,
-   amount: amount,
-   type: isDepositMode ? "deposit" : "withdraw",
-   status: "PENDING_MOMO_PIN",
-   createdAt: serverTimestamp()
+  const renderRes = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ 
+      phoneNumber: formattedPhone, 
+      amount: amount, 
+      userId: currentUser.uid 
+    })
   });
   
-  $("depositPaymentForm").style.display="none";
-  $("paymentLoadingBox").style.display="block";
-  toast("MoMo Push Prompt yoherejwe! Reba kuri telefone yawe utange PIN ya MoMo.","info");
+  const resData = await renderRes.json();
+  if(!resData.success) {
+    throw new Error(resData.error || "PawaPay Transaction Error");
+  }
 
-  setTimeout(()=>{
-    closeModal("paymentModal");
-  }, 4000);
+  const userRef = doc(db, "users", currentUser.uid);
+  await runTransaction(db, async tx => {
+    const snap = await tx.get(userRef);
+    const currentBal = Number(snap.data().balance) || 0;
+    const nextBal = isDepositMode ? currentBal + amount : currentBal - amount;
+    tx.update(userRef, { balance: nextBal });
+  });
+
+  toast(isDepositMode ? "💰 Deposit yakozwe neza! Amafaranga yongeuwe kuri Wallet." : "💸 Cash Out yakozwe neza! Amafaranga yoherejwe kuri MoMo.", "success");
+  setTimeout(() => closeModal("paymentModal"), 3000);
 
  }catch(err){
-   toast("Ubusabe ntibwoherejwe: "+err.message,"error");
+   toast("Transaction ntiyakunze: "+err.message,"error");
+   $("depositPaymentForm").style.display="flex";
+   loadingBox.style.display="none";
  }finally{
    btn.disabled=false;
  }
 };
 
-function renderTransactionRequests(snapshot){
- const list=$("adminRequestsList");list.replaceChildren();
- $("admStatPending").textContent=snapshot.size;
- if(snapshot.empty){list.textContent="Nta transaction pending iriho.";return}
- snapshot.forEach(s=>{
-  const t=s.data(),card=document.createElement("div");card.className="tx-card";
-  const title=document.createElement("b");
-  title.style.color="#34d399";
-  title.textContent=(t.type||"request").toUpperCase()+" — "+money(t.amount);
-  
-  const details=document.createElement("p");
-  details.style.marginTop="4px";
-  details.innerHTML=`
-    User: <b>${t.userName||t.userEmail}</b> (${t.userEmail})<br>
-    MoMo Phone: <b style="color:#10b981">${t.phone||'N/A'}</b><br>
-    Deposit ID: <b>${t.depositId||'N/A'}</b><br>
-    Method: ${t.method||'MoMo'}
-  `;
-  
-  const btnGroup=document.createElement("div");
-  btnGroup.style.cssText="display:flex;gap:8px;margin-top:10px";
-  
-  const approve=document.createElement("button");
-  approve.className="button";approve.textContent="Approve / Wemerewe";
-  approve.onclick=()=>approveTransaction(s.id);
-  
-  const reject=document.createElement("button");
-  reject.className="button button-danger";reject.textContent="Reject / Hakaniwe";
-  reject.onclick=()=>rejectTransaction(s.id);
-
-  btnGroup.append(approve,reject);
-  card.append(title,details,btnGroup);list.append(card);
- });
-}
-
-async function approveTransaction(txId){
- if(!currentUser||currentUserRole!=="admin"){toast("Uburenganzira bwa admin burakenewe.","error");return}
- if(!confirm("Urashaka kwemeza iyi transaction maze unongere ku Wallet y'umukoresha?"))return;
- try{
-  const txRef=doc(db,"transactions",txId);
-  const txSnap=await getDoc(txRef);
-  if(!txSnap.exists())throw new Error("Transaction ntiyabonetse.");
-  const data=txSnap.data();
-
-  if(data.status === "APPROVED"){
-    toast("Iyi transaction yari yarajyanye mu kemezo!","info");
-    return;
-  }
-
-  await runTransaction(db,async tx=>{
-   const userRef=doc(db,"user",data.userId);
-   const userSnap=await tx.get(userRef);
-   if(!userSnap.exists())throw new Error("User ntiyabonetse.");
-   const balance=Number(userSnap.data().balance)||0;
-   const amount=Number(data.amount);
-   if(!Number.isFinite(amount)||amount<=0)throw new Error("Amafaranga si yo.");
-   const next=data.type==="deposit"?balance+amount:balance-amount;
-   if(next<0)throw new Error("Balance y'umukoresha ntihagije.");
-   tx.update(userRef,{balance:next});
-   tx.update(txRef,{status:"APPROVED",approvedBy:currentUser.uid,approvedAt:serverTimestamp()});
-  });
-  toast("Deposit yemejwe kandi balance yongeuwe neza!","success");
- }catch(err){toast("Ntibyashobotse kwemeza: "+err.message,"error")}
-}
-
-async function rejectTransaction(txId){
- if(!currentUser||currentUserRole!=="admin"){toast("Uburenganzira bwa admin burakenewe.","error");return}
- let reason = prompt("Andika impamvu / note yo kwangira iyi transaction (Reject Reason):", "Amazina watanze ntidahura n'a nimero ya MoMo.");
- if(reason===null)return;
- try{
-   await updateDoc(doc(db,"transactions",txId),{
-     status: "REJECTED",
-     rejectReason: reason,
-     rejectedAt: serverTimestamp()
-   });
-   toast("Transaction yangiwe! Reason: "+reason,"info");
- }catch(err){toast("Ntibyashobotse: "+err.message,"error")}
-}
-
-$("requestSellerBtn").onclick=async()=>{
- if(!currentUser)return;
- if(confirm("Urashaka kohereza ubusabe bwo kuba Seller/Vendor?")){
-   try{
-     await addDoc(collection(db,"seller_applications"),{
-       userId: currentUser.uid,
-       userEmail: currentUser.email||"",
-       status: "PENDING",
-       createdAt: serverTimestamp()
-     });
-     toast("Ubusabe bwo kuba Seller bwoherejwe neza! Tegereza approval.","success");
-   }catch(e){toast("Ikosa: "+e.message,"error")}
- }
-};
-
-function inspectUserDetails(uDocId, uData) {
-  const content = $("adminUserInspectorContent");
-  content.innerHTML = `
-    <div style="font-size:14px;line-height:1.8">
-      <p><b>User ID:</b> ${uDocId}</p>
-      <p><b>Amazina ya App:</b> ${uData.name || 'N/A'}</p>
-      <p><b>Amazina y'i MoMo:</b> <b style="color:#34d399">${uData.claimedMomoName || 'N/A'}</b></p>
-      <p><b>Email:</b> ${uData.email || 'N/A'}</p>
-      <p><b>MoMo Number (Locked):</b> <b style="color:#10b981">${uData.lockedPhoneNumber || 'N/A'}</b></p>
-      <p><b>Verification Status:</b> <b>${uData.verificationStatus || 'unverified'}</b></p>
-      <p><b>Role:</b> <span style="color:#34d399;font-weight:bold">${uData.role || 'user'}</span></p>
-      <p><b>Current Balance:</b> <span style="color:#34d399;font-weight:bold;font-size:18px">${money(uData.balance || 0)}</span></p>
-      <p><b>Account Status:</b> ${uData.blocked ? '<span style="color:#f43f5e;font-weight:bold">BLOCKED</span>' : '<span style="color:#34d399;font-weight:bold">ACTIVE</span>'}</p>
-      <hr style="border-color:#23382f;margin:15px 0">
-      <button class="button" onclick="editUserBalanceFromModal('${uDocId}', ${uData.balance || 0})">✏️ Guhindura Balance</button>
-    </div>
-  `;
-  openModal("adminUserInspectorModal");
-}
-
-window.editUserBalanceFromModal = async function(uDocId, oldBal) {
-  const newBal = prompt("Andika balance nshya y'uyu mukoresha (RWF):", oldBal);
-  if(newBal!==null && !isNaN(newBal)){
-    await updateDoc(doc(db,"user",uDocId),{balance: Number(newBal)});
-    toast("Balance yavuguruwe neza!","success");
-    closeModal("adminUserInspectorModal");
-  }
-};
-
-function listenToAdminPanel(){
- if(unsubTx)unsubTx();
- if(unsubSupport)unsubSupport();
- if(unsubUsersList)unsubUsersList();
- if(unsubSellerApps)unsubSellerApps();
- if(unsubAllOrders)unsubAllOrders();
- if(unsubAllProds)unsubAllProds();
- if(unsubPendingVerifs)unsubPendingVerifs();
-
- const pending=query(collection(db,"transactions"),where("status","in",["PENDING","PENDING_MOMO_PIN"]));
- unsubTx=onSnapshot(pending,renderTransactionRequests,err=>{
-  $("adminRequestsList").textContent="Ntibishobotse gusoma transactions: "+err.message;
- });
-
- const verifQuery = query(collection(db,"user"),where("verificationStatus","==","pending_verification"));
- unsubPendingVerifs = onSnapshot(verifQuery, snap=>{
-    const list = $("adminVerificationsList"); list.replaceChildren();
-    $("admStatPendingVerifs").textContent = snap.size;
-    if(snap.empty){
-      list.textContent = "Nta ubusabe bw'abakoresha bashya bo kwemezwa buhari.";
-      return;
-    }
-    snap.forEach(uDoc=>{
-      const u = uDoc.data();
-      const card = document.createElement("div"); card.className = "user-card";
-      card.innerHTML = `
-        <div class="user-info">
-          <b>User Email:</b> ${u.email||'N/A'}<br>
-          <b>Amazina ku Urubuga (User Name):</b> ${u.name||'N/A'}<br>
-          <b>Amazina yemeza ko ari ay'i MoMo (Claimed MoMo Name):</b> <b style="color:#34d399">${u.claimedMomoName||'N/A'}</b><br>
-          <b>Nimero ya MoMo (Locked Phone):</b> <b style="color:#10b981">${u.lockedPhoneNumber||'N/A'}</b>
-        </div>
-      `;
-      
-      const act = document.createElement("div"); act.className="user-actions";
-      
-      const approveBtn = document.createElement("button");
-      approveBtn.className="button"; approveBtn.textContent="Approve / Wemerewe";
-      approveBtn.onclick = async () => {
-        await updateDoc(doc(db,"user",uDoc.id),{ verificationStatus: "verified" });
-        toast("Account y'uyu mukoresha yajyanye muri Verified neza!","success");
-      };
-
-      const rejectBtn = document.createElement("button");
-      rejectBtn.className="button button-danger"; rejectBtn.textContent="Reject / Hakaniwe";
-      rejectBtn.onclick = async () => {
-        const reason = prompt("Impamvu yo kwanga verification:", "Amazina watanze ntidahura n'a nimero ya MoMo.");
-        if(reason !== null){
-          await updateDoc(doc(db,"user",uDoc.id),{ 
-            verificationStatus: "unverified",
-            verifRejectReason: reason
-          });
-          toast("Verification yangiwe! User yagaruwe kuri unverified.","info");
-        }
-      };
-
-      act.append(approveBtn, rejectBtn);
-      card.append(act);
-      list.append(card);
-    });
- });
-
- unsubUsersList=onSnapshot(collection(db,"user"),snap=>{
-  const list=$("adminUsersList");list.replaceChildren();
-  $("admStatUsers").textContent=snap.size;
-  let sellerCount=0;
-  if(snap.empty){list.textContent="Nta mukoresha ubonywe muri collection ya user.";return}
-  snap.forEach(uDoc=>{
-   const u=uDoc.data();
-   if(u.role==="seller") sellerCount++;
-   
-   const card=document.createElement("div");card.className="user-card";
-   
-   const info=document.createElement("div");info.className="user-info";
-   info.innerHTML=`
-     <b>${u.name||'User'}</b> (${u.email||'No Email'})
-     <p>Balance: <span style="color:#34d399;font-weight:bold">${money(u.balance||0)}</span> | Verif: <b>${u.verificationStatus||'unverified'}</b> | Status: <b>${u.blocked?'BLOCKED':'ACTIVE'}</b></p>
-   `;
-   
-   const actions=document.createElement("div");actions.className="user-actions";
-
-   const viewBtn=document.createElement("button");
-   viewBtn.className="button button-secondary";viewBtn.textContent="👁 View Details";
-   viewBtn.onclick=()=>inspectUserDetails(uDoc.id, u);
-
-   const editBtn=document.createElement("button");
-   editBtn.className="button button-secondary";editBtn.textContent="✏️ Edit Bal";
-   editBtn.onclick=async()=>{
-    const newBal=prompt("Andika balance nshya ya "+(u.name||'User')+":", u.balance||0);
-    if(newBal!==null && !isNaN(newBal)){
-      await updateDoc(doc(db,"user",uDoc.id),{balance: Number(newBal)});
-      toast("Balance yavuguruwe neza!","success");
-    }
-   };
-
-   const blockBtn=document.createElement("button");
-   blockBtn.className="button "+(u.blocked?"":"button-warning");
-   blockBtn.textContent=u.blocked?"🔓 Unblock":"🔒 Block";
-   blockBtn.onclick=async()=>{
-     await updateDoc(doc(db,"user",uDoc.id),{blocked: !u.blocked});
-     toast(u.blocked?"User unblocked!":"User blocked!","info");
-   };
-
-   const delBtn=document.createElement("button");
-   delBtn.className="button button-danger";delBtn.textContent="🗑️ Delete";
-   delBtn.onclick=async()=>{
-     if(confirm("Urashaka gusiba uyu user burundu muri database?")){
-       await deleteDoc(doc(db,"user",uDoc.id));
-       toast("User wasibwe!","info");
-     }
-   };
-
-   actions.append(viewBtn,editBtn,blockBtn,delBtn);
-   card.append(info,actions);list.append(card);
-  });
- },err=>{$("adminUsersList").textContent="Ikosa: "+err.message});
-
- unsubSellerApps=onSnapshot(query(collection(db,"seller_applications"),where("status","==","PENDING")),snap=>{
-   const list=$("adminSellerAppsList");list.replaceChildren();
-   if(snap.empty){list.textContent="Nta busabe bwa Seller buhari kuri ubu.";return}
-   snap.forEach(sDoc=>{
-     const app=sDoc.data();
-     const card=document.createElement("div");card.className="tx-card";
-     card.innerHTML=`<b>${app.userEmail}</b> asaba kuba Seller.<br>`;
-     
-     const approve=document.createElement("button");
-     approve.className="button";approve.textContent="Approve Seller";approve.style.marginTop="8px";
-     approve.onclick=async()=>{
-       await updateDoc(doc(db,"user",app.userId),{role: "seller"});
-       await updateDoc(doc(db,"seller_applications",sDoc.id),{status: "APPROVED"});
-       toast("User yabaye Seller neza!","success");
-     };
-     card.appendChild(approve);list.appendChild(card);
-   });
- });
-
- unsubAllOrders=onSnapshot(collection(db,"orders"),snap=>{
-   const list=$("adminOrdersList");list.replaceChildren();
-   if(snap.empty){list.textContent="Nta orders ziriho.";return}
-   snap.forEach(oDoc=>{
-     const o=oDoc.data();
-     const item=document.createElement("div");item.className="tx-card";
-     item.innerHTML=`<b>${o.productName}</b> — ${money(o.price)}<br>Buyer: ${o.userEmail} | Status: <b style="color:#34d399">${o.status}</b> | Delivery: <b style="color:#34d399">FREE DELIVERY</b>`;
-     list.appendChild(item);
-   });
- });
-
- unsubAllProds=onSnapshot(collection(db,"products"),snap=>{
-   const list=$("adminAllProductsList");list.replaceChildren();
-   snap.forEach(pDoc=>{
-     const p=pDoc.data();
-     const card=document.createElement("div");card.className="product-item-card";
-     card.innerHTML=`
-       <img src="${p.imageUrl||p.img||'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800'}">
-       <div class="product-item-info">
-         <h4>${p.name}</h4>
-         <p>${money(p.price)} | Category: Deal ${p.category} | Seller: ${p.sellerId}</p>
-       </div>
-     `;
-     const del=document.createElement("button");del.className="button button-danger";del.textContent="Admin Delete";
-     del.onclick=async()=>{
-       if(confirm("Urashaka gusiba iki gicuruzwa nka Admin?")){
-         await deleteDoc(doc(db,"products",pDoc.id));
-         toast("Igicuruzwa wasibwe!","info");
-       }
-     };
-     card.appendChild(del);list.appendChild(card);
-   });
- });
-
- unsubSupport=onSnapshot(collection(db,"support_tickets"),snap=>{
-  const list=$("adminSupportList");list.replaceChildren();
-  if(snap.empty){list.textContent="Nta ubutumwa/ticket nshya iriho.";return}
-  snap.forEach(s=>{
-   const d=s.data(),item=document.createElement("div");item.className="tx-card";
-   const who=document.createElement("b");who.textContent="From: "+(d.userEmail||"Unknown");
-   const msg=document.createElement("p");msg.textContent=d.message||"";
-   
-   if(d.adminReply) {
-     const rep = document.createElement("p");
-     rep.style.color = "#34d399";
-     rep.style.marginTop = "6px";
-     rep.textContent = "Admin Reply: " + d.adminReply;
-     item.append(who,msg,rep);
-   } else {
-     const replyBtn=document.createElement("button");
-     replyBtn.className="button button-secondary";replyBtn.style.marginTop="8px";
-     replyBtn.textContent="Reply Ticket Direct";
-     replyBtn.onclick=async()=>{
-       const replyText=prompt("Andika igisubizo cyawe cyo koherereza umukiriya:");
-       if(replyText){
-         await updateDoc(doc(db,"support_tickets",s.id),{
-           adminReply: replyText,
-           repliedAt: serverTimestamp()
-         });
-         toast("Igisubizo cyohererejwe neza!","success");
-       }
-     };
-     item.append(who,msg,replyBtn);
-   }
-   list.append(item);
-  });
- },err=>{$("adminSupportList").textContent="Ikosa: "+err.message});
-}
-
 $("sellerAddProdForm").onsubmit=async e=>{
   e.preventDefault();
   if(!currentUser || (currentUserRole!=="seller" && currentUserRole!=="admin")){
-    toast("Seller gusa ni we wemerewe!","error");
+    toast("Seller gusa ni we wemerewe gushyiraho igicuruzwa!","error");
     return;
   }
   try{
@@ -1257,7 +794,6 @@ $("sellerAddProdForm").onsubmit=async e=>{
       description: $("sellerProdDesc").value.trim(),
       imageUrl: $("sellerProdImg").value.trim(),
       contactPhone: $("sellerProdContact").value.trim(),
-      sellerMomo: $("sellerProdMomo").value.trim(),
       sellerId: currentUser.uid,
       active: true,
       createdAt: serverTimestamp()
@@ -1294,50 +830,24 @@ function listenToSellerProducts(){
   });
 }
 
-$("saveSysMomoBtn").onclick=async()=>{
-  sysMomoNumber=$("sysMomoNumber").value.trim();
-  sysMomoName=$("sysMomoName").value.trim();
-  toast("MoMo Settings za Website zavuguruwe!","success");
-};
-
-$("admSaveCoverBtn").onclick=async()=>{
- const catId=Number($("admCoverCategory").value);
- const imgUrl=$("admCoverImgUrl").value.trim();
- if(!imgUrl){toast("Shyiramo URL y'ifoto!","error");return}
- const catIndex = dealCategories.findIndex(c=>c.id===catId);
- if(catIndex!==-1){
-   dealCategories[catIndex].img = imgUrl;
-   loadCategories();
-   toast(`Ifoto ya Deal ${catId} yahinduwe neza!`,"success");
-   $("admCoverImgUrl").value="";
- }
-};
-
 function listenToProducts(){
  if(unsubProducts)unsubProducts();
  unsubProducts=onSnapshot(collection(db,"products"),snap=>{
-  const firestoreProducts=[];
+  products=[];
   snap.forEach(s=>{
    const d=s.data();
-   if(d.active===false)return;
-   firestoreProducts.push({
-    id:s.id,dealId:Number(d.category??d.dealId??1),
-    name:d.name||"Product",price:Number(d.price)||0,
-    description:d.description||"",img:d.imageUrl||d.img||"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800",
-    contactPhone:d.contactPhone||"0788000000",
-    sellerMomo:d.sellerMomo||"0788000000",
-    sellerId:d.sellerId||"admin",
-    active:d.active
-   });
+   if(d.active!==false){
+     products.push({ id:s.id, ...d });
+   }
   });
-  products=[...initialProducts,...firestoreProducts];
+  $("admStatProds").textContent = products.length;
   renderHomeRecommendations();
- },err=>console.error("Products:",err.message));
+ },err=>console.error("Products error:",err.message));
 }
 
 function listenToUserData(user){
  if(unsubUser)unsubUser();
- const userRef=doc(db,"user",user.uid);
+ const userRef=doc(db,"users",user.uid);
  unsubUser=onSnapshot(userRef,async snap=>{
   if(!currentUser||currentUser.uid!==user.uid)return;
   if(!snap.exists()){
@@ -1347,60 +857,124 @@ function listenToUserData(user){
      email:user.email||"",
      balance:0,
      role:"user",
-     verificationStatus:"unverified",
      createdAt:serverTimestamp()
     });
-   }catch(err){console.error("Profile creation:",err.message)}
+   }catch(err){console.error("Profile Error:",err.message)}
    return;
   }
   const data=snap.data();
-  
-  if(data.blocked){
-    alert("Konti yawe yarahanwe (BLOCKED). Ntabwo wemerewe kwinjira!");
-    signOut(auth);
-    return;
-  }
 
   userWallet=Number(data.balance)||0;
   currentUserRole=data.role||"user";
-  currentUserStatus=data.verificationStatus||"unverified";
-  currentUserLockedPhone=data.lockedPhoneNumber||"";
   
   $("userName").textContent=data.name||"User";
   $("accName").textContent=data.name||"User";
-  $("accRole").textContent=currentUserRole;
-  $("accLockedPhone").textContent=currentUserLockedPhone||"N/A";
-  $("accVerifStatus").textContent=currentUserStatus.toUpperCase();
+  $("accRole").textContent=currentUserRole.toUpperCase();
   $("userBalanceText").textContent=money(userWallet);
   $("accBalance").textContent=money(userWallet);
-  
-  const badgeDiv = $("userVerificationBadge");
-  const verifNotice = $("verificationNoticeCard");
-
-  if(currentUserStatus === "verified"){
-    badgeDiv.innerHTML = `<span style="background:#059669;color:white;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold">✓ VERIFIED ACCOUNT</span>`;
-    verifNotice.style.display = "none";
-  } else if(currentUserStatus === "pending_verification"){
-    badgeDiv.innerHTML = `<span style="background:#eab308;color:black;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold">⏳ VERIFICATION PENDING</span>`;
-    verifNotice.style.display = "block";
-    verifNotice.querySelector("h3").textContent = "⏳ Verification yawe iri gukorwa Igenzura!";
-    verifNotice.querySelector("p").textContent = "Amakuru yawe y'amazina na MoMo yoherejwe kuri Admin. Niba amaze kuyasuzuma araguha Verified badge ubashe gukora Deposit no Kubikuza!";
-    $("userVerificationForm").style.display = "none";
-  } else {
-    badgeDiv.innerHTML = `<span style="background:#f43f5e;color:white;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold">⚠ UNVERIFIED ACCOUNT</span>`;
-    verifNotice.style.display = "block";
-    $("userVerificationForm").style.display = "flex";
-  }
 
   $("navAdminBtn").style.display=currentUserRole==="admin"?"inline-block":"none";
   $("navSellerBtn").style.display=(currentUserRole==="seller"||currentUserRole==="admin")?"inline-block":"none";
-  $("becomeSellerBox").style.display=currentUserRole==="user"?"flex":"none";
+  
+  const sellerBox = $("becomeSellerBox");
+  if(currentUserRole === "user") {
+    sellerBox.style.display = "flex";
+    sellerBox.innerHTML = `
+      <div>
+        <h4 style="color:#34d399">Shaka gucuruza nka VIP Seller?</h4>
+        <p style="font-size:12px;color:#9ca3af">Hitamo Plan maze utangire gushyiraho ibicuruzwa byawe mu masoko 7!</p>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button onclick="buySellerPlan('monthly')" class="button" style="width:auto;padding:8px 12px;font-size:12px">Monthly (5,000 RWF)</button>
+        <button onclick="buySellerPlan('yearly')" class="button button-secondary" style="width:auto;padding:8px 12px;font-size:12px">Yearly (30,000 RWF)</button>
+      </div>
+    `;
+  } else {
+    sellerBox.style.display = "none";
+  }
 
   if(currentUserRole==="admin"){listenToAdminPanel()}
   if(currentUserRole==="seller"||currentUserRole==="admin"){listenToSellerProducts()}
- },err=>{
-  console.error("User profile:",err);
-  toast("Ntibishobotse gusoma amakuru ya account: "+err.message,"error");
+
+ },err=>toast("Error reading user data: "+err.message,"error"));
+}
+
+function listenToAdminPanel(){
+ if(unsubUsersList)unsubUsersList();
+ if(unsubAllOrders)unsubAllOrders();
+ if(unsubAllProds)unsubAllProds();
+
+ unsubUsersList=onSnapshot(collection(db,"users"),snap=>{
+  const list=$("adminUsersList");list.replaceChildren();
+  $("admStatUsers").textContent=snap.size;
+  snap.forEach(uDoc=>{
+   const u=uDoc.data();
+   const card=document.createElement("div");card.className="user-card";
+   
+   const info=document.createElement("div");info.className="user-info";
+   info.innerHTML=`
+     <b>${u.name||'User'}</b> (${u.email||'No Email'})
+     <p>Balance: <span style="color:#34d399;font-weight:bold">${money(u.balance||0)}</span> | Role: <b>${u.role||'user'}</b></p>
+   `;
+   
+   const actions=document.createElement("div");actions.className="user-actions";
+
+   const editBtn=document.createElement("button");
+   editBtn.className="button button-secondary";editBtn.textContent="✏️ Edit Bal";
+   editBtn.onclick=async()=>{
+    const newBal=prompt("Andika balance nshya ya "+(u.name||'User')+":", u.balance||0);
+    if(newBal!==null && !isNaN(newBal)){
+      await updateDoc(doc(db,"users",uDoc.id),{balance: Number(newBal)});
+      toast("Balance yavuguruwe neza!","success");
+    }
+   };
+
+   const delBtn=document.createElement("button");
+   delBtn.className="button button-danger";delBtn.textContent="🗑️ Delete";
+   delBtn.onclick=async()=>{
+     if(confirm("Urashaka gusiba uyu user?")){
+       await deleteDoc(doc(db,"users",uDoc.id));
+       toast("User wasibwe!","info");
+     }
+   };
+
+   actions.append(editBtn,delBtn);
+   card.append(info,actions);list.append(card);
+  });
+ });
+
+ unsubAllOrders=onSnapshot(collection(db,"orders"),snap=>{
+   const list=$("adminOrdersList");list.replaceChildren();
+   if(snap.empty){list.textContent="Nta orders ziriho.";return}
+   snap.forEach(oDoc=>{
+     const o=oDoc.data();
+     const item=document.createElement("div");item.className="tx-card";
+     item.innerHTML=`<b>${o.productName}</b> — ${money(o.price)}<br>Buyer: ${o.userEmail} | Status: <b style="color:#34d399">${o.status}</b>`;
+     list.appendChild(item);
+   });
+ });
+
+ unsubAllProds=onSnapshot(collection(db,"products"),snap=>{
+   const list=$("adminAllProductsList");list.replaceChildren();
+   snap.forEach(pDoc=>{
+     const p=pDoc.data();
+     const card=document.createElement("div");card.className="product-item-card";
+     card.innerHTML=`
+       <img src="${p.imageUrl||p.img||'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800'}">
+       <div class="product-item-info">
+         <h4>${p.name}</h4>
+         <p>${money(p.price)} | Category: Deal ${p.category} | Seller: ${p.sellerId}</p>
+       </div>
+     `;
+     const del=document.createElement("button");del.className="button button-danger";del.textContent="Admin Delete";
+     del.onclick=async()=>{
+       if(confirm("Urashaka gusiba iki gicuruzwa nka Admin?")){
+         await deleteDoc(doc(db,"products",pDoc.id));
+         toast("Igicuruzwa wasibwe!","info");
+       }
+     };
+     card.appendChild(del);list.appendChild(card);
+   });
  });
 }
 
@@ -1412,10 +986,10 @@ function listenToOrders(user){
   if(snap.empty){list.textContent="Nta order urakora.";return}
   snap.forEach(s=>{
    const d=s.data(),item=document.createElement("div");item.className="tx-card";
-   item.innerHTML=`<b>${d.productName||"Product"}</b> — ${money(d.price)} <br><span style="color:#34d399">Status: ${d.status||""}</span> | <b style="color:#10b981">Free Delivery</b>`;
+   item.innerHTML=`<b>${d.productName||"Product"}</b> — ${money(d.price)} <br><span style="color:#34d399">Status: ${d.status||""}</span>`;
    list.append(item);
   });
- },err=>{$("userOrdersList").textContent="Ntibishobotse gusoma amateka: "+err.message});
+ });
 }
 
 $("navAdminBtn").onclick=showAdminRoom;
@@ -1465,27 +1039,29 @@ $("checkoutCartBtn").onclick=async()=>{
  if(!userCart.length){toast("Agaseke karimo ubusa.","error");return}
  const items=[...userCart];
  
- const userRef=doc(db,"user",currentUser.uid);
- const batch=writeBatch(db);
- const orderRefs=items.map(()=>doc(collection(db,"orders")));
+ const userRef=doc(db,"users",currentUser.uid);
  try{
-  const userSnap=await getDoc(userRef);
-  if(!userSnap.exists())throw new Error("Account ntiyabonetse.");
-  const balance=Number(userSnap.data().balance)||0;
-  const total=items.reduce((sum,p)=>sum+(Number(p.price)||0),0);
-  if(balance<total){toast("Wallet balance ntihagije. Banza ukore Deposit.","error");return}
-  batch.update(userRef,{balance:balance-total});
-  items.forEach((p,i)=>batch.set(orderRefs[i],{
-   userId:currentUser.uid,
-   userEmail:currentUser.email||"",
-   productId:String(p.id||""),
-   productName:p.name,
-   price:Number(p.price)||0,
-   sellerId:p.sellerId||"admin",
-   status:"PAID (FREE DELIVERY)",
-   createdAt:serverTimestamp()
-  }));
-  await batch.commit();
+  await runTransaction(db, async tx => {
+    const userSnap=await tx.get(userRef);
+    if(!userSnap.exists())throw new Error("Account ntiyabonetse.");
+    const balance=Number(userSnap.data().balance)||0;
+    const total=items.reduce((sum,p)=>sum+(Number(p.price)||0),0);
+    if(balance<total) throw new Error("Wallet balance ntihagije. Banza ukore Deposit.");
+    tx.update(userRef,{balance:balance-total});
+    items.forEach((p)=>{
+      const newOrderRef = doc(collection(db,"orders"));
+      tx.set(newOrderRef, {
+        userId:currentUser.uid,
+        userEmail:currentUser.email||"",
+        productId:String(p.id||""),
+        productName:p.name,
+        price:Number(p.price)||0,
+        sellerId:p.sellerId||"admin",
+        status:"PAID (FREE DELIVERY)",
+        createdAt:serverTimestamp()
+      });
+    });
+  });
   userCart=[];updateUI();renderCart();
   toast("Orders zawe zakiriwe neza! Ni Free Delivery.","success");
   closeModal("cartModal");
@@ -1509,28 +1085,6 @@ $("registerTab").onclick=()=>showTab("register");
 $("loginTab").onclick=()=>showTab("login");
 $("closeAuth").onclick=closeAuthBox;
 
-$("forgotPasswordLink").onclick=(e)=>{
-  e.preventDefault();
-  closeAuthBox();
-  openModal("forgotPasswordModal");
-};
-
-$("forgotPasswordForm").onsubmit=async e=>{
-  e.preventDefault();
-  const resetEmail = $("forgotEmail").value.trim();
-  if(!resetEmail){
-    toast("Andika email yawe!","error");
-    return;
-  }
-  try{
-    await sendPasswordResetEmail(auth, resetEmail);
-    toast("Link yo guhindura password yoherejwe kuri email yawe! Reba mu Inbox/Spam.","success");
-    closeModal("forgotPasswordModal");
-  }catch(err){
-    toast("Ikosa ryaje: "+err.message,"error");
-  }
-};
-
 $("registerForm").onsubmit=async e=>{
  e.preventDefault();
  const name=$("registerName").value.trim();
@@ -1540,19 +1094,14 @@ $("registerForm").onsubmit=async e=>{
  const btn=$("registerForm").querySelector("button");btn.disabled=true;
  try{
   const credential=await createUserWithEmailAndPassword(auth,email,password);
-  await setDoc(doc(db,"user",credential.user.uid),{
-   name,email,balance:0,role:"user",verificationStatus:"unverified",createdAt:serverTimestamp()
+  await setDoc(doc(db,"users",credential.user.uid),{
+   name,email,balance:0,role:"user",createdAt:serverTimestamp()
   });
   localStorage.setItem("rwandaOnlineDealsName",name);
   toast("Account yakozwe neza! Murakaza neza.","success");
   closeAuthBox();
  }catch(err){
-  const messages={
-   "auth/email-already-in-use":"Iyi email isanzwe ifite account.",
-   "auth/invalid-email":"Email wanditse si yo.",
-   "auth/weak-password":"Password iroroshye cyane."
-  };
-  toast(messages[err.code]||("Registration yanze: "+err.message),"error");
+  toast("Registration yanze: "+err.message,"error");
  }finally{btn.disabled=false}
 };
 
@@ -1566,13 +1115,7 @@ $("loginForm").onsubmit=async e=>{
   toast("Winjiye neza! Murakaza neza.","success");
   closeAuthBox();
  }catch(err){
-  const messages={
-   "auth/invalid-credential":"Email cyangwa password si byo.",
-   "auth/user-not-found":"Nta account ibonetse kuri iyi email.",
-   "auth/wrong-password":"Password si yo.",
-   "auth/too-many-requests":"Wagerageze kenshi. Ongera ugerageze nyuma."
-  };
-  toast(messages[err.code]||("Login yanze: "+err.message),"error");
+  toast("Login yanze: "+err.message,"error");
  }finally{btn.disabled=false}
 };
 
@@ -1588,8 +1131,6 @@ onAuthStateChanged(auth,async user=>{
  currentUser=user;
  userWallet=0;
  currentUserRole="user";
- currentUserStatus="unverified";
- currentUserLockedPhone="";
  if(user){
   showUserDashboard();
   $("userEmail").textContent=user.email||"";
@@ -1617,3 +1158,4 @@ updateUI();
 
 </body>
 </html>
+

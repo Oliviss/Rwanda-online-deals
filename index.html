@@ -403,15 +403,15 @@ footer p{margin:6px;font-size:13px}
 
 <footer id="contact"><p><strong>Rwanda Online Deals</strong></p><p>© 2026 Rwanda Online Deals. All Rights Reserved. Free Delivery across Rwanda.</p></footer>
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
  getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,
  sendPasswordResetEmail,signOut,onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
  getFirestore,doc,getDoc,setDoc,updateDoc,deleteDoc,collection,addDoc,
  onSnapshot,query,where,serverTimestamp,runTransaction,writeBatch
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig={
  apiKey:"AIzaSyCOOEbhkKrv0ysHarRZvjw2DlgsRlcN180",
@@ -1158,4 +1158,3 @@ updateUI();
 
 </body>
 </html>
-
